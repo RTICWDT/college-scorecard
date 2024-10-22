@@ -107,58 +107,78 @@ const cleanString = (str) => {
   return str.replace(/[^a-zA-Z\s]/g, '').trim();
 }
 
-function calculateStringSimilarity(str1, str2) {
-  // Skip empty strings
-  if (!str1 || !str2) return 0;
+function calculateStringSimilarity(str1, str2) {  
+  // Convert to lowercase once for performance
+  const s1 = str1.toLowerCase();
+  const s2 = str2.toLowerCase();
   
   // Exact match
-  if (str1 === str2) return 1;
+  if (s1 === s2) {
+    return 1 
+  };
   
-  // Word boundary match (e.g., "physics" as a complete word)
-  const wordBoundaryRegex = new RegExp(`\\b${str2}\\b`, 'i');
-  if (wordBoundaryRegex.test(str1)) return 0.95;
+  // If str2 (search term) contains spaces, try matching it as a complete phrase first
+  if (s2.includes(' ')) {
+    // Complete phrase match at word boundary
+    const phraseRegex = new RegExp(`\\b${escapeRegExp(s2)}\\b`, 'i');
+    if (phraseRegex.test(s1)) return 0.98;
+    
+    // Complete phrase match anywhere
+    if (s1.includes(s2)) {
+      const position = s1.indexOf(s2);
+      const positionPenalty = position / s1.length * 0.1;
+      return 0.95 - positionPenalty;
+    }
+  }
   
-  // Start of word match (e.g., "physics" at start of word)
-  const startOfWordRegex = new RegExp(`\\b${str2}`, 'i');
-  if (startOfWordRegex.test(str1)) return 0.9;
+  // Word boundary match
+  const wordBoundaryRegex = new RegExp(`\\b${escapeRegExp(s2)}\\b`, 'i');
+  if (wordBoundaryRegex.test(s1)) return 0.9;
   
-  // Contains as exact substring (case-insensitive)
-  if (str1.toLowerCase().includes(str2.toLowerCase())) {
-    // Prefer matches closer to the start of the string
-    const position = str1.toLowerCase().indexOf(str2.toLowerCase());
-    const positionPenalty = position / str1.length * 0.1; // Small penalty for later positions
+  // Start of word match
+  const startOfWordRegex = new RegExp(`\\b${escapeRegExp(s2)}`, 'i');
+  if (startOfWordRegex.test(s1)) return 0.85;
+  
+  // Contains as exact substring
+  if (s1.includes(s2)) {
+    const position = s1.indexOf(s2);
+    const positionPenalty = position / s1.length * 0.1;
     return 0.8 - positionPenalty;
   }
   
-  // If str2 contains str1, it's a less relevant match
-  if (str2.toLowerCase().includes(str1.toLowerCase())) {
+  // If the target contains the search term
+  if (s2.includes(s1)) {
     return 0.6;
   }
   
   // Calculate Levenshtein distance for fuzzy matching
-  const matrix = Array(str2.length + 1).fill().map(() => Array(str1.length + 1).fill(0));
+  const matrix = Array(s2.length + 1).fill().map(() => Array(s1.length + 1).fill(0));
   
-  for (let i = 0; i <= str1.length; i++) matrix[0][i] = i;
-  for (let j = 0; j <= str2.length; j++) matrix[j][0] = j;
+  for (let i = 0; i <= s1.length; i++) matrix[0][i] = i;
+  for (let j = 0; j <= s2.length; j++) matrix[j][0] = j;
   
-  for (let j = 1; j <= str2.length; j++) {
-    for (let i = 1; i <= str1.length; i++) {
-      const cost = str1[i - 1].toLowerCase() === str2[j - 1].toLowerCase() ? 0 : 1;
+  for (let j = 1; j <= s2.length; j++) {
+    for (let i = 1; i <= s1.length; i++) {
+      const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
       matrix[j][i] = Math.min(
-        matrix[j][i - 1] + 1,      // deletion
-        matrix[j - 1][i] + 1,      // insertion
-        matrix[j - 1][i - 1] + cost // substitution
+        matrix[j][i - 1] + 1,
+        matrix[j - 1][i] + 1,
+        matrix[j - 1][i - 1] + cost
       );
     }
   }
   
-  // Calculate similarity score with length penalty
-  const maxLength = Math.max(str1.length, str2.length);
-  const distance = matrix[str2.length][str1.length];
-  const lengthDifference = Math.abs(str1.length - str2.length);
-  const lengthPenalty = lengthDifference / maxLength * 0.1; // Penalty for length difference
+  const maxLength = Math.max(s1.length, s2.length);
+  const distance = matrix[s2.length][s1.length];
+  const lengthDifference = Math.abs(s1.length - s2.length);
+  const lengthPenalty = lengthDifference / maxLength * 0.1;
   
   return Math.max(0, (1 - (distance / maxLength)) - lengthPenalty);
+}
+
+// Utility function to escape special regex characters
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 const filteredOptions = computed(() => {
@@ -166,13 +186,6 @@ const filteredOptions = computed(() => {
 
   const cleanedFilter = cleanString(filter.value).toLowerCase();
   if (!cleanedFilter) return allOptions.value;
-  
-  const threshold = 0.5;
-  
-  const searchTerms = cleanedFilter
-    .split(/\s+/)
-    .map(term => cleanString(term).toLowerCase())
-    .filter(term => term.length > 0);
   
   // Calculate scores in a separate array
   const scoredOptions = allOptions.value.map(option => ({
@@ -182,13 +195,13 @@ const filteredOptions = computed(() => {
       const cleanSubtitle = cleanString(option.subtitle).toLowerCase();
 
       // Calculate scores for each search term
-      const textScores = searchTerms.map(term => calculateStringSimilarity(cleanText, term));
-      const subtitleScores = searchTerms.map(term => calculateStringSimilarity(cleanSubtitle, term));
+      const textScores = [cleanedFilter].map(term => calculateStringSimilarity(cleanText, term));
+      const subtitleScores = [cleanedFilter].map(term => calculateStringSimilarity(cleanSubtitle, term));
       
       // Get the best match score for each field
       const bestTextScore = Math.max(...textScores);
       const bestSubtitleScore = Math.max(...subtitleScores);
-      
+
       const weights = {
         text: 0.7,       // Primary text carries 70% of the weight
         subtitle: 0.3    // Subtitle carries 30% of the weight
@@ -200,6 +213,7 @@ const filteredOptions = computed(() => {
   }));
   
   // Filter and sort based on scores, but return original objects
+  const threshold = 0.5;
   const filtered = scoredOptions
     .filter(item => item.score > threshold)
     .sort((a, b) => b.score - a.score)
@@ -346,7 +360,6 @@ const onComboboxKeyUp = (event) => {
       break
     default:
       if (isPrintableCharacter(char)) {
-        console.log('char:', char)
         setVisualFocusCombobox()
         const option = filteredOptions.value[0]
 
