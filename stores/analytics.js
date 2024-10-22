@@ -27,7 +27,7 @@ export const useAnalytics = defineStore('analytics', {
 
       try {
         if (typeof window !== 'undefined' && this.gtag) {
-          if (config.public.node_env.production) {
+          if (process.env.NODE_ENV === 'production') {
             return console.info(`[gtag] event - Category: ${category}, Action: ${action}, Label: ${label || window.location.pathname}`);
           }
 
