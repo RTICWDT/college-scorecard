@@ -124,7 +124,7 @@
       <v-row v-else>
         <v-col>
           <v-alert
-            v-if="true || currentFilter === 4"
+            v-if="currentFilter === 4"
             border="start"
             density="compact"
             color="yellow-600"
