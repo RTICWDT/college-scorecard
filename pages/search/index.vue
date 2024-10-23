@@ -651,7 +651,7 @@ const handleFormSearch = (params) => {
   
   Object.assign(input, { ...updateParams, page: 1 })
 
-  if (params.state || (params.distance && (params.distance || params.lat || params.long))) {
+  if (params.state || (params.distance && (params.zip || params.lat || params.long))) {
     return handleLocationSelection(params)
   }
 
