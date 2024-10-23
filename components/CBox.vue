@@ -224,19 +224,31 @@ const filteredOptions = computed(() => {
   return filtered;
 });
 
-// Add this computed property for listbox positioning
-const listboxStyle = computed(() => {
-  if (!isOpen.value || !comboboxNode.value || !groupNode.value) return { display: 'none' }
-  const rect = groupNode.value.getBoundingClientRect()
 
-  return {
+const styleRef = ref({ display: 'none' })
+
+// Debounced update function
+const updateStyle = useDebounce(() => {
+  if (!isOpen.value || !comboboxNode.value || !groupNode.value) {
+    styleRef.value = { display: 'none' }
+    return
+  }
+
+  const rect = groupNode.value.getBoundingClientRect()
+  styleRef.value = {
     position: 'fixed',
     top: `${rect.bottom}px`,
     left: `${rect.left + window.scrollX + 5}px`,
     width: `${rect.width - 8}px`,
     display: 'block'
   }
-})
+}, 100) // roughly one frame at 60fps
+
+// Watch for changes that should trigger style updates
+watch([isOpen, comboboxNode, groupNode], updateStyle)
+
+// Use the ref instead of a computed
+const listboxStyle = computed(() => styleRef.value)
 
 const onComboboxInput = (event) => {
   filter.value = event.target.value
@@ -412,6 +424,7 @@ const onComboboxClick = () => {
   if (isOpen.value) {
     close(true)
   } else {
+    
     open()
   }
 }
