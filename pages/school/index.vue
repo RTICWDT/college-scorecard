@@ -332,10 +332,6 @@ const schoolId = computed(() => {
   return key ? key : null
 })
 
-const metaTagsTitle = computed(() => {
-  return school ? useGet(school, "school.name") + " | College Scorecard" : "College Scorecard"
-})
-
 const shareLink = computed(() => {
   const currentPath = route.fullPath
   const url = useRequestURL()
@@ -435,8 +431,17 @@ watch(() => route.fullPath , (newPath) => {
   }
 })
 
+const schoolNameFromUrl = computed(() => {
+  const key = Object.keys(route.query)[0]
+  if (!key) return null
+
+  let arr = key.split('-')
+  arr.shift()
+  return arr.join(' ')
+})
+
 useHead({
-  metaTagsTitle,
+  title: schoolNameFromUrl.value,
   meta: [
     {
       key: "og:title",
