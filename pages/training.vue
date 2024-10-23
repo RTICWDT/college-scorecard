@@ -77,15 +77,8 @@
                     </a>.
                     In some states, Unemployment Insurance (UI) recipients
                     can attend school or training and continue to receive UI
-                    benefits (
-                    <a
-                      href="https://www.dol.gov/general/topic/unemployment-insurance"
-                      target="_blank"
-                      @click="analytics.transitionOutboundLink($event)"
-                      >
-                      learn more about UI benefits
-                      <v-icon size="x-small" icon="mdi-open-in-new" />
-                    </a>
+                    benefits
+                    (<a href="https://www.dol.gov/general/topic/ unemployment-insurance"target="_blank"@click="analytics.transitionOutboundLink($event)">learn more about UI benefits<v-icon size="x-small" icon="mdi-open-in-new" /></a>
                     in your state).
                   </p>
                 </v-col>
