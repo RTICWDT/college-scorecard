@@ -21,7 +21,7 @@
           @blur="onComboboxBlur"
           @click="onComboboxClick"
         >
-        <div ref="placeholderNode" class="placeholder-text position-absolute text-gray-500" @click="onPlaceHolderClick">Type to search</div>
+        <div ref="placeholderNode" class="placeholder-text position-absolute" @click="onPlaceHolderClick">Type to search</div>
         <button
           id="cb1-button"
           ref="buttonNode"
@@ -618,11 +618,13 @@ onUnmounted(() => {
   padding-right: 5px;
   transition: all 0.2s;
   top: 17px;
+  color: use-theme('gray-500');
 
   &.focus {
     font-size: 12px;
     top: -10px;
     left: 25px;
+    color: use-theme('primary-yellow');
   }
 }
 
