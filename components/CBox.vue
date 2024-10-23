@@ -390,12 +390,16 @@ const onComboboxFocus = () => {
   setVisualFocusCombobox()
   selectedOption.value = null
   placeholderNode.value.classList.add('focus')
+  placeholderNode.value.classList.add('active')
 }
 
 const onComboboxBlur = () => {
   removeVisualFocusAll()
 
   if (!comboboxNode.value.value) {
+    placeholderNode.value.classList.remove('focus')
+    placeholderNode.value.classList.remove('active')
+  } else {
     placeholderNode.value.classList.remove('focus')
   }
 }
@@ -620,10 +624,13 @@ onUnmounted(() => {
   top: 17px;
   color: use-theme('gray-500');
 
-  &.focus {
+  &.active {
     font-size: 12px;
     top: -10px;
     left: 25px;
+  }
+
+  &.focus {
     color: use-theme('primary-yellow');
   }
 }
