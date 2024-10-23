@@ -96,7 +96,7 @@
                       <v-btn
                         size="large"
                         color="primary-green"
-                        @click="handleSearchNearbySchools()"
+                        @click="handleLocationCheck()"
                         :prepend-icon="location.isLoading ? 'fa:fas fa-circle-notch fa-spin' : 'mdi-map-marker'"
                       >
                         {{ location.isLoading ? 'Searching Schools' : location.error ? 'Location unavailable' : 'Search Nearby Schools'}}
@@ -120,7 +120,7 @@
             <h3 class="text-center pb-4">
               Search for training programs by field of study
             </h3>
-            <SearchFieldOfStudy @v-model="input.cip4" />
+            <SearchFieldOfStudy v-model="input.cip4" />
           </v-card>
         </v-col>
       </v-row>
@@ -246,16 +246,6 @@ const { location, handleLocationCheck } = useLocationCheck();
 const input = reactive({ cip4: null })
 const router = useRouter();
 
-const handleFieldOfStudySelected = (fieldOfStudy) => {
-  const result = handleLocationCheck();
-  console.log(result)
-
-  // this.$url(
-  //     "/search/?toggle=fos&dolflag=true&sort=avg_net_price:asc&cip4=" +
-  //       encodeURIComponent(fieldOfStudy.cip4)
-  //   )
-};
-
 watch(() => location.latLon, (newValue) => {
   if (!newValue) return;
 
@@ -269,14 +259,16 @@ watch(() => location.latLon, (newValue) => {
   router.push({ name: 'search', query: query })
 });
 
-const handleSearchNearbySchools = async () => {
-  const result = await handleLocationCheck();
-  // console.log(result)
+watch(() => input.cip4, (newValue) => {
+  if (!newValue && newValue?.code) return;
 
-  // this.$url(
-  //     "/search/?toggle=institutions&dolflag=true&sort=avg_net_price:asc"
-  //   )
-};
+  const query = {
+    cip4: newValue.code.substring(0, 4),
+    dolflag: true,
+  }
+
+  router.push({ name: 'search', query: query })
+})
 
 useHead({
   title: "Training Programs",
