@@ -88,7 +88,7 @@
                     <div class="text-center justify-center">
                       <v-btn
                         size="large"
-                        color="primary-green"
+                        color="secondary-green"
                         @click="handleLocationCheck()"
                         :prepend-icon="location.isLoading ? 'fa:fas fa-circle-notch fa-spin' : 'mdi-map-marker'"
                       >
@@ -193,7 +193,7 @@
 
                 <p class="text-center mb-8">
                   <v-btn
-                    color="primary-green"
+                    color="secondary-green"
                     href="https://studentaid.gov/h/apply-for-aid/fafsa"
                     target="_blank"
                     @click="analytics.transitionOutboundLink($event)"
