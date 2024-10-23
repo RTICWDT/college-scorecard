@@ -20,8 +20,8 @@
           @focus="onComboboxFocus"
           @blur="onComboboxBlur"
           @click="onComboboxClick"
-          placeholder="Type to search"
         >
+        <div ref="placeholderNode" class="placeholder-text position-absolute text-gray-500" @click="onPlaceHolderClick">Type to search</div>
         <button
           id="cb1-button"
           ref="buttonNode"
@@ -31,10 +31,10 @@
           aria-controls="cb1-listbox"
           @click="onButtonClick"
         >
-          <svg width="18" height="16" aria-hidden="true" focusable="false" style="forced-color-adjust: auto">
-            <polygon class="arrow" stroke-width="0" fill-opacity="0.75" fill="#888" points="3,6 15,6 9,14"></polygon>
-          </svg>
-        </button>
+        <svg width="18" height="16" aria-hidden="true" focusable="false" style="forced-color-adjust: auto">
+          <polygon class="arrow" stroke-width="0" fill-opacity="0.75" fill="#888" points="3,6 15,6 9,14"></polygon>
+        </svg>
+      </button>
       </div>
     </div>
 
@@ -71,6 +71,7 @@
 
 <script setup>
 const comboboxNode = ref(null)
+const placeholderNode = ref(null)
 const groupNode = ref(null)
 const buttonNode = ref(null)
 const listboxNode = ref(null)
@@ -388,10 +389,19 @@ const onComboboxFocus = () => {
   filter.value = comboboxNode.value.value
   setVisualFocusCombobox()
   selectedOption.value = null
+  placeholderNode.value.classList.add('focus')
 }
 
 const onComboboxBlur = () => {
   removeVisualFocusAll()
+
+  if (!comboboxNode.value.value) {
+    placeholderNode.value.classList.remove('focus')
+  }
+}
+
+const onPlaceHolderClick = () => {
+  comboboxNode.value.focus()
 }
 
 const onComboboxClick = () => {
@@ -600,6 +610,21 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+.placeholder-text {
+  user-select: none;
+  left: 43px;
+  background-color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  transition: all 0.2s;
+  top: 17px;
+
+  &.focus {
+    font-size: 12px;
+    top: -10px;
+    left: 25px;
+  }
+}
 
 .cb_edit {
   outline: none;;

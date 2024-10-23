@@ -4,8 +4,9 @@
     <v-container>
       <Spacer :height="100" />
       <v-row>
-        <p class="mb-2">Search Field of Study</p>
-        <CBox :items="options" v-model="selectedItem" />
+        <v-card class="pa-8 w-100">
+          <CBox :items="options" v-model="selectedItem" />
+        </v-card>
         <Spacer :height="700" />
       </v-row>
     </v-container>

@@ -26,11 +26,12 @@
   <!-- Top Splash and Search-->
   <div class="bg-primary-aqua">
     <v-container class="pt-12">
+      <h1 class="text-center pb-6 mx-auto mt-3">
+        Find the right training program for you.
+      </h1>
       <v-row class="pb-8 my-4">
         <!-- Header Info -->
-        <h1 class="text-uppercase text-center pb-6 mx-auto mt-3">
-          Find the Right Training Program For You.
-        </h1>
+
 
         <v-col cols="12" lg="6">
           <p class="mx-4 mx-md-16 font-weight-bold text-left">
@@ -268,8 +269,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content:
-        "Find the right training program for you. Search for schools with training programs and training programs by field of study.",
+      content: "Find the right training program for you. Search for schools with training programs and training programs by field of study.",
     },
   ],
 });
