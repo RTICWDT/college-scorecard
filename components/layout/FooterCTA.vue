@@ -105,6 +105,6 @@ const analytics = useAnalytics();
 }
 
 .bottom-panel {
-  background-color: use-theme('gray-400');
+  background-color: use-theme('gray-300');
 }
 </style>
