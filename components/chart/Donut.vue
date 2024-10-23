@@ -71,8 +71,8 @@ const chartData = computed(() => ({
   labels: ['value', ''],
   datasets: [
     {
-      backgroundColor: [props.color, color('gray-100')],
-      hoverBackgroundColor: [props.color, color('gray-100')],
+      backgroundColor: [color(props.color), color('gray-100')],
+      hoverBackgroundColor: [color(props.color), color('gray-100')],
       data: [props.value, 100 - props.value],
       borderWidth: 0,
       borderColor: 'white',
