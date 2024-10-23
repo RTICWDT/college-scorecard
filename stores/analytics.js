@@ -23,8 +23,6 @@ export const useAnalytics = defineStore('analytics', {
 
   actions: {
     GATrackEvent(category, action, label = '') {
-      const config = useRuntimeConfig()
-
       try {
         if (typeof window !== 'undefined' && this.gtag) {
           if (process.env.NODE_ENV === 'production') {
