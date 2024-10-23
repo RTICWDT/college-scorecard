@@ -1,10 +1,10 @@
 <template>
   <div class="d-print-none">
     <div
-      class="d-block pa-md-4 text-white"
+      class="d-block pa-md-4 text-white bg-primary-blue"
       app
       absolute
-      style="background-color: #10274E; z-index: 900;"
+      style="z-index: 900;"
     >
       <v-container class="py-8">
         <v-row>
