@@ -262,6 +262,8 @@ watch(() => location.latLon, (newValue) => {
   const query = {
     lat: newValue.min_lat + ".." + newValue.max_lat,
     long: newValue.min_lon + ".." + newValue.max_lat,
+    dolflag: true,
+    distance: 50,
   }
 
   router.push({ name: 'search', query: query })
@@ -269,7 +271,7 @@ watch(() => location.latLon, (newValue) => {
 
 const handleSearchNearbySchools = async () => {
   const result = await handleLocationCheck();
-  console.log(result)
+  // console.log(result)
 
   // this.$url(
   //     "/search/?toggle=institutions&dolflag=true&sort=avg_net_price:asc"
