@@ -52,7 +52,7 @@ const tabID = (context, controlTab) => {
   position: absolute;
   border-radius: 50%;
   z-index: 1;
-  border: 2px solid #ededed;
+  border: 2px solid use-theme('gray-50');
 }
 
 .circle {

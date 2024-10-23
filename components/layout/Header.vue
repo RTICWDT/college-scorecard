@@ -92,7 +92,7 @@ nav {
 
     a {
       padding: 2px;
-      outline: 2px solid #0071bb;
+      outline: 2px solid use-theme('blue-500');
       outline-style: groove;
     }
   }

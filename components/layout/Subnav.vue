@@ -13,7 +13,7 @@ li a, li span {
 
 li a.active, li span.active {
   font-weight: bold;
-  border-bottom: 3px solid #97cff5;
+  border-bottom: 3px solid use-theme('blue-500');
   z-index: -100;
 }
 

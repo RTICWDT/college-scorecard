@@ -43,7 +43,7 @@ const toggleHighlight = (event, fos) => {
 
 <style scoped lang="scss">
 .result-card {
-  border-left: 1px solid #666;
+  border-left: 1px solid use-theme('gray-700');
   min-height: 125px;
 }
 </style>

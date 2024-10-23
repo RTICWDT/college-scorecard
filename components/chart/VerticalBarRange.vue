@@ -236,7 +236,7 @@ onMounted(() => {
     &.picc-range-label-min,
     &.picc-range-label-max,
     &.picc-range-label-median {
-      color: #000;
+      color: black;
       font-size: 0.85rem;
     }
 
@@ -253,7 +253,7 @@ onMounted(() => {
     &.picc-range-label-median,
     &.picc-range-label-lower,
     &.picc-range-label-upper {
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid black;
     }
 
     &.picc-range-label-upper {
@@ -311,7 +311,7 @@ onMounted(() => {
       span:not(.arrow-left) {
         margin-left: $bar-width + $arrow-size + 10;
         text-align: center;
-        color: #000;
+        color: black;
         margin-top: -0px;
         font-size: 12px !important;
         font-family: "Public Sans", Helvetica, arial, sans-serif !important;

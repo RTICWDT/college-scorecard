@@ -248,7 +248,7 @@ watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompar
 .drawer-content {
   background-color: white;
   max-width: 900px;
-  border-top: 8px solid #000;
+  border-top: 8px solid black;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 
@@ -281,7 +281,7 @@ watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompar
 
   .toggle-content {
     max-width: 900px;
-    background-color: #000;
+    background-color: black;
 
     @include mdAndUp {
       border-top-right-radius: 5px;

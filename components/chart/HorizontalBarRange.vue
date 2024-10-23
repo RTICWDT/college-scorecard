@@ -275,7 +275,7 @@ onMounted(() => {
     &.picc-range-label-min,
     &.picc-range-label-max,
     &.picc-range-label-middle {
-      color: #000;
+      color: black;
       font-size: 1rem;
     }
 
@@ -332,15 +332,15 @@ onMounted(() => {
       margin-bottom: 0;
       height: 100%;
       width: 1px;
-      background-color: #000;
-      border-left: 1px solid #000;
+      background-color: black;
+      border-left: 1px solid black;
       span {
         top: 35px !important;
         width: $label-width;
       }
       span:not(.arrow-left) {
         text-align: center;
-        color: #000;
+        color: black;
         top: 44px !important;
         margin-left: -3.75rem !important;
         font-weight: 400;

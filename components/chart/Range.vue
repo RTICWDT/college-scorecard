@@ -239,7 +239,7 @@ onMounted(() => {
     &.picc-range-label-min,
     &.picc-range-label-max,
     &.picc-range-label-middle {
-      color: #000;
+      color: black;
       font-size: 12px;
     }
 
