@@ -56,6 +56,13 @@ li a.active, li span.active {
 .fade-leave-to {
   opacity: 0;
 }
+
+.nav-item { 
+  &.active {
+    font-weight: bold;
+    border-bottom: 3px solid #97cff5;
+  }
+}
 </style>
 
 <template>
@@ -67,7 +74,8 @@ li a.active, li span.active {
     @blur="handleBlur"
 
   >
-    <span 
+    <span
+      class="nav-item"
       :class="{ 'active': active }"
       tabindex="0"
       role="button"
