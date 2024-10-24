@@ -1,7 +1,7 @@
 <template>
   <div v-if="error" style="height: 500px" class="d-flex align-center justify-center text-center">
     <p style="max-width: 500px;">
-      Something went wrong and we couldn't load your fields of study for comparison. Try again later or <a href="mailto:scorecarddata@rti.org">Contact Us</a> for assistance.
+      Something went wrong and we couldn't load your selected fields of study for comparison. Try again later or <a href="mailto:scorecarddata@rti.org">Contact Us</a> for assistance.
     </p>
   </div>
 

@@ -4,12 +4,14 @@
         <v-col cols="12" lg="12" class="">
           <div>
             <v-card class="pa-5" elevation="0">
-              <h2>Something went wrong</h2>
-              <p>Try searching for a school by name:</p>
+              <h2 class="mb-3">Something went wrong and we couldn't find your school.</h2>
+              <p class="mb-2">Try searching for a school by name:</p>
               <SearchSchoolAutocomplete
                 @school-name-selected="handleSchoolNameSelected"
                 :searchEmptyName="false"
               />
+
+              <p class="mt-6">Or <a href="mailto:scorecarddata@rti.org">contact us</a> for assistance.</p>
             </v-card>
           </div>
         </v-col>
