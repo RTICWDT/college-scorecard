@@ -23,9 +23,9 @@
               @update:model-value="colorSlider"
               :slider-color="sliderColor"
             >
-              <v-tab @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Search Schools')">Search Schools</v-tab>
-              <v-tab @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Search Fields of Study')">Search Fields of Study</v-tab>
-              <v-tab @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Show Me Options')">Show Me Options</v-tab>
+              <v-tab class="font-header" @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Search Schools')">Search Schools</v-tab>
+              <v-tab class="font-header" @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Search Fields of Study')">Search Fields of Study</v-tab>
+              <v-tab class="font-header" @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Show Me Options')">Show Me Options</v-tab>
             </v-tabs>
 
             <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
@@ -327,7 +327,6 @@
   }
 
   .v-tab {
-    font-family: $header-font-family;
     font-size: 1rem;
     color: white;
     letter-spacing: normal;

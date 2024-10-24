@@ -18,7 +18,7 @@
           <Spacer :height="15"/>
           <h3 class="text-h5 font-weight-bold mb-2">SAT</h3>
 
-          <h4 class="text-overline">Critical Reading</h4>
+          <h4 class="text-uppercase">Critical Reading</h4>
           <ChartRange
             v-if="satReading.available"
             :lower="{
@@ -41,7 +41,7 @@
           />
           <p v-else class="data-na">Data Not Available</p>
 
-          <h4 class="text-overline">Math</h4>
+          <h4 class="text-uppercase">Math</h4>
           <ChartRange
             v-if="satMath.available"
             :lower="{

@@ -1,7 +1,7 @@
 <template>
   <div v-if="institutions.length > 0">
     <div class="d-flex">
-      <h4 class="text-overline">{{ title }}</h4>
+      <h4 class="text-uppercase">{{ title }}</h4>
       <div class="flex-grow-1" />
       <slot name="byline" :groupName="titleShorthand()" :institution="institutions[0]"></slot> 
     </div>

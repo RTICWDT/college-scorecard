@@ -39,8 +39,8 @@
     <v-col cols="12" sm="6" md="3">
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
-          <span class='mb-2'>Median Earnings</span>
-          <TooltipModal :definition="'fos-median-earnings'" :is-branch="isBranch" />
+          <span class='mb-0'>Median Earnings</span>
+          <TooltipModal :definition="'fos-median-earnings'" :is-branch="isBranch" class="ml-1" />
         </div>
 
         <div v-if="medianEarnings">
@@ -67,8 +67,8 @@
 
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
-          <span class='mb-2'>Monthly Earnings</span>
-          <TooltipModal :definition="'fos-monthly-earnings'" :is-branch="isBranch" />
+          <span class='mb-0'>Monthly Earnings</span>
+          <TooltipModal :definition="'fos-monthly-earnings'" :is-branch="isBranch" class="ml-1" />
         </div>
 
 
@@ -87,7 +87,7 @@
     <v-col cols="12" sm="6" md="3">
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
-          <span class='mb-2'>Median Debt</span>
+          <span class='mb-0'>Median Debt</span>
           <TooltipModal
             :definition="'fos-median-debt'"
             :is-branch="isBranch"
@@ -98,7 +98,6 @@
         <div v-if="medianDebt">
           <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
             {{ toDollar(medianDebt) }}
-
           </span>
           <div style="max-width: 160px; height: 30px">
             <ChartHorizontalBar
@@ -120,7 +119,7 @@
 
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
-          <span class='mb-2'>Monthly Loan Payment</span>
+          <span class='mb-0'>Monthly Loan Payment</span>
           <TooltipModal
             :definition="'fos-monthly-debt-payment'"
             :is-branch="isBranch"

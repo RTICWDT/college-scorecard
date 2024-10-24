@@ -24,7 +24,7 @@
     <div v-else>
       <v-row>
         <v-col cols="12" md="8" class="pb-0">
-          <p class="text-overline mb-1" id="loan-type-label">Loan Type</p>
+          <p class="text-uppercase mb-1" id="loan-type-label">Loan Type</p>
 
           <v-select
             :items="aidLoanSelectItems"

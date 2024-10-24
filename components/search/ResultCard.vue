@@ -30,7 +30,7 @@
         <div class="hover-tip">{{ isSelected ? 'Added to compare' : compareHoverCountText }}</div>
       </v-tooltip>
 
-      <p class="text-overline mb-1">{{ city }}, {{ state }}</p>
+      <p class="text-uppercase mb-1 mt-1">{{ city }}, {{ state }}</p>
       <h2 class="title mt-0 font-weight-bold">
         <NuxtLink class="nameLink" :to="schoolLink">{{ schoolName }}</NuxtLink>
       </h2>

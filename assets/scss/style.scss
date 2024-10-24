@@ -8,6 +8,17 @@ $primary-green: #007000;
 $primary-blue: #10274E;
 $secondary-blue: #1570EF;
 
+$base-font-family: "Inter", Helvetica, arial, sans-serif;
+$header-font-family: neue-haas-grotesk-display, Helvetica, arial, sans-serif;
+
+.font-header {
+  font-family: $header-font-family;
+}
+
+.font-base {
+  font-family: $base-font-family;
+}
+
 .v-application {
   // VUETIFY OVERRIDES
   .v-btn {
