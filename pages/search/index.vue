@@ -212,7 +212,13 @@
           <div :cols="showSidebar ? 6 : 9" xl="10" class="px-4 py-2 pa-sm-8`">
 
             <v-card class="mt-2 mb-2 px-4 elevation-0 d-flex align-center py-3 py-md-0 resultsNavCard">
-              <div v-if="isLoading">
+              <div v-if="error">
+                <p class="title">
+                  Something went wrong and we couldn't complete your search. Please try again later or <a href="mailto:scorecarddata@rti.org">contact us</a> for assistance.
+                </p>
+              </div>
+
+              <div v-else-if="isLoading">
                   <h3 class="title">
                     Loading
                     <v-icon size="z-small" color="primary-blue" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
@@ -347,12 +353,6 @@
                     <Spacer :height="30" />
                   </v-col>
                 </v-row>
-              </div>
-
-              <!-- Search Query Error-->
-              <div class="show-error" v-if="error">
-                <h1>Something went wrong:</h1>
-                <p class="error-message">{{ error }}</p>
               </div>
 
               <!-- Institution Results -->
@@ -524,14 +524,10 @@ const searchAPI = async () => {
     shareUrl.value = window.location.href
     displayFlag.value = input.dolflag === "true"
   } catch (err) {
-    console.warn("Error fetching search.", error)
+    console.warn("Error fetching search.", err)
     results.meta = {}
     results.schools = []
-    if (error.response?.errors) {
-      showError(error.response.errors[0])
-    } else if (error.response?.status === 500) {
-      showError("API 500 Error")
-    }
+    error.value = err.message
   }
 }
 

@@ -229,7 +229,13 @@
           </div>
 
           <v-card class="mt-2 mb-2 px-4 elevation-0 d-flex align-center py-3 py-md-0 resultsNavCard">
-            <div v-if="isLoading">
+            <div v-if="error">
+              <p class="title">
+                Something went wrong and we couldn't complete your search. Please try again later or <a href="mailto:scorecarddata@rti.org">contact us</a> for assistance.
+              </p>
+            </div>
+
+            <div v-else-if="isLoading">
               <h3 class="title" style="font-size: 1.5rem;">
                 Loading
                 <v-icon size="z-small" color="primary-blue" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
@@ -328,7 +334,7 @@
 
               <!-- Field Of Study CIP 4 Information -->
               <div>
-                <v-row>
+                <v-row v-if="!error">
                   <v-col cols="12">
                     <v-alert color="white" class="pl-5">
                       <strong>Note:</strong> Field of Study titles are based
@@ -368,7 +374,7 @@
               <!-- No Results/Canned Search/ -->
               <div
                 id="search-can-query-container"
-                v-if="!isLoading && results.fieldsOfStudy.length === 0"
+                v-if="!isLoading && results.fieldsOfStudy.length === 0 && !error"
               >
                 <v-row>
                   <v-col cols="12">
@@ -381,12 +387,6 @@
 
               <!-- Main Search Results -->
               <div class="results-main-alert">
-
-                <!-- Search Query Error-->
-                <div class="show-error" v-show="error">
-                  <h1>Something went wrong:</h1>
-                  <p class="error-message">{{ error }}</p>
-                </div>
 
                 <!-- Field of Study Results -->
                 <div
@@ -601,13 +601,7 @@ const searchAPI = async () => {
     let params = prepareSearchParams()
     let query = prepareParams(params)
     let url = generateQueryString(params)
-
-    // console.log("SEARCHING API WITH: ", input)
-    // console.log("QUERY: ", query)
-    // console.log("URL: ", url)
-
     router.replace(route.path + url)
-
     const response = await apiGet("/fos", query)
 
     isLoading.value = false
@@ -616,18 +610,9 @@ const searchAPI = async () => {
     shareUrl.value = window.location.href
   } catch (err) {
     isLoading.value = false
-    console.warn("Error fetching search.", err)
-
     results.meta = { total: 0 }
     results.fieldsOfStudy = []
-
-    if (err.message === "Request aborted") {
-      // Do nothing for aborted requests
-    } else if (err.response?.data?.errors) {
-      showError(err.response.data.errors[0])
-    } else if (err.response?.status === 500) {
-      showError("API 500 Error")
-    }
+    error.value = err
   }
 }
 
@@ -637,15 +622,6 @@ const prepareSearchParams = () => {
     ...cleanedInput,
     page: input.page ? input.page - 1 : 0,
     sort: input.sort || defaultSort.value
-  }
-}
-
-const showError = (error) => {
-  console.error("error:", error)
-  if (error.message) {
-    error.value = error.message
-  } else {
-    console.log(error)
   }
 }
 

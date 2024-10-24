@@ -1,5 +1,11 @@
 <template>
-  <div v-if="loading || fieldsOfStudy.all.length === 0" style="height: 500px" class="d-flex align-center justify-center">
+  <div v-if="error" style="height: 500px" class="d-flex align-center justify-center text-center">
+    <p style="max-width: 500px;">
+      Something went wrong and we couldn't load your fields of study for comparison. Try again later or <a href="mailto:scorecarddata@rti.org">Contact Us</a> for assistance.
+    </p>
+  </div>
+
+  <div v-else-if="loading || fieldsOfStudy.all.length === 0" style="height: 500px" class="d-flex align-center justify-center">
     <div v-if="loading">
       <strong class="mr-1">Loading</strong> <v-icon icon="fa:fas fa-circle-notch fa-spin" size="small" />
     </div>
@@ -105,6 +111,7 @@ const props = defineProps({
   isViewingSharedComparison: Boolean,
 })
 
+const error = ref(null)
 const queryFieldsOfStudy = async () => {
   let params
 
@@ -133,6 +140,10 @@ const queryFieldsOfStudy = async () => {
     url: `${fieldOfStudy.unit_id}.${fieldOfStudy.code}.${fieldOfStudy.credential.level}`
   }))
 
+  if (paramArray.length === 0) {
+    return
+  }
+
   try {
     loading.value = true
     const responses = await apiGetAll("/schools/", paramArray)
@@ -148,7 +159,8 @@ const queryFieldsOfStudy = async () => {
     }).filter(Boolean)
 
     groupFieldsOfStudy(fosResults)
-  } catch (error) {
+  } catch (err) {
+    error.value = err
     console.error("Issue locating Fields of Study for compare...", error)
   } finally {
     loading.value = false

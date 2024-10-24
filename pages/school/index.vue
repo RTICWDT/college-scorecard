@@ -1,14 +1,5 @@
 <template>
-  <div class="d-flex w-100 h-100 align-center justify-content-center" v-if="loading || (!school.id && !error)">
-    <div class="show-loading w-100">
-      <h1 class="title text-center mt-15">
-        <v-icon size="x-small" class="mr-2 position-relative" style="bottom: 2px;" color="primary-blue" icon="fa:fas fa-circle-notch fa-spin"/>
-        Loading
-      </h1>
-    </div>
-  </div>
-
-  <v-container class="mt-5" v-else-if="error">
+  <v-container class="mt-5" v-if="error">
     <v-row>
         <v-col cols="12" lg="12" class="">
           <div>
@@ -24,6 +15,17 @@
         </v-col>
       </v-row>
   </v-container>
+
+  <div class="d-flex w-100 h-100 align-center justify-content-center" v-else-if="loading || (!school.id && !error)">
+    <div class="show-loading w-100">
+      <h1 class="title text-center mt-15">
+        <v-icon size="x-small" class="mr-2 position-relative" style="bottom: 2px;" color="primary-blue" icon="fa:fas fa-circle-notch fa-spin"/>
+        Loading
+      </h1>
+    </div>
+  </div>
+
+
 
   <div v-else>
 
@@ -412,10 +414,9 @@ const findSchool = async () => {
     //   panelsFOS.value = [0]
     // }
     trackState()
-  } catch (error) {
-    error.value = true
-    console.warn(error)
-    console.warn("No School found for ID: " + schoolId.value)
+  } catch (err) {
+    error.value = err
+    console.warn(err)
   }
 }
 

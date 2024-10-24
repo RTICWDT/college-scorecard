@@ -25,7 +25,9 @@ export const useApi = () => {
   const apiGetAll = async (uri, paramArray) => {
     try {
       const promises = paramArray.map(params => apiGet(uri, params));
-      return await Promise.all(promises);
+      await Promise.all(promises).then(values => {
+        return values;
+      });
     } catch (error) {
       console.error('API GetAll Error:', error);
       throw error;

@@ -1,5 +1,11 @@
 <template>
-  <div v-if="loading || institutions.all.length === 0" style="height: 500px" class="d-flex align-center justify-center">
+  <div v-if="error" style="height: 500px" class="d-flex align-center justify-center text-center">
+    <p style="max-width: 500px;">
+      Something went wrong and we couldn't load your fields of study for comparison. Try again later or <a href="mailto:scorecarddata@rti.org">Contact Us</a> for assistance.
+    </p>
+  </div>
+
+  <div v-else-if="loading || institutions.all.length === 0" style="height: 500px" class="d-flex align-center justify-center">
     <div v-if="loading">
       <strong class="mr-1">Loading</strong> <v-icon icon="fa:fas fa-circle-notch fa-spin" size="small" />
     </div>
@@ -160,6 +166,7 @@ const props = defineProps({
 })
 
 const loading = ref(false)
+const error = ref(null)
 const institutions = reactive({
   all: [],
   schoolsCertificate: [],
@@ -180,6 +187,10 @@ const querySchools = async () => {
     paramArray = params.map((id) => ({ id: Number(id) }))
   } else {
     paramArray = store.institutions.map((institution) => ({ id: institution.id }))
+  }
+
+  if (paramArray.length === 0) {
+    return
   }
   
   analytics.trackCompareList(paramArray.map((institution) => institution.id).join(";"))
@@ -208,7 +219,9 @@ const querySchools = async () => {
     if (props.isViewingSharedComparison) {
       store.temporaryInstitutions = institutions.all.map((institution) => store.schoolParams(institution))
     }
-  } catch (error) {
+  } catch (err) {
+    error.value = err
+    
     console.error("Issue locating schools for compare...", error)
   } finally {
     loading.value = false

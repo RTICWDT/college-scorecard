@@ -1,5 +1,22 @@
 <template>
-  <v-main>
+  <v-container class="mt-5" v-if="error">
+    <v-row>
+        <v-col cols="12" lg="12" class="">
+          <div>
+            <v-card class="pa-5" elevation="0">
+              <h2>Something went wrong</h2>
+              <p>Try searching for a school by name:</p>
+              <SearchSchoolAutocomplete
+                @school-name-selected="handleSchoolNameSelected"
+                :searchEmptyName="false"
+              />
+            </v-card>
+          </div>
+        </v-col>
+      </v-row>
+  </v-container>
+
+  <v-main v-else>
     <div class="school-heading">
       <div class="bg-white">
         <v-container>
@@ -389,6 +406,7 @@ const formatFOS = (fosObject) => {
   }
 }
 
+const error = ref(null)
 onMounted(async () => {
   const urlParams = route.query
   const schoolId = Object.keys(urlParams)[0]
@@ -410,7 +428,8 @@ onMounted(async () => {
       currentTextFilter.value = selectedFOS.title
       subpanel.value = 0
     }
-  } catch (error) {
+  } catch (err) {
+    error.value = err
     console.warn('No School found for ID: ' + schoolId)
   }
 })
