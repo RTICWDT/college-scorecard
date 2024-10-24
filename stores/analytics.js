@@ -43,19 +43,16 @@ export const useAnalytics = defineStore('analytics', {
       this.GATrackEvent('[Data] Expand Accordion', accordion)
     },
   
-    trackOutboundLink: (evt) => {
-      let href = '(unknown)'
-      if (evt.target.className.match(/v-btn__content/)) {
-        href = evt.target.parentNode.href
-      } else {
-        href = evt.target.href
-      }
-      this.GATrackEvent('External Link', href)
-    },
-  
     transitionOutboundLink(event) {
       if (confirm("You are leaving the College Scorecard. \n\nThe U.S. Department of Education does not necessarily endorse the views expressed or the data and facts presented on this external site. \n\nLinks are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.")) {
-        this.trackOutboundLink(event)
+        let href = '(unknown)'
+        if (event.target.className.match(/v-btn__content/)) {
+          href = event.target.parentNode.href
+        } else {
+          href = event.target.href
+        }
+
+        this.GATrackEvent('External Link', href)
       } else {
         event.preventDefault()
       }

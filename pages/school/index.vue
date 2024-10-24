@@ -341,7 +341,7 @@ const shareLink = computed(() => {
 
 // METHODS
 // 
-// 
+//
 const trackState = (school) => {
   const state = useGet(school, "school.state")
   const previousStates = window.sessionStorage.getItem('states')
@@ -349,7 +349,7 @@ const trackState = (school) => {
     let states = previousStates ? JSON.parse(previousStates) : []
     if (previousStates && !states.includes(state)) {
       states.push(state)
-      trackMultipleStates(states)
+      analytics.trackMultipleStates(states)
     }
     window.sessionStorage.setItem('states', JSON.stringify(states))
   }
