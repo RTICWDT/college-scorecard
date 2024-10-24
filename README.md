@@ -1,4 +1,4 @@
-The [College Scorecard](https://github.com/rti-international/scorecard-website) transition project away from the [Gridsome Project](https://github.com/rti-international/scorecard-website)
+The College Scorecard transition project away from the [Gridsome Project](https://github.com/rti-international/scorecard-website)
 
 The transition includes:
 + Vue2 to [Vue3](https://vuejs.org/)
@@ -51,13 +51,13 @@ npm run preview
 ## Migration Checklist
 
 - [x] API
-- [x] Store
+- [x] Stores
 - [x] SEO / Meta tags
 - [x] Favicons
-- [ ] Analytics
+- [x] Analytics
 - [x] ChartJS Integration
 - [x] Leaflet Integration
-- [x] Vuetify Integration
+- [x] Vuetify 3 Integration
 - [x] SCSS Integration
 
 - Layout
@@ -94,17 +94,11 @@ npm run preview
   - [x] Routing
   - [x] 404
   - [ ] Error Handling
-  - [ ] Design Pass
+  - [x] Design Pass
   - [x] SEO / Metatags
-  - [ ] Analytics Events
+  - [x] Analytics Events
   - [x] Share Functionality
-  - [ ] Fonts
-
-- Nice-to-have
-  - [ ] Search Optimization / Refactor
-  - [x] Compare store composable interface
-  - [ ] design color consistency check & stylesheet
-  - [ ] Typescript?
+  - [x] Fonts
 
 - Bugs
   - [x] /school params need to set the state of the page properly
