@@ -48,7 +48,6 @@ const currentData = computed(() => {
   let percent
 
   for (let dataPoint in data) {
-    console.log(friendlyMetrics[dataPoint])
     percent = Math.round(data[dataPoint] * 100)
     if (percent > 0) {
       rows.push({
