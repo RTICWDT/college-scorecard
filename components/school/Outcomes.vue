@@ -1,20 +1,19 @@
 <template>
-  <div v-show="has_data" class="om_visualization">
+  <div v-show="hasData" class="om_visualization">
     <div class="om_group">
       Out of {{ toNumber(group_count) }} students...
     </div>
-    <div>
-      {{ currentData }}
+    <div v-for="datum in currentData">
+      <v-icon class="om_icon">{{ datum.icon }}</v-icon>
+      {{ datum.text }}
     </div>
   </div>
 
-  <div v-show="!has_data" class="data-na">
-    <div class="om_sankey na">Data not available.</div>
-  </div>
+  <div v-show="!hasData" class="data-na">Data not available.</div>
 </template>
 
 <script setup>
-const analytics = useAnalytics()
+const { toNumber } = useNumberFormatter()
 
 const props = defineProps({ 
   school: {
@@ -32,13 +31,11 @@ const props = defineProps({
 })
 
 const outcomes = ref(null)
-const outcome_cohorts = ref(null)
-const has_data = ref(true)
-
-const { toNumber } = useNumberFormatter()
+const outcomeCohorts = ref(null)
+const hasData = ref(true)
 
 const group_count = computed(() => {
-  return useGet(outcome_cohorts.value, props.options.study + "." + props.options.enroll)
+  return useGet(outcomeCohorts.value, props.options.study + "." + props.options.enroll)
 })
 
 const currentData = computed(() => {
@@ -51,14 +48,17 @@ const currentData = computed(() => {
   let percent
 
   for (let dataPoint in data) {
+    console.log(friendlyMetrics[dataPoint])
     percent = Math.round(data[dataPoint] * 100)
     if (percent > 0) {
-      rows.push(percent + "% " + friendlyMetrics[dataPoint])
+      rows.push({
+        icon: icons[dataPoint],
+        text: percent + "% " + friendlyMetrics[dataPoint]
+      })
     }
   }
 
-  has_data.value = rows.length > 0
-
+  hasData.value = rows.length > 0
   return rows
 })
 
@@ -75,7 +75,7 @@ const extractData = (school) => {
 
   let subgroup = "8yr_pooled"
 
-  outcome_cohorts.value = {
+  outcomeCohorts.value = {
     study_full_time: {
       enroll_first_time:
         outcome_cohort_data.full_time.first_time[subgroup],
@@ -168,5 +168,12 @@ const friendlyMetrics = {
   still_enrolled_pooled: "still enrolled",
   transfer_pooled: "transferred",
   unknown_pooled: "withdrew",
+}
+
+const icons = {
+  award_pooled: "mdi-trophy",
+  still_enrolled_pooled: "mdi-school",
+  transfer_pooled: "mdi-transfer",
+  unknown_pooled: "mdi-close",
 }
 </script>
