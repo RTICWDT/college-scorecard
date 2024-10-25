@@ -56,7 +56,7 @@
               <!-- School Header Info -->
               <v-row>
                 <v-col cols="12" md="6" class="text-white">
-                  <div v-if="school.id">
+                  <div v-if="!loading && school.id">
                     <p class="mb-3 text-uppercase">
                       All Fields of Study Offered at
                     </p>
@@ -133,7 +133,7 @@
     </div>
 
     <v-container class="my-10">
-      <div v-if="!school.id" class="show-loading">
+      <div v-if="loading || !school.id" class="show-loading">
         <h1 class="text-h6 text-center my-15">
           <v-icon color="primary-blue">fas fa-circle-notch fa-spin</v-icon>
           Loading
@@ -418,13 +418,21 @@ const formatFOS = (fosObject) => {
   }
 }
 
+watch(() => route.fullPath, () => {
+  findSchool()
+})
+
+const loading = ref(false)
 const error = ref(null)
-onMounted(async () => {
+
+const findSchool = async () => {
   const urlParams = route.query
   const schoolId = Object.keys(urlParams)[0]
 
   try {
+    loading.value = true
     const response = await apiGet("/schools/", { id: schoolId })
+    loading.value = false
 
     if (response.metadata.total > 1) {
       console.warn('More than one school found for ID: "' + schoolId + '"')
@@ -434,15 +442,18 @@ onMounted(async () => {
     Object.assign(school, response.results[0])
     document.title = useGet(school, 'school.name') + ' | College Scorecard'
 
-    const selectedFOS = mapFOSFromURL(urlParams, fieldOfStudySelectItems)
+    const selectedFOS = mapFOSFromURL()
     if (selectedFOS) {
       currentFilter.value = parseInt(selectedFOS.credential.level, 10);
       currentTextFilter.value = selectedFOS.title
       subpanel.value = 0
     }
   } catch (err) {
-    error.value = err
     console.warn('No School found for ID: ' + schoolId)
   }
+}
+
+onMounted(() => {
+  findSchool()
 })
 </script>

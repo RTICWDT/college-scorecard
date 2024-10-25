@@ -101,6 +101,7 @@ const { color } = useVuetify()
 const store = useCompareStore()
 const router = useRouter()
 const route = useRoute()
+
 const shareUrl = computed(() => {
   if (route.query.fos || route.query.s) {
     window.location.href
@@ -133,7 +134,6 @@ router.push(cleanedPath)
 // school param  // &s={schoolId}
 // field of study param // &fos={schoolID}.{fieldOfStudyCode}.{credentialLevel}
 
-
 const toggleFields = ['institutions', 'fos']
 const compareToggle = ref(route.query.toggle)
 const isComparingSchools = computed(() => route.query.toggle === 'institutions')
@@ -143,6 +143,14 @@ const compareToggleOptions = computed(() => [
   { label: `SCHOOLS (${schoolCount.value})`, value: 'institutions', color: color('primary-green'), activeColor: color('primary-green', 0.1) },
   { label: `FIELDS OF STUDY (${fieldOfStudyCount.value})`, value: 'fos', color: color('primary-yellow'), activeColor: color('primary-yellow', 0.1) },
 ])
+
+watch(isComparingSchools, () => {
+  if (isComparingSchools.value) {
+    compareToggle.value = toggleFields[0]
+  } else {
+    compareToggle.value = toggleFields[1]
+  }
+})
 
 const handleCompareToggle = (value) => {
   const newQuery = { ...route.query, toggle: value}
