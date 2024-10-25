@@ -93,7 +93,7 @@ npm run preview
   - [x] Images
   - [x] Routing
   - [x] 404
-  - [ ] Error Handling
+  - [x] Error Handling
   - [x] Design Pass
   - [x] SEO / Metatags
   - [x] Analytics Events
