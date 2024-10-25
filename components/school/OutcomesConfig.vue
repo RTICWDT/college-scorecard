@@ -9,6 +9,7 @@
           label="Show Pell Grant Recipients Only"
           color="secondary-green"
           class="mt-0 pt-0"
+          hideDetails
         >
           <template #label>
             <span>
@@ -19,7 +20,7 @@
       </v-col>  
     </v-row>
 
-    <div>
+    <div class="ml-5">
       <div>
         <p class="outcomes_intro d-inline-block mb-2">Show data for students who</p>
         <v-btn
