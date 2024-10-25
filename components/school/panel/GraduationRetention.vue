@@ -1,18 +1,18 @@
 <template>
   <div class="px-0 py-3 pa-sm-5">
     <v-row>
-      <v-col cols="12" md="6" id="showPellOnlyGrad">
+      <v-col cols="12" md="6" id="showPellOnly">
         <v-card flat class="pa-4 fill-height">
           <h2 class="mb-3">
             Graduation Rate&nbsp;
             <TooltipModal
               definition="graduation-rate"
               :version="completionRateFieldDefinition"
-              :isPell="showPellOnlyGrad"
+              :isPell="showPellOnly"
             />
           </h2>
           <v-checkbox
-            v-model="showPellOnlyGrad"
+            v-model="showPellOnly"
             label="Show Pell Grant Recipients Only"
             color="secondary-green"
             class="mt-0"
@@ -24,7 +24,7 @@
             </template>
           </v-checkbox>
           <v-expand-transition>
-            <div v-if="!showPellOnlyGrad" class="d-none d-lg-block">
+            <div v-if="!showPellOnly" class="d-none d-lg-block">
               <p><em>Show Midpoint For:</em></p>
               <div style="max-width: 600px;">
                 <Toggle
@@ -48,14 +48,14 @@
           </v-expand-transition>
           <ChartHorizontalBarMedian
             v-if="
-              (completionRate && !showPellOnlyGrad) ||
-                (completionRatePell && showPellOnlyGrad)
+              (completionRate && !showPellOnly) ||
+                (completionRatePell && showPellOnly)
             "
             :value="{
-              label: showPellOnlyGrad
+              label: showPellOnly
                 ? Math.round(parseFloat(completionRatePell) * 100) + '%'
                 : Math.round(parseFloat(completionRate) * 100) + '%',
-              value: showPellOnlyGrad
+              value: showPellOnly
                 ? Math.round(parseFloat(completionRatePell) * 100)
                 : Math.round(parseFloat(completionRate) * 100),
             }"
@@ -75,7 +75,7 @@
                 toPercent(medianToggle === 'group' ? computedToggleGraduationRate[0] : computedToggleGraduationRate[1]),
               value: medianToggle === 'group' ? computedToggleGraduationRate[0] * 100 : computedToggleGraduationRate[1] * 100,
               style: { height: '60px' },
-              show: !showPellOnlyGrad,
+              show: !showPellOnly,
             }"
             :height="500"
             :y-bar-thickness="50"
@@ -111,7 +111,10 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <SchoolOutcomes :school="school" />
+        <v-card class="pa-4">
+          <SchoolOutcomesConfig v-model:showPellOnly="showPellOnly" v-model:options="options" />
+          <SchoolOutcomes :showPellOnly="showPellOnly" :options="options" :school="school" />
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -121,6 +124,7 @@
 const { toPercent } = useNumberFormatter()
 const { yearsText } = useFilters()
 const { color } = useVuetify()
+const { showPellOnly, options } = useSchoolOutcomesHelper()
 
 const props = defineProps({
   school: {
@@ -143,25 +147,5 @@ const retentionRate = computed(() => retentionRateMethod(props.school))
 const completionRateFieldDefinition = computed(() => completionRateFieldDefinitionMethod(props.school))
 const computedToggleGraduationRate = computed(() => toggleGraduationRateMethod(props.school))
 
-const { fields } = useConstants()
-
-// Reactive state
-const showPellOnlyGrad = ref(false)
 const medianToggle = ref('group')
-
-const currentSankey = reactive({
-  enroll: "enroll_both",
-  study: "study_both",
-})
-
-
-const groupName = computed(() => {
-  return useGet(props.school.value, fields["PREDOMINANT_DEGREE"])
-})
-
-
-// Methods
-const handleMedianToggle = (toggleValue) => {
-  medianToggle.value = toggleValue === 0 ? "group" : "all"
-}
 </script>

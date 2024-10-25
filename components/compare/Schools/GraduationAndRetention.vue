@@ -93,19 +93,15 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <CompareTooltipHeader title="Outcomes 8 Years After Attending" definition="outcome-measures" :h="2" class="mb-5 mt-7" :pell="showPellOnlyOutcomes" />
-  <v-checkbox
-    v-model="showPellOnlyOutcomes"
-    label="Show Pell Grant Recipients Only"
-    color="secondary-green"
-  >
-    <template v-slot:label>
-        Show Pell Grant Recipients Only
-    </template>
-  </v-checkbox>
-
-  <div class="px-0 px-md-5 mb-5">
-    <SchoolOutcomes :schools="institutions" />
+  <SchoolOutcomesConfig v-model:showPellOnly="showPellOnly" v-model:options="options" />
+  <div class="px-0 px-md-5 my-5">
+    <div class="px-0 px-md-5 mb-5">
+      <CompareSchoolsDataSection :institutions="institutions">
+        <template #data="{ institution }">
+          <SchoolOutcomes :showPellOnly="showPellOnly" :options="options" :school="institution" />
+        </template>
+      </CompareSchoolsDataSection>
+    </div>
   </div>
 </template>
 
@@ -115,6 +111,7 @@ const { toPercent } = useNumberFormatter()
 const medianToggle = ref('group')
 const showMedian = computed(() => !showPellOnly.value)
 const { color } = useVuetify()
+const { showPellOnly, options } = useSchoolOutcomesHelper()
 
 const {
   completionRate,
@@ -122,9 +119,6 @@ const {
   toggleGraduationRate,
   retentionRate,
 } = useComplexFieldMethods()
-
-const showPellOnly = ref(false)
-const showPellOnlyOutcomes = ref(false)
 
 const contextualCompletionRate = computed(() => (institution) => {
   return showPellOnly.value ? completionRatePell(institution) : completionRate(institution)

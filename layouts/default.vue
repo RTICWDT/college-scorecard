@@ -4,9 +4,8 @@
       <LayoutUsaBanner />
       <LayoutHeader />
     </header>
-    <v-main id="mainContent">
+    <v-main id="mainContent" style="min-height: 80vh">
       <slot />
-      
     </v-main>
     <LayoutFooter />
     <CompareDrawer />  

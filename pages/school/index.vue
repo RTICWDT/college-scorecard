@@ -427,11 +427,8 @@ onMounted(() => {
 })
 
 // reload on route change
-watch(() => route.fullPath , (newPath) => {
-  const id = schoolId.value
-  if (Object.keys(route.query)[0] !== id) {
-    findSchool()
-  }
+watch(() => route.fullPath , (newPath, oldPath) => {
+  findSchool()
 })
 
 const schoolNameFromUrl = computed(() => {
