@@ -97,8 +97,6 @@ const medianEarningsMidpoint = (institution) => {
   const medianEarnings = toggleMedianEarnings(institution)
   return medianToggle.value === 'group' ? medianEarnings[0] : medianEarnings[1]
 }
-
-
 </script>
 
 <style lang="scss" scoped>

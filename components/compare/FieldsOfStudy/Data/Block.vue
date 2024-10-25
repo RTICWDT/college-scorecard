@@ -1,6 +1,6 @@
 <template>
   <div v-if="fieldsOfStudy.length > 0">
-    <h4 class="text-uppercase">{{ title }}</h4>
+    <h4 class="text-uppercase text-caption text-gray-700">{{ title }}</h4>
     <div class="py-3">
       <div 
         v-for="fos in fieldsOfStudy" 

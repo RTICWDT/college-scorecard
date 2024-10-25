@@ -105,11 +105,7 @@
   </v-checkbox>
 
   <div class="px-0 px-md-5 mb-5">
-    <CompareSchoolsDataSection :institutions="institutions">
-      <template #data="{ institution }">
-        SANKEY REPLACEMENT GOES HERE
-      </template>
-    </CompareSchoolsDataSection>
+    <SchoolOutcomes :schools="institutions" />
   </div>
 </template>
 

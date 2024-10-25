@@ -110,42 +110,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" id="showPellOnlyOutcomes">
-        <v-card flat class="pa-4">
-          <v-row class="d-flex">
-            <v-col cols="12" md="12">
-              <h2 class="mb-0">
-                Outcomes 8 Years After Attending&nbsp;
-                <TooltipModal
-                  definition="outcome-measures"
-                  :isPell="showPellOnlyOutcomes"
-                />
-              </h2>
-              <v-checkbox
-                v-model="showPellOnlyOutcomes"
-                label="Show Pell Grant Recipients Only"
-                color="secondary-green"
-                class="mt-0 pt-0"
-              >
-                <template #label>
-                  <span>
-                    Show Pell Grant Recipients Only&nbsp;
-                  </span>
-                </template>
-              </v-checkbox>
-            </v-col>  
-          </v-row>
-
-          <!-- <SankeyButtons
-            @update-sankey="currentSankey = $event"
-          />
-          <Sankey
-            :school="school"
-            colors="solid"
-            :currentSankey="currentSankey"
-            :showPellOnly="showPellOnlyOutcomes"
-          /> -->
-        </v-card>
+      <v-col cols="12">
+        <SchoolOutcomes :school="school" />
       </v-col>
     </v-row>
   </div>
@@ -181,7 +147,6 @@ const { fields } = useConstants()
 
 // Reactive state
 const showPellOnlyGrad = ref(false)
-const showPellOnlyOutcomes = ref(false)
 const medianToggle = ref('group')
 
 const currentSankey = reactive({
