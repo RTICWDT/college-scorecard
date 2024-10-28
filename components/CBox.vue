@@ -19,7 +19,6 @@
           @keyup="onComboboxKeyUp"
           @focus="onComboboxFocus"
           @blur="onComboboxBlur"
-          @click="onComboboxClick"
         >
         <div ref="placeholderNode" class="placeholder-text position-absolute" @click="onPlaceHolderClick">Type to search</div>
         <button
@@ -47,8 +46,6 @@
         :class="{ 'focus': listboxHasVisualFocus, 'selected': listboxHasVisualFocus }"
         class="elevation-4"
         :style="listboxStyle"
-        @mouseover="onListboxMouseover"
-        @mouseout="onListboxMouseout"
       >
         <li
           v-for="option in filteredOptions"
@@ -57,8 +54,6 @@
           role="option"
           :aria-selected="option === selectedOption"
           @click="onOptionClick(option)"
-          @mouseover="onOptionMouseover(option)"
-          @mouseout="onOptionMouseout"
           class="pl-3 py-2 pr-3"
         >
           <p class="text-body-1">{{ option.text }}</p>
@@ -76,10 +71,15 @@ const groupNode = ref(null)
 const buttonNode = ref(null)
 const listboxNode = ref(null)
 const filter = ref('')
+
+
 const isOpen = ref(false)
-const hasHover = ref(false)
+
+
 const selectedOption = ref(null)
 const activeDescendant = ref('')
+
+
 const comboboxHasVisualFocus = ref(false)
 const listboxHasVisualFocus = ref(false)
 
@@ -100,8 +100,6 @@ const allOptions = ref(props.items)
 const firstOption = computed(() => filteredOptions.value[0] || null)
 const lastOption = computed(() => filteredOptions.value[filteredOptions.value.length - 1] || null)
 const autocomplete = 'list'
-
-
 
 // SEARCH ALGO
 const cleanString = (str) => {
@@ -217,38 +215,13 @@ const filteredOptions = computed(() => {
   const threshold = 0.5;
   const filtered = scoredOptions
     .filter(item => item.score > threshold)
-    .sort((a, b) => b.score - a.score)
+    // .sort((a, b) => b.score - a.score)
     .map(item => item.option);
 
   if (!filtered.length) return allOptions.value;
   return filtered;
 });
 
-
-const styleRef = ref({ display: 'none' })
-
-// Debounced update function
-const updateStyle = useDebounce(() => {
-  if (!isOpen.value || !comboboxNode.value || !groupNode.value) {
-    styleRef.value = { display: 'none' }
-    return
-  }
-
-  const rect = groupNode.value.getBoundingClientRect()
-  styleRef.value = {
-    position: 'fixed',
-    top: `${rect.bottom}px`,
-    left: `${rect.left + window.scrollX + 5}px`,
-    width: `${rect.width - 8}px`,
-    display: 'block'
-  }
-}, 100) // roughly one frame at 60fps
-
-// Watch for changes that should trigger style updates
-watch([isOpen, comboboxNode, groupNode], updateStyle)
-
-// Use the ref instead of a computed
-const listboxStyle = computed(() => styleRef.value)
 
 const onComboboxInput = (event) => {
   filter.value = event.target.value
@@ -372,6 +345,7 @@ const onComboboxKeyUp = (event) => {
       setVisualFocusCombobox()
       break
     default:
+      // enter a character to search on
       if (isPrintableCharacter(char)) {
         setVisualFocusCombobox()
         const option = filteredOptions.value[0]
@@ -403,30 +377,15 @@ const onComboboxFocus = () => {
   selectedOption.value = null
   placeholderNode.value.classList.add('focus')
   placeholderNode.value.classList.add('active')
+  open()
 }
 
-const onComboboxBlur = () => {
+const onComboboxBlur = (e) => {
   removeVisualFocusAll()
-
-  if (!comboboxNode.value.value) {
-    placeholderNode.value.classList.remove('focus')
-    placeholderNode.value.classList.remove('active')
-  } else {
-    placeholderNode.value.classList.remove('focus')
-  }
 }
 
 const onPlaceHolderClick = () => {
   comboboxNode.value.focus()
-}
-
-const onComboboxClick = () => {
-  if (isOpen.value) {
-    close(true)
-  } else {
-    
-    open()
-  }
 }
 
 const onButtonClick = () => {
@@ -439,14 +398,6 @@ const onButtonClick = () => {
   setVisualFocusCombobox()
 }
 
-const onListboxMouseover = () => {
-  hasHover.value = true
-}
-
-const onListboxMouseout = () => {
-  hasHover.value = false
-  setTimeout(close, 1)
-}
 
 const onOptionClick = (option) => {
   setValue(option.text)
@@ -454,35 +405,27 @@ const onOptionClick = (option) => {
   close(true)
 }
 
-const onOptionMouseover = (option) => {
-  hasHover.value = true
-  open()
-  setOption(option)
-}
-
-const onOptionMouseout = () => {
-  hasHover.value = false
-  setTimeout(close, 1)
-}
-
 const open = () => {
   isOpen.value = true
   comboboxNode.value.setAttribute('aria-expanded', 'true')
   buttonNode.value.setAttribute('aria-expanded', 'true')
-  // Remove this line:
-  // comboboxNode.value.parentNode.classList.add('focus')
 }
 
 const close = (force = false) => {
-  if (force || (!comboboxHasVisualFocus.value && !listboxHasVisualFocus.value && !hasHover.value)) {
+  if (force || (!comboboxHasVisualFocus.value && !listboxHasVisualFocus.value)) {
     isOpen.value = false
     comboboxNode.value.setAttribute('aria-expanded', 'false')
     buttonNode.value.setAttribute('aria-expanded', 'false')
     setActiveDescendant(null)
-    // Remove this line:
-    // comboboxNode.value.parentNode.classList.add('focus')
+
+    if (!comboboxNode.value.value) {
+      placeholderNode.value.classList.remove('active')
+    }
   }
 }
+
+// SETTERS
+// 
 
 const setValue = (value) => {
   filter.value = value
@@ -529,7 +472,11 @@ const removeVisualFocusAll = () => {
   listboxNode.value.classList.remove('focus')
   selectedOption.value = null
   setActiveDescendant(null)
+  placeholderNode.value.classList.remove('focus')
 }
+
+// OPTION SCROLLING
+//
 
 const setActiveDescendant = (option) => {
   if (option && listboxHasVisualFocus.value) {
@@ -562,9 +509,7 @@ const getPreviousOption = (currentOption) => {
 const isOptionInView = (option) => {
   const optionNode = document.getElementById(option.id)
   const bounding = optionNode.getBoundingClientRect()
-
   const listboxBounds = listboxNode.value.getBoundingClientRect()
-
 
   return (
     bounding.top >= listboxBounds.top &&
@@ -579,49 +524,55 @@ const isPrintableCharacter = (str) => {
   return str.length === 1 && str.match(/\S| /)
 }
 
+
+
+
+// LISTBOX STYLING and VISIBILITY
+//
 const onBackgroundMouseDown = (event) => {
   if (!comboboxNode.value.contains(event.target) &&
       !listboxNode.value.contains(event.target) &&
       !buttonNode.value.contains(event.target)) {
     comboboxHasVisualFocus.value = false
     removeVisualFocusAll()
-    setTimeout(() => close(true), 1)
+    close(true)
   }
 }
 
-const onWindowResize = () => {
-  if (isOpen.value) {
-    // Force update of listbox position
-    isOpen.value = false
-    nextTick(() => {
-      isOpen.value = true
-    })
-  }
-}
+const styleRef = ref({ display: 'none' })
 
-const onScroll = () => {
-  if (isOpen.value) {
-    // Force update of listbox position
-    isOpen.value = false
-    nextTick(() => {
-      isOpen.value = true
-    })
+// Debounced update function
+const updateStyle = () => {
+  if (!isOpen.value || !comboboxNode.value || !groupNode.value) {
+    styleRef.value = { display: 'none' }
+    return
   }
-}
+
+  const rect = groupNode.value.getBoundingClientRect()
+  styleRef.value = {
+    position: 'fixed',
+    top: `${rect.bottom}px`,
+    left: `${rect.left + window.scrollX + 5}px`,
+    width: `${rect.width - 8}px`,
+    display: 'block'
+  }
+} // roughly one frame at 60fps
+
+
+watch([isOpen, comboboxNode, groupNode], updateStyle)
+const listboxStyle = computed(() => styleRef.value)
+const onWindowResize = () => { updateStyle() }
+const onScroll = () => { updateStyle() }
 
 onMounted(() => {
   document.addEventListener('mousedown', onBackgroundMouseDown, true)
   window.addEventListener('resize', onWindowResize)
-
-  // Add this event listener for scroll events
   window.addEventListener('scroll', onScroll)
 })
 
 onUnmounted(() => {
   document.removeEventListener('mousedown', onBackgroundMouseDown, true)
   window.removeEventListener('resize', onWindowResize)
-
-  // Remove this event listener for scroll events
   window.removeEventListener('scroll', onScroll)
 })
 </script>
@@ -820,7 +771,7 @@ ul[role="listbox"] li[role="option"] {
   z-index: 1000000;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  max-height: 450px;
+  max-height: 250px;
   overflow-y: auto;
 }
 </style>
