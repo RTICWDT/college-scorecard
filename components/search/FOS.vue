@@ -13,7 +13,7 @@ const props = defineProps({
 const { site } = useSiteData()
 const selectedItem = ref()
 const options = ref(site.value.data.cip_6_digit.map((item) => {
-  return { id: item.code, text: item.title, subtitle: item.cip4Title }
+  return { code: item.code, text: item.title, subtitle: item.cip4Title }
 }))
 
 const onFilter = (input, options) => {

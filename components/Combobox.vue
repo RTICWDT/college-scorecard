@@ -63,6 +63,7 @@
         </li>
       </ul>
     </Teleport>
+
   </div>
 </template>
 
@@ -108,13 +109,9 @@ const comboboxHasVisualFocus = ref(false)
 const listboxHasVisualFocus = ref(false)
 
 const allOptions = ref(props.options)
+const filteredOptions = computed(() => props.onFilter(filter.value, allOptions.value));
 const firstOption = computed(() => filteredOptions.value[0] || null)
 const lastOption = computed(() => filteredOptions.value[filteredOptions.value.length - 1] || null)
-
-const filteredOptions = computed(() => {
-  const filtered = props.onFilter(filter.value, allOptions.value)
-  return filtered;
-});
 
 // 
 // COMBOBOX INPUT HANDlERS & CLICKS
@@ -472,7 +469,7 @@ onUnmounted(() => {
   padding-left: 5px;
   padding-right: 5px;
   transition: all 0.2s;
-  top: 17px;
+  top: 15px;
   color: use-theme('gray-500');
 
   &.dense:not(.active) {
@@ -587,7 +584,7 @@ ul[role="listbox"] li[role="option"] {
 
 .combobox .input-wrapper {
   outline: 1px solid transparent;
-  border: 1px solid gray;
+  border: 1px solid rgb(155,155,155);
   transition: border-color 0.1s, outline-color 0.1s;
   cursor: text;
 }
@@ -618,13 +615,13 @@ ul[role="listbox"] li[role="option"] {
 
 .input-wrapper {
   background-color: white;
-  border: 1px solid gray;
+  border: 1px solid grey;
   border-radius: 3px;
   display: flex;
   width: 100%;
   align-items: center;
   padding: 1rem;
-  height: 60px;
+  height: 55px;
 
   &.dense {
     height: 40px;
