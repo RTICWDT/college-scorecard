@@ -3,7 +3,7 @@
     <ul class="school-key-figures">
       <v-tooltip location="bottom" v-if="!sizeOnly && yearIcon !== 'none'">
         <template v-slot:activator="{ props }">
-          <li :class="yearsClass(years)" v-bind="props">
+          <li :class="yearsClass(years)" v-bind="props" class="w-100">
             <img :src="yearIcon" alt="" class="schoolIcon" :height="imgSize" />
             <span>{{ formatYearsLabel(years) }}</span>
           </li>
@@ -11,19 +11,19 @@
         <div class="hover-tip">{{ tip }}</div>
       </v-tooltip>
 
-      <li v-if="!sizeOnly && ownershipIcon !== 'none'" :class="controlClass(ownership)">
+      <li v-if="!sizeOnly && ownershipIcon !== 'none'" :class="controlClass(ownership)" class="w-100">
         <img :src="ownershipIcon" alt="" class="schoolIcon" :height="imgSize" />
         <span>{{ control(ownership) }}</span>
       </li>
 
-      <li v-if="!sizeOnly && localeIcon !== 'none'" :class="localeClass(schoolLocale)">
+      <li v-if="!sizeOnly && localeIcon !== 'none'" :class="localeClass(schoolLocale)" class="w-100">
         <img :src="localeIcon" alt="" class="schoolIcon" :height="imgSize" />
         <span>{{ locale(schoolLocale) }}</span>
       </li>
 
       <v-tooltip location="bottom" v-if="sizeIcon !== 'none'">
         <template v-slot:activator="{ props }">
-          <li :class="sizeCategoryClass(schoolSize)" v-bind="props">
+          <li :class="sizeCategoryClass(schoolSize)" v-bind="props" class="w-100">
             <img :src="sizeIcon" alt="" class="schoolIcon" :height="imgSize" />
             <span>{{ sizeCategory(schoolSize) }}</span>
           </li>
