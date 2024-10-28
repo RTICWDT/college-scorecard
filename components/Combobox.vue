@@ -1,7 +1,7 @@
 <template>
   <div class="combobox combobox-list w-100">
     <div class="group" ref="groupNode">
-      <div class="input-wrapper" :class="{ 'active': comboboxHasVisualFocus, 'options-visible': isOpen }">
+      <div class="input-wrapper" :class="{ 'active': comboboxHasVisualFocus, 'options-visible': isOpen, 'dense': dense }">
         <v-icon width="20" height="20" class="icon">mdi-magnify</v-icon>
         <input
           id="cb1-input"
@@ -9,7 +9,7 @@
           class="cb_edit"
           type="text"
           role="combobox"
-          :aria-autocomplete="autocomplete"
+          aria-autocomplete="list"
           :aria-expanded="isOpen"
           aria-controls="cb1-listbox"
           :aria-activedescendant="activeDescendant"
@@ -18,9 +18,11 @@
           @keydown="onComboboxKeyDown"
           @keyup="onComboboxKeyUp"
           @focus="onComboboxFocus"
-          @blur="onComboboxBlur"
+          @blur="removeVisualFocusAll()"
         >
-        <div ref="placeholderNode" class="placeholder-text position-absolute" @click="onPlaceHolderClick">Type to search</div>
+        <div ref="placeholderNode" class="placeholder-text position-absolute" :class="{ 'dense': dense }" @click="onPlaceHolderClick">
+          Type to search
+        </div>
         <button
           id="cb1-button"
           ref="buttonNode"
@@ -43,7 +45,7 @@
         ref="listboxNode"
         role="listbox"
         aria-label="States"
-        :class="{ 'focus': listboxHasVisualFocus, 'selected': listboxHasVisualFocus }"
+        :class="{ 'focus': listboxHasVisualFocus, 'update:modelValue': listboxHasVisualFocus }"
         class="elevation-4"
         :style="listboxStyle"
       >
@@ -65,171 +67,62 @@
 </template>
 
 <script setup>
-const comboboxNode = ref(null)
-const placeholderNode = ref(null)
-const groupNode = ref(null)
-const buttonNode = ref(null)
-const listboxNode = ref(null)
-const filter = ref('')
-
-
-const isOpen = ref(false)
-
-
-const selectedOption = ref(null)
-const activeDescendant = ref('')
-
-
-const comboboxHasVisualFocus = ref(false)
-const listboxHasVisualFocus = ref(false)
-
 const props = defineProps({
   dense: {
     type: Boolean,
     default: false
   },
-  items: {
+  options: {
     type: Array,
     default: () => []
+  },
+  onFilter: {
+    type: Function,
+    default: (searchInput, options) => { return options }
+  },
+  dense: {
+    type: Boolean,
+    default: false
+  },
+  color: {
+    type: String,
+    default: '#007000'
   }
 })
 
-const emit = defineEmits(['selected'])
+const emit = defineEmits(['update:modelValue'])
+const themeColor = ref(props.color)
+const themeColorTranparent = ref(props.color + '11')
 
-const allOptions = ref(props.items)
+const comboboxNode = ref(null)
+const placeholderNode = ref(null)
+const groupNode = ref(null)
+const buttonNode = ref(null)
+const listboxNode = ref(null)
+
+const filter = ref('')
+const isOpen = ref(false)
+const selectedOption = ref(null)
+const activeDescendant = ref('')
+const comboboxHasVisualFocus = ref(false)
+const listboxHasVisualFocus = ref(false)
+
+const allOptions = ref(props.options)
 const firstOption = computed(() => filteredOptions.value[0] || null)
 const lastOption = computed(() => filteredOptions.value[filteredOptions.value.length - 1] || null)
-const autocomplete = 'list'
-
-// SEARCH ALGO
-const cleanString = (str) => {
-  return str.replace(/[^a-zA-Z\s]/g, '').trim();
-}
-
-function calculateStringSimilarity(str1, str2) {  
-  // Convert to lowercase once for performance
-  const s1 = str1.toLowerCase();
-  const s2 = str2.toLowerCase();
-  
-  // Exact match
-  if (s1 === s2) {
-    return 1 
-  };
-  
-  // If str2 (search term) contains spaces, try matching it as a complete phrase first
-  if (s2.includes(' ')) {
-    // Complete phrase match at word boundary
-    const phraseRegex = new RegExp(`\\b${escapeRegExp(s2)}\\b`, 'i');
-    if (phraseRegex.test(s1)) return 0.98;
-    
-    // Complete phrase match anywhere
-    if (s1.includes(s2)) {
-      const position = s1.indexOf(s2);
-      const positionPenalty = position / s1.length * 0.1;
-      return 0.95 - positionPenalty;
-    }
-  }
-  
-  // Word boundary match
-  const wordBoundaryRegex = new RegExp(`\\b${escapeRegExp(s2)}\\b`, 'i');
-  if (wordBoundaryRegex.test(s1)) return 0.9;
-  
-  // Start of word match
-  const startOfWordRegex = new RegExp(`\\b${escapeRegExp(s2)}`, 'i');
-  if (startOfWordRegex.test(s1)) return 0.85;
-  
-  // Contains as exact substring
-  if (s1.includes(s2)) {
-    const position = s1.indexOf(s2);
-    const positionPenalty = position / s1.length * 0.1;
-    return 0.8 - positionPenalty;
-  }
-  
-  // If the target contains the search term
-  if (s2.includes(s1)) {
-    return 0.6;
-  }
-  
-  // Calculate Levenshtein distance for fuzzy matching
-  const matrix = Array(s2.length + 1).fill().map(() => Array(s1.length + 1).fill(0));
-  
-  for (let i = 0; i <= s1.length; i++) matrix[0][i] = i;
-  for (let j = 0; j <= s2.length; j++) matrix[j][0] = j;
-  
-  for (let j = 1; j <= s2.length; j++) {
-    for (let i = 1; i <= s1.length; i++) {
-      const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
-      matrix[j][i] = Math.min(
-        matrix[j][i - 1] + 1,
-        matrix[j - 1][i] + 1,
-        matrix[j - 1][i - 1] + cost
-      );
-    }
-  }
-  
-  const maxLength = Math.max(s1.length, s2.length);
-  const distance = matrix[s2.length][s1.length];
-  const lengthDifference = Math.abs(s1.length - s2.length);
-  const lengthPenalty = lengthDifference / maxLength * 0.1;
-  
-  return Math.max(0, (1 - (distance / maxLength)) - lengthPenalty);
-}
-
-// Utility function to escape special regex characters
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
 
 const filteredOptions = computed(() => {
-  if (!filter.value) return allOptions.value;
-
-  const cleanedFilter = cleanString(filter.value).toLowerCase();
-  if (!cleanedFilter) return allOptions.value;
-  
-  // Calculate scores in a separate array
-  const scoredOptions = allOptions.value.map(option => ({
-    option,
-    score: (() => {
-      const cleanText = cleanString(option.text).toLowerCase();
-      const cleanSubtitle = cleanString(option.subtitle).toLowerCase();
-
-      // Calculate scores for each search term
-      const textScores = [cleanedFilter].map(term => calculateStringSimilarity(cleanText, term));
-      const subtitleScores = [cleanedFilter].map(term => calculateStringSimilarity(cleanSubtitle, term));
-      
-      // Get the best match score for each field
-      const bestTextScore = Math.max(...textScores);
-      const bestSubtitleScore = Math.max(...subtitleScores);
-
-      const weights = {
-        text: 0.7,       // Primary text carries 70% of the weight
-        subtitle: 0.3    // Subtitle carries 30% of the weight
-      };
-
-      // Noramlized return
-      return (bestTextScore * weights.text) + (bestSubtitleScore * weights.subtitle);
-    })()
-  }));
-  
-  // Filter and sort based on scores, but return original objects
-  const threshold = 0.5;
-  const filtered = scoredOptions
-    .filter(item => item.score > threshold)
-    // .sort((a, b) => b.score - a.score)
-    .map(item => item.option);
-
-  if (!filtered.length) return allOptions.value;
+  const filtered = props.onFilter(filter.value, allOptions.value)
   return filtered;
 });
 
+// 
+// COMBOBOX INPUT HANDlERS & CLICKS
+// 
 
 const onComboboxInput = (event) => {
   filter.value = event.target.value
-  if (filter.value.length > 0) {
-    open()
-  } else {
-    close()
-  }
+  filter.value.length > 0 ? open() : close()
 }
 
 const onComboboxKeyDown = (event) => {
@@ -248,7 +141,7 @@ const onComboboxKeyDown = (event) => {
       close(true)
       setVisualFocusCombobox()
       flag = true
-      emit('selected', selectedOption.value)
+      emit('update:modelValue', selectedOption.value)
       break
     case 'ArrowDown':
       if (filteredOptions.value.length > 0) {
@@ -380,31 +273,19 @@ const onComboboxFocus = () => {
   open()
 }
 
-const onComboboxBlur = (e) => {
-  removeVisualFocusAll()
-}
-
 const onPlaceHolderClick = () => {
   comboboxNode.value.focus()
 }
 
 const onButtonClick = () => {
-  if (isOpen.value) {
-    close(true)
-  } else {
-    open()
-  }
-  comboboxNode.value.focus()
-  setVisualFocusCombobox()
+  isOpen.value ? close(true) : open()
+  placeholderNode.value.classList.add('active')
+  placeholderNode.value.classList.add('focus')
 }
 
-
-const onOptionClick = (option) => {
-  setValue(option.text)
-  emit('selected', option)
-  close(true)
-}
-
+// OPEN & CLOSE
+// 
+// 
 const open = () => {
   isOpen.value = true
   comboboxNode.value.setAttribute('aria-expanded', 'true')
@@ -424,7 +305,7 @@ const close = (force = false) => {
   }
 }
 
-// SETTERS
+// SETTERS & FOCUS
 // 
 
 const setValue = (value) => {
@@ -445,6 +326,12 @@ const setOption = (option, flag = false) => {
       comboboxNode.value.setSelectionRange(filter.value.length, option.text.length)
     }
   }
+}
+
+const onOptionClick = (option) => {
+  setValue(option.text)
+  emit('update:modelValue', option)
+  close(true)
 }
 
 const setVisualFocusCombobox = () => {
@@ -588,6 +475,10 @@ onUnmounted(() => {
   top: 17px;
   color: use-theme('gray-500');
 
+  &.dense:not(.active) {
+    top: 8px;
+  }
+
   &.active {
     font-size: 12px;
     top: -10px;
@@ -595,7 +486,7 @@ onUnmounted(() => {
   }
 
   &.focus {
-    color: use-theme('primary-yellow');
+    color: v-bind('themeColor');
   }
 }
 
@@ -715,12 +606,12 @@ ul[role="listbox"] li[role="option"] {
 
 [role="listbox"].focus [role="option"][aria-selected="true"],
 [role="listbox"] [role="option"]:hover {
-  background-color: use-theme('primary-yellow', 0.05);
+  background-color: v-bind('themeColorTranparent');
   padding-top: 0;
   padding-bottom: 0;
   /* border-top: 2px solid currentcolor; */
   /* border-bottom: 2px solid currentcolor; */
-  outline: 1px solid use-theme('primary-yellow');
+  outline: 1px solid v-bind('themeColor');
 
 }
 
@@ -729,11 +620,15 @@ ul[role="listbox"] li[role="option"] {
   background-color: white;
   border: 1px solid gray;
   border-radius: 3px;
-  height: 60px;
   display: flex;
   width: 100%;
   align-items: center;
   padding: 1rem;
+  height: 60px;
+
+  &.dense {
+    height: 40px;
+  }
 }
 
 .combobox .input-wrapper {
@@ -743,14 +638,14 @@ ul[role="listbox"] li[role="option"] {
 
 .combobox .input-wrapper:focus-within,
 .combobox .input-wrapper.active {
-  border-color: use-theme('primary-yellow'); /* Darker yellow border for contrast */
-  outline-color: use-theme('primary-yellow');
+  border-color: v-bind('themeColor'); /* Darker yellow border for contrast */
+  outline-color: v-bind('themeColor');
 }
 
 /* Add this class to the input-wrapper when options are being viewed */
 .combobox .input-wrapper.options-visible {
-  border-color: use-theme('primary-yellow');
-  outline-color: use-theme('primary-yellow');
+  border-color: v-bind('themeColor');
+  outline-color: v-bind('themeColor');
 }
 
 /* Style for the v-icon */
@@ -763,7 +658,7 @@ ul[role="listbox"] li[role="option"] {
 .combobox .input-wrapper:focus-within .icon,
 .combobox .input-wrapper.active .icon,
 .combobox .input-wrapper.options-visible .icon {
-  color: use-theme('primary-yellow'); /* Match the border color */
+  color: v-bind('themeColor'); /* Match the border color */
 }
 
 #cb1-listbox {

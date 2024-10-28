@@ -5,7 +5,7 @@
       <Spacer :height="100" />
       <v-row>
         <v-card class="pa-8 w-100">
-          <CBox :items="options" v-model="selectedItem" />
+          <SearchFOS v-model="selectedItem" />
         </v-card>
         <Spacer :height="700" />
       </v-row>
@@ -14,11 +14,11 @@
 </template>
 
 <script setup>
-const { site } = useSiteData()
 const selectedItem = ref()
-const options = ref(site.value.data.cip_6_digit.map((item) => {
-  return { id: item.code, text: item.title, subtitle: item.cip4Title }
-}))
+
+watch(selectedItem, (value) => {
+  console.log(value)
+})
 
 useHead({
   title: 'Test',
