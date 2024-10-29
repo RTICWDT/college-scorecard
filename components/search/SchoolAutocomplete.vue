@@ -1,40 +1,14 @@
 <template>
-  <div>
-    <v-combobox
-      v-model="search"
-      :items="items"
-      :loading="isLoading"
-      :search="search"
-      return-object
-      no-filter
-      label="Enter a school"
-      item-title="school.name"
-      autocomplete="off"
-      hide-details
-      color="primary-green"
-      variant="outlined"
-      prepend-inner-icon="fa:fas fa-search"
-      hide-no-data
-      @update:search="runSearch"
-      aria-label="Name Search"
-      aria-autocomplete="list"
-      aria-haspopup="listbox"
-      id="institution-search-box"
-      class="pt-0 mt-0"
-      :density="dense ? 'compact' : 'default'"
-      :max-width="horizontal ? 300 : undefined"
-      @keydown.enter="handleSubmit"
-      :list-props="{ tag: 'ul' }"
-    >
-      <template #item="{ item, props }">
-        <v-list-item tag='li' role="option" v-bind="props" @click="goToSchool">
-          <v-list-item-title>
-            <span class="name-complete-school-name" />
-          </v-list-item-title>
-        </v-list-item>
-      </template>
-    </v-combobox>
-  </div>
+  <Combobox 
+    placeholder="Enter a school"  
+    :dense="dense" 
+    :options="items" 
+    v-model="search"
+    :onFilter="onFilter"
+    @onSubmit="handleSubmit"
+    @onClear="handleClear"
+    @onSearch="handleSearch"
+  />
 </template>
 
 <script setup>
@@ -42,7 +16,7 @@ const { prepareParams } = usePrepareParams()
 const { fields } = useConstants()
 const { apiGet } = useApi()
 
-const emit = defineEmits(['school-name-selected', 'submit'])
+const emit = defineEmits(['onClear', 'onSubmit', 'onSearch'])
 const items = ref([]);
 const isLoading = ref(false);
 const search = ref(null);
@@ -75,20 +49,30 @@ onMounted(() => {
   })
 })
 
-const goToSchool = () => {
-  if (search.value) {
-    emit('school-name-selected', search.value)
-  }
+const onFilter = async (newVal, options) => {
+  runSearch(newVal)
 }
 
 const handleSubmit = () => {
-  emit('submit', search.value)
+  if (search.value) {
+    emit('onSubmit', search.value)
+  }
+}
+
+const handleClear = () => {
+  search.value = null
+  emit('onClear', null)
+}
+
+const handleSearch = (newVal) => {
+  console.log(newVal)
+  emit('onSearch', newVal)
 }
 
 const runSearch = useDebounce((newVal) => {
   if (newVal === '') {
     items.value = [];
-    return emit('submit', newVal)
+    return emit('onSearch', newVal)
   }
 
   performSearch(newVal)
@@ -136,7 +120,13 @@ const performSearch = async (newVal) => {
       schools.unshift(...flaggedAliasMatch);
     }
 
-    items.value = schools;
+    items.value = schools.map((school) => ({
+      ...school,
+      code: school[fields.ID],
+      title: school[fields.NAME],
+      text: school[fields.NAME],
+    }));
+
   } catch (error) {
     console.error("Error fetching schools:", error);
     items.value = [];

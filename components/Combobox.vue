@@ -51,7 +51,7 @@
         :style="listboxStyle"
       >
         <li
-          v-for="option in filteredOptions"
+          v-for="option in options"
           :key="`${option.code}.${option.title}.${option.subtitle}`"
           :id="option.code"
           role="option"
@@ -100,7 +100,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'onSubmit', 'onClear', 'onSearch'])
 const themeColor = ref(props.color)
 const themeColorTranparent = ref(props.color + '11')
 
@@ -117,19 +117,21 @@ const activeDescendant = ref('')
 const comboboxHasVisualFocus = ref(false)
 const listboxHasVisualFocus = ref(false)
 
-const allOptions = ref(props.options)
-const filteredOptions = computed(() => props.onFilter(filter.value, allOptions.value));
-const firstOption = computed(() => filteredOptions.value[0] || null)
-const lastOption = computed(() => filteredOptions.value[filteredOptions.value.length - 1] || null)
+const firstOption = computed(() => props.options[0] || null)
+const lastOption = computed(() => props.options[props.options.length - 1] || null)
 
 // 
 // COMBOBOX INPUT HANDlERS & CLICKS
-// 
+//
 
 const onComboboxInput = (event) => {
   filter.value = event.target.value
-  filter.value.length > 0 ? open() : close()
+  props.onFilter(filter.value)
 }
+
+watch(props.options, (newVal) => {
+  props.options.lenth > 0 ? open() : close()
+})
 
 const onComboboxKeyDown = (event) => {
   let flag = false
@@ -141,16 +143,25 @@ const onComboboxKeyDown = (event) => {
 
   switch (event.key) {
     case 'Enter':
+      if (selectedOption.value) {
+        emit('update:modelValue', selectedOption.value)
+        emit('onSubmit', selectedOption.value)
+      } else {
+        emit('onSearch', filter.value)
+      }
+
       if (listboxHasVisualFocus.value) {
         setValue(selectedOption.value.text)
       }
+
       close(true)
       setVisualFocusCombobox()
       flag = true
       emit('update:modelValue', selectedOption.value)
+      
       break
     case 'ArrowDown':
-      if (filteredOptions.value.length > 0) {
+      if (props.options.length > 0) {
         if (altKey) {
           open()
         } else {
@@ -167,7 +178,7 @@ const onComboboxKeyDown = (event) => {
       flag = true
       break
     case 'ArrowUp':
-      if (filteredOptions.value.length > 0) {
+      if (props.options.length > 0) {
         if (listboxHasVisualFocus.value) {
           setOption(getPreviousOption(selectedOption.value), true)
         } else {
@@ -247,7 +258,7 @@ const onComboboxKeyUp = (event) => {
       // enter a character to search on
       if (isPrintableCharacter(char)) {
         setVisualFocusCombobox()
-        const option = filteredOptions.value[0]
+        const option = props.options[0]
 
         if (option) {
           if (isOpen.value === false && comboboxNode.value.value.length) {
@@ -337,6 +348,7 @@ const setOption = (option, flag = false) => {
 const onOptionClick = (option) => {
   setValue(option.text)
   emit('update:modelValue', option)
+  emit('onSubmit', option)
   close(true)
 }
 
@@ -359,6 +371,10 @@ const setVisualFocusListbox = () => {
 }
 
 const removeVisualFocusAll = () => {
+  if (!comboboxNode.value) {
+    return
+  }
+
   comboboxNode.value.parentNode.classList.remove('focus')
   comboboxHasVisualFocus.value = false
   listboxHasVisualFocus.value = false
@@ -385,16 +401,16 @@ const setActiveDescendant = (option) => {
 
 const getNextOption = (currentOption) => {
   if (currentOption !== lastOption.value) {
-    const index = filteredOptions.value.indexOf(currentOption)
-    return filteredOptions.value[index + 1]
+    const index = props.options.indexOf(currentOption)
+    return props.options[index + 1]
   }
   return firstOption.value
 }
 
 const getPreviousOption = (currentOption) => {
   if (currentOption !== firstOption.value) {
-    const index = filteredOptions.value.indexOf(currentOption)
-    return filteredOptions.value[index - 1]
+    const index = props.options.indexOf(currentOption)
+    return props.options[index - 1]
   }
   return lastOption.value
 }

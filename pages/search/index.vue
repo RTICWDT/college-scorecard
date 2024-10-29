@@ -104,9 +104,9 @@
           <div style="min-width: 200px">
             <SearchSchoolAutocomplete
               ref="searchSchoolRef"
-              @school-name-selected="handleSchoolSelection"
-              @school-name-cleared="handleSchoolSelection"
-              @submit="handleSchoolSelection"
+              @onSubmit="handleSchoolSelection"
+              @onClear="handleSchoolSelection"
+              @onSearch="handleSchoolSelection"
               :initial-school="route.query.search"
               :dense="true"
               :horizontal="!breakpoints.smAndDown.value"
@@ -655,6 +655,7 @@ const handleFormSearch = (params) => {
 }
 
 const handleSchoolSelection = (school) => {
+  console.log(school)
   input.search = typeof school === "string" ? school : school["school.name"]
   input.page = 1
   debounceSearch()

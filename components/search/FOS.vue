@@ -1,5 +1,5 @@
 <template>
-  <Combobox :dense="dense" color="#FDB022" :options="options" v-model="selectedItem" :onFilter="onFilter" />
+  <Combobox :dense="dense" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
 </template>
 
 <script setup>
@@ -16,14 +16,16 @@ const options = ref(site.value.data.cip_6_digit.map((item) => {
   return { code: item.code, text: item.title, subtitle: item.cip4Title }
 }))
 
-const onFilter = (input, options) => {
-  if (!input) return options;
+const filteredOptions = ref(options.value)
+
+const onFilter = (input) => {
+  if (!input) return filteredOptions.value = options.value;
 
   const cleanedFilter = cleanString(input).toLowerCase();
-  if (!cleanedFilter) return options;
+  if (!cleanedFilter) return filteredOptions.value = options.value;
 
   // Calculate scores in a separate array
-  const scoredOptions = options.map(option => ({
+  const scoredOptions = options.value.map(option => ({
     option,
     score: (() => {
       const cleanText = cleanString(option.text).toLowerCase();
@@ -54,8 +56,9 @@ const onFilter = (input, options) => {
     .sort((a, b) => b.score - a.score)
     .map(item => item.option);
 
-  if (!filtered.length) return options;
-  return filtered;
+  if (!filtered.length) return filteredOptions.value = options.value;
+
+  filteredOptions.value = filtered;
 }
 
 
