@@ -2,7 +2,10 @@
   <div class="combobox combobox-list w-100">
     <div class="group" ref="groupNode">
       <div class="input-wrapper" :class="{ 'active': comboboxHasVisualFocus, 'options-visible': isOpen, 'dense': dense }">
-        <v-icon width="20" height="20" class="icon">mdi-magnify</v-icon>
+        <div style="width: 25px;">
+          <v-icon v-if="loading" size="small" class="icon" icon="fa:fas fa-circle-notch fa-spin" />
+          <v-icon v-else class="icon" icon="mdi:mdi-magnify"/>
+        </div>
         <input
           id="cb1-input"
           ref="comboboxNode"
@@ -97,6 +100,10 @@ const props = defineProps({
   modelValue: {
     type: Object,
     default: null
+  },
+  loading: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -130,7 +137,6 @@ onMounted(() => {
     }
   }
 })
-
 
 // 
 // COMBOBOX INPUT HANDlERS & CLICKS

@@ -3,6 +3,7 @@
     v-model="search"
     placeholder="Enter a school"  
     :dense="dense" 
+    :loading="loading"
     :options="items" 
     :onFilter="onFilter"
     @onSubmit="handleSubmit"
@@ -20,6 +21,7 @@ const emit = defineEmits(['onClear', 'onSubmit', 'onSearch'])
 const items = ref([]);
 const isLoading = ref(false);
 const search = ref(null);
+const loading = ref(false);
 
 const props = defineProps({
   initialSchool: {
@@ -84,7 +86,9 @@ const performSearch = async (newVal) => {
   const preparedQuery = prepareParams(query);
 
   try {
+    loading.value = true;
     const response = await apiGet("/schools", preparedQuery);
+    loading.value = false;
     let schools = response.results;
 
     if (!schools.length) {
