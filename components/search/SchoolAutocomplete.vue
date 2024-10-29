@@ -1,9 +1,9 @@
 <template>
   <Combobox 
+    v-model="search"
     placeholder="Enter a school"  
     :dense="dense" 
     :options="items" 
-    v-model="search"
     :onFilter="onFilter"
     @onSubmit="handleSubmit"
     @onClear="handleClear"
@@ -26,15 +26,7 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  searchEmptyName: {
-    type: Boolean,
-    default: true,
-  },
   dense: {
-    type: Boolean,
-    default: false,
-  },
-  horizontal: {
     type: Boolean,
     default: false,
   },

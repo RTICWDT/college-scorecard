@@ -110,7 +110,8 @@ const groupNode = ref(null)
 const buttonNode = ref(null)
 const listboxNode = ref(null)
 
-const filter = ref(props.modelValue ? props.modelValue.title : '')
+const filter = ref()
+
 const isOpen = ref(false)
 const selectedOption = ref(props.modelValue)
 const activeDescendant = ref('')
@@ -119,6 +120,17 @@ const listboxHasVisualFocus = ref(false)
 
 const firstOption = computed(() => props.options[0] || null)
 const lastOption = computed(() => props.options[props.options.length - 1] || null)
+
+onMounted(() => {
+  if (props.modelValue) {
+    if (typeof props.modelValue === 'string') {
+      filter.value = props.modelValue
+    } else {
+      filter.value = props.modelValue.title
+    }
+  }
+})
+
 
 // 
 // COMBOBOX INPUT HANDlERS & CLICKS

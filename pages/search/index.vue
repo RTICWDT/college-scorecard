@@ -104,12 +104,11 @@
           <div style="min-width: 200px">
             <SearchSchoolAutocomplete
               ref="searchSchoolRef"
+              v-model="route.query.search"
               @onSubmit="handleSchoolSelection"
               @onClear="handleSchoolSelection"
               @onSearch="handleSchoolSelection"
-              :initial-school="route.query.search"
               :dense="true"
-              :horizontal="!breakpoints.smAndDown.value"
             />
           </div>
 
