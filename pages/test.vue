@@ -5,7 +5,7 @@
       <Spacer :height="100" />
       <v-row>
         <v-card class="pa-8 w-100">
-          <SearchFOS v-model="selectedItem" />
+          <SearchFieldOfStudy v-model="selectedItem" />
         </v-card>
         <Spacer :height="700" />
       </v-row>

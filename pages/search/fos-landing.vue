@@ -46,7 +46,7 @@ h1 {
             </v-row>
             <v-row>
               <v-col cols="12" sm="5">
-                <SearchFOS v-model="input.cip4" />
+                <SearchFieldOfStudy v-model="input.cip4" />
               </v-col>
               <v-col cols="12" sm="4">
                 <v-select

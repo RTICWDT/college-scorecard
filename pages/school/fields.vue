@@ -6,7 +6,7 @@
             <v-card class="pa-5" elevation="0">
               <h2 class="mb-3">Something went wrong and we couldn't find fields of study for this school.</h2>
               <p class="mb-2">Try searching for a different school by name:</p>
-              <SearchSchoolAutocomplete
+              <SearchSchool
                 @onSubmit="handleSchoolNameSelected"
                 :searchEmptyName="false"
               />

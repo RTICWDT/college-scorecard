@@ -102,7 +102,7 @@
           <div class="search-label my-2 my-md-0 mr-0 mr-md-2">School:</div>
 
           <div style="min-width: 200px">
-            <SearchSchoolAutocomplete
+            <SearchSchool
               ref="searchSchoolRef"
               v-model="route.query.search"
               @onSubmit="handleSchoolSelection"

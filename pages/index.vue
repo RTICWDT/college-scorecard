@@ -31,7 +31,7 @@
             <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
               <v-tabs-window-item>
                 <v-card class="pa-5" flat>
-                  <SearchSchoolAutocomplete @onSubmit="handleSchoolNameSelected" @onClear="() => {}" :searchEmptyName="false" />
+                  <SearchSchool @onSubmit="handleSchoolNameSelected" @onClear="() => {}" :searchEmptyName="false" />
 
                   <div class="mt-5 text-right">
                     <v-btn variant="text" size="small" @click="toggleCustomSearch = !toggleCustomSearch" class="text-uppercase">
@@ -55,7 +55,7 @@
                   </v-row>
                   <v-row>
                     <v-col cols="12" sm="5">
-                      <SearchFOS v-model="input.cip4" />
+                      <SearchFieldOfStudy v-model="input.cip4" />
                     </v-col>
                     <v-col cols="12" sm="4">
                       <v-select
@@ -105,7 +105,7 @@
                   </v-expansion-panel-title>
 
                   <v-expansion-panel-text>
-                    <SearchSchoolAutocomplete
+                    <SearchSchool
                       @onSubmit="handleSchoolNameSelected"
                       :searchEmptyName="false"
                       v-if="breakpoints.smAndDown.value"
@@ -125,7 +125,7 @@
                     <v-row>
                       <v-col cols="12" sm="5">
                         <label class="d-block mb-2" for="fosSearch">Search Fields of Study</label>
-                        <SearchFOS v-model="input.cip4" />
+                        <SearchFieldOfStudy v-model="input.cip4" />
                       </v-col>
                       <v-col cols="12" sm="4">
                         <label class="d-block  mb-2" for="fosDegree">Select Degree Type</label>
