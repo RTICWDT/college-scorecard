@@ -32,8 +32,8 @@
           aria-controls="cb1-listbox"
           @click="onButtonClick"
         >
-        <svg width="18" height="16" aria-hidden="true" focusable="false" style="forced-color-adjust: auto">
-          <polygon class="arrow" stroke-width="0" fill-opacity="0.75" fill="#888" points="3,6 15,6 9,14"></polygon>
+        <svg width="18" height="18" aria-hidden="true" focusable="false" style="forced-color-adjust: auto">
+          <polygon class="arrow" stroke-width="0" fill="#000" points="4,9 14,9 9,14"></polygon>
         </svg>
       </button>
       </div>
