@@ -117,7 +117,7 @@
           <div class="search-label my-2 my-md-0 mr-0 mr-md-2">Field of Study:</div>
 
           <div style="min-width: 200px">
-            <SearchFieldOfStudy
+            <SearchFOS
               v-model="fosSearch.cip4"
               :dense="true"
             />

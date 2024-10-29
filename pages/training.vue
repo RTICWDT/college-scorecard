@@ -114,7 +114,7 @@
             <h3 class="text-center pb-4">
               Search for training programs by field of study
             </h3>
-            <SearchFieldOfStudy v-model="input.cip4" />
+            <SearchFOS v-model="input.cip4" />
           </v-card>
         </v-col>
       </v-row>
