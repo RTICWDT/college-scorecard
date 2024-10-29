@@ -24,6 +24,7 @@
           Type to search
         </div>
         <button
+          v-if="options.length > 0"
           id="cb1-button"
           ref="buttonNode"
           tabindex="-1"
