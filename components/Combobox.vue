@@ -51,8 +51,8 @@
       >
         <li
           v-for="option in filteredOptions"
-          :key="`${option.id}.${option.title}.${option.subtitle}`"
-          :id="option.id"
+          :key="`${option.code}.${option.title}.${option.subtitle}`"
+          :id="option.code"
           role="option"
           :aria-selected="option === selectedOption"
           @click="onOptionClick(option)"
@@ -364,9 +364,9 @@ const removeVisualFocusAll = () => {
 
 const setActiveDescendant = (option) => {
   if (option && listboxHasVisualFocus.value) {
-    activeDescendant.value = option.id
+    activeDescendant.value = option.code
     if (!isOptionInView(option)) {
-      const optionNode = document.getElementById(option.id)
+      const optionNode = document.getElementById(option.code)
       optionNode.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
     }
   } else {
@@ -391,9 +391,11 @@ const getPreviousOption = (currentOption) => {
 }
 
 const isOptionInView = (option) => {
-  const optionNode = document.getElementById(option.id)
+  const optionNode = document.getElementById(option.code)
   const bounding = optionNode.getBoundingClientRect()
   const listboxBounds = listboxNode.value.getBoundingClientRect()
+
+
 
   return (
     bounding.top >= listboxBounds.top &&
