@@ -7,7 +7,7 @@ const props = defineProps({
   dense: {
     type: Boolean,
     default: false,
-  }
+  },
 })
 
 const { site } = useSiteData()

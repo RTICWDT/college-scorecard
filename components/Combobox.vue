@@ -88,6 +88,10 @@ const props = defineProps({
   color: {
     type: String,
     default: '#007000'
+  },
+  modelValue: {
+    type: Object,
+    default: null
   }
 })
 
@@ -101,9 +105,9 @@ const groupNode = ref(null)
 const buttonNode = ref(null)
 const listboxNode = ref(null)
 
-const filter = ref('')
+const filter = ref(props.modelValue ? props.modelValue.title : '')
 const isOpen = ref(false)
-const selectedOption = ref(null)
+const selectedOption = ref(props.modelValue)
 const activeDescendant = ref('')
 const comboboxHasVisualFocus = ref(false)
 const listboxHasVisualFocus = ref(false)
@@ -454,6 +458,10 @@ onMounted(() => {
   document.addEventListener('mousedown', onBackgroundMouseDown, true)
   window.addEventListener('resize', onWindowResize)
   window.addEventListener('scroll', onScroll)
+
+  if (selectedOption.value) {
+    placeholderNode.value.classList.add('active')
+  }
 })
 
 onUnmounted(() => {
