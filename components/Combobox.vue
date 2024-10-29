@@ -21,10 +21,10 @@
           @blur="removeVisualFocusAll()"
         >
         <div ref="placeholderNode" class="placeholder-text position-absolute" :class="{ 'dense': dense }" @click="onPlaceHolderClick">
-          Type to search
+          {{ placeholder }}
         </div>
         <button
-          v-if="options.length > 0"
+          v-show="options.length > 0"
           id="cb1-button"
           ref="buttonNode"
           tabindex="-1"
@@ -89,6 +89,10 @@ const props = defineProps({
   color: {
     type: String,
     default: '#007000'
+  },
+  placeholder: {
+    type: String,
+    default: 'Type to search'
   },
   modelValue: {
     type: Object,
@@ -674,6 +678,7 @@ ul[role="listbox"] li[role="option"] {
   z-index: 1000000;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 3px;
   max-height: 250px;
   overflow-y: auto;
 }
