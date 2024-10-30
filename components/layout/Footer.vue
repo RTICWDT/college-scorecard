@@ -53,7 +53,7 @@
                 <NuxtLink to="/data/change-log" class="d-block mb-1">
                   Change Log
                 </NuxtLink>
-                <NuxtLink to="/data/glossary" class="d-block mb-1">
+                <NuxtLink to="/data/glossary" class="d-block mb-10">
                   Glossary
                 </NuxtLink>
               </li>
