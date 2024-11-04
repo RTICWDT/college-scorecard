@@ -116,11 +116,35 @@ const performSearch = async (newVal) => {
       schools.unshift(...flaggedAliasMatch);
     }
 
+    const searchTermLower = newVal.toLowerCase();
+
+    // sort based on school.name match
+    schools.sort((a, b) => {
+        // Convert school names to lowercase for comparison
+        const aNameLower = a[fields.NAME].toLowerCase();
+        const bNameLower = b[fields.NAME].toLowerCase();
+        
+        // Check for exact matches
+        const aIsExactMatch = aNameLower === searchTermLower;
+        const bIsExactMatch = bNameLower === searchTermLower;
+        
+        if (aIsExactMatch && !bIsExactMatch) {
+            return -1; // a comes first
+        }
+        if (!aIsExactMatch && bIsExactMatch) {
+            return 1;  // b comes first
+        }
+        
+        // If neither is an exact match, maintain original order based on relevance score
+        return b.relevance_score - a.relevance_score;
+    });
+
     items.value = schools.map((school) => ({
       ...school,
       code: school[fields.ID],
       title: school[fields.NAME],
       text: school[fields.NAME],
+      exact: school[fields.NAME].toLowerCase() === searchTermLower,
     }));
 
   } catch (error) {

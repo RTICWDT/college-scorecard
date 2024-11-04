@@ -62,7 +62,7 @@
           @click="onOptionClick(option)"
           class="pl-3 py-2 pr-3"
         >
-          <p class="text-body-1">{{ option.text }}</p>
+          <p class="text-body-1" :class="{ 'wip-font-weight-bold': option.exact }">{{ option.text }}</p>
           <p class="text-body-2 text-gray-700">{{ option.subtitle }}</p>
         </li>
       </ul>
@@ -480,9 +480,9 @@ const updateStyle = () => {
   const rect = groupNode.value.getBoundingClientRect()
   styleRef.value = {
     position: 'fixed',
-    top: `${rect.bottom}px`,
-    left: `${rect.left + window.scrollX + 5}px`,
-    width: `${rect.width - 8}px`,
+    top: `${rect.bottom + 3}px`,
+    left: `${rect.left + window.scrollX}px`,
+    width: `${rect.width}px`,
     display: 'block'
   }
 } // roughly one frame at 60fps
