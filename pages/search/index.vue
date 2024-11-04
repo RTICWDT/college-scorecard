@@ -101,7 +101,7 @@
         <v-card flat class="white d-flex flex-column flex-md-row align-md-center border-none px-3 pb-2 pt-0 pt-md-2">
           <div class="search-label my-2 my-md-0 mr-0 mr-md-2">School:</div>
 
-          <div style="min-width: 200px">
+          <div style="min-width: 200px" class="flex-grow-1 mr-0 mr-md-4">
             <SearchSchool
               ref="searchSchoolRef"
               v-model="route.query.search"
