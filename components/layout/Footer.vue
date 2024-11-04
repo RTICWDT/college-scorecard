@@ -17,7 +17,7 @@
                 <NuxtLink to="/search" class="d-block mb-1">
                   Search Schools
                 </NuxtLink>
-                <NuxtLink to="search/fos-landing" class="d-block mb-1">
+                <NuxtLink to="/search/fos-landing" class="d-block mb-1">
                   Search Fields of Study
                 </NuxtLink>
               </li>
