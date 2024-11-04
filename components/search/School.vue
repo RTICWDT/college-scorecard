@@ -59,7 +59,6 @@ const handleClear = () => {
 }
 
 const handleSearch = (newVal) => {
-  console.log(newVal)
   emit('onSearch', newVal)
 }
 

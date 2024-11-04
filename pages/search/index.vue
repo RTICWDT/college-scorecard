@@ -654,7 +654,6 @@ const handleFormSearch = (params) => {
 }
 
 const handleSchoolSelection = (school) => {
-  console.log(school)
   input.search = typeof school === "string" ? school : school["school.name"]
   input.page = 1
   debounceSearch()

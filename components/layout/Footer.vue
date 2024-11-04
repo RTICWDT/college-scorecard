@@ -135,7 +135,6 @@ const { breakpoints } = useVuetify()
 const version = ref('3.0.3') // TODO: implement a way to get the version
 
 const isFluid = computed(() => {
-  console.log(breakpoints.md.value)
   return breakpoints.md.value
 })
 
