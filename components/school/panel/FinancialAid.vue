@@ -24,13 +24,16 @@
     <div v-else>
       <v-row>
         <v-col cols="12" md="8" class="pb-0">
-          <p class="text-uppercase mb-1" id="loan-type-label">Loan Type</p>
+          <p class="text-caption text-uppercase pt-5 pb-1" id="loan-type-label">Loan Type</p>
 
           <v-select
             :items="aidLoanSelectItems"
             v-model="aidLoanSelect"
             color="secondary-green"
             aria-labelledby="loan-type-label"
+            class="mb-5 pt-0"
+            hide-details
+            variant="outlined"
           />
         </v-col>
 
@@ -39,7 +42,7 @@
             v-model="aidShowMedianDebtWithPrior"
             label="Include debt borrowed at prior institutions"
             color="secondary-green"
-            class="shrink"
+            class="shrink mt-0 mt-md-10"
             hide-details
           >
             <template #label>
