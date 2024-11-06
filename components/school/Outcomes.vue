@@ -1,11 +1,20 @@
 <template>
-  <div v-show="hasData" class="om_visualization">
-    <div class="om_group">
+  <div v-show="hasData" class="mb-4">
+    <div class="text-h6 font-weight-bold my-4">
       Out of {{ toNumber(group_count) }} students...
     </div>
-    <div v-for="datum in currentData">
-      <v-icon class="om_icon">{{ datum.icon }}</v-icon>
-      {{ datum.text }}
+    <div v-for="datum in currentData" style="max-width: 850px;" class="ml-0 ml-lg-8">
+      <div class="mb-n3">{{ datum.metric }}</div>
+      <div class="mb-n5">
+        <ChartHorizontalBarMedian
+          :value="{
+            label: toPercent(datum.percent),
+            value: datum.percent,
+          }"
+          :min="{ value: 0 }"
+          :max="{ value: 1 }"
+        />
+      </div>
     </div>
   </div>
 
@@ -13,7 +22,7 @@
 </template>
 
 <script setup>
-const { toNumber } = useNumberFormatter()
+const { toNumber, toPercent } = useNumberFormatter()
 
 const props = defineProps({ 
   school: {
@@ -38,6 +47,15 @@ const group_count = computed(() => {
   return useGet(outcomeCohorts.value, props.options.study + "." + props.options.enroll)
 })
 
+const capitalize = (str) => {
+    // Type check
+    if (typeof str !== 'string') {
+        throw new TypeError('Input must be a string');
+    }
+    if (str.length === 0) { return ''; }
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 const currentData = computed(() => {
   const data = useGet(
     outcomes.value,
@@ -48,11 +66,11 @@ const currentData = computed(() => {
   let percent
 
   for (let dataPoint in data) {
-    percent = Math.round(data[dataPoint] * 100)
+    percent = data[dataPoint]
     if (percent > 0) {
       rows.push({
-        icon: icons[dataPoint],
-        text: percent + "% " + friendlyMetrics[dataPoint]
+        percent: percent,
+        metric: capitalize(friendlyMetrics[dataPoint]),
       })
     }
   }

@@ -8,7 +8,7 @@
           @update:model-value="$emit('update:showPellOnly', $event)"
           label="Show Pell Grant Recipients Only"
           color="secondary-green"
-          class="mt-0 pt-0"
+          class="mt-0 pt-0 mb-5 ml-n2"
           hideDetails
         >
           <template #label>
@@ -20,13 +20,13 @@
       </v-col>  
     </v-row>
 
-    <div class="ml-5">
+    <div>
       <div>
-        <p class="outcomes_intro d-inline-block mb-2">Show data for students who</p>
+        <p class="outcomes_intro d-inline-block mb-2 mr-1">Show data for students who</p>
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.enroll == 'enroll_first_time' ? 'secondary-green' : null"
+          :color="options.enroll == 'enroll_first_time' ? 'secondary-green' : 'gray-100'"
           @click="updateOptions({ ...options, enroll: 'enroll_first_time' })"
         >
           started college here
@@ -34,7 +34,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.enroll == 'enroll_not_first_time' ? 'secondary-green' : null"
+          :color="options.enroll == 'enroll_not_first_time' ? 'secondary-green' : 'gray-100'"
           @click="updateOptions({ ...options, enroll: 'enroll_not_first_time' })"
         >
           transferred in
@@ -42,18 +42,18 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.enroll == 'enroll_both' ? 'secondary-green' : null"
+          :color="options.enroll == 'enroll_both' ? 'secondary-green' : 'gray-100'"
           @click="updateOptions({ ...options, enroll: 'enroll_both' })"
         >
           both
         </v-btn>
       </div>
       <div>
-        <p class="outcomes_intro d-inline-block">and started their studies</p>
+        <p class="outcomes_intro d-inline-block mr-1">and started their studies</p>
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.study == 'study_full_time' ? 'secondary-green' : null"
+          :color="options.study == 'study_full_time' ? 'secondary-green' : 'gray-100'"
           @click="updateOptions({ ...options, study: 'study_full_time' })"
         >
           full-time
@@ -61,7 +61,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.study == 'study_part_time' ? 'secondary-green' : null"
+          :color="options.study == 'study_part_time' ? 'secondary-green' : 'gray-100'"
           @click="updateOptions({ ...options, study: 'study_part_time' })"
         >
           part-time
@@ -69,7 +69,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.study == 'study_both' ? 'secondary-green' : null"
+          :color="options.study == 'study_both' ? 'secondary-green' : 'gray-100'"
           @click="updateOptions({ ...options, study: 'study_both' })"
         >
           both
