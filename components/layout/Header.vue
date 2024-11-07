@@ -106,7 +106,7 @@ nav {
     </a>
   </div>
 
-  <div class="d-flex px-3 py-4 position-fixed w-100 bg-primary-blue" style="align-items: center; justify-content: space-between; height: 100px; z-index: 800;">
+  <div class="d-flex px-3 py-4 w-100 bg-primary-blue" style="align-items: center; justify-content: space-between; height: 100px; z-index: 800;">
     <div>
       <NuxtLink :to="'/'" @click="navigateTo('/')">
         <div class="logo">
@@ -155,8 +155,6 @@ nav {
       </div>
     </div>
   </div>
-
-  <Spacer :height="100" />
 
   <!-- Mobile Navigation Drawer -->
   <v-navigation-drawer v-model="drawer" temporary disable-resize-watcher location="right" color="white" class="mobile-nav">
