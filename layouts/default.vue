@@ -1,7 +1,7 @@
 <template>
   <v-app>
+    <LayoutUsaBanner />
     <header class="d-print-none">
-      <LayoutUsaBanner />
       <LayoutHeader />
     </header>
     <v-main id="mainContent" style="min-height: 80vh">

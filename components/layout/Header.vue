@@ -108,7 +108,7 @@ nav {
 
   <div class="d-flex px-3 py-4 position-fixed w-100 bg-primary-blue" style="align-items: center; justify-content: space-between; height: 100px; z-index: 800;">
     <div>
-      <NuxtLink :to="'/'">
+      <NuxtLink :to="'/'" @click="navigateTo('/')">
         <div class="logo">
           <img src="~/assets/images/US-DOE-CollegeScorecard-Logo.svg" alt="US Department of Education College Scorecard"
             class="logo" />

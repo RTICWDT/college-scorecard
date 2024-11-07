@@ -1,21 +1,22 @@
 <template>
-  <v-container fluid class="bg-gray-100 w-100 py-0 px-0 position-fixed" style="z-index: 900;" aria-label="Official government website">
+  <div style="position: sticky; top: 0px; z-index: 1000;">
+  <v-container fluid class="bg-gray-100 w-100 py-0 px-0" style="z-index: 900;" aria-label="Official government website">
     <div class="d-flex align-items-center px-3">
       <LayoutUsaFlag class="mx-2"/>
       <p class="mb-0 py-1" style="font-size: .75rem">
         <span> 
-          {{ breakpoints.xs.value ? 'An official website of the US government' : 'An official website of the United States government'}}
+          An official website of the United States government
           <button tabindex="2" @click="toggleInfo" alt="Here's how you know" aria-required="true">
             <span style="color: #0071bb; text-decoration: underline;">
-              <span class="hide-mobile pr-1">Here's how you know</span><i class="fas reveal-caret" :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+              <span class="pr-1">Here's how you know</span><i class="fas reveal-caret" :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
             </span>
           </button>
         </span>
       </p>
     </div>
 
-    <v-container fluid class="w-100 position-relative py-0 px-0" style="z-index: 1000;" v-show="showInfo">
-      <div class="pt-4 pb-3 w-100 position-absolute" style="left: 12px; top:-4px;">
+    <v-container fluid class="w-100 position-relative py-0 px-0 pl-2" style="z-index: 1000;" v-show="showInfo">
+      <div class="pt-4 pb-3 w-100" style="left: 12px; top:-4px;">
         <v-row class="bg-gray-100 w-100 pb-3">
           <v-col md="6" sm="12">
             <div class="d-flex">
@@ -42,7 +43,7 @@
       </div>
     </v-container>
   </v-container>
-  <Spacer :height="26"/>
+  </div>
 </template>
 
 <script setup>
