@@ -76,7 +76,7 @@ const currentData = computed(() => {
   }
 
   hasData.value = rows.length > 0
-  return rows
+  return rows.sort((a, b) => b.percent - a.percent)
 })
 
 const extractData = (school) => {
