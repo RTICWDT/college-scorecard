@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="px-11 pb-11">
+  <div class="px-3 px-md-11 pb-11">
     <ChartFieldDataExtended
       v-if="selectedFieldOfStudyDetail"
       :fos="selectedFieldOfStudyDetail"
@@ -56,7 +56,6 @@
             :display-toggle="true"
             :control-tab="fieldSort"
             @tab-change="handleToggle"
-            label="Sort By: "
             class="pt-2 pb-2"
           />
 

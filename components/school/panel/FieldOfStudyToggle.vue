@@ -1,10 +1,11 @@
 <template>
-  <div class="pa-4 rounded-lg fos-sort-toggle-container">
-    <span v-if="!labelPrefix" class="d-flex text-subtitle-2">{{ label }}</span>
-    <div class="align-center d-flex">
+  <div class="pa-4 rounded-lg fos-sort-toggle-container d-flex-column d-md-flex align-center">
+    <span class="d-flex text-subtitle-2 mr-2 mb-1 mb-md-0">Sort by: </span>
+    <div class="align-center d-flex flex-grow-1">
       <v-tabs
         id="fos-sort-toggle"
         :show-arrows="true"
+        v-model="currentTab"
         @update:modelValue="$emit('tab-change', $event)"
         :height="tabsHeight"
         :style="tabContainerStyle"
@@ -14,11 +15,11 @@
           :key="tab.group"
           :value="tab.group"
           :style="tabStyle"
-          :class="[{ 'tab': modelValue === tab.group }, 'fos-sort-tab']"
+          :class="tab.group === currentTab ? 'active' : ''"
         >
-          <slot :name="`tab-${tab.group}`">
-            <span class="fos-sort-tab-title">
-              {{ labelPrefix }}{{ tab.groupName }}
+          <slot>
+            <span>
+              {{ tab.groupName }}
             </span>
           </slot>
         </v-tab>
@@ -66,11 +67,30 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['tab-change', 'update:modelValue'])
+
+const currentTab = ref(props.modelValue)
+
+watch(() => currentTab.value, (value) => {
+  console.log('currentTab', value)
+  currentTab.value = value
+})
 </script>
 
 <style lang="scss" scoped>
 .fos-sort-toggle-container {
   background-color: use-theme('gray-100') !important;
+}
+
+.active {
+  background-color: white !important;
+}
+
+:deep(.v-slide-group__next, .v-slide-group__prev) {
+  width: 30px;
+}
+
+:deep(.v-tab--selected .v-tab__slider) {
+  opacity: 0;
 }
 
 </style>
