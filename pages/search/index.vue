@@ -298,6 +298,7 @@
                       :total-visible="paginatorPageCount"
                       active-color="primary-green"
                       variant="flat"
+                      style="position: relative; bottom: 4px;"
                     />
                   </div>
 
