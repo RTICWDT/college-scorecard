@@ -33,7 +33,7 @@
         :max="utility.fieldOfStudySalary.max"
         :min="utility.fieldOfStudySalary.min"
         hide-details
-        class="align-center"
+        class="align-center mx-0"
         track-color="grey-darken-1"
         color="primary-yellow"
         thumb-color="primary-yellow"
@@ -50,6 +50,8 @@
             prefix="$"
             suffix="k"
             @update:model-value="updateSalaryMin"
+            :max="150"
+            :min="0"
           />
         </template>
         <template #append>
@@ -64,6 +66,8 @@
             prefix="$"
             suffix="k"
             @update:model-value="updateSalaryMax"
+            :max="150"
+            :min="0"
           />
         </template>
       </v-range-slider>
@@ -92,7 +96,7 @@
         :max="utility.fieldOfStudyDebt.max"
         :min="utility.fieldOfStudyDebt.min"
         hide-details
-        class="align-center"
+        class="align-center mx-0"
         track-color="grey-darken-1"
         color="primary-yellow"
         thumb-color="primary-yellow"
@@ -109,6 +113,8 @@
             variant="outlined"
             prefix="$"
             suffix="k"
+            :max="50"
+            :min="0"
             @update:model-value="updateDebtMin"
           ></v-text-field>
         </template>
@@ -123,6 +129,8 @@
             variant="outlined"
             prefix="$"
             suffix="k"
+            :max="50"
+            :min="0"
             @update:model-value="updateDebtMax"
           ></v-text-field>
         </template>
@@ -299,3 +307,11 @@ defineExpose({
   resetForm
 })
 </script>
+
+<style scoped lang="scss">
+:deep(.v-text-field__suffix) {
+  font-size: 14px;
+  margin-left: 2px;
+  padding-right: 10px;
+}
+</style>
