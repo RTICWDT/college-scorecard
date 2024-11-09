@@ -109,6 +109,19 @@
             </div>
           </v-col>
         </v-row>
+
+        <v-row>
+          <v-col>
+            <p style="font-size: 13px;">
+              The College Scorecard website is currently not fully compliant
+              with Section 508 of the Rehabilitation Act of 1973, as amended.
+              The Department is currently remediating all non-compliant components.
+              If you need assistance with this site, please contact
+              <a href="mailto:scorecarddata@rti.org" class="underline">scorecarddata@rti.org</a>
+              for alternative means to interact with this website.
+            </p>
+          </v-col>
+        </v-row>
       </v-container>
     </div>
   </div>
@@ -124,6 +137,13 @@ a {
     text-decoration: underline;
   }
   color: white;
+}
+
+a.underline {
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
 }
 </style>
 
