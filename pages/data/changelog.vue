@@ -14,6 +14,24 @@
     </v-row>
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
+        <v-expansion-panel-title>October 10, 2024</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <p>On October 10, 2024, the Department updated the College Scorecard downloadable data files and the API as indicated below.</p>
+          <ul>
+            <li>More recent data values derived from Federal Student Aid sources for the following data metrics were included:</li>
+            <ul>
+              <li>Currently Operating Status Flag</li>
+              <li>Heightened Cash Monitoring Flag</li>
+              <li>Accrediting Agency Name and code</li>
+              <li>Title IV Approval Date</li>
+              <li>Federal School Code</li>
+              <li>Institutional Control</li>
+            </ul>
+            <li>Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics identifying Minority Serving Institutions.</li>
+          </ul>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+      <v-expansion-panel>
         <v-expansion-panel-title>July 24, 2024</v-expansion-panel-title>
         <v-expansion-panel-text>
           <p>
