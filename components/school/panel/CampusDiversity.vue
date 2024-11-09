@@ -216,6 +216,10 @@ const { fields } = useConstants()
   background-color: use-theme('secondary-blue');
 }
 
+.mid-dark-blue {
+  background-color: use-theme('primary-blue');
+}
+
 .key-box {
   display: inline-block;
   width: 20px;
