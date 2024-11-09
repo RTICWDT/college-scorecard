@@ -58,13 +58,14 @@
         placeholder="ZIP Code"
         hide-details
         :class="[props.horizontal ? 'mx-3' : 'my-3 mr-2']"
-        type="number"
+        type="text"
         density="compact"
         :rules="[utility.rules.zip]"
         min="0"
         variant="outlined"
         @update:modelValue="handleSearch"
         color="primary-green"
+        style="min-width: 120px;"
       />
       <v-text-field
         v-model="input.distance"
