@@ -327,19 +327,19 @@ const currentHoist = computed(() => {
   switch (sort) {
     case "ipeds_award_count":
       // Note: These might need to be handled differently as they're mutating state
-      // hoistCurrency.value = false
-      // hoistGroupText.value = "largest"
-      // hoistGroupData.value = "number of graduates"
+      hoistCurrency.value = false
+      hoistGroupText.value = "largest"
+      hoistGroupData.value = "number of graduates"
       return "Graduates"
     case "highest_earnings":
-      // hoistCurrency.value = true
-      // hoistGroupText.value = "highest earning"
-      // hoistGroupData.value = "earnings"
+      hoistCurrency.value = true
+      hoistGroupText.value = "highest earning"
+      hoistGroupData.value = "earnings"
       return "Median Earnings"
     case "lowest_debt":
-      // hoistCurrency.value = true
-      // hoistGroupText.value = "with the least amount of debt"
-      // hoistGroupData.value = "debt"
+      hoistCurrency.value = true
+      hoistGroupText.value = "with the least amount of debt"
+      hoistGroupData.value = "debt"
       return "Median Debt"
   }
 })
