@@ -14,10 +14,10 @@
                 <div class="font-weight-bold mb-1">
                   Search
                 </div>
-                <NuxtLink to="/search" class="d-block mb-1">
+                <NuxtLink to="/search/" class="d-block mb-1">
                   Search Schools
                 </NuxtLink>
-                <NuxtLink to="/search/fos-landing" class="d-block mb-1">
+                <NuxtLink to="/search/fos-landing/" class="d-block mb-1">
                   Search Fields of Study
                 </NuxtLink>
               </li>
@@ -33,7 +33,7 @@
                 </NuxtLink>
               </li>
               <li class="mx-2 mb-4">
-                <NuxtLink to="/resources" class="font-weight-bold">
+                <NuxtLink to="/resources/" class="font-weight-bold">
                   Resources
                 </NuxtLink>
               </li>
@@ -41,19 +41,19 @@
                 <div class="font-weight-bold mb-1">
                   About the Data
                 </div>
-                <NuxtLink to="/data" class="d-block mb-1">
+                <NuxtLink to="/data/" class="d-block mb-1">
                   Download the Data
                 </NuxtLink>
-                <NuxtLink to="/data/data-documentation" class="d-block mb-1">
+                <NuxtLink to="/data/data-documentation/" class="d-block mb-1">
                   Data Documentation
                 </NuxtLink>
-                <NuxtLink to="/data/api-documentation" class="d-block mb-1">
+                <NuxtLink to="/data/api-documentation/" class="d-block mb-1">
                   API Documentation
                 </NuxtLink>
-                <NuxtLink to="/data/change-log" class="d-block mb-1">
+                <NuxtLink to="/data/change-log/" class="d-block mb-1">
                   Change Log
                 </NuxtLink>
-                <NuxtLink to="/data/glossary" class="d-block mb-10">
+                <NuxtLink to="/data/glossary/" class="d-block mb-10">
                   Glossary
                 </NuxtLink>
               </li>
@@ -63,7 +63,7 @@
             <div class="float-right">
               <p class="mb-0">
                 <small>
-                  Powered by <NuxtLink to="/data">College Scorecard Data</NuxtLink>
+                  Powered by <NuxtLink to="/data/">College Scorecard Data</NuxtLink>
                 </small>
               </p>
               <p class="mb-0">

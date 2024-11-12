@@ -152,7 +152,7 @@
 
   <div v-if="isFedLoan">
     <CompareTooltipHeader title="Repayment Rate" definition="repayment-rate" :h="2" class="mb-1 mt-7" />
-    <p class="mb-5" style="max-width: 800px">Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see the <NuxtLink to="/data/glossary">glossary</NuxtLink>.</p>
+    <p class="mb-5" style="max-width: 800px">Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see the <NuxtLink to="/data/glossary/">glossary</NuxtLink>.</p>
 
     <v-checkbox
       class="mb-2 mt-n4"

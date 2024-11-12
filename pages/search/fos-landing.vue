@@ -125,7 +125,7 @@ const fosDegrees = computed(() => formMappings.fosDegrees)
 const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
 
 const handleFormSubmit = () => {
-  router.push(`/search/fos?cip4=${encodeURIComponent(input.cip4.code)}&cip4_degree=${encodeURIComponent(input.cip4_degree)}`)
+  router.push(`/search/fos/?cip4=${encodeURIComponent(input.cip4.code)}&cip4_degree=${encodeURIComponent(input.cip4_degree)}`)
 }
 
 useHead({

@@ -8,11 +8,11 @@
           hide-slider
           show-arrows
         >
-          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data')" value="data">Download the Data</v-tab>
-          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/data-documentation')" value="data-documentation">Data Documentation</v-tab>
-          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/api-documentation')" value="api-documentation">API Documentation</v-tab>
-          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/changelog')" value="changelog">Change Log</v-tab>
-          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/glossary')" value="glossary">Glossary</v-tab>
+          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/')" value="data">Download the Data</v-tab>
+          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/data-documentation/')" value="data-documentation">Data Documentation</v-tab>
+          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/api-documentation/')" value="api-documentation">API Documentation</v-tab>
+          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/changelog/')" value="changelog">Change Log</v-tab>
+          <v-tab tabindex="0" class="data-tab navigation" @click="navigateTo('/data/glossary/')" value="glossary">Glossary</v-tab>
         </v-tabs>
       </v-container>
     </div>

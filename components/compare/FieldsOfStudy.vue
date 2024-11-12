@@ -13,7 +13,7 @@
     <div v-else-if="fieldsOfStudy.all.length === 0" class="position-relative" style="bottom: 30px;">
       <h3 class="text-h4 font-weight-bold text-center mt-4">No fields of study selected to compare.</h3>
       <div class="text-center mt-8">
-        <NuxtLink to="/search/fos-landing">
+        <NuxtLink to="/search/fos-landing/">
           <v-btn
             color="secondary-green"
             size="large"

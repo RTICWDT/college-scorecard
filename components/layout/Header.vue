@@ -133,8 +133,8 @@ nav {
             :onNavigate="navigateTo" />
 
           <li>
-            <NuxtLink :to="'/resources'" :class="{ 'active': !!activeLink.match('resources') }"
-              @click="navigateTo('/resources')">
+            <NuxtLink :to="'/resources/'" :class="{ 'active': !!activeLink.match('resources') }"
+              @click="navigateTo('/resources/')">
               Resources
             </NuxtLink>
           </li>
@@ -179,7 +179,7 @@ nav {
           <hr />
           <p class="nav-title">Search</p>
 
-          <v-list-item @click="mobileNavClick(`/search`)" class="nav-item" tabindex="0">
+          <v-list-item @click="mobileNavClick(`/search/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
                 <span>Search Schools</span>
@@ -188,7 +188,7 @@ nav {
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="mobileNavClick(`/search/fos-landing`)" class="nav-item" tabindex="0">
+          <v-list-item @click="mobileNavClick(`/search/fos-landing/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
                 <span>Search Fields of Study</span>
@@ -220,7 +220,7 @@ nav {
 
           <hr />
 
-          <v-list-item @click="mobileNavClick(`/resources`)" class="nav-title-item" tabindex="0">
+          <v-list-item @click="mobileNavClick(`/resources/`)" class="nav-title-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
                 <span>Resources</span>
@@ -232,7 +232,7 @@ nav {
           <hr />
           <p class="nav-title">About the Data</p>
 
-          <v-list-item @click="mobileNavClick(`/data`)" class="nav-item" tabindex="0">
+          <v-list-item @click="mobileNavClick(`/data/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
                 <span>Download the Data</span>
@@ -241,7 +241,7 @@ nav {
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="mobileNavClick(`/data/data-documentation`)" class="nav-item" tabindex="0">
+          <v-list-item @click="mobileNavClick(`/data/data-documentation/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
                 <span>Data Documentation</span>
@@ -250,7 +250,7 @@ nav {
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="mobileNavClick(`/data/api-documentation`)" class="nav-item" tabindex="0">
+          <v-list-item @click="mobileNavClick(`/data/api-documentation/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
                 <span>API Documentation</span>
@@ -259,7 +259,7 @@ nav {
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="mobileNavClick(`/data/changelog`)" class="nav-item" tabindex="0">
+          <v-list-item @click="mobileNavClick(`/data/changelog/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
                 <span>Change Log</span>
@@ -268,7 +268,7 @@ nav {
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="mobileNavClick(`/data/glossary`)" class="nav-item" tabindex="0">
+          <v-list-item @click="mobileNavClick(`/data/glossary/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
                 <span>Glossary</span>
@@ -351,33 +351,33 @@ const compareItems = [
 const searchItems = [
   {
     label: 'Search Schools',
-    action: '/search'
+    action: '/search/'
   },
   {
     label: 'Search Fields of Study',
-    action: '/search/fos-landing'
+    action: '/search/fos-landing/'
   }
 ]
 const dataItems = [
   {
     label: 'Download the Data',
-    action: '/data'
+    action: '/data/'
   },
   {
     label: 'Data Documentation',
-    action: '/data/data-documentation'
+    action: '/data/data-documentation/'
   },
   {
     label: 'API Documentation',
-    action: '/data/api-documentation'
+    action: '/data/api-documentation/'
   },
   {
     label: 'Change Log',
-    action: '/data/changelog'
+    action: '/data/changelog/'
   },
   {
     label: 'Glossary',
-    action: '/data/glossary'
+    action: '/data/glossary/'
   }
 ]
 

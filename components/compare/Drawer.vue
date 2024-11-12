@@ -58,12 +58,12 @@
             </div>
             <div class="flex-grow-1"></div>
             <div class="d-flex justify-start justify-sm-center bg-white pt-3 pb-10 pb-sm-0" :class="{ 'border-b': breakpoints.xs.value }">
-              <NuxtLink v-if="noSchoolsSelected" to="/search" :tabindex="-1">
+              <NuxtLink v-if="noSchoolsSelected" to="/search/" :tabindex="-1">
                 <v-btn color="primary-green"  :tabindex="showDrawer ? 0 : -1">
                   Search Schools
                 </v-btn>
               </NuxtLink>
-              <NuxtLink v-else to="/compare?toggle=institutions" :tabindex="-1">
+              <NuxtLink v-else to="/compare/?toggle=institutions" :tabindex="-1">
                 <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
                   Compare {{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}
                 </v-btn>
@@ -109,12 +109,12 @@
             </div>
             <div class="flex-grow-1"></div>
             <div class="d-flex justify-start justify-sm-center bg-white pt-3">
-              <NuxtLink v-if="noFosSelected" to="/search/fos-landing" :tabindex="-1">
+              <NuxtLink v-if="noFosSelected" to="/search/fos-landing/" :tabindex="-1">
                 <v-btn v-if="noFosSelected" color="primary-green" :tabindex="showDrawer ? 0 : -1">
                   Search Fields of Study
                 </v-btn>
               </NuxtLink>
-              <NuxtLink v-else to="/compare?toggle=fos" :tabindex="-1">
+              <NuxtLink v-else to="/compare/?toggle=fos" :tabindex="-1">
                 <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
                   Compare {{ store.fos.length }} Field{{ oneFosSelected ? '': 's' }} of Study
                 </v-btn>

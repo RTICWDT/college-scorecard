@@ -11,11 +11,11 @@
           <div class="mb-0 mr-2 d-flex align-self-center black--text light-grey">
             <strong>SEARCH:</strong>
           </div>
-          <v-tab tabindex="0" class="search-tab navigation school" @click="navigateTo('/search')" value="/search">
+          <v-tab tabindex="0" class="search-tab navigation school" @click="navigateTo('/search/')" value="/search/">
             Schools
             <div class="tab-border-bottom"></div>
           </v-tab>
-          <v-tab tabindex="0" class="search-tab navigation fos" @click="navigateTo('/search/fos-landing')" value="/search/fos-landing">
+          <v-tab tabindex="0" class="search-tab navigation fos" @click="navigateTo('/search/fos-landing/')" value="/search/fos-landing/">
             Field of Study
             <div class="tab-border-bottom"></div>
           </v-tab>
@@ -37,7 +37,7 @@ const navigateTo = (href) =>  {
 
 const tab = computed(() => {
   if (route.path.match('/search/fos')) {
-    return '/search/fos-landing'
+    return '/search/fos-landing/'
   }
 
   return route.path
@@ -45,7 +45,7 @@ const tab = computed(() => {
 
 const getTabFromRoute = (path) => {
   if (path.match('/search/fos')) {
-    return '/search/fos-landing'
+    return '/search/fos-landing/'
   }
   return path
 }

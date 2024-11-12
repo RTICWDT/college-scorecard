@@ -4,6 +4,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
       return
     }
 
-    return navigateTo('/search/fos-landing')
+    return navigateTo('/search/fos-landing/')
   }  
 })
