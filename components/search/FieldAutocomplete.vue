@@ -1,5 +1,6 @@
 <template>
   <v-autocomplete
+    label="Search Academic Fields"
     id="search-form-fos-auto-complete"
     v-model="cip4"
     :items="items"

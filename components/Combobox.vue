@@ -3,8 +3,8 @@
     <div class="group" ref="groupNode">
       <div class="input-wrapper" :class="{ 'active': comboboxHasVisualFocus, 'options-visible': isOpen, 'dense': dense }">
         <div style="width: 25px;">
-          <v-icon v-if="loading" size="small" class="icon" icon="fa:fas fa-circle-notch fa-spin" />
-          <v-icon v-else class="icon" icon="mdi:mdi-magnify"/>
+          <v-icon v-if="loading" size="small" class="icon" icon="fa:fas fa-circle-notch fa-spin" aria-label="Loading results" />
+          <v-icon v-else class="icon" icon="mdi:mdi-magnify" aria-label="Search" />
         </div>
         <input
           id="cb1-input"
@@ -15,6 +15,7 @@
           aria-autocomplete="list"
           :aria-expanded="isOpen"
           aria-controls="cb1-listbox"
+          aria-label="Search items"
           :aria-activedescendant="activeDescendant"
           :value="filter"
           @input="onComboboxInput"
@@ -31,7 +32,7 @@
           id="cb1-button"
           ref="buttonNode"
           tabindex="-1"
-          aria-label="States"
+          aria-label="Toggle dropdown"
           :aria-expanded="isOpen"
           aria-controls="cb1-listbox"
           @click="onButtonClick"

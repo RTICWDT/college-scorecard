@@ -25,7 +25,7 @@ useHead({
     { name: 'MobileOptimized', content: '320' },
     { name: "google-site-verification", content: "joZQgj-M8GQ05V29ojfVsbsNk44SRgGqJfws9tBcnPU" },
     { name: "google-site-verification", content: "V-KEdRwSWd6GSLEWRBddZy6B5yLCs6vkRRflrImQiKE" },
-    { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1" },
+    { name: "viewport", content: "width=device-width,initial-scale=1.0,maximum-scale=1" },
     { name: "description", content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: "College Scorecard" },
