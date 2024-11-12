@@ -83,21 +83,21 @@ const percentFull = computed(() => {
   const minValue = props.min.value;
   const maxValue = props.max.value;
   const value = props.value.value;
-  return ((value - minValue) / (maxValue - minValue)) * 100;
+  return Math.min(100, ((value - minValue) / (maxValue - minValue)) * 100);
 });
 
 const percentEmpty = computed(() => {
   const minValue = props.min.value;
   const maxValue = props.max.value;
   const value = props.value.value;
-  return ((maxValue - value) / (maxValue - minValue)) * 100;
+  return Math.min(100, ((maxValue - value) / (maxValue - minValue)) * 100);
 });
 
 const midpointPosition = computed(() => {
   const minValue = props.min.value;
   const maxValue = props.max.value;
   const midpoint = props.midpoint.value;
-  return ((midpoint - minValue) / (maxValue - minValue)) * 100;
+  return Math.min(100, ((midpoint - minValue) / (maxValue - minValue)) * 100);
 });
 
 const thresholdPercent = computed(() => breakpoints.mdAndUp.value ? 80 : 50)
