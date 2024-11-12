@@ -4,9 +4,9 @@
       Out of {{ toNumber(group_count) }} students...
     </div>
     <div v-for="datum in currentData" style="max-width: 850px;" class="ml-0 ml-lg-8">
-      <div class="mb-n3">{{ datum.metric }}</div>
-      <div class="mb-n5">
-        <ChartHorizontalBarMedian
+      <div class="mb-0">{{ datum.metric }}</div>
+      <div class="mb-0">
+        <ChartHorizontalBarRangeSimplified
           :value="{
             label: toPercent(datum.percent),
             value: datum.percent,
