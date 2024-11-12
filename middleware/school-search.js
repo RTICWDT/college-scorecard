@@ -38,7 +38,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
   }
 
   if (params_modified) {
-    console.log(query)
     return navigateTo({
       path: to.path,
       query: query
