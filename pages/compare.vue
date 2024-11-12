@@ -37,7 +37,7 @@
               size="small"
               color="secondary-green"
               @click="updateStoreToMatchSharedComparison"
-              :disabled="!sharedComparisonIsLoading"
+              :disabled="!sharedComparisonIsLoaded"
             >
               Update Your List to Match
             </v-btn>
@@ -187,18 +187,30 @@ const fieldOfStudyCount = computed(() => {
 
 const updateStoreToMatchSharedComparison = () => {
   store.fos = []
-  store.temporaryFos.forEach((fos) => store.addFieldOfStudy(fos))
+  if (store.temporaryFos) {
+    store.temporaryFos.forEach((fos) => store.addFieldOfStudy(fos))
+  } else {
+    store.temporaryFos = []
+  }
 
   store.institutions = []
-  store.temporaryInstitutions.forEach((institution) => store.addSchool(institution))
+  if (store.temporaryInstitutions) {
+    store.temporaryInstitutions.forEach((institution) => store.addSchool(institution))
+  } else {
+    store.temporaryInstitutions = []
+  }
 
   store.temporaryFos = null
   store.temporaryInstitutions = null
   router.replace(`/compare/?toggle=${route.query.toggle}`)
 }
 
-const sharedComparisonIsLoading = computed(() => {
-  return Array.isArray(store.temporaryFos) && Array.isArray(store.temporaryInstitutions)
+const sharedComparisonIsLoaded = ref(false)
+
+watch(() => [store.temporaryFos, store.temporaryInstitutions], (a,b) => {
+  if (Array.isArray(store.temporaryFos) || Array.isArray(store.temporaryInstitutions)) {
+    sharedComparisonIsLoaded.value = true
+  }
 })
 
 onBeforeRouteLeave(() => {
