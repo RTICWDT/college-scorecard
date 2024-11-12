@@ -71,7 +71,6 @@ const emit = defineEmits(['tab-change', 'update:modelValue'])
 const currentTab = ref(props.modelValue)
 
 watch(() => currentTab.value, (value) => {
-  console.log('currentTab', value)
   currentTab.value = value
 })
 </script>

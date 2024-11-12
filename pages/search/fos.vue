@@ -513,7 +513,6 @@ const results = reactive({
   meta: { total: 0 },
 })
 
-console.log(route.query)
 const input = reactive({
   sort: route.query.sort || defaultSort.value,
   page: route.query.page || 1,
