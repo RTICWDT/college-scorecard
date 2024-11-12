@@ -246,7 +246,6 @@
             v-model="input.size"
             label="Small"
             value="small"
-            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -257,7 +256,6 @@
             v-model="input.size"
             label="Medium"
             value="medium"
-            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -268,7 +266,6 @@
             v-model="input.size"
             label="Large"
             value="large"
-            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -287,7 +284,6 @@
               v-model="input.control"
               label="Public"
               value="public"
-              color="secondary-green"
               class="py-0 my-0"
               @keydown.enter.prevent
             />
@@ -298,7 +294,6 @@
               v-model="input.control"
               label="Private Nonprofit"
               value="private"
-              color="secondary-green"
               class="py-0 my-0"
               @keydown.enter.prevent
             />
@@ -309,7 +304,6 @@
               v-model="input.control"
               label="Private For-Profit"
               value="profit"
-              color="secondary-green"
               class="py-0 my-0"
               @keydown.enter.prevent
             />
@@ -328,7 +322,6 @@
             v-model="input.locale"
             label="City"
             value="city"
-            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -339,7 +332,6 @@
             v-model="input.locale"
             label="Suburban"
             value="suburban"
-            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -350,7 +342,6 @@
             v-model="input.locale"
             label="Town"
             value="town"
-            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -361,7 +352,6 @@
             v-model="input.locale"
             label="Rural"
             value="rural"
-            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
