@@ -28,8 +28,9 @@
         </p>
       </template>
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="medianEarnings(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="medianEarnings(institution)"
+          :showMinMax="true"
           :value="{
             label: toDollar(medianEarnings(institution)),
             value: medianEarnings(institution),
@@ -37,17 +38,14 @@
           :min="{
             label: '$0',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '$100,000',
             value: 100000,
-            style: { height: '60px' },
           }"
-          :median="{
+          :midpoint="{
             label: 'Midpoint',
             value: medianEarningsMidpoint(institution),
-            style: { height: '60px' },
             show: true,
           }"
         />
@@ -59,8 +57,9 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-            :shouldRender="percentMoreThanHS(institution)"
+        <ChartHorizontalBarRangeSimplified
+            :hasData="percentMoreThanHS(institution)"
+            :showMinMax="true"
             :value="{
               label: toPercent(percentMoreThanHS(institution)),
               value: percentMoreThanHS(institution),
@@ -68,12 +67,10 @@
             :min="{
               label: '0%',
               value: 0,
-              style: { height: '60px' },
             }"
             :max="{
               label: '100%',
               value: 1,
-              style: { height: '60px' },
             }"
           />
       </template>

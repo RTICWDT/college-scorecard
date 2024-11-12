@@ -24,8 +24,9 @@
     <div class="px-0 px-md-5 pb-10">
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
-          <ChartHorizontalBarMedian
-            :shouldRender="medianTotalDebt(fos)"
+          <ChartHorizontalBarRangeSimplified
+            :hasData="medianTotalDebt(fos)"
+            :showMinMax="true"
             :value="{
               label: toDollar(medianTotalDebt(fos)),
               value: medianTotalDebt(fos),
@@ -33,16 +34,11 @@
             :min="{
               label: '$0',
               value: 0,
-              style: { height: '60px' },
             }"
             :max="{
               label: '$150,000',
               value: 150000,
-              style: { height: '60px' },
             }"
-            :y-bar-thickness="50"
-            :label-font-size="24"
-            :labels="true"
           />
         </template>
       </CompareFieldsOfStudyDataSection>
@@ -72,8 +68,9 @@
     <div class="px-0 px-md-5 pb-10">
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
-          <ChartHorizontalBarMedian
-            :shouldRender="medianTotalMonthlyDebt(fos)"
+          <ChartHorizontalBarRangeSimplified
+            :hasData="medianTotalMonthlyDebt(fos)"
+            :showMinMax="true"
             :value="{
               label: toDollar(medianTotalMonthlyDebt(fos)),
               value: medianTotalMonthlyDebt(fos),
@@ -81,16 +78,11 @@
             :min="{
               label: '$0',
               value: 0,
-              style: { height: '60px' },
             }"
             :max="{
               label: '$2,000',
               value: 2000,
-              style: { height: '60px' },
             }"
-            :y-bar-thickness="50"
-            :label-font-size="24"
-            :labels="true"
           />
         </template>
       </CompareFieldsOfStudyDataSection>

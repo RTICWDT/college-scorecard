@@ -164,8 +164,10 @@
               }}</em
             >
 
-            <ChartHorizontalBarMedian
-              v-if="netPrice"
+            <ChartHorizontalBarRangeSimplified
+              :hasData="netPrice"
+              :showMinMax="true"
+              :showBarValues="false"
               :value="{
                 label: toDollar(netPrice),
                 value: netPrice,
@@ -173,14 +175,12 @@
               :min="{
                 label: '$0',
                 value: 0,
-                style: { height: '60px' },
               }"
               :max="{
                 label: '$100,000',
                 value: 100000,
-                style: { height: '60px' },
               }"
-              :median="{
+              :midpoint="{
                 label:
                   'Midpoint for ' +
                   (medianToggle === 'group'
@@ -191,23 +191,9 @@
                   medianToggle === 'group'
                     ? toggleAverageAnnualCosts[0]
                     : toggleAverageAnnualCosts[1],
-                style: { height: '60px' },
                 show: true,
               }"
-              :upperTipStyleOverride="{
-                display: 'none',
-              }"
-              :rangeChartStyle="{
-                height: '35px',
-              }"
-              :height="500"
-              :y-bar-thickness="50"
-              :label-font-size="24"
-              :labels="true"
-              class="pt-3"
-              style="height:100px"
             />
-            <div class="data-na" v-else>Data Not Available</div>
           </div>
         </v-card>
 
@@ -259,8 +245,10 @@
               }}
             </em>
 
-            <ChartHorizontalBarMedian
-              v-if="medianEarnings"
+            <ChartHorizontalBarRangeSimplified
+              :hasData="medianEarnings"
+              :showMinMax="true"
+              :showBarValues="false"
               :value="{
                 label: toDollar(
                   medianEarnings,
@@ -270,14 +258,12 @@
               :min="{
                 label: '$0',
                 value: 0,
-                style: { height: '60px' },
               }"
               :max="{
                 label: '$100,000+',
                 value: 100000,
-                style: { height: '60px' },
               }"
-              :median="{
+              :midpoint="{
                 label:
                   'Midpoint for ' +
                   (medianToggle === 'group'
@@ -288,20 +274,9 @@
                   medianToggle === 'group'
                     ? toggleMedianEarnings[0]
                     : toggleMedianEarnings[1],
-                style: { height: '60px' },
                 show: true,
               }"
-              :upperTipStyleOverride="{
-                display: 'none',
-              }"
-              :height="500"
-              :y-bar-thickness="50"
-              :label-font-size="24"
-              :labels="true"
-              class="pt-3"
-              style="height:100px"
             />
-            <div class="data-na" v-else>Data Not Available</div>
           </div>
         </v-card>
       </v-col>

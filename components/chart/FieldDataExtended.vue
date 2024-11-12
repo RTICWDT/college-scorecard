@@ -13,18 +13,23 @@
                 <span class="text-h4 text-primary font-weight-bold">
                   {{ toDollar(medianEarnings) }}
                 </span>
-
-                <ChartHorizontalBar
-                  v-if="medianEarnings"
-                  :value="medianEarnings"
-                  :min="0"
-                  :max="130000"
-                  color="secondary-blue"
-                  bgcolor="gray-200"
-                  :height="25"
-                  :labels="false"
-                  type="currency"
-                  class="mt-3"
+                <Spacer :height="10" />
+                <ChartHorizontalBarRangeSimplified
+                  :hasData="medianEarnings"
+                  :show-bar-values="false"
+                  class="pb-1"
+                  :value="{
+                    label: toDollar(medianEarnings),
+                    value: medianEarnings,
+                  }"
+                  :min="{
+                    label: '$0',
+                    value: 0,
+                  }"
+                  :max="{
+                    label: '$130,000',
+                    value: 130000,
+                  }"
                 />
               </div>
 
@@ -54,18 +59,23 @@
                 <span class="text-h4 text-primary font-weight-bold">
                   {{ toDollar(medianDebt) }}
                 </span>
-
-                <ChartHorizontalBar
-                  v-if="medianDebt"
-                  :value="medianDebt"
-                  :min="0"
-                  :max="100000"
-                  color="secondary-blue"
-                  bgcolor="gray-200"
-                  :height="25"
-                  :labels="false"
-                  type="currency"
-                  class="mt-3"
+                <Spacer :height="10" />
+                <ChartHorizontalBarRangeSimplified
+                  :hasData="medianDebt"
+                  :show-bar-values="false"
+                  class="pb-1"
+                  :value="{
+                    label: toDollar(medianDebt),
+                    value: medianDebt,
+                  }"
+                  :min="{
+                    label: '$0',
+                    value: 0,
+                  }"
+                  :max="{
+                    label: '$100,000',
+                    value: 100000,
+                  }"
                 />
               </div>
 
@@ -79,20 +89,25 @@
                 <span class="text-h4 text-primary font-weight-bold">
                   {{ toDollar(medianPrior) }}
                 </span>
-                <ChartHorizontalBar
-                  v-if="medianPrior"
-                  :value="medianPrior"
-                  :min="0"
-                  :max="100000"
-                  color="secondary-blue"
-                  bgcolor="gray-200"
-                  :height="25"
-                  :labels="false"
-                  type="currency"
-                  class="mt-3"
+                <Spacer :height="10" />
+                <ChartHorizontalBarRangeSimplified
+                  :hasData="medianPrior"
+                  :show-bar-values="false"
+                  class="pb-1"
+                  :value="{
+                    label: toDollar(medianPrior),
+                    value: medianPrior,
+                  }"
+                  :min="{
+                    label: '$0',
+                    value: 0,
+                  }"
+                  :max="{
+                    label: '$100,000',
+                    value: 100000,
+                  }"
                 />
               </div>
-
               <div v-else class="text-center text-subtitle-1">
                 Data Not Available
               </div>

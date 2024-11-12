@@ -39,9 +39,9 @@
         </div>
         <Spacer :height="20" />
 
-        <ChartHorizontalBarMedian
-          v-if="medianEarnings"
-          class="pt-12 pt-lg-0"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="medianEarnings"
+          :showMinMax="true"
           :value="{
             label: toDollar(medianEarnings),
             value: medianEarnings,
@@ -49,14 +49,12 @@
           :min="{
             label: '$0',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '$100,000+',
             value: 100000,
-            style: { height: '60px' },
           }"
-          :median="{
+          :midpoint="{
             label:
               'Midpoint: ' +
               toDollar(
@@ -68,17 +66,9 @@
               medianToggle === 'group'
                 ? toggleMedianEarnings[0]
                 : toggleMedianEarnings[1],
-            style: { height: '60px' },
             show: true,
           }"
-          :height="500"
-          :y-bar-thickness="50"
-          :label-font-size="24"
-          :labels="true"
         />
-        <div v-else class="data-na">
-          Data Not Available
-        </div>
       </v-card>
     </v-col>
     <v-col cols="12" lg="5">

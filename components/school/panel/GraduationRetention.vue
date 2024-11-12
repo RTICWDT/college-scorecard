@@ -14,7 +14,6 @@
           <v-checkbox
             v-model="showPellOnly"
             label="Show Pell Grant Recipients Only"
-            color="secondary-green"
             class="mt-0"
           >
             <template #label>
@@ -46,11 +45,13 @@
               </div>
             </div>
           </v-expand-transition>
-          <ChartHorizontalBarMedian
-            v-if="
+          <Spacer :height="10" />
+          <ChartHorizontalBarRangeSimplified
+            :hasData="
               (completionRate && !showPellOnly) ||
                 (completionRatePell && showPellOnly)
             "
+            :showMinMax="true"
             :value="{
               label: showPellOnly
                 ? Math.round(parseFloat(completionRatePell) * 100) + '%'
@@ -62,30 +63,19 @@
             :min="{
               label: '0%',
               value: 0,
-              style: { height: '60px' },
             }"
             :max="{
               label: '100%',
               value: 100,
-              style: { height: '60px' },
             }"
-            :median="{
+            :midpoint="{
               label:
                 'Midpoint: ' +
                 toPercent(medianToggle === 'group' ? computedToggleGraduationRate[0] : computedToggleGraduationRate[1]),
               value: medianToggle === 'group' ? computedToggleGraduationRate[0] * 100 : computedToggleGraduationRate[1] * 100,
-              style: { height: '60px' },
               show: !showPellOnly,
             }"
-            :height="500"
-            :y-bar-thickness="50"
-            :label-font-size="24"
-            :labels="true"
-            class="pb-10"
           />
-          <div v-else class="data-na">
-            Data Not Available
-          </div>
         </v-card>
       </v-col>
       <v-col cols="12" md="6">

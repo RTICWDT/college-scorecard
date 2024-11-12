@@ -45,9 +45,9 @@
             </div>
 
           </div>
-          <ChartHorizontalBarMedian
-            class="pt-8 pt-lg-0"
-            v-if="netPrice"
+          <ChartHorizontalBarRangeSimplified
+            :hasData="netPrice"
+            :showMinMax="true"
             :value="{
               label: toDollar(netPrice),
               value: netPrice,
@@ -55,14 +55,12 @@
             :min="{
               label: '$0',
               value: 0,
-              style: { height: '60px' },
             }"
             :max="{
               label: '$100,000',
               value: 100000,
-              style: { height: '60px' },
             }"
-            :median="{
+            :midpoint="{
               label:
                 'Midpoint: ' +
                 toDollar(
@@ -74,16 +72,9 @@
                 medianToggle === 'group'
                   ? toggleAverageAnnualCosts[0]
                   : toggleAverageAnnualCosts[1],
-              style: { height: '60px' },
               show: true,
             }"
-            :y-bar-thickness="50"
-            :label-font-size="24"
-            :labels="true"
           />
-          <div v-else class="data-na">
-            Data Not Available
-          </div>
         </div>
         <div v-else>
           <h2 class="mb-3">
@@ -140,8 +131,9 @@
           <v-row>
             <v-col cols="2"></v-col>
             <v-col cols="8">
-              <ChartHorizontalBarMedian
-                v-if="netPrice"
+              <ChartHorizontalBarRangeSimplified
+                :hasData="netPrice"
+                :showMinMax="true"
                 :value="{
                   label: toDollar(netPrice),
                   value: netPrice,
@@ -149,14 +141,12 @@
                 :min="{
                   label: '$0',
                   value: 0,
-                  style: { height: '60px' },
                 }"
                 :max="{
-                  label: '$100,000%',
+                  label: '$100,000',
                   value: 100000,
-                  style: { height: '60px' },
                 }"
-                :median="{
+                :midpoint="{
                   label:
                     'Midpoint: ' +
                     toDollar(
@@ -168,17 +158,9 @@
                     medianToggle === 'group'
                       ? toggleAverageAnnualCosts[0]
                       : toggleAverageAnnualCosts[1],
-                  style: { height: '60px' },
                   show: true,
                 }"
-                :height="500"
-                :y-bar-thickness="50"
-                :label-font-size="24"
-                :labels="true"
               />
-              <div v-else class="data-na">
-                Data Not Available
-              </div>
             </v-col>
             <v-col cols="2"></v-col>
           </v-row>

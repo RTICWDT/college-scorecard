@@ -20,8 +20,6 @@
 </template>
 
 <script setup>
-const nuxtApp = useNuxtApp();
-
 const props = defineProps({
   min: {
     type: Object,

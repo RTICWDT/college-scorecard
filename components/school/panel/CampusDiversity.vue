@@ -121,24 +121,37 @@
           >
             {{ item.label }}
             <Spacer :height="10" />
-            <ChartHorizontalBar
-              :value="Math.round(item.value * 100)"
-              :min="0"
-              :max="100"
-              color="secondary-blue"
-              :height="30"
-              :label-font-size="18"
-              :labels="true"
+            <ChartHorizontalBarRangeSimplified 
+              :hasData="item.value"
+              class="pb-1"
+              :value="{
+                label: Math.round(item.value * 100) + '%',
+                value: item.value,
+              }"
+              :min="{
+                label: '0%',
+                value: 0,
+              }"
+              :max="{
+                label: '100%',
+                value: 1,
+              }"
             />
-            <ChartHorizontalBar
-              :value="Math.round(item.staff_value * 100)"
-              :min="0"
-              :max="100"
-              color="primary-blue"
-              :height="30"
-              :label-font-size="18"
-              class="mt-1 mb-4"
-              :labels="true"
+            <ChartHorizontalBarRangeSimplified 
+              :hasData="item.value"
+              color="#10274E"
+              :value="{
+                label: Math.round(item.staff_value * 100) + '%',
+                value: item.staff_value,
+              }"
+              :min="{
+                label: '0%',
+                value: 0,
+              }"
+              :max="{
+                label: '100%',
+                value: 1,
+              }"
             />
           </div>
         </v-col>
@@ -149,24 +162,37 @@
           >
             {{ item.label }}
             <Spacer :height="10" />
-            <ChartHorizontalBar
-              :value="Math.round(item.value * 100)"
-              :min="0"
-              :max="100"
-              color="secondary-blue"
-              :height="30"
-              :label-font-size="18"
-              :labels="true"
+            <ChartHorizontalBarRangeSimplified 
+              :hasData="item.value"
+              class="pb-1"
+              :value="{
+                label: Math.round(item.value * 100) + '%',
+                value: item.value,
+              }"
+              :min="{
+                label: '0%',
+                value: 0,
+              }"
+              :max="{
+                label: '100%',
+                value: 1,
+              }"
             />
-            <ChartHorizontalBar
-              :value="Math.round(item.staff_value * 100)"
-              :min="0"
-              :max="100"
-              color="primary-blue"
-              :height="30"
-              :label-font-size="18"
-              class="mt-1 mb-4"
-              :labels="true"
+            <ChartHorizontalBarRangeSimplified 
+              :hasData="item.value"
+              color="#10274E"
+              :value="{
+                label: Math.round(item.staff_value * 100) + '%',
+                value: item.staff_value,
+              }"
+              :min="{
+                label: '0%',
+                value: 0,
+              }"
+              :max="{
+                label: '100%',
+                value: 1,
+              }"
             />
           </div>
         </v-col>

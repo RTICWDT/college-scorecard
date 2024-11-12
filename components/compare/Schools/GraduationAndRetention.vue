@@ -41,8 +41,9 @@
       </template>
 
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="contextualCompletionRate(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="contextualCompletionRate(institution)"
+          :showMinMax="true"
           :value="{
             label: toPercent(contextualCompletionRate(institution)),
             value: contextualCompletionRate(institution),
@@ -50,14 +51,12 @@
           :min="{
             label: '0%',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '100%',
             value: 1,
-            style: { height: '60px' },
           }"
-          :median="{
+          :midpoint="{
             label: 'Midpoint',
             value: completionRateMidpoint(institution),
             style: { height: '60px' },
@@ -72,8 +71,9 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="retentionRate(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="retentionRate(institution)"
+          :showMinMax="true"
           :value="{
             label: toPercent(retentionRate(institution)),
             value: retentionRate(institution),
@@ -81,12 +81,10 @@
           :min="{
             label: '0%',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '100%',
             value: 1,
-            style: { height: '60px' },
           }"
         />
       </template>

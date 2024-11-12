@@ -1,30 +1,42 @@
 <template>
-<div class="w-100 pb-5">
+<div v-if="hasData" class="w-100" :class="props.class || 'pb-5'">
+  <div v-if="showMinMax" class="w-100 d-flex" style="font-size: 12px;">
+    <div>{{  min.label }}</div>
+    <div class="flex-grow-1" />
+    <div class="text-right">{{ max.label }}</div>
+  </div>
+
   <div class="w-100 d-flex bar">
-    <div v-if="midpoint" class="midpoint" :style="{ left: `${midpointPosition}%` }">
+    <div v-if="midpoint.show" class="midpoint" :style="{ left: `${midpointPosition}%` }">
       <div class="midpoint-text">
-        Midpoint: {{ midpoint.label }}
+        {{ midpoint.label }}
       </div>
     </div>
 
-    <div class="filled d-flex align-center" :style="{ width: filledWidth }">
-      <div v-show="value.value > threshold" class="w-100 text-right mr-2 text-white value-text">
+    <div class="filled d-flex align-center" :style="{ width: `${percentFull}%` }">
+      <div v-show="percentFull > thresholdPercent && showBarValues" class="w-100 text-right mr-2 text-white value-text">
         {{ value.label }}
       </div>
     </div>
 
-    <div class="unfilled d-flex align-center" :style="{ width: unfilledWidth }">
-      <div v-show="value.value < threshold" class="ml-2 value-text">
+    <div class="unfilled d-flex align-center" :style="{ width: `${percentEmpty}%` }">
+      <div v-show="percentFull < thresholdPercent && showBarValues" class="ml-2 value-text">
         {{ value.label }}
       </div>
     </div>
   </div>
-
+</div>
+<div v-else class="data-na">
+  <p>Data Not Available</p>
 </div>
 </template>
 
 <script setup>
 const props = defineProps({
+  hasData: {
+    type: Boolean,
+    default: true,
+  },
   min: {
     type: Object,
     default: { value: 0, label: "0" },
@@ -39,17 +51,56 @@ const props = defineProps({
   },
   midpoint: {
     type: Object,
-    default: null,
-  }
+    default: {
+      value: 0.5,
+      label: "50",
+      show: false,
+    },
+  },
+  showMinMax: {
+    type: Boolean,
+    default: false,
+  },
+  showBarValues: {
+    type: Boolean,
+    default: true,
+  },
+  class: {
+    type: String,
+    default: "",
+  },
+  color: {
+    type: String,
+    default: '#1570EF',
+  },
 })
 
+const barColor = ref(props.color)
+
 const { breakpoints } = useVuetify()
-const filledWidth = computed(() => `${props.value.value * 100}%`)
-const unfilledWidth = computed(() => `${(1 - props.value.value) * 100}%`)
-const midpointPosition = computed(() => props.midpoint.value * 100)
-const threshold = computed(() => breakpoints.mdAndUp.value ? 0.8 : 0.5)
 
+const percentFull = computed(() => {
+  const minValue = props.min.value;
+  const maxValue = props.max.value;
+  const value = props.value.value;
+  return ((value - minValue) / (maxValue - minValue)) * 100;
+});
 
+const percentEmpty = computed(() => {
+  const minValue = props.min.value;
+  const maxValue = props.max.value;
+  const value = props.value.value;
+  return ((maxValue - value) / (maxValue - minValue)) * 100;
+});
+
+const midpointPosition = computed(() => {
+  const minValue = props.min.value;
+  const maxValue = props.max.value;
+  const midpoint = props.midpoint.value;
+  return ((midpoint - minValue) / (maxValue - minValue)) * 100;
+});
+
+const thresholdPercent = computed(() => breakpoints.mdAndUp.value ? 80 : 50)
 </script>
 
 <style scoped lang="scss">
@@ -61,7 +112,7 @@ const threshold = computed(() => breakpoints.mdAndUp.value ? 0.8 : 0.5)
   .filled {
     height: 100%;
     position: absolute;
-    background-color: use-theme('blue-600');
+    background-color: v-bind('barColor');
     transition: all 0.5s;
   }
 
@@ -86,6 +137,7 @@ const threshold = computed(() => breakpoints.mdAndUp.value ? 0.8 : 0.5)
     height: 38px;
     background-color: black;
     width: 1px;
+    transition: all 0.5s;
 
     &::after {
       content: "";

@@ -5,25 +5,21 @@
     <div class="px-0 px-md-5 pb-10">
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
-          <ChartHorizontalBarMedian
-            :shouldRender="gradCount(fos)"
+          <ChartHorizontalBarRangeSimplified
+            :hasData="gradCount(fos)"
+            :showMinMax="true"
             :value="{
               label: toNumber(gradCount(fos)),
               value: gradCount(fos),
             }"
             :min="{
-              label: '$0',
+              label: '0',
               value: 0,
-              style: { height: '60px' },
             }"
             :max="{
-              label: '400',
+              label: '1000',
               value: 1000,
-              style: { height: '60px' },
             }"
-            :y-bar-thickness="50"
-            :label-font-size="24"
-            :labels="true"
           />
         </template>
       </CompareFieldsOfStudyDataSection>

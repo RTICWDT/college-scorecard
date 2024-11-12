@@ -28,8 +28,9 @@
       </template>
 
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="netPrice(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="netPrice(institution)"
+          :showMinMax="true"
           :value="{
             label: toDollar(netPrice(institution)),
             value: netPrice(institution),
@@ -37,17 +38,14 @@
           :min="{
             label: '$0',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '$100,000',
             value: 100000,
-            style: { height: '60px' },
           }"
-          :median="{
+          :midpoint="{
             label: 'Midpoint',
             value: netPriceMidpoint(institution),
-            style: { height: '60px' },
             show: true,
           }"
         />
@@ -70,8 +68,9 @@
     ></v-select>
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="currentIncomeAmount(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="currentIncomeAmount(institution)"
+          :showMinMax="true"
           :value="{
             label: toDollar(currentIncomeAmount(institution)),
             value: currentIncomeAmount(institution),
@@ -79,12 +78,10 @@
           :min="{
             label: '$0',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '$100,000',
             value: 100000,
-            style: { height: '60px' },
           }"
         />
       </template>

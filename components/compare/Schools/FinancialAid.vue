@@ -15,8 +15,9 @@
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
-          <ChartHorizontalBarMedian
-            :shouldRender="studentsReceivingLoans(institution)"
+          <ChartHorizontalBarRangeSimplified
+            :hasData="studentsReceivingLoans(institution)"
+            :showMinMax="true"
             :value="{
               label: toPercent(studentsReceivingLoans(institution)),
               value: studentsReceivingLoans(institution),
@@ -24,12 +25,10 @@
             :min="{
               label: '0%',
               value: 0,
-              style: { height: '60px' },
             }"
             :max="{
               label: '100%',
               value: 1,
-              style: { height: '60px' },
             }"
           />
         </template>
@@ -69,8 +68,9 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="medianTotalDebt(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="medianTotalDebt(institution)"
+          :showMinMax="true"
           :value="{
             label: toDollar(medianTotalDebt(institution)),
             value: medianTotalDebt(institution),
@@ -78,12 +78,10 @@
           :min="{
             label: '$0',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '$100,000',
             value: 100000,
-            style: { height: '60px' },
           }"
         />
       </template>
@@ -129,8 +127,9 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="typicalMonthlyLoanPayment(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="typicalMonthlyLoanPayment(institution)"
+          :showMinMax="true"
           :value="{
             label: toDollar(typicalMonthlyLoanPayment(institution)),
             value: typicalMonthlyLoanPayment(institution),
@@ -138,12 +137,10 @@
           :min="{
             label: '$0',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '$1,000',
             value: 1000,
-            style: { height: '60px' },
           }"
         />
       </template>

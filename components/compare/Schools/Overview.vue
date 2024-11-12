@@ -32,8 +32,9 @@
       </template>
 
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="netPrice(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="netPrice(institution)"
+          :showMinMax="true"
           :value="{
             label: toDollar(netPrice(institution)),
             value: netPrice(institution),
@@ -41,17 +42,14 @@
           :min="{
             label: '$0',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '$100,000',
             value: 100000,
-            style: { height: '60px' },
           }"
-          :median="{
+          :midpoint="{
             label: 'Midpoint',
             value: netPriceMidpoint(institution),
-            style: { height: '60px' },
             show: true,
           }"
         />
@@ -69,8 +67,9 @@
       </template>
 
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="completionRate(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="completionRate(institution)"
+          :showMinMax="true"
           :value="{
             label: toPercent(completionRate(institution)),
             value: completionRate(institution),
@@ -78,17 +77,14 @@
           :min="{
             label: '0%',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '100%',
             value: 1,
-            style: { height: '60px' },
           }"
-          :median="{
+          :midpoint="{
             label: 'Midpoint',
             value: completionRateMidpoint(institution),
-            style: { height: '60px' },
             show: true,
           }"
         />
@@ -106,8 +102,9 @@
       </template>
 
       <template #data="{ institution }">      
-        <ChartHorizontalBarMedian
-          v-if="medianEarnings(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="medianEarnings(institution)"
+          :showMinMax="true"
           :value="{
             label: toDollar(medianEarnings(institution)),
             value: medianEarnings(institution),
@@ -115,17 +112,14 @@
           :min="{
             label: '$0',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '$100,000',
             value: 100000,
-            style: { height: '60px' },
           }"
-          :median="{
+          :midpoint="{
             label: 'Midpoint',
             value: medianEarningsMidpoint(institution),
-            style: { height: '60px' },
             show: true,
           }"
         />

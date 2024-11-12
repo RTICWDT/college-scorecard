@@ -3,8 +3,9 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="fullTimeEnrollment(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="fullTimeEnrollment(institution)"
+          :showMinMax="true"
           :value="{
             label: toPercent(fullTimeEnrollment(institution)),
             value: fullTimeEnrollment(institution),
@@ -12,12 +13,10 @@
           :min="{
             label: '0%',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '100%',
             value: 1,
-            style: { height: '60px' },
           }"
         />
       </template>
@@ -55,8 +54,9 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="socioEconomicDiversity(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="socioEconomicDiversity(institution)"
+          :showMinMax="true"
           :value="{
             label: toPercent(socioEconomicDiversity(institution)),
             value: socioEconomicDiversity(institution),
@@ -64,12 +64,10 @@
           :min="{
             label: '0%',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '100%',
             value: 1,
-            style: { height: '60px' },
           }"
         />
       </template>
@@ -87,8 +85,9 @@
 
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="currentRaceEthnicityPercentage(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="currentRaceEthnicityPercentage(institution)"
+          :showMinMax="true"
           :value="{
             label: toPercent(currentRaceEthnicityPercentage(institution)),
             value: currentRaceEthnicityPercentage(institution),
@@ -96,12 +95,10 @@
           :min="{
             label: '0%',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '100%',
             value: 1,
-            style: { height: '60px' },
           }"
         />
       </template>

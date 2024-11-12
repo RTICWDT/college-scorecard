@@ -95,8 +95,9 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <ChartHorizontalBarMedian
-          :shouldRender="acceptanceRateActual(institution)"
+        <ChartHorizontalBarRangeSimplified
+          :hasData="acceptanceRateActual(institution)"
+          :showMinMax="true"
           :value="{
             label: toPercent(acceptanceRateActual(institution)),
             value: acceptanceRateActual(institution),
@@ -104,12 +105,10 @@
           :min="{
             label: '0%',
             value: 0,
-            style: { height: '60px' },
           }"
           :max="{
             label: '100%',
             value: 1,
-            style: { height: '60px' },
           }"
         />
       </template>

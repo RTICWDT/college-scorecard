@@ -11,8 +11,8 @@
             label: toPercent(datum.percent),
             value: datum.percent,
           }"
-          :min="{ value: 0 }"
-          :max="{ value: 1 }"
+          :min="{ value: 0, label: '0%' }"
+          :max="{ value: 1, label: '100%' }"
         />
       </div>
     </div>

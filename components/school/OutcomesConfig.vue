@@ -7,7 +7,6 @@
           :model-value="showPellOnly"
           @update:model-value="$emit('update:showPellOnly', $event)"
           label="Show Pell Grant Recipients Only"
-          color="secondary-green"
           class="mt-0 pt-0 mb-5 ml-n2"
           hideDetails
         >

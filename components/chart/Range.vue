@@ -212,7 +212,7 @@ onMounted(() => {
   position: relative;
 
   .picc-range-bar {
-    background-color: theem-color('secondary-blue');
+    background-color: use-theme('secondary-blue');
     height: 100%;
     left: 0;
     position: absolute;
