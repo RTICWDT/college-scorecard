@@ -531,12 +531,6 @@ const searchAPI = async () => {
   }
 }
 
-const showError = (errorMessage) => {
-  console.error("error:", errorMessage)
-  error.value = typeof errorMessage === 'string' ? errorMessage : "There was an unexpected API error."
-}
-
-
 const generateQueryString = (params) => {
   const searchParams = new URLSearchParams();
   for (const key in params) {
