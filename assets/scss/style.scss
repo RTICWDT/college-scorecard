@@ -11,6 +11,38 @@ $secondary-blue: #1570EF;
 $base-font-family: "Inter", Helvetica, arial, sans-serif;
 $header-font-family: neue-haas-grotesk-display, Helvetica, arial, sans-serif;
 
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6,
+.text-subtitle-1,
+.text-subtitle-2,
+.text-body-1,
+.text-body-2 {
+  font-family: $base-font-family !important;
+}
+
+.title,
+.display-1,
+.display-2,
+.display-3,
+.display-4 .subtitle-1,
+.subtitle-2 {
+  font-family: $header-font-family !important;
+}
+
+.display-2 {
+  font-size: 28px !important;
+  line-height: 32px !important;
+}
+
+.display-3 {
+  font-size: 3rem !important;
+  line-height: 32px !important;
+}
+
 .font-header {
   font-family: $header-font-family;
 }
@@ -78,25 +110,6 @@ $header-font-family: neue-haas-grotesk-display, Helvetica, arial, sans-serif;
     a {
       color: white !important;
     }
-  }
-
-  .title,
-  .display-1,
-  .display-2,
-  .display-3,
-  .display-4 .subtitle-1,
-  .subtitle-2 {
-    font-family: $header-font-family !important;
-  }
-
-  .display-2 {
-    font-size: 28px !important;
-    line-height: 32px !important;
-  }
-
-  .display-3 {
-    font-size: 3rem !important;
-    line-height: 32px !important;
   }
 
   .overline {
