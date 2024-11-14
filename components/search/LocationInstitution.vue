@@ -155,19 +155,20 @@ const input = reactive({
   long: null,
 })
 
-// Initialize data based on props
-if (props.initialState) {
-  utility.location = "State"
-  input.state = props.initialState
-} else if (props.initialZip) {
-  utility.location = "ZIP Code"
-  input.zip = props.initialZip
-  input.distance = props.initialDistance
-}
+onMounted(() => {
+  // Initialize data based on props
+  if (props.initialState.length > 0) {
+    utility.location = "State"
+    input.state = props.initialState
+  } else if (props.initialZip) {
+    utility.location = "ZIP Code"
+    input.zip = props.initialZip
+    input.distance = props.initialDistance
+  }
+})
 
 watch(() => props.initialState, (newValue) => input.state = newValue)
 watch(() => props.initialZip, (newValue) => input.zip = newValue)
-watch(() => props.initialDistance, (newValue) => input.distance = newValue)
 
 watch(() => location.latLon, (newValue) => {
   if (
@@ -182,6 +183,7 @@ watch(() => location.latLon, (newValue) => {
     input.long =
       newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4)
   }
+
   emit("search-update", input)
 })
 
@@ -203,7 +205,11 @@ function handleLocationChange(e) {
   if (e == null) {
     utility.location = null
   }
-  
+
+  if (input.distance === 0) {
+    input.distance = 50
+  }
+
   // emit("search-update", input)
 }
 
