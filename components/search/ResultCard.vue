@@ -12,7 +12,7 @@
         </v-card>
       </p>
 
-      <v-tooltip :disabled="isLoading" location="bottom">
+      <v-tooltip :disabled="isLoading" location="bottom" :aria-label="isSelected ? 'Remove school from compare' : compareHoverCountText">
         <template v-slot:activator="{ props }">
           <v-btn
             icon

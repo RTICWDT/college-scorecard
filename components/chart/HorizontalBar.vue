@@ -6,6 +6,7 @@
       :options="chartOptions"
       :data="chartData"
       :plugins="plugins"
+      aria-label="Horizontal Bar Chart"
     />
   </div>
 </template>

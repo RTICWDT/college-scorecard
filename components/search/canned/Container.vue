@@ -2,7 +2,6 @@
   <div
     role="group"
     class="group_checkbox"
-    aria-checked="mixed"
     aria-controls="canned-search-near-me canned-search-most-get-in canned-search-most-grad canned-search-degree-c canned-search-degree-a canned-search-degree-b"
   >
     <v-row>

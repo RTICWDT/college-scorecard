@@ -33,7 +33,7 @@
         :max="utility.fieldOfStudySalary.max"
         :min="utility.fieldOfStudySalary.min"
         hide-details
-        class="align-center mx-0"
+        class="align-center mx-0 salary-hack-select-aria"
         track-color="grey-darken-1"
         color="primary-yellow"
         thumb-color="primary-yellow"
@@ -52,6 +52,7 @@
             @update:model-value="updateSalaryMin"
             :max="150"
             :min="0"
+            aria-label="Minimum Salary After Completing"
           />
         </template>
         <template #append>
@@ -68,6 +69,7 @@
             @update:model-value="updateSalaryMax"
             :max="150"
             :min="0"
+            aria-label="Maximum Salary After Completing"
           />
         </template>
       </v-range-slider>
@@ -96,7 +98,7 @@
         :max="utility.fieldOfStudyDebt.max"
         :min="utility.fieldOfStudyDebt.min"
         hide-details
-        class="align-center mx-0"
+        class="align-center mx-0 median-debt-hack-select-aria"
         track-color="grey-darken-1"
         color="primary-yellow"
         thumb-color="primary-yellow"
@@ -116,6 +118,7 @@
             :max="50"
             :min="0"
             @update:model-value="updateDebtMin"
+            aria-label="Minimum Median Total Debt"
           ></v-text-field>
         </template>
         <template #append>
@@ -132,6 +135,7 @@
             :max="50"
             :min="0"
             @update:model-value="updateDebtMax"
+            aria-label="Maximum Median Total Debt"
           ></v-text-field>
         </template>
       </v-range-slider>
@@ -305,6 +309,29 @@ watch(groomedInput, (newValue, oldValue) => {
 
 defineExpose({
   resetForm
+})
+
+onMounted(() => {
+  //extreme hack to get aria-labels on thumbs for v-slider cause vuetify is horrible with accessibility
+  const medianDebtslider = document.getElementsByClassName('median-debt-hack-select-aria')[0]
+  if (!medianDebtslider) { return }
+  const container = medianDebtslider.getElementsByClassName('v-slider__container')[0]
+  if (!container) { return }
+  const thumbs = container.getElementsByClassName('v-slider-thumb')
+  if (!thumbs) { return }
+  Array.from(thumbs).map((thumb, index) => {
+    thumb.setAttribute('aria-label', `Median Total Debt Slider Thumb ${index + 1}`)
+  })
+
+  const salarySlider = document.getElementsByClassName('salary-hack-select-aria')[0]
+  if (!salarySlider) { return }
+  const salaryContainer = salarySlider.getElementsByClassName('v-slider__container')[0]
+  if (!salaryContainer) { return }
+  const salaryThumbs = salaryContainer.getElementsByClassName('v-slider-thumb')
+  if (!salaryThumbs) { return }
+  Array.from(salaryThumbs).map((thumb, index) => {
+    thumb.setAttribute('aria-label', `Salary After Completing Slider Thumb ${index + 1}`)
+  })
 })
 </script>
 

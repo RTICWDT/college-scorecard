@@ -55,7 +55,7 @@
             </span>
           </div>
           <div class="flex-grow-1" />
-          <v-tooltip text="Remove Field of Study">
+          <v-tooltip text="Remove Field of Study" aria-label="Remove Field of Study">
             <template v-slot:activator="{ props }">
               <v-btn
                 v-bind="props"
@@ -65,6 +65,7 @@
                 size="x-small"
                 @click="removeFieldOfStudy(fieldOfStudy)"
                 class="remove-btn ml-4"
+                aria-label="Remove Field of Study"
               />
             </template>
           </v-tooltip>

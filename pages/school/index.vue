@@ -178,12 +178,11 @@
                 <v-expansion-panel class="fos-profile-panel" elevation="2">
                   <v-expansion-panel-title id="fields-of-study" @click="analytics.trackAccordion('Fields of Study')" class="field-of-study-title bg-tertiary-yellow">
                     <span>Fields of Study</span>
-                    <v-btn
-                      size="x-small"
-                      icon="fa:fas fa-award"
-                      class="bg-primary-yellow ml-2"
-                      :readonly="true"
-                    />
+                    <div class="d-flex align-center" style="width: 32px; height: 32px;">
+                      <div class="bg-primary-yellow ml-2 pa-2 mr-2 rounded-circle" style="width: 32px; height: 32px;">
+                        <v-icon size="xsmall" icon="fa:fas fa-award" style="position: relative; bottom: 5px; left: -1px;"/>
+                      </div>
+                    </div>
                   </v-expansion-panel-title>
 
                   <v-expansion-panel-text class="field-of-study-text ">

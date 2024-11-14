@@ -24,23 +24,6 @@
         <span v-html="_max.label"></span>
       </span>
 
-      <v-tooltip location="top" v-if="!hideLower" :disabled="!lowertip">
-        <template v-slot:activator="{ props }">
-          <span
-            class="picc-range-label picc-range-label-lower"
-            :style="_lower.styles"
-            ref="lower"
-            v-bind="props"
-          >
-            <span v-html="_lower.label" :style="lowerTipStyleOverride"></span>
-          </span>
-        </template>
-
-        <div class="hover-tip">
-          {{ lowertip }}
-        </div>
-      </v-tooltip>
-
       <span
         v-if="!hideMiddle"
         class="picc-range-label picc-range-label-middle"
@@ -49,23 +32,6 @@
       >
         <span v-html="_middle.label"></span>
       </span>
-
-      <v-tooltip location="top" :disabled="!uppertip">
-        <template v-slot:activator="{ props }">
-          <span
-            class="picc-range-label picc-range-label-upper"
-            :style="_upper.styles"
-            ref="upper"
-            v-bind="props"
-          >
-            <span v-html="_upper.label" :style="upperTipStyleOverride"></span>
-          </span>
-        </template>
-
-        <div class="hover-tip">
-          {{ uppertip }}
-        </div>
-      </v-tooltip>
     </div>
   </div>
 </template>

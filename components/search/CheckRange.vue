@@ -12,6 +12,7 @@
           v-model="sliderValue"
           :id="props.id"
           class="align-center pa-0 ma-0"
+          :class="`${props.id}-hack-select`"
           hide-details
           @update:modelValue="handleSliderInput"
           :min="props.min"
@@ -19,10 +20,9 @@
           :color="trackColor"
           :track-color="trackBackground"
           thumb-color="secondary-green"
-          :aria-labelledby="generatedId"
-          :aria-label="generatedId"
           thumb-label
           :title="props.id"
+          aria-label="Slider Input"
         >
           <template #prepend>
             <div style="display:inline-flex;min-width:100%;">
@@ -33,7 +33,7 @@
                 color="secondary-green"
                 class="pa-0 ma-0"
                 hide-details
-                :aria-labelledby="generatedId"
+                :aria-labelledby="props.id"
                 @keydown.enter.prevent
               />
             </div>
@@ -52,7 +52,7 @@
               density="compact"
               :prefix="prefix"
               :suffix="props.appendText"
-              :aria-labelledby="generatedId"
+              :aria-labelledby="props.id"
               :max-width="130"
               @keydown.enter.prevent
             />
@@ -164,6 +164,17 @@ function handleTextFieldInput(value) {
 function handleEnable(e) {
   emit('slider-toggle', e)
 }
+
+onMounted(() => {
+  //extreme hack to get aria-labels on thumbs for v-slider cause vuetify is horrible with accessibility
+  const slider = document.getElementsByClassName(`${props.id}-hack-select`)[0]
+  if (!slider) { return }
+  const container = slider.getElementsByClassName('v-slider__container')[0]
+  if (!container) { return }
+  const thumb = container.getElementsByClassName('v-slider-thumb')[0]
+  if (!thumb) { return }
+  thumb.setAttribute('aria-label', `${props.legendTitle} Slider Thumb`)
+})
 </script>
 
 <style lang="scss" scoped>

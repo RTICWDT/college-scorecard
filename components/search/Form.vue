@@ -406,7 +406,7 @@
       <v-expansion-panel>
         <v-expansion-panel-title>
           WIOA Programs&nbsp;
-          <TooltipModal definition="wioa-participants" /> 
+          <TooltipModal definition="wioa-participants" />
         </v-expansion-panel-title>
         <v-expansion-panel-text>
           <v-checkbox
@@ -414,7 +414,6 @@
             v-model="input.dolflag"
             label="Only show schools that have Department of Labor WIOA programs"
             value="true"
-            color="secondary-green"
             hide-details
             @keydown.enter.prevent
           /> 

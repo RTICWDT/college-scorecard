@@ -195,6 +195,7 @@
       color="primary-green"
       @click="toTop"
       icon="fa:fas fa-arrow-up"
+      aria-label="Back to top"
     />
     
     <!-- MAIN -->

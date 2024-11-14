@@ -260,6 +260,7 @@ const props = defineProps({
 })
 
 const {
+  programReporter,
   isProgramReporter: isProgramReporterMethod,
   netPrice: netPriceMethod,
   income: incomeMethod,

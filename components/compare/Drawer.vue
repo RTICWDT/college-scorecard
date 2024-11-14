@@ -19,6 +19,7 @@
               @click="showDrawer = !showDrawer"
               icon="mdi-close"
               :tabindex="showDrawer ? 0 : -1"
+              aria-label="Close Compare Drawer"
             />
           </v-col>
         </v-row>
@@ -33,6 +34,8 @@
                 icon="fa:fas fa-university"
                 class="bg-tertiary-green mr-2"
                 :readonly="true"
+                :tabindex="-1"
+                aria-label="Compare Schools Icon"
               />
               <h3>Compare Schools</h3>
             </div>
@@ -47,12 +50,12 @@
               </div>
               <div v-else v-for="institution in store.institutions">
                 <div class="d-flex align-center mb-5">
-                  <v-tooltip location="bottom" text="Remove School">
+                  <v-tooltip location="bottom" text="Remove School" aria-label="Remove School from Compare" id="aria-remove-school">
                     <template v-slot:activator="{ props }">
-                      <v-btn v-bind="props" icon="mdi-close" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
+                      <v-btn aria-labelledby="aria-remove-school" v-bind="props" icon="mdi-close" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
                     </template>
                   </v-tooltip>
-                  <NuxtLink :to="schoolLink(institution)" class="text-body-2"><strong>{{ institution.school.name }}</strong></NuxtLink>
+                  <NuxtLink :to="schoolLink(institution)" class="text-body-2" :tabindex="showDrawer ? 0 : -1"><strong>{{ institution.school.name }}</strong></NuxtLink>
                 </div>
               </div>
             </div>
@@ -80,6 +83,8 @@
                 icon="fa:fas fa-award"
                 class="bg-primary-yellow mr-2"
                 :readonly="true"
+                tabindex="-1"
+                aria-label="Compare Fields of Study Icon"
               />
               <h3>Compare Fields of Study</h3>
             </div>
@@ -94,13 +99,13 @@
               </div>
               <div v-else v-for="fos in store.fos">
                 <div class="d-flex align-center mb-5">
-                  <v-tooltip location="bottom" text="Remove Field of Study">
+                  <v-tooltip location="bottom" text="Remove Field of Study" aria-label="Remove Field of Study from Compare" id="aria-remove-fos">
                     <template v-slot:activator="{ props }">
-                      <v-btn v-bind="props" icon="mdi-close" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
+                      <v-btn aria-labelledby="aria-remove-fos" v-bind="props" icon="mdi-close" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
                     </template>
                   </v-tooltip>
                   <div>
-                    <NuxtLink :to="fosLink(fos)" class="text-body-2"><strong>{{ fos.title }}</strong></NuxtLink>
+                    <NuxtLink :to="fosLink(fos)" class="text-body-2" :tabindex="showDrawer ? 0 : -1"><strong>{{ fos.title }}</strong></NuxtLink>
                     <p class="text-caption text-uppercase">{{ fos.credential.title }}</p>
                     <p class="text-caption">{{ fos.school.name }}</p>
                   </div>
@@ -136,7 +141,7 @@
           <v-btn
             class="button w-100" 
             @click="showDrawer = !showDrawer" 
-            tabindex="0" 
+            tabindex="0"
             :disabled="showDrawer"
             block
           >
@@ -147,30 +152,22 @@
                     <p class="font-weight-bold">Ready to Compare:</p>
                   </div>
                   <div class="d-flex align-center mr-5">
-                    <v-btn
-                      :icon="maxSchoolsReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-university'"
-                      :class="{ 'bg-tertiary-green': !maxSchoolsReached, 'bg-error': maxSchoolsReached }"
-                      size="x-small"
-                      class="mx-2"
-                      :readonly="true"
-                    />
-                    <p>{{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}</p>
-                    <v-tooltip v-if="maxSchoolsReached" activator="parent" location="top">
-                      Maximum of 10 Schools Reached
-                    </v-tooltip>
+                      <div :class="maxFosReamaxSchoolsReachedched ? 'bg-error' : 'bg-tertiary-green'"  class="pa-2 mr-2 rounded-circle">
+                        <v-icon size="xsmall" :icon="maxSchoolsReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-university'" />
+                      </div>
+                      <p>{{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}</p>
+                      <v-tooltip v-if="maxSchoolsReached" activator="parent" location="top">
+                        Maximum of 10 Schools Reached
+                      </v-tooltip>
                   </div>
-                  <div class="d-flex align-center">
-                    <v-btn
-                      :icon="maxFosReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'"
-                      :class="{ 'bg-primary-yellow': !maxFosReached, 'bg-error': maxFosReached }"
-                      size="x-small"
-                      class="mx-2"
-                      :readonly="true"
-                    />
-                    <p>{{ store.fos.length }} Field{{ oneFosSelected ? '' : 's' }} of Study</p>
-                    <v-tooltip v-if="maxFosReached" activator="parent" location="top">
-                      Maximum of 10 Fields of Study Reached
-                    </v-tooltip>
+                  <div class="d-flex align-center mr-5">
+                      <div :class="maxFosReached ? 'bg-error' : 'bg-primary-yellow'" class="pa-2 mr-2 rounded-circle">
+                        <v-icon size="xsmall" :icon="maxFosReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'" />
+                      </div>
+                      <p>{{ store.institutions.length }} School{{ oneFosSelected ? '' : 's' }}</p>
+                      <v-tooltip v-if="maxFosReached" activator="parent" location="top">
+                        Maximum of 10 Fields of Study Reached
+                      </v-tooltip>
                   </div>
                 </v-col>
               </v-row>

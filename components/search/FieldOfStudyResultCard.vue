@@ -7,12 +7,13 @@
           <NuxtLink class="nameLink mb-2" :to="dynamicLink">{{ schoolName }}</NuxtLink>
         </h2>
         <div :key="`${institution.id}-${fos.title}`">
-          <v-tooltip :disabled="isLoading" location="right">
+          <v-tooltip :id="`${institution.id}-${fos.title}-aria`" :disabled="isLoading" location="right" :aria-label="isSelected ? 'Remove Field of Study from Compare' : compareFOSHoverCountText">
             <template v-slot:activator="{ props }">
               <v-btn
                 v-bind="props"
                 @click="!isLoading ? store.toggleFieldOfStudy(fos) : () => {}"
                 :class="isSelected ? '' : totalFieldOfStudyCount > 9 ? 'noCompareAllow' : ''"
+                :aria-label="isSelected ? 'Remove Field of Study from Compare' : compareFOSHoverCountText"
                 icon
               >
                 <v-icon :color="isSelected ? '#0075B2' : 'grey'" icon="fa:fa fa-check-circle"></v-icon>

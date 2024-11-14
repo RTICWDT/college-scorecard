@@ -4,6 +4,7 @@
       :data="chartData"
       :options="options"
       :plugins="[centerTextPlugin]"
+      aria-label="Doughnut Chart"
     />
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="school-key-figures-container">
     <ul class="school-key-figures">
-      <v-tooltip location="bottom" v-if="!sizeOnly && yearIcon !== 'none'">
+      <v-tooltip location="bottom" v-if="!sizeOnly && yearIcon !== 'none'" :aria-label="tip">
         <template v-slot:activator="{ props }">
           <li :class="yearsClass(years)" v-bind="props" class="w-100">
             <img :src="yearIcon" alt="" class="schoolIcon" :height="imgSize" />
@@ -21,7 +21,7 @@
         <span>{{ locale(schoolLocale) }}</span>
       </li>
 
-      <v-tooltip location="bottom" v-if="sizeIcon !== 'none'">
+      <v-tooltip location="bottom" v-if="sizeIcon !== 'none'" :aria-label="sizeTip">
         <template v-slot:activator="{ props }">
           <li :class="sizeCategoryClass(schoolSize)" v-bind="props" class="w-100">
             <img :src="sizeIcon" alt="" class="schoolIcon" :height="imgSize" />

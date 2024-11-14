@@ -111,7 +111,7 @@
       <h2 id="basic-usage">Basic Usage</h2>
       <h3 id="base-url">Base URL</h3>
       <p>All API requests are made to the following base URL:</p>
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools</code></pre>
 
       <!-- STRUCTURE -->
       <h3 id="request-structure">Request Structure</h3>
@@ -119,7 +119,7 @@
         API requests are made using HTTP GET requests. The basic structure
         of a request is as follows:
       </p>
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&amp;{parameters}</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&amp;{parameters}</code></pre>
 
       <h3 id="parameters">Parameters</h3>
       <p>
@@ -147,7 +147,7 @@
       </ul>
       <h4 id="example-request">Example Request</h4>
 
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&amp;school.name=Harvard University&amp;fields=id,school.name,latest.student.size</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&amp;school.name=Harvard University&amp;fields=id,school.name,latest.student.size</code></pre>
 
       <h3 id="pagination">Pagination</h3>
       <p>
@@ -165,7 +165,7 @@
       </ul>
 
       <h4 id="example-paginated-request">Example Paginated Request</h4>
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&school.state=CA&page=1&per_page=10</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&school.state=CA&page=1&per_page=10</code></pre>
 
       <h3 id="sorting-with-sort-">Sorting</h3>
       <p>
@@ -196,7 +196,7 @@
         metadata and results. Here’s an example of a response structure:
       </p>
 
-      <pre><code>{{ responseFormatCode }}</code></pre>
+      <pre tabindex="0"><code>{{ responseFormatCode }}</code></pre>
 
       <h2 id="error-handling">Error Handling</h2>
       <p>
@@ -229,7 +229,7 @@
 
 
       <h3 id="example-error-response">Example Error Response</h3>
-      <pre><code>{{ errorResponseMessage }}</code></pre>
+      <pre tabindex="0"><code>{{ errorResponseMessage }}</code></pre>
 
 
 
@@ -259,7 +259,7 @@
       <h4 id="example-field-selection-request">
         Example Field Selection Request
       </h4>
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&amp;fields=id,school.name,latest.cost.tuition.in_state,latest.completion.rate</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&amp;fields=id,school.name,latest.cost.tuition.in_state,latest.completion.rate</code></pre>
 
 
       <p>
@@ -282,16 +282,16 @@
       <h2 id="common-use-cases">Common Use Cases</h2>
 
       <h3 id="searching-for-schools-by-name">Searching for Schools by Name</h3>
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&school.name=Stanford University</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&school.name=Stanford University</code></pre>
 
       <h3 id="filtering-schools-by-state-and-city">Filtering Schools by State and City</h3>
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&school.state=NY&school.city=New York</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&school.state=NY&school.city=New York</code></pre>
 
       <h3 id="retrieving-specific-data-fields">Retrieving Specific Data Fields</h3>
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&fields=id,school.name,latest.admissions.admission_rate.overall,latest.student.size</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&fields=id,school.name,latest.admissions.admission_rate.overall,latest.student.size</code></pre>
 
       <h3 id="paginated-requests">Paginated Requests</h3>
-      <pre><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&school.state=TX&page=2&per_page=10</code></pre>
+      <pre tabindex="0"><code>https://api.data.gov/ed/collegescorecard/v1/schools?api_key=YOUR_API_KEY&school.state=TX&page=2&per_page=10</code></pre>
 
 
       <h2 id="advanced-usage">Advanced Usage</h2>

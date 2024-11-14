@@ -13,11 +13,14 @@
           {{ label }}
         </v-btn>
       </template>
-      <v-list min-width="200">
+      <v-list min-width="200" aria-label="Share Search Options" tag="ul">
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
           @click="picked(item)"
+          tag="li"
+          role="option"
+          :tabindex="0"
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
@@ -32,15 +35,16 @@
       v-model="showCopyNotify"
       location="top"
       transition="fade-transition"
+      aria-label="URL Copied"
     >
-    <template v-slot:activator="{ props }">
-      <div v-bind="props" class="position-relative" style="bottom: 25px;">
-        <!-- This div acts as an anchor for the tooltip -->
-        <!-- You might want to bind this to your copy button or the copied content -->
-      </div>
-    </template>
-    <div>URL Copied!</div>
-  </v-tooltip>
+      <template v-slot:activator="{ props }">
+        <div v-bind="props" class="position-relative" style="bottom: 25px;">
+          <!-- This div acts as an anchor for the tooltip -->
+          <!-- You might want to bind this to your copy button or the copied content -->
+        </div>
+      </template>
+      <div>URL Copied!</div>
+    </v-tooltip>
 
 
   </div>

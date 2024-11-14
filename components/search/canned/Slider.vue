@@ -11,7 +11,7 @@
   >
     <template #label>
       {{ label }}
-      <SimpleTooltip v-if="tip" color="#1565c0" class="ml-2" :text="tip" text-color="white" />
+      <SimpleTooltip v-if="tip" color="#1565c0" class="ml-2" :text="tip" text-color="white" :aria-label="label" />
     </template>
   </v-switch>
 </template>

@@ -40,7 +40,7 @@
         </div>
         <div class="flex-grow-1" />
 
-        <v-tooltip text="Remove School">
+        <v-tooltip text="Remove School" aria-label="Remove School">
           <template v-slot:activator="{ props }">
             <v-btn
               v-bind="props"
@@ -50,6 +50,7 @@
               icon="mdi-close"
               size="x-small"
               @click="removeSchool(institution)"
+              aria-label="Remove School"
             />
           </template>
         </v-tooltip>
