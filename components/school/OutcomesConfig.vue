@@ -25,7 +25,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.enroll == 'enroll_first_time' ? 'secondary-green' : 'gray-100'"
+          :color="options.enroll == 'enroll_first_time' ? 'primary-green' : 'gray-100'"
           @click="updateOptions({ ...options, enroll: 'enroll_first_time' })"
         >
           started college here
@@ -33,7 +33,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.enroll == 'enroll_not_first_time' ? 'secondary-green' : 'gray-100'"
+          :color="options.enroll == 'enroll_not_first_time' ? 'primary-green' : 'gray-100'"
           @click="updateOptions({ ...options, enroll: 'enroll_not_first_time' })"
         >
           transferred in
@@ -41,7 +41,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.enroll == 'enroll_both' ? 'secondary-green' : 'gray-100'"
+          :color="options.enroll == 'enroll_both' ? 'primary-green' : 'gray-100'"
           @click="updateOptions({ ...options, enroll: 'enroll_both' })"
         >
           both
@@ -52,7 +52,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.study == 'study_full_time' ? 'secondary-green' : 'gray-100'"
+          :color="options.study == 'study_full_time' ? 'primary-green' : 'gray-100'"
           @click="updateOptions({ ...options, study: 'study_full_time' })"
         >
           full-time
@@ -60,7 +60,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.study == 'study_part_time' ? 'secondary-green' : 'gray-100'"
+          :color="options.study == 'study_part_time' ? 'primary-green' : 'gray-100'"
           @click="updateOptions({ ...options, study: 'study_part_time' })"
         >
           part-time
@@ -68,7 +68,7 @@
         <v-btn
           class="ma-1 d-block d-sm-inline component-toggle-button"
           size="small"
-          :color="options.study == 'study_both' ? 'secondary-green' : 'gray-100'"
+          :color="options.study == 'study_both' ? 'primary-green' : 'gray-100'"
           @click="updateOptions({ ...options, study: 'study_both' })"
         >
           both
