@@ -486,8 +486,6 @@ onMounted(() => {
     loadEmbeddedForm()
   })
 
-  console.log(config.public.apiSignupKey)
-
   window.apiUmbrellaSignupOptions = {
     registrationSource: "college-scorecard",
     apiKey: config.public.apiSignupKey,
