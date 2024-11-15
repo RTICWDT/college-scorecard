@@ -152,7 +152,7 @@ const route = useRoute()
 const activeLink = ref(null)
 const { breakpoints } = useVuetify()
 
-const version = ref('3.0.3') // TODO: implement a way to get the version
+const version = ref('3.2.5') // TODO: implement a way to get the version
 
 const isFluid = computed(() => {
   return breakpoints.md.value
