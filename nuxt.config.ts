@@ -10,10 +10,10 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiKey: process.env.GRIDSOME_API_KEY,
-      apiUrl: process.env.GRIDSOME_API_URL,
-      recaptchaKey: process.env.GRIDSOME_RECAPTCHA_KEY,
-      apiSignupKey: process.env.GRIDSOME_API_SIGNUP_KEY,
+      apiKey: process.env.SCORECARD_API_KEY,
+      apiUrl: process.env.SCORECARD_API_URL,
+      recaptchaKey: process.env.RECAPTCHA_KEY,
+      apiSignupKey: process.env.API_SIGNUP_KEY,
     }
   },
 
