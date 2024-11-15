@@ -486,9 +486,11 @@ onMounted(() => {
     loadEmbeddedForm()
   })
 
+  console.log(config.public.apiSignupKey)
+
   window.apiUmbrellaSignupOptions = {
     registrationSource: "college-scorecard",
-    apiKey: config.public.recaptchaKey,
+    apiKey: config.public.apiSignupKey,
     contactUrl: "scorecarddata@rti.org",
     siteName: "College Scorecard",
     emailFromName: "College Scorecard",
