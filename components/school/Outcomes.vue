@@ -1,6 +1,6 @@
 <template>
   <div v-show="hasData" class="mb-4">
-    <div class="font-weight-bold my-4" style="font-size: 22px;">
+    <div class="font-weight-bold my-4" style="font-size: 16px;">
       Out of {{ toNumber(group_count) }} students...
     </div>
     <div v-for="datum in currentData" style="max-width: 850px;" class="ml-0 ml-lg-8">

@@ -16,7 +16,7 @@
         :class="{ 'bg-yellow-600': store.highlightedInstitution === institution }" 
         @click="(event) => toggleHighlight(event, institution)"
       >
-        <NuxtLink class="font-weight-bold text-body-2" :to="schoolLink(institution)">
+        <NuxtLink class="font-weight-bold text-body-2" style="font-size: 1.175rem" :to="schoolLink(institution)">
           {{ institution.school.name }}
         </NuxtLink>
         <Spacer :height="10" />
