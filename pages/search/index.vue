@@ -519,7 +519,11 @@ const searchAPI = async () => {
     router.replace(route.path + url)
 
     const response = await apiGet("/schools", query)
-    const searchTerm = query['school.search'].toLowerCase()
+
+    let searchTerm = query['school.search']
+    if (searchTerm) {
+      searchTerm = searchTerm.toLowerCase()
+    }
 
     isLoading.value = false
     results.schools = response.results
