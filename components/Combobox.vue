@@ -63,7 +63,8 @@
           @click="onOptionClick(option)"
           class="pl-3 py-2 pr-3"
         >
-          <p class="text-body-1" :class="{ 'font-weight-bold': option.exact }">{{ option.text }}</p>
+          <!-- Disable exact match bolding for now -->
+          <p class="text-body-1" :class="{ 'font-weight-bold': option.exact && false }">{{ option.text }}</p>
           <p class="text-body-2 text-gray-700">{{ option.subtitle }}</p>
         </li>
       </ul>
