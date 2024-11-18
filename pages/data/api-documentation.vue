@@ -508,11 +508,13 @@ const loadEmbeddedForm = () => {
       document.getElementsByTagName("body")[0]
     ).appendChild(apiUmbrella)
 
-  apiUmbrella.onload = () => {
-    document
-      .querySelector("#api_umbrella_signup_form")
-      .addEventListener("submit", () => formSubmitted.value = true)
-  }
+  // if (callback) {
+  //   apiUmbrella.onload = () => {
+  //     document
+  //       .querySelector("#api_umbrella_signup_form")
+  //       // .addEventListener("submit", () => formSubmitted.value = true)
+  //   }
+  // }
 }
 
 const { scrollToAnchor } = useScroll()
