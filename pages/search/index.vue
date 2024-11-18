@@ -519,8 +519,35 @@ const searchAPI = async () => {
     router.replace(route.path + url)
 
     const response = await apiGet("/schools", query)
+    const searchTerm = query['school.search'].toLowerCase()
+
     isLoading.value = false
     results.schools = response.results
+
+    if (searchTerm) {
+      // sort based on school.name match
+      results.schools.sort((a, b) => {
+          // Convert school names to lowercase for comparison
+          const aNameLower = a[fields.NAME].toLowerCase();
+          const bNameLower = b[fields.NAME].toLowerCase();
+
+          // Check for exact matches
+          const aIsExactMatch = aNameLower === searchTerm;
+          const bIsExactMatch = bNameLower === searchTerm;
+
+          if (aIsExactMatch && !bIsExactMatch) {
+              return -1; // a comes first
+          }
+          if (!aIsExactMatch && bIsExactMatch) {
+              return 1;  // b comes first
+          }
+
+          // If neither is an exact match, maintain original order based on relevance score
+          return 0;
+      });
+    }
+
+
     results.meta = response.metadata
     shareUrl.value = window.location.href
     displayFlag.value = input.dolflag === "true"
