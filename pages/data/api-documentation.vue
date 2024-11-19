@@ -492,7 +492,6 @@ onMounted(() => {
     contactUrl: "scorecarddata@rti.org",
     siteName: "College Scorecard",
     emailFromName: "College Scorecard",
-    recaptchaV2SiteKey: null,
     exampleApiUrl:
       "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=[api_key]", // To ignore curly braces
   }
