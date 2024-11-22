@@ -13,7 +13,7 @@
           type="text"
           role="combobox"
           aria-autocomplete="list"
-          :aria-expanded="isOpen"
+          :aria-expanded="isOpen && options.length > 0"
           aria-controls="cb1-listbox"
           aria-label="Search items"
           :aria-activedescendant="activeDescendant"
