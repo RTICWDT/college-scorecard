@@ -16,10 +16,11 @@
               class="ml-auto"
               color="secondary-gray"
               size="small"
-              @click="showDrawer = !showDrawer"
+              @click="toggleDrawer"
               icon="mdi-close"
               :tabindex="showDrawer ? 0 : -1"
               aria-label="Close Compare Drawer"
+              id="compare_drawer--close-drawer-button"
             />
           </v-col>
         </v-row>
@@ -140,9 +141,10 @@
         <div class='flex-grow-1 toggle-content'>
           <v-btn
             class="button w-100" 
-            @click="showDrawer = !showDrawer" 
+            @click="toggleDrawer" 
             tabindex="0"
             :disabled="showDrawer"
+            id="compare_drawer--open-drawer-button"
             block
           >
             <v-container class="inner-button py-2">
@@ -220,6 +222,19 @@ watch(() => route.fullPath, () => {
 
 watch(() => store.fos.length, () => { showRail.value = hasItemsToCompare.value && !onComparePage.value })
 watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompare.value && !onComparePage.value })
+
+
+const toggleDrawer = async (e) => {
+  showDrawer.value = !showDrawer.value
+
+  await nextTick()
+  if (showDrawer.value) {
+    document.getElementById('compare_drawer--close-drawer-button').focus()
+  } else {
+    document.getElementById('compare_drawer--open-drawer-button').focus()
+  }
+  e.preventDefault()
+}
 </script>
 
 <style scoped lang="scss">
