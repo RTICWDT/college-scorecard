@@ -19,8 +19,7 @@
           <div class="flex-grow-1" />
           <v-btn 
             @click="showDialog = false" 
-            alt="Close More Information tooltip" 
-            aria-required="true" 
+            :aria-label="`Close ${title} tooltip`"
             icon="mdi:mdi-close"
             elevation="0"
             color="secondary-gray"
