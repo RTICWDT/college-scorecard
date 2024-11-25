@@ -59,6 +59,7 @@ nav {
     min-height: 25px;
     height: 25px;
     padding-top: 5px;
+    margin-bottom: 10px;
   }
 
   .nav-caret {
@@ -72,6 +73,16 @@ nav {
     height: 25px;
     margin-bottom: -3px !important;
     padding-top: 5px;
+    font-size: 16px !important;
+  }
+
+  .nav-title-override {
+    font-size: 16px !important;
+    font-weight: bold;
+  }
+
+  .nav-subtitle-override {
+    font-size: 16px;
   }
 }
 
@@ -168,9 +179,9 @@ nav {
 
         <div>
           <v-list-item @click="mobileNavClick(`/`)" class="nav-title-item" tabindex="0">
-            <v-list-item-title>
+            <v-list-item-title class="mb-2">
               <div class="d-flex justify-space-between">
-                <span>Home</span>
+                <span class="nav-title-override">Home</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -182,7 +193,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/search/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Search Schools</span>
+                <span class="nav-subtitle-override">Search Schools</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -191,7 +202,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/search/fos-landing/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Search Fields of Study</span>
+                <span class="nav-subtitle-override">Search Fields of Study</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -203,7 +214,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Compare Schools</span>
+                <span class="nav-subtitle-override">Compare Schools</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -212,7 +223,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Compare Fields of Study</span>
+                <span class="nav-subtitle-override">Compare Fields of Study</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -223,7 +234,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/resources/`)" class="nav-title-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Resources</span>
+                <span class="nav-title-override">Resources</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -235,7 +246,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/data/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Download the Data</span>
+                <span class="nav-subtitle-override">Download the Data</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -244,7 +255,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/data/data-documentation/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Data Documentation</span>
+                <span class="nav-subtitle-override">Data Documentation</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -253,7 +264,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/data/api-documentation/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>API Documentation</span>
+                <span class="nav-subtitle-override">API Documentation</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -262,7 +273,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/data/changelog/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Change Log</span>
+                <span class="nav-subtitle-override">Change Log</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
@@ -271,7 +282,7 @@ nav {
           <v-list-item @click="mobileNavClick(`/data/glossary/`)" class="nav-item" tabindex="0">
             <v-list-item-title>
               <div class="d-flex justify-space-between">
-                <span>Glossary</span>
+                <span class="nav-subtitle-override">Glossary</span>
                 <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
               </div>
             </v-list-item-title>
