@@ -90,7 +90,8 @@ li a.active, li span.active {
         <v-btn 
           v-for="(item, index) in items" 
           :key="index"
-          class="justify-start text-black" 
+          class="justify-start text-black my-1"
+          style="font-size: 16px;" 
           variant="text"
           x-large
           tabindex="0" 
