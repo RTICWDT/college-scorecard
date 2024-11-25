@@ -7,133 +7,133 @@
       height="auto"
       class="drawer pa-5 wrapper"
       elevation="0"
-    >
-      <v-container class="drawer-content elevation-10">
-        <v-row>
-          <v-col class="d-flex align-center">
-            <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
-            <v-btn
-              class="ml-auto"
-              color="secondary-gray"
-              size="small"
-              @click="toggleDrawer"
-              icon="mdi-close"
-              :tabindex="showDrawer ? 0 : -1"
-              aria-label="Close Compare Drawer"
-              id="compare_drawer--close-drawer-button"
-            />
-          </v-col>
-        </v-row>
-
-        <v-row>
-
-          <!-- SCHOOLS -->
-          <v-col class="border-e d-flex flex-column" cols="12" sm="6">
-            <div class="d-flex align-center mb-5">
+      ref="drawerTarget"
+    > 
+      <focus-trap v-model:active="showDrawer">
+        <v-container class="drawer-content elevation-10">
+          <v-row>
+            <v-col class="d-flex align-center">
+              <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
               <v-btn
+                class="ml-auto"
+                color="secondary-gray"
                 size="small"
-                icon="fa:fas fa-university"
-                class="bg-tertiary-green mr-2"
-                :readonly="true"
-                :tabindex="-1"
-                aria-label="Compare Schools Icon"
+                @click="toggleDrawer"
+                icon="mdi-close"
+                :tabindex="showDrawer ? 0 : -1"
+                aria-label="Close Compare Drawer"
+                id="compare_drawer--close-drawer-button"
               />
-              <h3>Compare Schools</h3>
-            </div>
+            </v-col>
+          </v-row>
 
-            <div class="items-list">
-              <div v-if="maxSchoolsReached" class="pa-2 mb-5 bg-tertiary-yellow font-weight-bold">
-                Maximum of 10 Schools Selected
+          <v-row>
+
+            <!-- SCHOOLS -->
+            <v-col class="border-e d-flex flex-column" cols="12" sm="6">
+              <div class="d-flex align-center mb-5">
+                <v-btn
+                  size="small"
+                  icon="fa:fas fa-university"
+                  class="bg-tertiary-green mr-2"
+                  :readonly="true"
+                  :tabindex="-1"
+                  aria-label="Compare Schools Icon"
+                />
+                <h3>Compare Schools</h3>
               </div>
 
-              <div v-if="noSchoolsSelected">
-                <p class="text-body-2 pl-3 font-weight-bold">No Schools Selected</p>
-              </div>
-              <div v-else v-for="institution in store.institutions">
-                <div class="d-flex align-center mb-5">
-                  <v-tooltip location="bottom" text="Remove School" aria-label="Remove School from Compare" id="aria-remove-school">
-                    <template v-slot:activator="{ props }">
-                      <v-btn aria-labelledby="aria-remove-school" v-bind="props" icon="mdi-close" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
-                    </template>
-                  </v-tooltip>
-                  <NuxtLink :to="schoolLink(institution)" class="text-body-2" :tabindex="showDrawer ? 0 : -1"><strong>{{ institution.school.name }}</strong></NuxtLink>
+              <div class="items-list">
+                <div v-if="maxSchoolsReached" class="pa-2 mb-5 bg-tertiary-yellow font-weight-bold">
+                  Maximum of 10 Schools Selected
                 </div>
-              </div>
-            </div>
-            <div class="flex-grow-1"></div>
-            <div class="d-flex justify-start justify-sm-center bg-white pt-3 pb-10 pb-sm-0" :class="{ 'border-b': breakpoints.xs.value }">
-              <NuxtLink v-if="noSchoolsSelected" to="/search/" :tabindex="-1">
-                <v-btn color="primary-green"  :tabindex="showDrawer ? 0 : -1">
-                  Search Schools
-                </v-btn>
-              </NuxtLink>
-              <NuxtLink v-else to="/compare/?toggle=institutions" :tabindex="-1">
-                <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
-                  Compare {{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}
-                </v-btn>
-              </NuxtLink>
-            </div>
 
-          </v-col>
-
-          <!-- FOS -->
-          <v-col class="d-flex flex-column" cols="12" sm="6">
-            <div class="d-flex align-center mb-5">
-              <v-btn
-                size="small"
-                icon="fa:fas fa-award"
-                class="bg-primary-yellow mr-2"
-                :readonly="true"
-                tabindex="-1"
-                aria-label="Compare Fields of Study Icon"
-              />
-              <h3>Compare Fields of Study</h3>
-            </div>
-
-            <div class="items-list">
-              <v-card v-if="maxFosReached" class="pa-2 mb-5 bg-tertiary-yellow font-weight-bold">
-                Maximum of 10 Fields of Study selected
-              </v-card>
-
-              <div v-if="noFosSelected">
-                <p class="text-body-2 pl-3 font-weight-bold">No Fields of Study Selected</p>
-              </div>
-              <div v-else v-for="fos in store.fos">
-                <div class="d-flex align-center mb-5">
-                  <v-tooltip location="bottom" text="Remove Field of Study" aria-label="Remove Field of Study from Compare" id="aria-remove-fos">
-                    <template v-slot:activator="{ props }">
-                      <v-btn aria-labelledby="aria-remove-fos" v-bind="props" icon="mdi-close" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
-                    </template>
-                  </v-tooltip>
-                  <div>
-                    <NuxtLink :to="fosLink(fos)" class="text-body-2" :tabindex="showDrawer ? 0 : -1"><strong>{{ fos.title }}</strong></NuxtLink>
-                    <p class="text-caption text-uppercase">{{ fos.credential.title }}</p>
-                    <p class="text-caption">{{ fos.school.name }}</p>
+                <div v-if="noSchoolsSelected">
+                  <p class="text-body-2 pl-3 font-weight-bold">No Schools Selected</p>
+                </div>
+                <div v-else v-for="institution in store.institutions">
+                  <div class="d-flex align-center mb-5">
+                    <v-tooltip location="bottom" text="Remove School" aria-label="Remove School from Compare" id="aria-remove-school">
+                      <template v-slot:activator="{ props }">
+                        <v-btn aria-labelledby="aria-remove-school" v-bind="props" icon="mdi-close" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
+                      </template>
+                    </v-tooltip>
+                    <NuxtLink :to="schoolLink(institution)" class="text-body-2" :tabindex="showDrawer ? 0 : -1"><strong>{{ institution.school.name }}</strong></NuxtLink>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="flex-grow-1"></div>
-            <div class="d-flex justify-start justify-sm-center bg-white pt-3">
-              <NuxtLink v-if="noFosSelected" to="/search/fos-landing/" :tabindex="-1">
-                <v-btn v-if="noFosSelected" color="primary-green" :tabindex="showDrawer ? 0 : -1">
-                  Search Fields of Study
-                </v-btn>
-              </NuxtLink>
-              <NuxtLink v-else to="/compare/?toggle=fos" :tabindex="-1">
-                <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
-                  Compare {{ store.fos.length }} Field{{ oneFosSelected ? '': 's' }} of Study
-                </v-btn>
-              </NuxtLink>
-            </div>
-          </v-col>
-        </v-row>
+              <div class="flex-grow-1"></div>
+              <div class="d-flex justify-start justify-sm-center bg-white pt-3 pb-10 pb-sm-0" :class="{ 'border-b': breakpoints.xs.value }">
+                <NuxtLink v-if="noSchoolsSelected" to="/search/" :tabindex="-1">
+                  <v-btn color="primary-green"  :tabindex="showDrawer ? 0 : -1">
+                    Search Schools
+                  </v-btn>
+                </NuxtLink>
+                <NuxtLink v-else to="/compare/?toggle=institutions" :tabindex="-1">
+                  <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
+                    Compare {{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}
+                  </v-btn>
+                </NuxtLink>
+              </div>
 
-      </v-container>
+            </v-col>
+
+            <!-- FOS -->
+            <v-col class="d-flex flex-column" cols="12" sm="6">
+              <div class="d-flex align-center mb-5">
+                <v-btn
+                  size="small"
+                  icon="fa:fas fa-award"
+                  class="bg-primary-yellow mr-2"
+                  :readonly="true"
+                  tabindex="-1"
+                  aria-label="Compare Fields of Study Icon"
+                />
+                <h3>Compare Fields of Study</h3>
+              </div>
+
+              <div class="items-list">
+                <v-card v-if="maxFosReached" class="pa-2 mb-5 bg-tertiary-yellow font-weight-bold">
+                  Maximum of 10 Fields of Study selected
+                </v-card>
+
+                <div v-if="noFosSelected">
+                  <p class="text-body-2 pl-3 font-weight-bold">No Fields of Study Selected</p>
+                </div>
+                <div v-else v-for="fos in store.fos">
+                  <div class="d-flex align-center mb-5">
+                    <v-tooltip location="bottom" text="Remove Field of Study" aria-label="Remove Field of Study from Compare" id="aria-remove-fos">
+                      <template v-slot:activator="{ props }">
+                        <v-btn aria-labelledby="aria-remove-fos" v-bind="props" icon="mdi-close" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
+                      </template>
+                    </v-tooltip>
+                    <div>
+                      <NuxtLink :to="fosLink(fos)" class="text-body-2" :tabindex="showDrawer ? 0 : -1"><strong>{{ fos.title }}</strong></NuxtLink>
+                      <p class="text-caption text-uppercase">{{ fos.credential.title }}</p>
+                      <p class="text-caption">{{ fos.school.name }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-grow-1"></div>
+              <div class="d-flex justify-start justify-sm-center bg-white pt-3">
+                <NuxtLink v-if="noFosSelected" to="/search/fos-landing/" :tabindex="-1">
+                  <v-btn v-if="noFosSelected" color="primary-green" :tabindex="showDrawer ? 0 : -1">
+                    Search Fields of Study
+                  </v-btn>
+                </NuxtLink>
+                <NuxtLink v-else to="/compare/?toggle=fos" :tabindex="-1">
+                  <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
+                    Compare {{ store.fos.length }} Field{{ oneFosSelected ? '': 's' }} of Study
+                  </v-btn>
+                </NuxtLink>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
+      </focus-trap>
     </v-navigation-drawer>
-
-
-
+    
     <!-- DRAWER RAIL -->
     <div class="position-fixed w-100 rail wrapper" :class="{ 'visible': !showDrawer && showRail }">
       <div class="d-flex justify-center">
@@ -176,7 +176,6 @@
             </v-container>
           </v-btn>
         </div>
-
       </div>
     </div>
 </template>
