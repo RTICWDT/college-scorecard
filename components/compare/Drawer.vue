@@ -166,7 +166,7 @@
                       <div :class="maxFosReached ? 'bg-error' : 'bg-primary-yellow'" class="pa-2 mr-2 rounded-circle">
                         <v-icon size="xsmall" :icon="maxFosReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'" />
                       </div>
-                      <p>{{ store.institutions.length }} School{{ oneFosSelected ? '' : 's' }}</p>
+                      <p>{{ store.fos.length }} Field{{ oneFosSelected ? '' : 's' }} of Study</p>
                       <v-tooltip v-if="maxFosReached" activator="parent" location="top">
                         Maximum of 10 Fields of Study Reached
                       </v-tooltip>
