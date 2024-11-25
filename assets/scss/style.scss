@@ -20,7 +20,11 @@ $header-font-family: neue-haas-grotesk-display, Helvetica, arial, sans-serif;
 .text-subtitle-1,
 .text-subtitle-2,
 .text-body-1,
-.text-body-2 {
+.text-body-2,
+.text-button,
+.text-caption,
+.text-overline
+{
   font-family: $base-font-family !important;
 }
 
