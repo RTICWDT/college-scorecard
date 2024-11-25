@@ -521,7 +521,7 @@ onUnmounted(() => {
   padding-right: 5px;
   transition: all 0.2s;
   top: 15px;
-  color: use-theme('gray-500');
+  color: use-theme('gray-700');
 
   &.dense:not(.active) {
     top: 8px;

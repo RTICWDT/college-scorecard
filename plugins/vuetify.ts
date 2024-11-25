@@ -86,7 +86,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
             'gray-900': '#292E34',
             'gray-800': '#484E55',
-            'gray-700': '#6C737C',
+            'gray-700': '#636363',
             'gray-600': '#889099',
             'gray-500': '#A8B0BA',
             'gray-400': '#C3C9D3',
