@@ -249,7 +249,7 @@
         records that only contain those three fields.
       </p>
 
-      <v-btn @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')" size="large" color="secondary-green" href="/files/CollegeScorecardDataDictionary.xlsx" class="button data-home-button mb-4">Download the Data
+      <v-btn @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')" :size="breakpoints.smAndDown.value ? 'small' : 'large'" color="secondary-green" href="/files/CollegeScorecardDataDictionary.xlsx" class="button data-home-button mb-4">Download the Data
         Dictionary (.xlsx, 703 KB)
         <v-icon size="x-small" class="pl-1 ml-2" color="white">
           fas fa-download

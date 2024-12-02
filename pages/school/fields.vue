@@ -100,7 +100,7 @@
                     <h2 class="mb-6 d-inline-block">
                       Filter Fields of Study Offered
                     </h2>
-                    <v-avatar color="#fec005" size="40" class="ml-3">
+                    <v-avatar color="#fec005" size="40" class="ml-3 d-none d-sm-inline-flex">
                       <v-icon color="black" icon="fa:fas fa-award" />
                     </v-avatar>
                     <v-text-field

@@ -9,7 +9,7 @@
         <input
           id="cb1-input"
           ref="comboboxNode"
-          class="cb_edit"
+          class="cb_edit w-100"
           type="text"
           role="combobox"
           aria-autocomplete="list"

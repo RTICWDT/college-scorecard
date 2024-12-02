@@ -16,7 +16,7 @@
             @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')"
             href='/files/CollegeScorecardDataDictionary.xlsx'
             target="_blank"
-            size="large"
+            :size="breakpoints.smAndDown.value ? 'small' : 'large'"
             class="my-3"
           >
             <v-icon size="x-small" class="pr-1" icon="fa:fas fa-download" />
@@ -39,6 +39,7 @@
             text
             outlined
             class="mb-3 mr-2"
+            :size="breakpoints.smAndDown.value ? 'small' : 'default'"
           >
             <v-icon size="x-small" class="pr-1" icon="fa:fas fa-file-pdf" />
             Institution-Level Data Files (.pdf, 520 KB)
@@ -51,6 +52,7 @@
             text
             outlined
             class="mb-3"
+            :size="breakpoints.smAndDown.value ? 'small' : 'default'"
           >
             <v-icon size="x-small" class="pr-1" icon="fa:fas fa-file-pdf" />
             Field of Study Data Files (.pdf, 827 KB)
@@ -72,9 +74,10 @@
             text
             outlined
             class="mb-3 mr-2"
+            :size="breakpoints.smAndDown.value ? 'small' : 'default'"
           >
             <v-icon size="x-small" class="pr-1" icon="fa:fas fa-file-pdf" />
-            Cohort Alignment on Earnings Calculations (.pdf, 476 KB)
+            Cohort Alignment on Earnings Calculations <span :class="{ 'd-none': breakpoints.smAndDown }">(.pdf, 476 KB)</span>
           </v-btn>
         </v-col>
       </v-row>
@@ -85,6 +88,7 @@
 
 <script setup>
 const analytics = useAnalytics()
+const { breakpoints } = useVuetify()
 
 useHead({
   title: "Documentation",

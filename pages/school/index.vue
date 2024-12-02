@@ -53,7 +53,7 @@
                 variant="outlined"
                 color="white"
                 :elevation="0"
-                label="Share this School Search"
+                :label="breakpoints.xs.value ? 'Share' : 'Share this School Search'"
                 :url="shareLink"
                 show-copy
                 :hide="['email']"

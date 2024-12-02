@@ -111,7 +111,7 @@
 const props = defineProps({
   initialState: {
     type: [String, Array],
-    default: null,
+    default: [],
   },
   initialZip: {
     type: String,
@@ -157,6 +157,7 @@ const input = reactive({
 
 onMounted(() => {
   // Initialize data based on props
+  console.log(props.initialState)
   if (props.initialState.length > 0) {
     utility.location = "State"
     input.state = props.initialState

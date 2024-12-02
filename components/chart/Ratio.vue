@@ -53,6 +53,11 @@ const tabID = (context, controlTab) => {
   border-radius: 50%;
   z-index: 1;
   border: 2px solid use-theme('gray-50');
+
+  @include xs {
+    height: 100px;
+    width: 100px;
+  }
 }
 
 .circle {
@@ -67,6 +72,11 @@ const tabID = (context, controlTab) => {
   width: 5em;
   color: white;
   z-index: 2;
+
+  @include xs {
+    height: 2.5em;
+    width: 2.5em;
+  }
 }
 
 .light {

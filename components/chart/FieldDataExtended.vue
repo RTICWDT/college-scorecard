@@ -198,7 +198,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col>
+        <v-col cols="12" sm="6">
           <v-checkbox
             v-model="checked"
             label="Include debt borrowed at any prior institutions"

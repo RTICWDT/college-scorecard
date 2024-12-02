@@ -5,7 +5,7 @@
         <template v-slot:activator="{ props }">
           <li :class="yearsClass(years)" v-bind="props" class="w-100">
             <img :src="yearIcon" alt="" class="schoolIcon" :height="imgSize" />
-            <span>{{ formatYearsLabel(years) }}</span>
+            <span class="school-icon-text">{{ formatYearsLabel(years) }}</span>
           </li>
         </template>
         <div class="hover-tip">{{ tip }}</div>
@@ -13,19 +13,19 @@
 
       <li v-if="!sizeOnly && ownershipIcon !== 'none'" :class="controlClass(ownership)" class="w-100">
         <img :src="ownershipIcon" alt="" class="schoolIcon" :height="imgSize" />
-        <span>{{ control(ownership) }}</span>
+        <span class="school-icon-text">{{ control(ownership) }}</span>
       </li>
 
       <li v-if="!sizeOnly && localeIcon !== 'none'" :class="localeClass(schoolLocale)" class="w-100">
         <img :src="localeIcon" alt="" class="schoolIcon" :height="imgSize" />
-        <span>{{ locale(schoolLocale) }}</span>
+        <span class="school-icon-text">{{ locale(schoolLocale) }}</span>
       </li>
 
       <v-tooltip location="bottom" v-if="sizeIcon !== 'none'" :aria-label="sizeTip">
         <template v-slot:activator="{ props }">
           <li :class="sizeCategoryClass(schoolSize)" v-bind="props" class="w-100">
             <img :src="sizeIcon" alt="" class="schoolIcon" :height="imgSize" />
-            <span>{{ sizeCategory(schoolSize) }}</span>
+            <span class="school-icon-text">{{ sizeCategory(schoolSize) }}</span>
           </li>
         </template>
         <div class="hover-tip">{{ sizeTip }}</div>
@@ -130,6 +130,12 @@ const sizeIcon = computed(() => {
 
 .schoolIcon {
   font-size: v-bind(fontSize) + 'rem';
+}
+
+.school-icon-text {
+  @include xs {
+    font-size: 12px;
+  }
 }
 
 .school-key-figures {
