@@ -149,7 +149,7 @@
           >
             <v-container class="inner-button py-2">
               <v-row>
-                <v-col class="text-left d-flex pl-0 pl-sm-4 align-center">
+                <v-col class="text-left d-flex pl-1 pl-sm-4 align-center">
                   <div class="d-none d-sm-block mr-5">
                     <p class="font-weight-bold">Ready to Compare:</p>
                   </div>
@@ -162,7 +162,7 @@
                         Maximum of 10 Schools Reached
                       </v-tooltip>
                   </div>
-                  <div class="d-flex align-center mr-5">
+                  <div class="d-flex align-center">
                       <div :class="maxFosReached ? 'bg-error' : 'bg-primary-yellow'" class="pa-2 mr-2 rounded-circle">
                         <v-icon size="xsmall" :icon="maxFosReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'" />
                       </div>
