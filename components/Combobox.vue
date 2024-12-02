@@ -33,7 +33,7 @@
           ref="buttonNode"
           tabindex="-1"
           aria-label="Toggle dropdown"
-          :aria-expanded="isOpen"
+          :aria-expanded="isOpen && options.length > 0"
           aria-controls="cb1-listbox"
           @click="onButtonClick"
         >
@@ -320,13 +320,20 @@ const onButtonClick = () => {
   placeholderNode.value.classList.add('focus')
 }
 
+watch(() => [props.options, isOpen], () => {
+  if (props.options.length > 0 && isOpen.value) {
+    comboboxNode.value.setAttribute('aria-expanded', 'true')
+    buttonNode.value.setAttribute('aria-expanded', 'true')
+  } else {
+    comboboxNode.value.setAttribute('aria-expanded', 'false')
+    buttonNode.value.setAttribute('aria-expanded', 'false')
+  }
+})
+
 // OPEN & CLOSE
-// 
-// 
+//
 const open = () => {
   isOpen.value = true
-  comboboxNode.value.setAttribute('aria-expanded', 'true')
-  buttonNode.value.setAttribute('aria-expanded', 'true')
 }
 
 const close = (force = false) => {
