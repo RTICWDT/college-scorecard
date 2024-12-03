@@ -150,6 +150,11 @@ watch(isComparingSchools, () => {
   } else {
     compareToggle.value = toggleFields[1]
   }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 })
 
 const handleCompareToggle = (value) => {
