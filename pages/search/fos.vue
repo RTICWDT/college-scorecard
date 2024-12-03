@@ -47,7 +47,7 @@
 .sidebar-mobile {
   max-width: 100% !important;
   flex-grow: 1;
-  z-index: 1000;
+  z-index: 800;
 }
 
 .sidebar-open-main {}
