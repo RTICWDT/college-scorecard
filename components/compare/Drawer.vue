@@ -284,7 +284,7 @@ const toggleDrawer = async (e) => {
 .rail {
   transition: bottom 0.3s;
   bottom: -55px;
-  z-index: 1001;
+  z-index: 900;
 
   &.visible {
     bottom: 0px;
