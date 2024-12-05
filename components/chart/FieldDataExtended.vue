@@ -1,6 +1,6 @@
 <template>
   <div class="px-0 py-3 pa-sm-5">
-    <v-container class="pa-0">
+    <v-container>
       <v-row>
         <v-col cols="12" md="6">
           <v-card flat class="pa-5 fill-height">
