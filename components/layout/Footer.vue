@@ -110,7 +110,7 @@
           </v-col>
         </v-row>
 
-        <v-row>
+        <!-- <v-row>
           <v-col>
             <p style="font-size: 13px;">
               The College Scorecard website is currently not fully compliant
@@ -121,7 +121,7 @@
               for alternative means to interact with this website.
             </p>
           </v-col>
-        </v-row>
+        </v-row> -->
       </v-container>
     </div>
   </div>
