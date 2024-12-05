@@ -31,7 +31,12 @@
             <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
               <v-tabs-window-item>
                 <v-card class="pa-5" flat>
-                  <SearchSchool @onSubmit="handleSchoolNameSelected" @onClear="() => {}" :searchEmptyName="false" />
+                  <SearchSchool 
+                    @onSubmit="handleSchoolNameSelected"
+                    @onSearch="handleSchoolNameSelected"
+                    @onClear="() => {}"
+                    :searchEmptyName="false"
+                  />
 
                   <div class="mt-5 text-right">
                     <v-btn variant="text" size="small" @click="toggleCustomSearch = !toggleCustomSearch" class="text-uppercase">
