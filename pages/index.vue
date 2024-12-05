@@ -112,6 +112,7 @@
                   <v-expansion-panel-text>
                     <SearchSchool
                       @onSubmit="handleSchoolNameSelected"
+                      @onSearch="handleSchoolNameSelected"
                       :searchEmptyName="false"
                       v-if="breakpoints.smAndDown.value"
                     />
