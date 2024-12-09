@@ -2,6 +2,7 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 const isDevBuild = process.env.NODE_ENV === 'development' || process.env.DEV
+const isStagingBuild = process.env.NODE_ENV === 'production' && process.env.DEV
 
 export default defineNuxtConfig({
   ssr: false,
@@ -14,6 +15,8 @@ export default defineNuxtConfig({
       apiUrl: process.env.SCORECARD_API_URL,
       recaptchaKey: process.env.RECAPTCHA_KEY,
       apiSignupKey: process.env.API_SIGNUP_KEY,
+      isDevBuild: isDevBuild,
+      isStagingBuild: isStagingBuild,
     }
   },
 

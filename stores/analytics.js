@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useRuntimeConfig } from '#app'
 
 function initializeGtag() {
   const { gtag, initialize } = useGtag()
@@ -25,7 +26,8 @@ export const useAnalytics = defineStore('analytics', {
     GATrackEvent(category, action, label = '') {
       try {
         if (typeof window !== 'undefined' && this.gtag) {
-          if (process.env.NODE_ENV === 'production') {
+          const config = useRuntimeConfig()
+          if (config.public.isDevBuild || config.public.isStagingBuild) {
             return console.info(`[gtag] event - Category: ${category}, Action: ${action}, Label: ${label || window.location.pathname}`);
           }
 
