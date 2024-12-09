@@ -28,7 +28,7 @@ export const useAnalytics = defineStore('analytics', {
         if (typeof window !== 'undefined' && this.gtag) {
           const config = useRuntimeConfig()
           if (config.public.isDevBuild || config.public.isStagingBuild) {
-            return console.info(`[gtag] event - Category: ${category}, Action: ${action}, Label: ${label || window.location.pathname}, Build: ${config.public.isDevBuild ? 'Dev' : 'Staging'}`);
+            return console.info(`[gtag] event - Category: ${category}, Action: ${action}, Label: ${label || window.location.pathname}, Build: ${config.public.isStagingBuild ? 'Staging' : 'Dev'}`);
           }
 
           this.gtag('event', action, {
