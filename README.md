@@ -13,23 +13,24 @@ Make sure to install the dependencies:
 npm install
 ```
 
-## Development Server
+## Preview Build
 Start the development server on `http://localhost:3000`:
 
 ```bash
-npm run dev
-```
-
-## Production
-
-Build the static application for production:
-```bash
 npm run build
+npm run preview
 ```
 
-Locally preview production build:
+## Deploy
+
+Deploy app to the dev server:
 ```bash
-npm run preview
+npm run deploy:dev
+```
+
+Deploy app to the production server:
+```bash
+npm run deploy:prod
 ```
 
 ## Migration Notes
