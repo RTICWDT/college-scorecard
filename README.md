@@ -86,7 +86,7 @@ npm run preview
   - [x] Transition Away Notice
   - [x] Compare Drawer
   - [x] Tooltip Styling
-  - [ ] Google Charts Sankey Replacement
+  - [x] Google Charts Sankey Replacement
   
 - QA Pass
   - [x] Links / Downloads
@@ -102,5 +102,4 @@ npm run preview
 
 - Bugs
   - [x] /school params need to set the state of the page properly
-  - [x]link from compare drawer to field of study needs to function
-  - 
+  - [x] link from compare drawer to field of study needs to function
