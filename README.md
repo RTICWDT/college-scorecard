@@ -33,6 +33,11 @@ Deploy app to the dev server:
 npm run deploy:dev
 ```
 
+Deploy app to the staging server:
+```bash
+npm run deploy:staging
+```
+
 Deploy app to the production server:
 ```bash
 npm run deploy:prod
