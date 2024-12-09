@@ -281,7 +281,7 @@
                 Application for Federal Student Aid (FAFSA&#174;) form. You
                 can use
 
-                <a href="https://studentaid.gov/aid-estimator/" target="_blank" @click="analytics.transitionOutboundLink($)">
+                <a href="https://studentaid.gov/aid-estimator/" target="_blank" @click="analytics.transitionOutboundLink($event)">
                   Federal Student Aid aid-estimator
                   <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>

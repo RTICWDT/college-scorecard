@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
-const isDevBuild = process.env.NODE_ENV === 'development'
-const isStagingBuild = process.env.NODE_ENV === 'production' && Boolean(process.env.DEV)
+const isLocalBuild = process.env.NODE_ENV === 'development'
+const isDevBuild = process.env.NODE_ENV === 'production' && (process.env.DEV === 'true')
 
 export default defineNuxtConfig({
   ssr: false,
@@ -15,8 +15,8 @@ export default defineNuxtConfig({
       apiUrl: process.env.SCORECARD_API_URL,
       recaptchaKey: process.env.RECAPTCHA_KEY,
       apiSignupKey: process.env.API_SIGNUP_KEY,
+      isLocalBuild: isLocalBuild,
       isDevBuild: isDevBuild,
-      isStagingBuild: isStagingBuild,
     }
   },
 
