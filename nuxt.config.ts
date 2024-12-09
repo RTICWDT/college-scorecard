@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
-const isDevBuild = process.env.NODE_ENV === 'development' || Boolean(process.env.DEV)
+const isDevBuild = process.env.NODE_ENV === 'development'
 const isStagingBuild = process.env.NODE_ENV === 'production' && Boolean(process.env.DEV)
 
 export default defineNuxtConfig({
