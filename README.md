@@ -13,6 +13,11 @@ Make sure to install the dependencies:
 npm install
 ```
 
+Run the app locally:
+```bash
+npm run dev
+```
+
 ## Preview Build
 Start the development server on `http://localhost:3000`:
 
