@@ -18,6 +18,24 @@
 <script setup>
 import socialImage from '/social-card.png'
 
+
+useServerSeoMeta({
+  title: 'College Scorecard',
+  description: 'Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs, graduation, and post-college earnings.',
+  image: `https://collegescorecard.ed.gov/social-card.png`,
+  ogImage: `https://collegescorecard.ed.gov/social-card.png`,
+  ogDescription: 'Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs, graduation, and post-college earnings.',
+  ogTitle: 'College Scorecard',
+  ogType: 'website',
+  ogUrl: 'https://collegescorecard.ed.gov/',
+
+  twitterTitle: 'College Scorecard',
+  twitterCard: 'summary_large_image',
+  twitterDescription: 'Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs, graduation, and post-college earnings.',
+  twitterImage: `https://collegescorecard.ed.gov/social-card.png`,
+})
+
+
 useHead({
   titleTemplate: '%s | College Scorecard',
   htmlAttrs: {
