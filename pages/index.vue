@@ -454,16 +454,7 @@ useHead({
   title: 'Home',
   meta: [
     { name: 'description', content: "The U.S. Department of Education's College Scorecard has the most reliable data on college costs, graduation rates, and post-college earnings." },
-    { name: 'keywords', content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings' },
-    { name: "og:description", content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
-    { name: "og:image", content: "/social-card.png" },
-    { name: "og:type", content: "website" },
-    { name: 'og:url', content: 'https://collegescorecard.ed.gov/' },
-    { name: 'og:title', content: 'College Scorecard' },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: "College Scorecard" },
-    { name: "twitter:description", content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
-    { name: "twitter:image", content: "/social-card.png" },
+    { name: 'keywords', content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings' }
   ]
 })
 </script>
