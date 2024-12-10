@@ -448,13 +448,4 @@ const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
 const handleFormSubmit = () => {
   router.push(`/search/fos?cip4=${encodeURIComponent(input.cip4.code)}&cip4_degree=${encodeURIComponent(input.cip4_degree)}`)
 }
-
-// Meta
-useHead({
-  title: 'Home',
-  meta: [
-    { name: 'description', property: 'description', content: "The U.S. Department of Education's College Scorecard has the most reliable data on college costs, graduation rates, and post-college earnings." },
-    { name: 'keywords', property: 'keywords', content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings' }
-  ]
-})
 </script>

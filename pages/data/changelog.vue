@@ -1747,20 +1747,4 @@ const openAll = () => {
 const closeAll = () => {
   panels.value = []
 }
-
-useHead({
-  title: "Change Log",
-  meta: [
-    {
-      name: 'description',
-      property: 'description',
-      content: 'The change log describes the changes that have been made to the College Scorecard or API over time.'
-    },
-    {
-      name: 'keywords',
-      property: 'keywords',
-      content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, IPEDS, API'
-    }
-  ],
-})
 </script>
