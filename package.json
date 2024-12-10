@@ -10,7 +10,7 @@
     "deploy:dev-branch": "DEV=true BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD) && BUILD=development npx nuxi generate --dotenv .env.development && aws --profile scorecard s3 sync .output/public s3://scorecard-development-9d7y2giuzkhar2vn94xb/$BRANCH_NAME --exclude '*.DS_Store' && aws --profile scorecard cloudfront create-invalidation --distribution-id E2PKIP6XK74A9G --paths '/*'",
     "deploy:dev": "DEV=true npx nuxi generate --dotenv .env.development && aws --profile scorecard s3 sync .output/public s3://scorecard-development-9d7y2giuzkhar2vn94xb --exclude '*.DS_Store' && aws --profile scorecard cloudfront create-invalidation --distribution-id E2PKIP6XK74A9G --paths '/*'",
     "deploy:staging": "DEV=false npx nuxi generate --dotenv .env.production && aws --profile scorecard s3 sync .output/public s3://scorecard-staging-9d7y2giuzkhar2vn94xb --exclude '*.DS_Store' && aws --profile scorecard cloudfront create-invalidation --distribution-id E2C2BK6W1PBAKO --paths '/*'",
-    "deplot:prod": "DEV=false npm nuxi generate --dotenv .env.production && aws --profile scorecard s3 sync .output/public s3://scorecard-production-9d7y2giuzkhar2vn94xb --exclude '*.DS_Store' && aws --profile scorecard cloudfront create-invalidation --distribution-id E1EWCM0BUNA8YO --paths '/*'"
+    "deploy:prod": "DEV=false npm nuxi generate --dotenv .env.production && aws --profile scorecard s3 sync .output/public s3://scorecard-production-9d7y2giuzkhar2vn94xb --exclude '*.DS_Store' && aws --profile scorecard cloudfront create-invalidation --distribution-id E1EWCM0BUNA8YO --paths '/*'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
