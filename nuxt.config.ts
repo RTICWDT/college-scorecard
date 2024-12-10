@@ -4,8 +4,6 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 const isLocalBuild = process.env.NODE_ENV === 'development'
 const isDevBuild = process.env.NODE_ENV === 'production' && (process.env.DEV === 'true')
 
-console.log(process.env.NUXT_BASE_URL)
-
 export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2024-04-03',
@@ -88,5 +86,24 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: process.env.BRANCH_NAME ? `/${process.env.BRANCH_NAME}/` : '/',
+    head: {
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: "description", property: 'description', content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
+        { name: "twitter:card", property: 'twitter:card', content: "summary_large_image" },
+        { name: "twitter:title", property: 'twitter:title', content: "College Scorecard" },
+        { name: "twitter:description", property: 'twitter:description', content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
+        { name: "twitter:image", property: 'twitter:image', content: `https://collegescorecard.ed.gov/social-card.png` },
+        { name: "og:description", property: 'og:description', content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
+        { name: "og:image", property: 'og:image', content: `https://collegescorecard.ed.gov/social-card.png` },
+        { name: "og:type", property: 'og:type', content: "website" },
+        { name: 'og:url', property: 'og:url', content: 'https://collegescorecard.ed.gov/' },
+        { name: 'og:title', property: 'og:title', content: 'College Scorecard' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      ],
+    },
   },
 })
