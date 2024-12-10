@@ -4,6 +4,8 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 const isLocalBuild = process.env.NODE_ENV === 'development'
 const isDevBuild = process.env.NODE_ENV === 'production' && (process.env.DEV === 'true')
 
+console.log(process.env.NUXT_BASE_URL)
+
 export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2024-04-03',
@@ -17,6 +19,7 @@ export default defineNuxtConfig({
       apiSignupKey: process.env.API_SIGNUP_KEY,
       isLocalBuild: isLocalBuild,
       isDevBuild: isDevBuild,
+      baseURL: process.env.NUXT_BASE_URL
     }
   },
 

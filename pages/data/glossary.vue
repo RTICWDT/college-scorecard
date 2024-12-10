@@ -56,10 +56,12 @@ useHead({
   meta: [
     {
       name: 'description',
+      property: 'description',
       content: 'The glossary includes detailed description of every datapoint and relevant data variables on the College Scorecard.'
     },
     {
       name: 'keywords',
+      property: 'keywords',
       content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, IPEDS'
     }
   ],

@@ -70,11 +70,13 @@ useHead({
   meta: [
     {
       name: "description",
+      property: "description",
       content:
         "Download institution-level and field-of-study-level data files directly from the College Scorecard. Available data goes as far back as 1997.",
     },
     {
       name: "keywords",
+      property: "keywords",
       content:
         "College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, IPEDS, institution level data, field of study data, API, OPEID, IPEDS UNITID",
     },
