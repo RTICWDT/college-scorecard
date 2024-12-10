@@ -120,7 +120,6 @@ const mapRouteToSEO = () => {
   }
 
   title.value = `${page.value} | College Scorecard`
-  console.log(title.value)
 
   useSeoMeta({
     title: page.value,
