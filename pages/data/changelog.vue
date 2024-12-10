@@ -14,6 +14,12 @@
     </v-row>
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
+        <v-expansion-panel-title>December 09, 2024</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <p>On December 09, 2024, Version 3.4.0 of College Scorecard website was released. This version includes an upgrade to the website’s core framework to improve the performance and maintainability of the College Scorecard. The data on the website were not updated.</p>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+      <v-expansion-panel>
         <v-expansion-panel-title>October 10, 2024</v-expansion-panel-title>
         <v-expansion-panel-text>
           <p>On October 10, 2024, the Department updated the College Scorecard downloadable data files and the API as indicated below.</p>
