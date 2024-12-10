@@ -7,13 +7,13 @@
     </p>
     <p class="pb-4">
       This data was
-      <strong>last updated June 13, 2024</strong>.
+      <strong>last updated October 10, 2024</strong>.
     </p>
 
     <h2 class="my-5">
       All Data Files
       <v-btn class="ml-2" color="secondary-green"
-        href="https://ed-public-download.scorecard.network/downloads/College_Scorecard_Raw_Data_06102024.zip">Download
+        href="https://ed-public-download.scorecard.network/downloads/College_Scorecard_Raw_Data_10022024.zip">Download
         (.zip, 390 MB)
         <v-icon right dark size="x-small" class="ml-2" icon="fa:fas fa-download"/>
         </v-btn>
@@ -45,7 +45,7 @@
           Most Recent Institution-Level Data
         </h4>
         <v-btn size="small" color="secondary-green" class="ml-0 ml-sm-2"
-          href="https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Institution_06102024.zip">Download
+          href="https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Institution_10022024.zip">Download
           (.zip, 22 MB)
           <v-icon right dark size="x-small" class="ml-2" icon="fa:fas fa-download"/>
         </v-btn>
@@ -54,7 +54,7 @@
           Most Recent Data by Field of Study
         </h4>
         <v-btn size="small" class="ml-0 ml-sm-2" color="secondary-green"
-          href=" https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Field-of-Study_06102024.zip">Download
+          href="https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Field-of-Study_10022024.zip">Download
           (.zip, 13 MB)
           <v-icon right dark size="x-small" class="ml-2" icon="fa:fas fa-download"/></v-btn>
       </v-col>
