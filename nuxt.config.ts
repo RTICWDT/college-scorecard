@@ -95,10 +95,6 @@ export default defineNuxtConfig({
         { name: 'MobileOptimized', property: 'MobileOptimized', content: '320' },
         { name: "google-site-verification", property: 'google-site-verification', content: "joZQgj-M8GQ05V29ojfVsbsNk44SRgGqJfws9tBcnPU" },
         { name: "google-site-verification", property: 'google-site-verification', content: "V-KEdRwSWd6GSLEWRBddZy6B5yLCs6vkRRflrImQiKE" },
-        { name: "twitter:card", property: 'twitter:card', content: "summary_large_image" },
-        { name: "twitter:image", property: 'twitter:image', content: `https://collegescorecard.ed.gov/social-card.png` },
-        { name: "og:image", property: 'og:image', content: `https://collegescorecard.ed.gov/social-card.png` },
-        { name: "og:type", property: 'og:type', content: "website" },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

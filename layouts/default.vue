@@ -150,7 +150,7 @@ const mapRouteToSEO = () => {
       },
       {
         property: 'og:url',
-        content: 'https://collegescorecard.ed.gov/',
+        content: `https://collegescorecard.ed.gov${route.path}`,
         tagPriority: 'critical'
       },
       {
