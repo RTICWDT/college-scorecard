@@ -87,10 +87,6 @@ const props = defineProps({
     type: Function,
     default: (searchInput, options) => { return options }
   },
-  dense: {
-    type: Boolean,
-    default: false
-  },
   color: {
     type: String,
     default: '#007000'

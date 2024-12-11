@@ -127,12 +127,4 @@ const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
 const handleFormSubmit = () => {
   router.push(`/search/fos/?cip4=${encodeURIComponent(input.cip4.code)}&cip4_degree=${encodeURIComponent(input.cip4_degree)}`)
 }
-
-useHead({
-  title: 'Field of Study Search',
-  meta: [
-    { name: 'description', property: 'description', content: 'Search the fields of study offered at each school by degree type. Fields of study are areas of academic concentration (e.g, majors or programs).' },
-    { name: 'keywords', property: 'keywords', content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings; field of study, program, major, CIP, Classification of Instructional Programs, salary after completing, median total debt, WIOA' }
-  ],
-})
 </script>

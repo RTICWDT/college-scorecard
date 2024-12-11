@@ -11,13 +11,4 @@
 </template>
 
 <script setup>
-useHead({
-  title: 'Test',
-  meta: [
-    {
-      name: 'description',
-      content: 'Test page',
-    },
-  ],
-})
 </script>

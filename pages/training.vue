@@ -263,15 +263,4 @@ watch(() => input.cip4, (newValue) => {
 
   router.push({ name: 'search', query: query })
 })
-
-useHead({
-  title: "Training Programs",
-  meta: [
-    {
-      name: "description",
-      property: "description",
-      content: "Find the right training program for you. Search for schools with training programs and training programs by field of study.",
-    },
-  ],
-});
 </script>
