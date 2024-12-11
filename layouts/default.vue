@@ -123,23 +123,74 @@ const mapRouteToSEO = () => {
 
   useSeoMeta({
     title: page.value,
-    titleTemplate: '%s | College Scorecard',
-    description: description.value,
-    keywords: keywords.value,
-    ogTitle: title.value,
-    ogDescription: description.value,
-    ogUrl: 'https://collegescorecard.ed.gov/',
-    ogImage: 'https://collegescorecard.ed.gov/social-card.png',
-    twitterTitle: title.value,
-    twitterDescription: description.value,
-    twitterCard: 'summary_large_image',
-    twitterImage: 'https://collegescorecard.ed.gov/social-card.png',
-    ogType: 'website',
+    titleTemplate: `${page.value} | College Scorecard`,
+  })
+
+  useHead({
+    meta: [
+      {
+        property: 'description',
+        content: description.value,
+        tagPriority: 'critical'
+      },
+      {
+        property: 'keywords',
+        content: keywords.value,
+        tagPriority: 'critical'
+      },
+      {
+        property: 'og:title',
+        content: title.value,
+        tagPriority: 'critical'
+      },
+      {
+        property: 'og:description',
+        content: description.value,
+        tagPriority: 'critical'
+      },
+      {
+        property: 'og:url',
+        content: 'https://collegescorecard.ed.gov/',
+        tagPriority: 'critical'
+      },
+      {
+        property: 'og:image',
+        content: 'https://collegescorecard.ed.gov/social-card.png',
+        tagPriority: 'critical'
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+        tagPriority: 'critical'
+      },
+      // Twitter tags
+      {
+        name: 'twitter:title',
+        content: title.value,
+        tagPriority: 'critical'
+      },
+      {
+        name: 'twitter:description',
+        content: description.value,
+        tagPriority: 'critical'
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+        tagPriority: 'critical'
+      },
+      {
+        name: 'twitter:image',
+        content: 'https://collegescorecard.ed.gov/social-card.png',
+        tagPriority: 'critical'
+      }
+    ],
     htmlAttrs: {
       lang: 'en'
-    },
+    }
   })
 }
+
 watch(() => route.path, () => {
   mapRouteToSEO()
 })
