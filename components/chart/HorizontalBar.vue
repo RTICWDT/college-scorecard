@@ -126,9 +126,6 @@ const chartOptions = computed(() => ({
         display: false
       },
       ticks: {
-        display: false
-      },
-      ticks: {
         display: false,
         color: props.labelColor,
       }

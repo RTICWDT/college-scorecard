@@ -129,8 +129,12 @@ const mapRouteToSEO = () => {
     ogTitle: title.value,
     ogDescription: description.value,
     ogUrl: 'https://collegescorecard.ed.gov/',
+    ogImage: 'https://collegescorecard.ed.gov/social-card.png',
     twitterTitle: title.value,
     twitterDescription: description.value,
+    twitterCard: 'summary_large_image',
+    twitterImage: 'https://collegescorecard.ed.gov/social-card.png',
+    ogType: 'website',
     htmlAttrs: {
       lang: 'en'
     },
