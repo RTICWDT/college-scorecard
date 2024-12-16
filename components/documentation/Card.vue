@@ -19,9 +19,3 @@ const props = defineProps({
   title: String,
 })
 </script>
-
-<style scoped lang="scss">
-:deep(p), :deep(li) {
-  max-width: 800px;
-}
-</style>
