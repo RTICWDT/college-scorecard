@@ -57,6 +57,17 @@ $header-font-family: neue-haas-grotesk-display, Helvetica, arial, sans-serif;
 
 .v-application {
   // VUETIFY OVERRIDES
+  input::placeholder {
+    color: use-theme('gray-700') !important;
+    opacity: 1;
+  }
+
+  .v-label {
+    color: use-theme('gray-700');
+    opacity: 1;
+  }
+
+
   .v-btn {
     letter-spacing: normal;
     text-transform: none;
