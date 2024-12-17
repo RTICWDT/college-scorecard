@@ -9,6 +9,7 @@
     @onSubmit="handleSubmit"
     @onClear="handleClear"
     @onSearch="handleSearch"
+    @onInput="handleInput"
   />
 </template>
 
@@ -60,6 +61,10 @@ const handleClear = () => {
 
 const handleSearch = (newVal) => {
   emit('onSearch', newVal)
+}
+
+const handleInput = (newVal) => {
+  emit('onInput', newVal)
 }
 
 const runSearch = useDebounce((newVal) => {

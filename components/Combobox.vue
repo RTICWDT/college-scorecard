@@ -143,6 +143,7 @@ onMounted(() => {
 const onComboboxInput = (event) => {
   filter.value = event.target.value
   props.onFilter(filter.value)
+  emit('onInput', filter.value)
 }
 
 watch(props.options, (newVal) => {

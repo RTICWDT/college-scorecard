@@ -23,16 +23,33 @@
                 <SearchCollegeHome
                   @onSubmit="handleSchoolNameSelected"
                   @onSearch="handleSchoolNameSelected"
+                  @onInput="handleCollegeInput"
                   @onClear="() => {}"
                   :searchEmptyName="false"
                 />
-                <button class="search-button px-8 bg-primary-yellow font-weight-bold">SEARCH</button>
+                <button class="search-button px-8 bg-primary-yellow font-weight-bold" @click="searchCollegesFromInput">SEARCH</button>
               </div>
               <Spacer :height="20" />
               <div class="d-flex align-center">
                 <p class="mr-4">Or search by:</p>
-                <button class="option-button mr-3">Near Me <v-icon size="small">mdi-map-marker-outline</v-icon></button>
-                <button class="option-button">All Colleges</button>
+                <button class="option-button mr-3 d-flex align-center" @click="searchCollegesByLocation()" :disabled="location.error">
+                  <div class="mr-2">
+                    Near Me
+                  </div>
+                  
+                  <div v-if="location.isLoading">
+                    <v-icon size="x-small" icon="fa:fas fa-circle-notch fa-spin" />
+                  </div>
+                  <div v-else-if="location.error">
+                    <v-icon size="x-small" icon="mdi-alert-circle" />
+                  </div>
+                  <div v-else>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0.99996 5.90567L11.146 1.22685L6.29732 11.067L6.14352 6.18331L0.99996 5.90567Z" stroke="white" stroke-width="1.2" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </button>
+                <button class="option-button" @click="searchAllColleges">All Colleges</button>
               </div>
             </v-tabs-window-item>
 
@@ -110,7 +127,7 @@
 }
 
 :deep(.v-tab.v-tab.v-btn) {
-  height: 35px !important;
+  height: 40px !important;
 }
 
 :deep(.v-tab__slider) {
@@ -122,6 +139,7 @@
 const router = useRouter()
 const analytics = useAnalytics()
 const { formMappings } = useConstants()
+const { location, handleLocationCheck } = useLocationCheck();
 
 const desktopTabs = ref(0)
 
@@ -131,6 +149,25 @@ const handleSchoolNameSelected = (school) => {
   } else {
     router.push("/search/?search=" + encodeURIComponent(school["school.name"]))
   }
+}
+
+const collegeInput = ref(null)
+const handleCollegeInput = (input) => {
+  if (input) {
+    collegeInput.value = input
+  } else {
+    collegeInput.value = null
+  }
+}
+
+const searchCollegesFromInput = () => {
+  if (collegeInput.value) {
+    router.push("/search/?search=" + encodeURIComponent(collegeInput.value))
+  }
+}
+
+const searchAllColleges = () => {
+  router.push("/search/")
 }
 
 const input = reactive({
@@ -148,4 +185,29 @@ const fosColor = computed(() => {
 const handleFormSubmit = () => {
   router.push(`/search/fos?cip4=${encodeURIComponent(input.cip4.code)}&cip4_degree=${encodeURIComponent(input.cip4_degree)}`)
 }
+
+const searchCollegesByLocation = () => {
+  console.log("searchCollegesByLocation")
+  handleLocationCheck()
+}
+
+watch(location, (newVal) => {
+  if (!newVal.latLon) {
+    return
+  }
+
+  const latLon = newVal.latLon
+  
+  if (!latLon.min_lat || !latLon.max_lat || !latLon.min_lon || !latLon.max_lon) {
+    return;
+  }
+
+  const query = {
+    lat: latLon.min_lat + ".." + latLon.max_lat,
+    long: latLon.min_lon + ".." + latLon.max_lat,
+    distance: 50,
+  }
+
+  router.push({ name: 'search', query: query })
+})
 </script>
