@@ -1,4 +1,6 @@
 <template>
+
+  <!-- Splash -->
   <div class="bg-primary-blue">
     <Spacer />
     <v-container>
@@ -93,14 +95,224 @@
               </v-row>
             </v-tabs-window-item>
           </v-tabs-window>
-
-
-
         </v-col>
       </v-row>
     </v-container>
-    
   </div>
+
+  <!-- Search College -->
+  <div class="bg-white">
+    <Spacer />
+    <v-container>
+      <v-row>
+        <v-col cols="4">
+          <p class="mb-2 h-tag tag-green">Search College</p>
+          <h2 class="display-6 mb-4">Search for colleges using filters</h2>
+        </v-col>
+        <v-col cols="7">
+          <div class="bg-blue h-100 w-100"></div>
+        </v-col>
+      </v-row>
+    </v-container>
+    <Spacer />
+  </div>
+
+  <!-- Compare Colleges -->
+  <div class="bg-primary-blue">
+    <Spacer />
+    <v-container>
+      <v-row>
+        <v-col cols="4">
+          <p class="mb-2 h-tag tag-yellow">Compare Colleges</p>
+          <h2 class="display-6 mb-4">See how colleges compare</h2>
+          <p>Compare up to 10 colleges at once to make informed decisions about your path to college. </p>
+        </v-col>
+        <v-col cols="7">
+          <div class="bg-blue h-100 w-100"></div>
+        </v-col>
+      </v-row>
+    </v-container>
+    <Spacer />
+  </div>
+
+  <!-- College Profiles -->
+  <div>
+    <Spacer />
+    <v-container>
+      <v-row>
+        <v-col cols="4">
+          <p class="mb-2 h-tag tag-green">View College Profiles</p>
+          <h2 class="display-6 mb-4">Find the information that matters most <br v-if="breakpoints.lgAndUp.value" /> to you</h2>
+          <p class="info-text">View U.S. Department of Education data about costs, student debt, graduation rates, admissions test scores and acceptance rates, student body diversity, post-college earnings, and more.</p>
+        </v-col>
+        <v-col cols="7">
+          <div class="bg-blue h-100 w-100"></div>
+        </v-col>
+      </v-row>
+    </v-container>
+    <Spacer />
+  </div>
+
+    <!-- Fields of Study -->
+    <div class="bg-primary-aqua">
+      <Spacer />
+      <v-container>
+        <v-row>
+          <v-col cols="4">
+            <p class="mb-2 h-tag tag-white">Find what to study</p>
+            <h2 class="display-6 mb-4">Find what to study</h2>
+            <p class="info-text">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
+          </v-col>
+          <v-col cols="7">
+            <div class="bg-blue h-100 w-100"></div>
+          </v-col>
+        </v-row>
+      </v-container>
+      <Spacer />
+    </div>
+
+
+    <!-- ALternative Pathways / Resources -->
+    <div>
+      <Spacer />
+      <v-container>
+        <v-row>
+          <v-col cols="12" md="6" class="pr-md-8">
+            <v-card flat class="pa-7 h-100 elevation-7">
+              <h3 class="display-7 d-flex justify-space-between align-center">
+                Alternate Pathways and Resources
+              </h3>
+              <hr />
+              <p>
+                Search for apprenticeship jobs and programs on
+                <a
+                  class="home-callout"
+                  href="https://www.apprenticeship.gov/apprenticeship-finder"
+                  target="_blank"
+                  @click="analytics.transitionOutboundLink($event)"
+                >
+                  apprenticeship.gov
+                  <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+                </a>
+              </p>
+              <hr />
+              <p>
+                Use the
+                <a 
+                  class="home-callout"
+                  href="https://www.mynextmove.org"
+                  target="_blank"
+                  @click="analytics.transitionOutboundLink($event)"
+                >
+                  MyNextMove.org
+                  <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+                </a>
+                tool for career exploration and job analysis.
+              </p>
+              <hr />
+              <p>
+                Find training programs: compare completion rates, employment
+                rates, and more on
+                <a class="home-callout" href="https://trainingproviderresults.gov" target="_blank"
+                  @click="analytics.transitionOutboundLink($event)">
+                  TrainingProviderResults.gov
+                  <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+                </a>.
+              </p>
+              <hr />
+              <p>
+                Visit
+                <a class="home-callout" href="https://careeronestop.org" target="_blank"
+                  @click="analytics.transitionOutboundLink($event)">
+                  CareerOneStop.org
+                  <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+                </a>, your source for career exploration training and jobs.
+              </p>
+              <hr />
+              <p>
+                Explore the
+                <a class="home-callout" href="https://www.bls.gov/ooh/" target="_blank" @click="analytics.transitionOutboundLink($event)">Occupational Outlook Handbook (OOH)
+                  <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+                </a>
+                for detailed information about over 300 occupational profiles.
+              </p>
+              <hr />
+              <p>
+                You can learn more about the types of financial aid that are  available at
+                <a class="home-callout" href="https://studentaid.gov/" target="_blank" @click="analytics.transitionOutboundLink($event)">StudentAid.gov
+                  <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+                </a>
+              </p>
+            </v-card>
+          </v-col>
+
+          <v-col cols="12" md="6" sm="12" class="pl-md-8">
+            <div class="d-flex flex-column h-100">
+              <v-card flat class="px-7 py-9 elevation-7">
+                <h3 class="display-7 mb-4">Start Your FAFSA® Application</h3>
+                <p class="mb-4">To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA).</p>
+                <p  class="mb-7">
+                  Use the 
+                  <a class="home-callout" href="https://www.bls.gov/ooh/" target="_blank" @click="analytics.transitionOutboundLink($event)">FAFSA4caster
+                    <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+                  </a>
+                  to see how much aid may be available to you.
+                </p>
+                <v-btn 
+                    color="secondary-green text-uppercase h-tag" 
+                    href="https://studentaid.gov/h/apply-for-aid/fafsa" 
+                    target="_blank" 
+                    :size="breakpoints.smAndDown.value ? 'default' : 'large'"
+                    @click="analytics.transitionOutboundLink($event)"
+                  >
+                    Start Your FAFSA&reg; Application
+                  </v-btn>
+              </v-card>
+
+              <div class="flex-grow-1 my-3" />
+
+              <v-card flat class="pa-7 bg-primary-blue elevation-7">
+                <p>
+                  Veterans are eligible for higher education funding through the G.I. Bill benefits. 
+                  Use the
+                  <a
+                    href="https://www.vets.gov/gi-bill-comparison-tool"
+                    target="_blank"
+                    @click="analytics.transitionOutboundLink($event)"
+                    class="text-tertiary-green"
+                  >
+                    GI Bill<sup>®</sup> comparison tool
+                    <v-icon size="x-small" color="terriary-green">mdi-open-in-new</v-icon>
+                  </a>
+                  to learn about education programs and compare benefits 
+                  by school.
+                </p>
+                <Spacer :height="10" />
+                <p>
+                  <a
+                    href="https://www.vets.gov/gi-bill-comparison-tool"
+                    target="_blank"
+                    @click="analytics.transitionOutboundLink($event)"
+                  >
+                    <img
+                      src="~/assets/images/VA-Logo.svg"
+                      style="max-width: 300px"
+                      alt="VA Logo"
+                      width="300"
+                      height="67"
+                      contain
+                    />
+                  </a>
+                </p>
+              </v-card>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+      <Spacer />
+    </div>
+
+
 </template>
 
 <style scoped lang="scss">
@@ -133,6 +345,36 @@
 :deep(.v-tab__slider) {
   height: 4px !important;  
 }
+
+.h-tag {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  font-weight: 400;
+
+  &.tag-green {
+    color: use-theme('secondary-green');
+  }
+
+  &.tag-yellow {
+    color: use-theme('primary-yellow');
+  }
+
+  &.tag-white {
+    color: white;
+  }
+}
+
+.info-text {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.home-callout {
+  color: use-theme('secondary-green');
+}
 </style>
 
 <script setup>
@@ -140,7 +382,7 @@ const router = useRouter()
 const analytics = useAnalytics()
 const { formMappings } = useConstants()
 const { location, handleLocationCheck } = useLocationCheck();
-
+const { breakpoints } = useVuetify()
 const desktopTabs = ref(0)
 
 const handleSchoolNameSelected = (school) => {
