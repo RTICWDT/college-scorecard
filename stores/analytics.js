@@ -2,14 +2,15 @@ import { defineStore } from 'pinia'
 import { useRuntimeConfig } from '#app'
 
 function initializeGtag() {
-  const { gtag, initialize } = useGtag()
-
-  try {
-    initialize()
-    return gtag
-  } catch (e) {
-    console.error('[gtag] error', e)
-    return null
+  if (import.meta.client) {
+    const { gtag, initialize } = useGtag()
+    try {
+      initialize()
+      return gtag
+    } catch (e) {
+      console.error('[gtag] error', e)
+      return null
+    }
   }
 }
 
@@ -25,7 +26,7 @@ export const useAnalytics = defineStore('analytics', {
   actions: {
     GATrackEvent(category, action, label = '') {
       try {
-        if (typeof window !== 'undefined' && this.gtag) {
+        if (import.meta.client && this.gtag) {
           const config = useRuntimeConfig()
           if (config.public.isLocalBuild || config.public.isDevBuild) {
             return console.info(`[gtag] event - Category: ${category}, Action: ${action}, Label: ${label || window.location.pathname}, Build: ${config.public.isStagingBuild ? 'Staging' : 'Dev'}`);

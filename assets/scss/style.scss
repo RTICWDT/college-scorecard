@@ -32,7 +32,9 @@ $header-font-family: neue-haas-grotesk-display, Helvetica, arial, sans-serif;
 .display-1,
 .display-2,
 .display-3,
-.display-4 .subtitle-1,
+.display-4,
+.display-5,
+.subtitle-1,
 .subtitle-2 {
   font-family: $header-font-family !important;
 }
@@ -45,6 +47,12 @@ $header-font-family: neue-haas-grotesk-display, Helvetica, arial, sans-serif;
 .display-3 {
   font-size: 3rem !important;
   line-height: 32px !important;
+}
+
+.display-5 {
+  font-size: 50px;
+  line-height: 59.65px;
+  font-weight: 500;
 }
 
 .font-header {
