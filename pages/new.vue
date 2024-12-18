@@ -107,7 +107,7 @@
       <v-row>
         <v-col cols="4">
           <p class="mb-2 h-tag tag-green">Search College</p>
-          <h2 class="display-6 mb-7">Search for colleges using filters</h2>
+          <h2 class="display-6 mb-6">Search for colleges using filters</h2>
           <div class="position-relative">
             <div class="college-filter-highlight" :style="highlightStyle"></div>
           </div>
@@ -140,7 +140,7 @@
       <v-row>
         <v-col cols="4">
           <p class="mb-2 h-tag tag-yellow">Compare Colleges</p>
-          <h2 class="display-6 mb-4">See how colleges compare</h2>
+          <h2 class="display-6 mb-6">See how colleges compare</h2>
           <p>Compare up to 10 colleges at once to make informed decisions about your path to college. </p>
         </v-col>
         <v-col cols="8">
@@ -158,7 +158,7 @@
       <v-row>
         <v-col cols="4">
           <p class="mb-2 h-tag tag-green">View College Profiles</p>
-          <h2 class="display-6 mb-4">Find the information that matters most <br v-if="breakpoints.lgAndUp.value" /> to you</h2>
+          <h2 class="display-6 mb-6">Find the information that matters most <br v-if="breakpoints.lgAndUp.value" /> to you</h2>
           <p class="info-text">View U.S. Department of Education data about costs, student debt, graduation rates, admissions test scores and acceptance rates, student body diversity, post-college earnings, and more.</p>
         </v-col>
         <v-col cols="8">
@@ -176,7 +176,7 @@
         <v-row>
           <v-col cols="4">
             <p class="mb-2 h-tag tag-white">Find what to study</p>
-            <h2 class="display-6 mb-4">Find what to study</h2>
+            <h2 class="display-6 mb-6">Find what to study</h2>
             <p class="info-text">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
           </v-col>
           <v-col cols="8">
