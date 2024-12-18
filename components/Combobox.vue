@@ -703,6 +703,7 @@ ul[role="listbox"] li[role="option"] {
     border: 1px solid transparent;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+    border-right:none;
   }
 }
 
