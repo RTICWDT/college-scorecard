@@ -57,8 +57,8 @@
 
             <v-tabs-window-item style="height: 150px;">
               <v-row class="pb-0 mt-2">
-                <v-col class="pb-0" cols="12" sm="5"><label class="d-block mb-2" for="fosSearch">Search Fields of Study (Required)</label></v-col>
-                <v-col class="pb-0" cols="12" sm="5"><label class="d-block mb-2" for="fosDegree">Select Degree Type (Required)</label></v-col>
+                <v-col class="pb-0" cols="12" sm="5"><label class="d-block" for="fosSearch">Search Fields of Study (Required)</label></v-col>
+                <v-col class="pb-0" cols="12" sm="5"><label class="d-block" for="fosDegree">Select Degree Type (Required)</label></v-col>
               </v-row>
               <v-row>
                 <v-col cols="12" sm="5">
@@ -109,7 +109,7 @@
           <p class="mb-2 h-tag tag-green">Search College</p>
           <h2 class="display-6 mb-4">Search for colleges using filters</h2>
         </v-col>
-        <v-col cols="7">
+        <v-col cols="8">
           <div class="bg-blue h-100 w-100"></div>
         </v-col>
       </v-row>
@@ -127,7 +127,7 @@
           <h2 class="display-6 mb-4">See how colleges compare</h2>
           <p>Compare up to 10 colleges at once to make informed decisions about your path to college. </p>
         </v-col>
-        <v-col cols="7">
+        <v-col cols="8">
           <div class="bg-blue h-100 w-100"></div>
         </v-col>
       </v-row>
@@ -145,7 +145,7 @@
           <h2 class="display-6 mb-4">Find the information that matters most <br v-if="breakpoints.lgAndUp.value" /> to you</h2>
           <p class="info-text">View U.S. Department of Education data about costs, student debt, graduation rates, admissions test scores and acceptance rates, student body diversity, post-college earnings, and more.</p>
         </v-col>
-        <v-col cols="7">
+        <v-col cols="8">
           <div class="bg-blue h-100 w-100"></div>
         </v-col>
       </v-row>
@@ -163,7 +163,7 @@
             <h2 class="display-6 mb-4">Find what to study</h2>
             <p class="info-text">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
           </v-col>
-          <v-col cols="7">
+          <v-col cols="8">
             <div class="bg-blue h-100 w-100"></div>
           </v-col>
         </v-row>

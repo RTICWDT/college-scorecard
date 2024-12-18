@@ -2,7 +2,7 @@
   <Combobox 
     v-model="search"
     placeholder="Enter a school"  
-    :dense="dense" 
+    :variant="dense ? 'dense' : null" 
     :loading="loading"
     :options="items" 
     :onFilter="onFilter"

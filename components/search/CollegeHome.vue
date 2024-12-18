@@ -2,10 +2,11 @@
   <Combobox 
     v-model="search"
     placeholder="Enter college name (optional)"  
-    :dense="dense" 
+    variant="home"
     :loading="loading"
     :options="items" 
     :onFilter="onFilter"
+    color="#FDB022"
     @onSubmit="handleSubmit"
     @onClear="handleClear"
     @onSearch="handleSearch"
@@ -29,9 +30,9 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  dense: {
-    type: Boolean,
-    default: false,
+  variant: {
+    type: String,
+    default: 'default',
   },
 });
 
