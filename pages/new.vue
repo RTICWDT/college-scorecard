@@ -20,7 +20,7 @@
           </v-tabs>
 
           <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
-            <v-tabs-window-item style="height: 150px;">
+            <v-tabs-window-item style="height: 210px;">
               <div class="d-flex mt-5">
                 <SearchCollegeHome
                   @onSubmit="handleSchoolNameSelected"
@@ -55,7 +55,7 @@
               </div>
             </v-tabs-window-item>
 
-            <v-tabs-window-item style="height: 150px;">
+            <v-tabs-window-item style="height: 210px;">
               <v-row class="pb-0 mt-2">
                 <v-col class="pb-0" cols="12" sm="5"><label class="d-block" for="fosSearch">Search Fields of Study (Required)</label></v-col>
                 <v-col class="pb-0" cols="12" sm="5"><label class="d-block" for="fosDegree">Select Degree Type (Required)</label></v-col>
@@ -107,7 +107,23 @@
       <v-row>
         <v-col cols="4">
           <p class="mb-2 h-tag tag-green">Search College</p>
-          <h2 class="display-6 mb-4">Search for colleges using filters</h2>
+          <h2 class="display-6 mb-7">Search for colleges using filters</h2>
+          <div class="position-relative">
+            <div class="college-filter-highlight" :style="highlightStyle"></div>
+          </div>
+          <ul class="college-filter-list mb-7">
+            <li @mouseenter="highlightStyle.top = '-10px'"><span>Search by Location</span></li>
+            <li @mouseenter="highlightStyle.top = '28px'"><span>Filter by annual cost</span></li>
+            <li @mouseenter="highlightStyle.top = '68px'"><span>Search by degree type</span></li>
+          </ul>
+          <v-btn 
+            color="secondary-green text-uppercase h-tag" 
+            href="https://studentaid.gov/h/apply-for-aid/fafsa" 
+            target="_blank"
+            size="large"
+          >
+            Start your Search
+          </v-btn>
         </v-col>
         <v-col cols="8">
           <div class="bg-blue h-100 w-100"></div>
@@ -375,6 +391,31 @@
 .home-callout {
   color: use-theme('secondary-green');
 }
+
+.college-filter-list {
+  li {
+    list-style-image: url('~/assets/images/checkmark.png');
+    margin-bottom: 15px;
+    position: relative;
+    left: 35px;
+
+    span {
+      position: relative;
+      bottom: 2px;
+    }
+  }
+}
+
+.college-filter-highlight {
+  position: absolute;
+  width: 228px;
+  height: 40px;
+  background-color: use-theme('primary-yellow');
+  opacity: 0.2;
+  border-radius: 3px;
+  transition: top 0.3s;
+}
+
 </style>
 
 <script setup>
@@ -384,6 +425,10 @@ const { formMappings } = useConstants()
 const { location, handleLocationCheck } = useLocationCheck();
 const { breakpoints } = useVuetify()
 const desktopTabs = ref(0)
+
+const highlightStyle = ref({
+  top: "-10px",
+})
 
 const handleSchoolNameSelected = (school) => {
   if (school === "") {
