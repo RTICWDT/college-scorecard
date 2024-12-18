@@ -394,14 +394,27 @@
 
 .college-filter-list {
   li {
-    list-style-image: url('~/assets/images/checkmark.png');
+    list-style: none;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      height: 16px;
+      width: 16px;
+      background-image: url('~/assets/images/checkmark.png');
+      background-size:     cover;                      /* <------ */
+      background-repeat:   no-repeat;
+      background-position: center center;  
+    }
+
     margin-bottom: 15px;
     position: relative;
-    left: 35px;
+    left: 10px;
 
     span {
       position: relative;
       bottom: 2px;
+      left: 10px;
     }
   }
 }
