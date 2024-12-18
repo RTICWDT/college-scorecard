@@ -386,6 +386,10 @@ const { breakpoints } = useVuetify()
 const desktopTabs = ref(0)
 
 const handleSchoolNameSelected = (school) => {
+  if (school === "") {
+    return
+  }
+
   if (typeof school === "string") {
     router.push("/search/?search=" + encodeURIComponent(school))
   } else {
