@@ -566,6 +566,10 @@ onUnmounted(() => {
 
   &.focus {
     color: v-bind('themeColor');
+
+    &.variant-home {
+      color: use-theme('gray-700');
+    }
   }
 }
 
