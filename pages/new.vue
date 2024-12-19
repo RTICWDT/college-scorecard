@@ -22,13 +22,15 @@
           <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
             <v-tabs-window-item style="height: 210px;">
               <div class="d-flex mt-5">
-                <SearchCollegeHome
-                  @onSubmit="handleSchoolNameSelected"
-                  @onSearch="handleSchoolNameSelected"
-                  @onInput="handleCollegeInput"
-                  @onClear="() => {}"
-                  :searchEmptyName="false"
-                />
+                <div style="max-width: 767px; width: 100%">
+                  <SearchCollegeHome
+                    @onSubmit="handleSchoolNameSelected"
+                    @onSearch="handleSchoolNameSelected"
+                    @onInput="handleCollegeInput"
+                    @onClear="() => {}"
+                    :searchEmptyName="false"
+                  />
+                </div>
                 <button class="search-button px-8 bg-primary-yellow font-weight-bold" @click="searchCollegesFromInput">SEARCH</button>
               </div>
               <Spacer :height="20" />
@@ -102,9 +104,8 @@
 
   <!-- Search College -->
   <div class="bg-white">
-    <Spacer />
     <v-container>
-      <v-row>
+      <v-row class="align-center">
         <v-col cols="4">
           <p class="mb-2 h-tag tag-green">Search College</p>
           <h2 class="display-6 mb-6">Search for colleges using filters</h2>
@@ -117,73 +118,189 @@
             <li @mouseenter="highlightStyle.top = '68px'"><span>Search by degree type</span></li>
           </ul>
           <v-btn 
-            color="secondary-green text-uppercase h-tag" 
+            color="secondary-green text-uppercase h-tag font-weight-bold" 
             href="https://studentaid.gov/h/apply-for-aid/fafsa" 
             target="_blank"
             size="large"
+            :height="60"
+            :width="241"
           >
             Start your Search
           </v-btn>
         </v-col>
         <v-col cols="8">
-          <div class="bg-blue h-100 w-100"></div>
+          <div class="position-relative" style="height: 500px;">
+            <img 
+              src="~/assets/images/home/search.png" 
+              class="w-100 elevation-6 rounded-lg position-absolute" 
+              alt="College Search" 
+              style="width: 710px; height: 580px; bottom: -40px;"
+            />
+          </div>
         </v-col>
       </v-row>
     </v-container>
-    <Spacer />
   </div>
 
   <!-- Compare Colleges -->
   <div class="bg-primary-blue">
     <Spacer />
+    <Spacer />
+    <Spacer />
     <v-container>
       <v-row>
-        <v-col cols="4">
-          <p class="mb-2 h-tag tag-yellow">Compare Colleges</p>
-          <h2 class="display-6 mb-6">See how colleges compare</h2>
-          <p>Compare up to 10 colleges at once to make informed decisions about your path to college. </p>
+        <v-col cols="5">
+          <div style="max-width: 420px;"> 
+            <p class="mb-2 h-tag tag-yellow">Compare Colleges</p>
+            <h2 class="display-6 mb-6">See how colleges compare</h2>
+            <p>Compare up to 10 colleges at once to make informed decisions about your path to college. </p>
+            <Spacer />
+            <div class="position-relative" style="height: 275px;">
+              <img 
+                src="~/assets/images/home/median_debt.png" 
+                class="elevation-6 rounded-lg position-absolute" 
+                alt="College Search"
+                width="589px"
+                height="310px"
+              />
+            </div>
+          </div>
         </v-col>
-        <v-col cols="8">
-          <div class="bg-blue h-100 w-100"></div>
+        <v-col cols="7">
+          <div class="position-relative z-front">
+            <img 
+              src="~/assets/images/home/school_1.png" 
+              class="elevation-6 rounded-lg position-absolute" 
+              alt="College Search"
+              width="318px"
+              height="448px"
+              style="left: 20px;"
+            />
+            <img 
+              src="~/assets/images/home/school_2.png" 
+              class="elevation-6 rounded-lg position-absolute" 
+              alt="College Search"
+              width="318px"
+              height="448px"
+              style="left: 360px;"
+            />
+          </div>
         </v-col>
       </v-row>
     </v-container>
-    <Spacer />
   </div>
 
   <!-- College Profiles -->
   <div>
     <Spacer />
+    <Spacer />
     <v-container>
       <v-row>
-        <v-col cols="4">
-          <p class="mb-2 h-tag tag-green">View College Profiles</p>
-          <h2 class="display-6 mb-6">Find the information that matters most <br v-if="breakpoints.lgAndUp.value" /> to you</h2>
-          <p class="info-text">View U.S. Department of Education data about costs, student debt, graduation rates, admissions test scores and acceptance rates, student body diversity, post-college earnings, and more.</p>
+        <v-col cols="5">
+          <div style="max-width: 350px;"> 
+            <p class="mb-2 h-tag tag-green">View College Profiles</p>
+            <h2 class="display-6 mb-6">Find the information that matters most <br v-if="breakpoints.lgAndUp.value" /> to you</h2>
+            <p class="info-text mb-6">View U.S. Department of Education data about costs, student debt, graduation rates, admissions test scores and acceptance rates, student body diversity, post-college earnings, and more.</p>
+
+            <v-btn 
+              color="secondary-green text-uppercase h-tag font-weight-bold" 
+              href="https://studentaid.gov/h/apply-for-aid/fafsa" 
+              target="_blank"
+              size="large"
+              :height="60"
+              :width="218"
+            >
+              Search Schools
+            </v-btn>
+          </div>
         </v-col>
-        <v-col cols="8">
-          <div class="bg-blue h-100 w-100"></div>
+        <v-col cols="7">
+          <div class="position-relative">
+            <img 
+              src="~/assets/images/home/average_annual_cost.png" 
+              class="elevation-6 rounded-lg position-absolute" 
+              alt="College Search"
+              width="332px"
+              height="205px"
+              style="left: 300px; top: -50px;"
+            />
+            <img 
+              src="~/assets/images/home/acceptance_rate.png" 
+              class="elevation-6 rounded-lg position-absolute" 
+              alt="College Search"
+              width="271px"
+              height="285px"
+              style="left: 430px; top: 200px;"
+            />
+          </div>
+          <img 
+            src="~/assets/images/home/graduation_rate.png" 
+            class="elevation-6 rounded-lg" 
+            alt="College Search"
+            width="386px"
+            height="412px"
+          />
         </v-col>
       </v-row>
     </v-container>
+    <Spacer />
     <Spacer />
   </div>
 
     <!-- Fields of Study -->
     <div class="bg-primary-aqua">
       <Spacer />
+      <Spacer />
+      <Spacer />
       <v-container>
         <v-row>
-          <v-col cols="4">
-            <p class="mb-2 h-tag tag-white">Find what to study</p>
-            <h2 class="display-6 mb-6">Find what to study</h2>
-            <p class="info-text">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
+          <v-col cols="5">
+            <div style="max-width: 348px;">
+              <p class="mb-2 h-tag tag-white">Search fields of study</p>
+              <h2 class="display-6 mb-6">Find what to study</h2>
+              <p class="info-text mb-6">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
+              <NuxtLink to="search/fos-landing" class="text-white font-weight-bold text-decoration-none hover-underline">
+                Search Fields of Study<v-icon size="x-small" color="white" class="ml-1">mdi-arrow-right</v-icon>
+              </NuxtLink>
+            </div>
           </v-col>
-          <v-col cols="8">
-            <div class="bg-blue h-100 w-100"></div>
+          <v-col cols="7">
+            <div class="position-relative">
+              <img 
+                src="~/assets/images/home/location.png" 
+                class="elevation-6 rounded-lg position-absolute" 
+                alt="College Search"
+                width="289px"
+                height="355px"
+                style="left: -40px; top: -100px;"
+              />
+              <img 
+                src="~/assets/images/home/psychology.png" 
+                class="elevation-6 rounded-lg position-absolute" 
+                alt="College Search"
+                width="451px"
+                height="248px"
+                style="left: 280px; top: -60px;"
+              />
+              <img 
+                src="~/assets/images/home/median_earnings.png" 
+                class="elevation-6 rounded-lg position-absolute" 
+                alt="College Search"
+                width="540px"
+                height="276px"
+                style="left: 170px; top: 220px;"
+              />
+            </div>
+
           </v-col>
         </v-row>
       </v-container>
+      <Spacer />
+      <Spacer />
+      <Spacer />
+      <Spacer />
+      <Spacer />
+      <Spacer />
       <Spacer />
     </div>
 
@@ -266,19 +383,22 @@
             <div class="d-flex flex-column h-100">
               <v-card flat class="px-7 py-9 elevation-7">
                 <h3 class="display-7 mb-4">Start Your FAFSA® Application</h3>
-                <p class="mb-4">To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA).</p>
-                <p  class="mb-7">
-                  Use the 
-                  <a class="home-callout" href="https://www.bls.gov/ooh/" target="_blank" @click="analytics.transitionOutboundLink($event)">FAFSA4caster
-                    <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
-                  </a>
-                  to see how much aid may be available to you.
-                </p>
+                <div style="max-width: 400px">
+                  <p class="mb-4">To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA).</p>
+                  <p  class="mb-7">
+                    Use the 
+                    <a class="home-callout" href="https://www.bls.gov/ooh/" target="_blank" @click="analytics.transitionOutboundLink($event)">FAFSA4caster
+                      <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+                    </a>
+                    to see how much aid may be available to you.
+                  </p>
+                </div>
                 <v-btn 
-                    color="secondary-green text-uppercase h-tag" 
+                    color="secondary-green text-uppercase h-tag font-weight-bold" 
                     href="https://studentaid.gov/h/apply-for-aid/fafsa" 
                     target="_blank" 
-                    :size="breakpoints.smAndDown.value ? 'default' : 'large'"
+                    :height="60"
+                    :width="367"
                     @click="analytics.transitionOutboundLink($event)"
                   >
                     Start Your FAFSA&reg; Application
@@ -427,6 +547,20 @@
   opacity: 0.2;
   border-radius: 3px;
   transition: top 0.3s;
+}
+
+.z-back {
+  z-index: -1;
+}
+
+.z-front {
+  z-index: 1;
+}
+
+.hover-underline {
+  &:hover {
+    text-decoration: underline !important;
+  }
 }
 
 </style>
