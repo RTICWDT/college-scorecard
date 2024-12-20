@@ -212,7 +212,7 @@
             <li @mouseenter="highlightStyle.top = '28px'"><span>Filter by annual cost</span></li>
             <li @mouseenter="highlightStyle.top = '68px'"><span>Search by degree type</span></li>
           </ul>
-          <NuxtLink to="/search/">
+          <NuxtLink to="/search/" :tabindex="-1">
             <v-btn
               color="secondary-green text-uppercase h-tag font-weight-bold"
               target="_blank"
@@ -338,7 +338,7 @@
             <p class="mb-2 h-tag tag-green">View College Profiles</p>
             <h2 class="display-6 mb-6">Find the information that matters most <br v-if="breakpoints.lgAndUp.value" /> to you</h2>
             <p class="info-text mb-6">View U.S. Department of Education data about costs, student debt, graduation rates, admissions test scores and acceptance rates, student body diversity, post-college earnings, and more.</p>
-            <NuxtLink to="/search/">
+            <NuxtLink to="/search/" :tabindex="-1">
               <v-btn
                 color="secondary-green text-uppercase h-tag font-weight-bold" 
                 target="_blank"
