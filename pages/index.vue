@@ -173,6 +173,7 @@
                       color="primary-yellow"
                       bgColor="white"
                       aria-required="true"
+                      class="fos-search-degree-large"
                     />
                   </v-col>
 
@@ -184,6 +185,7 @@
                       :color="fosColor"
                       :disabled="disableSearch"
                       class="font-weight-bold "
+                      :height="70"
                     >
                       SEARCH
                     </v-btn>
@@ -365,7 +367,7 @@
               alt="College Search"
             />
           </div>
-          <img 
+          <img
             src="~/assets/images/home/graduation_rate.png" 
             class="elevation-6 rounded-lg layout-images graduation_rate scale-on-hover" 
             alt="College Search"
@@ -480,6 +482,24 @@
   border-bottom-right-radius: 5px;
   z-index: 100;
   position: relative;
+}
+
+.fos-search-degree-large {
+  :deep(.v-field__input) {
+    min-height: 70px !important;
+
+    input {
+      margin-top: 7px;
+    }
+  }
+  
+  :deep(.v-field__outline) {
+    height: 70px !important;
+  }
+  
+  :deep(.v-field) {
+    height: 70px !important;
+  }
 }
 
 .option-button {
