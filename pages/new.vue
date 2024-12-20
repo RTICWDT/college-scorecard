@@ -737,6 +737,7 @@
   &.resources {
     @include mdAndUp() {
       padding-top: 2rem;
+      padding-bottom: 2rem;
     }
 
     @include smAndDown() {
