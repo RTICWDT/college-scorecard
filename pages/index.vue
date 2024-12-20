@@ -204,7 +204,7 @@
     <v-container>
       <v-row class="align-center">
         <v-col cols="12" sm="6" lg="5">
-          <p class="mb-2 h-tag tag-green">Search College</p>
+          <p class="mb-2 h-tag tag-green">Search Colleges</p>
           <h2 class="display-6 mb-6" style="max-width: 420px;">Search for colleges using filters</h2>
           <div class="position-relative">
             <div class="college-filter-highlight" :style="highlightStyle"></div>
