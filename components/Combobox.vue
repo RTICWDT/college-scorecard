@@ -104,7 +104,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: ''
+    default: 'Type to Search'
   },
   modelValue: {
     type: Object,

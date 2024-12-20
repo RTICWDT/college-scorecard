@@ -1,7 +1,7 @@
 <template>
   <Combobox 
     v-model="search"
-    placeholder="Enter a school"  
+    :placeholder="placeholder"  
     :variant="dense ? 'dense' : null" 
     :loading="loading"
     :options="items" 
@@ -31,6 +31,10 @@ const props = defineProps({
   dense: {
     type: Boolean,
     default: false,
+  },
+  placeholder: {
+    type: String,
+    default: "Enter a school",
   },
 });
 

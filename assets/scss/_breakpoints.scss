@@ -38,6 +38,12 @@ $grid-breakpoints: (
   }
 }
 
+@mixin smAndDown {
+  @media (max-width: map-get($grid-breakpoints, 'md') - 1) {
+    @content;
+  }
+}
+
 @mixin md {
   @media (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints, 'lg') - 1) {
     @content;
@@ -50,7 +56,19 @@ $grid-breakpoints: (
   }
 }
 
+@mixin mdAndDown {
+  @media (max-width: map-get($grid-breakpoints, 'lg') - 1) {
+    @content;
+  }
+}
+
 @mixin lg {
+  @media (min-width: map-get($grid-breakpoints, 'lg')) {
+    @content;
+  }
+}
+
+@mixin lgAndUp {
   @media (min-width: map-get($grid-breakpoints, 'lg')) {
     @content;
   }
@@ -62,8 +80,14 @@ $grid-breakpoints: (
   }
 }
 
-@mixin pxAndUp($breakpoint) {
-  @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+@mixin pxAndUp($px) {
+  @media (min-width: $px) {
+    @content;
+  }
+}
+
+@mixin pxAndDown($px) {
+  @media (max-width: $px - 1) {
     @content;
   }
 }

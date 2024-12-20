@@ -1,5 +1,5 @@
 <template>
-  <Combobox :variant="dense ? 'dense' : null" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
+  <Combobox  :variant="dense ? 'dense' : null" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
 </template>
 
 <script setup>
