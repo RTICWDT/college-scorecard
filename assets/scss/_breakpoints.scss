@@ -74,6 +74,12 @@ $grid-breakpoints: (
   }
 }
 
+@mixin lgAndDown {
+  @media (max-width: map-get($grid-breakpoints, 'xl') - 1) {
+    @content;
+  }
+}
+
 @mixin xl {
   @media (min-width: map-get($grid-breakpoints, 'xl')) {
     @content;
