@@ -212,16 +212,17 @@
             <li @mouseenter="highlightStyle.top = '28px'"><span>Filter by annual cost</span></li>
             <li @mouseenter="highlightStyle.top = '68px'"><span>Search by degree type</span></li>
           </ul>
-          <v-btn 
-            color="secondary-green text-uppercase h-tag font-weight-bold" 
-            href="https://studentaid.gov/h/apply-for-aid/fafsa" 
-            target="_blank"
-            size="large"
-            :height="60"
-            :width="241"
-          >
-            Start your Search
-          </v-btn>
+          <NuxtLink to="/search/">
+            <v-btn
+              color="secondary-green text-uppercase h-tag font-weight-bold"
+              target="_blank"
+              size="large"
+              :height="60"
+              :width="241"
+            >
+              Start your Search
+            </v-btn>
+          </NuxtLink>
           <HomeArrow
             classes="d-none d-md-inline ml-6"
             color="#027A48"
@@ -248,10 +249,11 @@
   <div class="bg-primary-blue section compare-colleges">
     <v-container>
       <v-row>
-        <v-col cols="12" lg="5">
+
+        <v-col cols="12" lg="5" style="z-index: 1;" class="position-relative">
           <div class="compare-colleges-text-wrap"> 
             <p class="mb-2 h-tag tag-yellow">Compare Colleges</p>
-            <h2 class="display-6 mb-6">See how colleges <div class="d-inline-block">compare <HomeCompareIcon class="d-inline" /></div></h2>
+            <h2 class="display-6 mb-6">See how colleges <div class="d-inline-block">compare <HomeCompareIcon class="d-inline" :hovered="true" /></div></h2>
             <p style="max-width: 420px">Compare up to 10 colleges at once to make informed decisions about your path to college.</p>
             <Spacer :height="80" class="d-block d-lg-none" />
             <div class="d-none d-lg-block">
@@ -266,40 +268,61 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="12" lg="7">
-          <div class="position-relative z-front">
-            <img 
-              src="~/assets/images/home/school_1.png" 
-              class="elevation-6 rounded-lg layout-images school_1" 
-              alt="College Search"
-            />
-            <img 
-              src="~/assets/images/home/school_2.png" 
-              class="elevation-6 rounded-lg layout-images school_2" 
-              alt="College Search"
-            />
-            <div class="d-flex layout-images compare-colleges-arrow-top">
-              <p>Click the checkmark <br /> to compare colleges</p>
-              <HomeArrow
-                class="d-inline ml-6 mt-2"
-                color="#FDB022"
-                path="M1.3053 17.707C1.45951 17.8706 1.64444 18.0021 1.84952 18.0941C2.05461 18.1861 2.27581 18.2368 2.50049 18.2432C2.95958 18.2538 3.40441 18.0834 3.73895 17.7688C10.8846 10.9721 21.7831 8.07671 32.8893 10.0241C42.8798 11.774 62.0235 19.1671 77.9754 49.024L79.6109 52.0785L69.6849 46.6333C69.4872 46.5239 69.2697 46.4549 69.0452 46.4303C68.8206 46.4056 68.5934 46.4257 68.3767 46.4895C68.0497 46.585 67.7584 46.7753 67.5395 47.0363C67.3206 47.2973 67.184 47.6173 67.1469 47.9559C67.1098 48.2945 67.1739 48.6365 67.3311 48.9387C67.4884 49.2408 67.7316 49.4896 68.0302 49.6536L83.1334 57.941C83.3868 58.0777 83.6701 58.1494 83.9579 58.1498C84.2458 58.1503 84.5293 58.0794 84.7831 57.9436C85.0366 57.8061 85.2514 57.6069 85.4076 57.3644C85.5638 57.122 85.6563 56.8441 85.6767 56.5564L86.9695 38.7882C86.9868 38.5632 86.9591 38.337 86.888 38.1228C86.8169 37.9086 86.7039 37.7107 86.5555 37.5406C86.4072 37.3682 86.2262 37.2268 86.0229 37.1246C85.8197 37.0224 85.5983 36.9614 85.3714 36.9451C85.2711 36.9397 85.1705 36.9419 85.0705 36.9515C84.7187 36.9863 84.3865 37.13 84.1201 37.3625C83.9494 37.5102 83.8095 37.6902 83.7084 37.892C83.6073 38.0939 83.5469 38.3137 83.5308 38.5389L82.661 50.4877L80.9799 47.3412C64.3404 16.2444 44.0772 8.48637 33.4778 6.62936C21.3055 4.49664 9.29609 7.72685 1.36607 15.2735C1.20225 15.4293 1.07073 15.6158 0.979015 15.8224C0.887301 16.029 0.837191 16.2517 0.831547 16.4777C0.825904 16.7037 0.864838 16.9285 0.946126 17.1395C1.02741 17.3504 1.14946 17.5433 1.3053 17.707Z"
-                viewBox="0 0 89 67"
-                width="89"
-                height="67"
+
+        <v-col cols="12" lg="7" style="z-index: 2;" class="position-relative">
+          <div class="d-flex">
+            <div 
+              class="position-relative college-card"
+              @mouseenter="school1Hover = true"
+              @mouseleave="school1Hover = false"
+            >
+              <div
+                class="compare-icon" style="z-index: 10;">
+                <HomeCompareIcon :hovered="school1Hover" />
+              </div>
+              <img 
+                src="~/assets/images/home/school_1.png" 
+                class="elevation-6 rounded-lg layout-images school_1" 
+                alt="College Search"
               />
             </div>
-            <div class="layout-images compare-colleges-arrow-bottom">
-              <HomeArrow
-                class="d-inline mr-6"
-                color="#FDB022"
-                path="M135.204 39.5535C135.024 39.4239 134.82 39.3315 134.603 39.2817C134.387 39.2319 134.163 39.2256 133.944 39.2632C121.643 41.3397 113.032 41.339 106.843 39.2657L105.676 38.8723L106.572 38.0289C109.066 35.7162 111.2 33.0435 112.904 30.0996C116.382 23.9672 117.104 17.3925 114.818 12.5194C114.102 10.9572 113.056 9.56822 111.753 8.44748C110.45 7.32674 108.921 6.50072 107.269 6.02594C104.1 5.14392 100.727 5.34966 97.689 6.61027C91.4484 9.13441 86.5955 15.8741 89.8205 25.2494C91.8715 31.21 94.7905 35.6161 98.7431 38.7214L99.5472 39.3522L98.6951 39.9147C90.3761 45.4318 79.3475 48.9174 65.9207 50.2691C51.7381 51.8496 37.3852 49.8734 24.1576 44.5187C19.3505 42.5609 14.7976 40.0295 10.5979 36.9793L8.67047 35.5435L18.6482 35.9995C19.0928 36.014 19.5252 35.8526 19.8516 35.5503C20.1779 35.2481 20.372 34.8294 20.3916 34.385C20.4113 33.9406 20.2549 33.5064 19.9565 33.1765C19.658 32.8467 19.2416 32.6478 18.7974 32.623L3.11292 31.9035C2.82997 31.8906 2.54833 31.9491 2.29384 32.0734C2.03935 32.1978 1.82018 32.384 1.65643 32.6152C1.49269 32.8463 1.38962 33.1148 1.35669 33.3961C1.32376 33.6775 1.36202 33.9625 1.46796 34.2252L7.15186 48.3101C7.32018 48.7249 7.64601 49.0561 8.058 49.2311C8.46999 49.4062 8.93457 49.4109 9.34999 49.2441C9.39551 49.2267 9.44004 49.2068 9.48337 49.1845C9.85992 48.9913 10.1509 48.6646 10.2993 48.2682C10.4478 47.8719 10.443 47.4345 10.2861 47.0414L6.79158 38.3857L8.88402 39.9218C13.1597 42.9853 17.7752 45.5443 22.6386 47.5478C36.4426 53.189 51.4401 55.2813 66.261 53.6335C78.413 52.4101 88.7982 49.4489 97.1262 44.8354C98.947 43.8306 100.704 42.7138 102.387 41.4916L102.74 41.2337L103.137 41.4197C104.169 41.9023 105.231 42.3157 106.317 42.6573C113.019 44.774 121.712 44.7546 134.505 42.592C134.671 42.5634 134.832 42.5105 134.982 42.4351C135.242 42.3038 135.464 42.1076 135.625 41.8656C135.787 41.6236 135.884 41.344 135.906 41.0537C135.928 40.7635 135.874 40.4725 135.751 40.2089C135.628 39.9453 135.438 39.718 135.201 39.549M102.806 36.8253L102.381 37.1867L101.916 36.8783C97.9106 34.2021 95.0832 30.1568 93.0127 24.1441C90.5411 16.9528 94.0117 12.1892 98.0827 10.1401C98.3708 9.99671 98.664 9.86246 98.9579 9.74547C103.486 7.91423 109.339 8.77027 111.762 13.9512C113.58 17.8371 112.907 23.2489 109.964 28.4322C108.084 31.6253 105.663 34.4675 102.81 36.8318"
-                viewBox="0 0 137 70"
-                width="137"
-                height="70"
+            <div
+              class="position-relative college-card ml-5"
+              @mouseenter="school2Hover = true"
+              @mouseleave="school2Hover = false"
+            >
+              <div class="compare-icon hide-small" style="z-index: 10;">
+                <HomeCompareIcon :hovered="school2Hover" />
+              </div>
+              <img
+                src="~/assets/images/home/school_2.png" 
+                class="elevation-6 rounded-lg layout-images school_2" 
+                alt="College Search"
               />
-              <p class="mt-4">Compare the information <br />that matters most to you</p>
             </div>
+          </div>
+
+          <div class="d-flex layout-images compare-colleges-arrow-top">
+            <p>Click the checkmark <br /> to compare colleges</p>
+            <HomeArrow
+              class="d-inline ml-6 mt-2"
+              color="#FDB022"
+              path="M1.3053 17.707C1.45951 17.8706 1.64444 18.0021 1.84952 18.0941C2.05461 18.1861 2.27581 18.2368 2.50049 18.2432C2.95958 18.2538 3.40441 18.0834 3.73895 17.7688C10.8846 10.9721 21.7831 8.07671 32.8893 10.0241C42.8798 11.774 62.0235 19.1671 77.9754 49.024L79.6109 52.0785L69.6849 46.6333C69.4872 46.5239 69.2697 46.4549 69.0452 46.4303C68.8206 46.4056 68.5934 46.4257 68.3767 46.4895C68.0497 46.585 67.7584 46.7753 67.5395 47.0363C67.3206 47.2973 67.184 47.6173 67.1469 47.9559C67.1098 48.2945 67.1739 48.6365 67.3311 48.9387C67.4884 49.2408 67.7316 49.4896 68.0302 49.6536L83.1334 57.941C83.3868 58.0777 83.6701 58.1494 83.9579 58.1498C84.2458 58.1503 84.5293 58.0794 84.7831 57.9436C85.0366 57.8061 85.2514 57.6069 85.4076 57.3644C85.5638 57.122 85.6563 56.8441 85.6767 56.5564L86.9695 38.7882C86.9868 38.5632 86.9591 38.337 86.888 38.1228C86.8169 37.9086 86.7039 37.7107 86.5555 37.5406C86.4072 37.3682 86.2262 37.2268 86.0229 37.1246C85.8197 37.0224 85.5983 36.9614 85.3714 36.9451C85.2711 36.9397 85.1705 36.9419 85.0705 36.9515C84.7187 36.9863 84.3865 37.13 84.1201 37.3625C83.9494 37.5102 83.8095 37.6902 83.7084 37.892C83.6073 38.0939 83.5469 38.3137 83.5308 38.5389L82.661 50.4877L80.9799 47.3412C64.3404 16.2444 44.0772 8.48637 33.4778 6.62936C21.3055 4.49664 9.29609 7.72685 1.36607 15.2735C1.20225 15.4293 1.07073 15.6158 0.979015 15.8224C0.887301 16.029 0.837191 16.2517 0.831547 16.4777C0.825904 16.7037 0.864838 16.9285 0.946126 17.1395C1.02741 17.3504 1.14946 17.5433 1.3053 17.707Z"
+              viewBox="0 0 89 67"
+              width="89"
+              height="67"
+            />
+          </div>
+          <div class="layout-images compare-colleges-arrow-bottom">
+            <HomeArrow
+              class="d-inline mr-6"
+              color="#FDB022"
+              path="M135.204 39.5535C135.024 39.4239 134.82 39.3315 134.603 39.2817C134.387 39.2319 134.163 39.2256 133.944 39.2632C121.643 41.3397 113.032 41.339 106.843 39.2657L105.676 38.8723L106.572 38.0289C109.066 35.7162 111.2 33.0435 112.904 30.0996C116.382 23.9672 117.104 17.3925 114.818 12.5194C114.102 10.9572 113.056 9.56822 111.753 8.44748C110.45 7.32674 108.921 6.50072 107.269 6.02594C104.1 5.14392 100.727 5.34966 97.689 6.61027C91.4484 9.13441 86.5955 15.8741 89.8205 25.2494C91.8715 31.21 94.7905 35.6161 98.7431 38.7214L99.5472 39.3522L98.6951 39.9147C90.3761 45.4318 79.3475 48.9174 65.9207 50.2691C51.7381 51.8496 37.3852 49.8734 24.1576 44.5187C19.3505 42.5609 14.7976 40.0295 10.5979 36.9793L8.67047 35.5435L18.6482 35.9995C19.0928 36.014 19.5252 35.8526 19.8516 35.5503C20.1779 35.2481 20.372 34.8294 20.3916 34.385C20.4113 33.9406 20.2549 33.5064 19.9565 33.1765C19.658 32.8467 19.2416 32.6478 18.7974 32.623L3.11292 31.9035C2.82997 31.8906 2.54833 31.9491 2.29384 32.0734C2.03935 32.1978 1.82018 32.384 1.65643 32.6152C1.49269 32.8463 1.38962 33.1148 1.35669 33.3961C1.32376 33.6775 1.36202 33.9625 1.46796 34.2252L7.15186 48.3101C7.32018 48.7249 7.64601 49.0561 8.058 49.2311C8.46999 49.4062 8.93457 49.4109 9.34999 49.2441C9.39551 49.2267 9.44004 49.2068 9.48337 49.1845C9.85992 48.9913 10.1509 48.6646 10.2993 48.2682C10.4478 47.8719 10.443 47.4345 10.2861 47.0414L6.79158 38.3857L8.88402 39.9218C13.1597 42.9853 17.7752 45.5443 22.6386 47.5478C36.4426 53.189 51.4401 55.2813 66.261 53.6335C78.413 52.4101 88.7982 49.4489 97.1262 44.8354C98.947 43.8306 100.704 42.7138 102.387 41.4916L102.74 41.2337L103.137 41.4197C104.169 41.9023 105.231 42.3157 106.317 42.6573C113.019 44.774 121.712 44.7546 134.505 42.592C134.671 42.5634 134.832 42.5105 134.982 42.4351C135.242 42.3038 135.464 42.1076 135.625 41.8656C135.787 41.6236 135.884 41.344 135.906 41.0537C135.928 40.7635 135.874 40.4725 135.751 40.2089C135.628 39.9453 135.438 39.718 135.201 39.549M102.806 36.8253L102.381 37.1867L101.916 36.8783C97.9106 34.2021 95.0832 30.1568 93.0127 24.1441C90.5411 16.9528 94.0117 12.1892 98.0827 10.1401C98.3708 9.99671 98.664 9.86246 98.9579 9.74547C103.486 7.91423 109.339 8.77027 111.762 13.9512C113.58 17.8371 112.907 23.2489 109.964 28.4322C108.084 31.6253 105.663 34.4675 102.81 36.8318"
+              viewBox="0 0 137 70"
+              width="137"
+              height="70"
+            />
+            <p class="mt-4">Compare the information <br />that matters most to you</p>
           </div>
         </v-col>
       </v-row>
@@ -315,17 +338,17 @@
             <p class="mb-2 h-tag tag-green">View College Profiles</p>
             <h2 class="display-6 mb-6">Find the information that matters most <br v-if="breakpoints.lgAndUp.value" /> to you</h2>
             <p class="info-text mb-6">View U.S. Department of Education data about costs, student debt, graduation rates, admissions test scores and acceptance rates, student body diversity, post-college earnings, and more.</p>
-
-            <v-btn 
-              color="secondary-green text-uppercase h-tag font-weight-bold" 
-              href="https://studentaid.gov/h/apply-for-aid/fafsa" 
-              target="_blank"
-              size="large"
-              :height="60"
-              :width="218"
-            >
-              Search Schools
-            </v-btn>
+            <NuxtLink to="/search/">
+              <v-btn
+                color="secondary-green text-uppercase h-tag font-weight-bold" 
+                target="_blank"
+                size="large"
+                :height="60"
+                :width="218"
+              >
+                Search Schools
+              </v-btn>
+            </NuxtLink>
           </div>
         </v-col>
         <v-col cols="12" md="6" lg="7" class="d-none d-md-block">
@@ -368,12 +391,12 @@
           </v-col>
           <v-col cols="12" md="6" lg="7" class="d-none d-md-block">
             <div class="position-relative">
-              <img 
+              <img
                 src="~/assets/images/home/location.png" 
                 class="elevation-6 rounded-lg position-absolute layout-images location" 
                 alt="College Search"
               />
-              <img 
+              <img
                 src="~/assets/images/home/psychology.png" 
                 class="elevation-6 rounded-lg position-absolute layout-images psychology" 
                 alt="College Search"
@@ -413,7 +436,7 @@
                 <HomeFafsa />
               </v-card>
               <div class="flex-grow-1 my-3" />
-              <v-card flat class="pa-7 bg-primary-blue elevation-7">
+              <v-card class="pa-7 bg-primary-blue elevation-7 border-none">
                 <HomeVeterans theme="dark" />
               </v-card>
             </div>
@@ -560,6 +583,14 @@
   }
 }
 
+.college-card {
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
 .z-back {
   z-index: -1;
 }
@@ -595,7 +626,7 @@
     width: 710px;
     height: 580px;
     bottom: -40px; 
-    left: 15px;
+    // left: 15px;
   }
 
   &.median_debt {
@@ -610,13 +641,6 @@
   &.school_1 {
     width: 318px;
     height: 448px;
-    left: 20px;
-    position: absolute;
-
-    @include mdAndDown() {
-      position: static;
-      margin-bottom: 30px;
-    }
 
     @include smAndDown() {
       width: calc(318px - 40px);
@@ -627,14 +651,6 @@
   &.school_2 {
     width: 318px;
     height: 448px;
-    left: 360px;
-    position: absolute;
-
-    @include mdAndDown() {
-      position: static;
-      margin-bottom: 30px;
-      margin-left: 20px;
-    }
 
     @include sm() {
       // display:none;
@@ -649,26 +665,23 @@
 
   &.compare-colleges-arrow-top {
     position: absolute;
-    top: -80px;
+    top: -70px;
     left: 380px;
 
-    @include md() {
-      left: 360px;
-    }
-
     @include smAndDown() {
-      left: 280px;
+      left: 300px;
     }
 
     @include pxAndDown(615px) {
-      left: 0px
+      left: 20px;
+      top: -65px;
     }
   }
 
   &.compare-colleges-arrow-bottom {
     display: flex;
     position: absolute;
-    top: 470px;
+    top: 480px;
     left: 130px;
 
     @include mdAndDown() {
@@ -816,6 +829,22 @@
     @include xs() {
       padding-top: 1rem;
     }
+
+    .compare-icon {
+      position: absolute;
+      left: 260px;
+      top: 10px;
+
+      @include smAndDown() {
+        left: 220px;
+      }
+
+      &.hide-small {
+        @include pxAndDown(615px) {
+          display: none;
+        }
+      }
+    }
   }
 
   &.college-profiles {
@@ -883,6 +912,27 @@ const mobilePanels = ref(0)
 const highlightStyle = ref({
   top: "-10px",
 })
+
+const school1Hover = ref(false)
+const school2Hover = ref(false)
+
+const hoverSchool1 = (e) => {
+  console.log(e)
+  school1Hover.value = true
+}
+
+const unHoverSchool1 = (e) => {
+  school1Hover.value = false
+}
+
+const hoverSchool2 = (e) => {
+  school2Hover.value = true
+}
+
+const unHoverSchool2 = (e) => {
+  console.log(e)
+  school2Hover.value = false
+}
 
 const handleSchoolNameSelected = (school) => {
   if (school === "") {
