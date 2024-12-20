@@ -236,7 +236,7 @@
           <div class="position-relative" style="height: 500px;">
             <img
               src="~/assets/images/home/search.png" 
-              class="elevation-6 rounded-lg position-absolute layout-images search" 
+              class="elevation-6 rounded-lg position-absolute layout-images search scale-on-hover-small" 
               alt="College Search"
             />
           </div>
@@ -261,7 +261,7 @@
               <div class="position-relative" style="height: 255px;">
                 <img 
                   src="~/assets/images/home/median_debt.png" 
-                  class="elevation-6 rounded-lg layout-images median_debt" 
+                  class="elevation-6 rounded-lg layout-images median_debt scale-on-hover-small" 
                   alt="College Search"
                 />
               </div>
@@ -272,7 +272,7 @@
         <v-col cols="12" lg="7" style="z-index: 2;" class="position-relative">
           <div class="d-flex">
             <div 
-              class="position-relative college-card"
+              class="position-relative scale-on-hover"
               @mouseenter="school1Hover = true"
               @mouseleave="school1Hover = false"
             >
@@ -287,7 +287,7 @@
               />
             </div>
             <div
-              class="position-relative college-card ml-5"
+              class="position-relative scale-on-hover ml-5"
               @mouseenter="school2Hover = true"
               @mouseleave="school2Hover = false"
             >
@@ -355,18 +355,19 @@
           <div class="position-relative">
             <img 
               src="~/assets/images/home/average_annual_cost.png" 
-              class="elevation-6 rounded-lg position-absolute layout-images annual_cost" 
+              class="elevation-6 rounded-lg position-absolute layout-images annual_cost scale-on-hover" 
               alt="College Search"
+              style="z-index: 1;"
             />
             <img 
               src="~/assets/images/home/acceptance_rate.png" 
-              class="elevation-6 rounded-lg position-absolute layout-images acceptance_rate" 
+              class="elevation-6 rounded-lg position-absolute layout-images acceptance_rate scale-on-hover" 
               alt="College Search"
             />
           </div>
           <img 
             src="~/assets/images/home/graduation_rate.png" 
-            class="elevation-6 rounded-lg layout-images graduation_rate" 
+            class="elevation-6 rounded-lg layout-images graduation_rate scale-on-hover" 
             alt="College Search"
 
           />
@@ -393,18 +394,19 @@
             <div class="position-relative">
               <img
                 src="~/assets/images/home/location.png" 
-                class="elevation-6 rounded-lg position-absolute layout-images location" 
+                class="elevation-6 rounded-lg position-absolute layout-images location scale-on-hover" 
                 alt="College Search"
               />
               <img
                 src="~/assets/images/home/psychology.png" 
-                class="elevation-6 rounded-lg position-absolute layout-images psychology" 
+                class="elevation-6 rounded-lg position-absolute layout-images psychology scale-on-hover" 
                 alt="College Search"
               />
               <img 
                 src="~/assets/images/home/median_earnings.png" 
-                class="elevation-6 rounded-lg position-absolute layout-images median_earning" 
+                class="elevation-6 rounded-lg position-absolute layout-images median_earning scale-on-hover" 
                 alt="College Search"
+                style="z-index: 1;"
               />
               <HomeArrow
                 class="layout-images fos-arrow"
@@ -583,13 +585,21 @@
   }
 }
 
-.college-card {
-    transition: transform 0.3s;
+.scale-on-hover {
+  transition: transform 0.3s;
 
-    &:hover {
-      transform: scale(1.02);
-    }
+  &:hover {
+    transform: scale(1.02);
   }
+}
+
+.scale-on-hover-small {
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
 
 .z-back {
   z-index: -1;
