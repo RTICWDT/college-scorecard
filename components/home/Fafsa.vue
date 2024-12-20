@@ -22,7 +22,7 @@
   </v-btn>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .home-callout {
   color: use-theme('secondary-green');
 }

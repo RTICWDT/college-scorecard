@@ -73,7 +73,7 @@ onMounted(async () => {
 })
 </script>
 
-<style>
+<style scoped lang="scss">
 .arrow-path {
   stroke: var(--arrow-color);
   stroke-width: 1;

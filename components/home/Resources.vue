@@ -65,9 +65,13 @@
   </p>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .home-callout {
   color: use-theme('secondary-green') !important;
+}
+
+p {
+  max-width: 600px;
 }
 </style>
 

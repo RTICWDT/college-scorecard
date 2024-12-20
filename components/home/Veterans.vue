@@ -43,13 +43,17 @@
   </p>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .link-dark {
   color: use-theme('tertiary-green') !important;
 }
 
 .link-light {
   color: use-theme('secondary-green') !important;
+}
+
+p {
+  max-width: 600px;
 }
 </style>
 

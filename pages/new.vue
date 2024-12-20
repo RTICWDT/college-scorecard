@@ -5,7 +5,7 @@
     <v-container>
       <v-row>
         <v-col>
-          <h1 class="display-5">Search and compare colleges</h1>
+          <h1 class="display-5 splash-title">Search and compare colleges</h1>
           <Spacer :height="10" />
 
           <!-- MOBILE SPLASH -->
@@ -421,28 +421,35 @@
         </v-row>
       </v-container>
 
-      <v-container class="d-block d-md-none bg-white pb-6">
+      <v-container class="d-block d-md-none bg-white pb-6 pt-7">
         <v-row>
           <v-col>
             <HomeResources />
-            <hr />
+            <hr class="my-7"/>
             <HomeFafsa />
+            <Spacer :height="10" />
           </v-col>
         </v-row>
       </v-container>
       <v-container class="d-block d-md-none pb-6">
         <v-row>
           <v-col>
+            <Spacer :height="10" />
             <HomeVeterans theme="light" />
           </v-col>
         </v-row>
       </v-container>
     </div>
-
-
 </template>
 
 <style scoped lang="scss">
+.splash-title {
+  @include smAndDown() {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+}
+
 .search-button {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -802,7 +809,11 @@
       padding-bottom: 1rem;
     }
 
-    @include smAndDown() {
+    @include sm() {
+      padding-top: 2rem;
+    }
+
+    @include xs() {
       padding-top: 1rem;
     }
   }
@@ -813,7 +824,12 @@
       padding-bottom: 7rem;
     }
 
-    @include smAndDown() {
+    @include sm() {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    @include xs() {
       padding-top: 1rem;
       padding-bottom: 2rem;
     }
@@ -830,7 +846,12 @@
       padding-bottom: 13rem;
     }
 
-    @include smAndDown() {
+    @include sm() {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    @include xs() {
       padding-top: 1rem;
       padding-bottom: 1rem;
     }
@@ -843,6 +864,7 @@
     }
 
     @include smAndDown() {
+      // padding-top: 1rem;
     }
   }
 }
