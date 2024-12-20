@@ -688,7 +688,7 @@
 
     }
 
-    @include smAndDown() {
+    @include xs() {
       padding-top: 1rem;
       padding-bottom: 2rem;
     }
