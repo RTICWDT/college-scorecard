@@ -265,7 +265,7 @@
                 <img 
                   src="~/assets/images/home/median_debt.png" 
                   class="elevation-6 rounded-lg layout-images median_debt scale-on-hover-small" 
-                  alt="College Search"
+                  alt="The header 'Median Total Debt After Graduation' is above two bar charts. One chart says 'University of State College' and displays a value of $31,200. The other chart says 'College State University' and displays a value of $25,500."
                 />
               </div>
             </div>
@@ -372,7 +372,7 @@
           <img
             src="~/assets/images/home/graduation_rate.png" 
             class="elevation-6 rounded-lg layout-images graduation_rate scale-on-hover" 
-            alt="College Search"
+            alt="A vertical bar chart labeled 'Graduation Rate' with a value of 96% on a scale of 0% to 100%."
 
           />
         </v-col>
@@ -413,7 +413,7 @@
               <img
                 src="~/assets/images/home/psychology.png" 
                 class="elevation-6 rounded-lg position-absolute layout-images psychology scale-on-hover" 
-                alt="College Search"
+                alt="Data for a Psychology field of study. Median Earnings: $87,254, Monthly Earnings $7,271, Median Total Debt $19,500, and Monthly Loan Payment $195."
               />
               <img 
                 src="~/assets/images/home/median_earnings.png" 
