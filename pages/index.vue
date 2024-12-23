@@ -390,7 +390,16 @@
               <h2 class="display-6 mb-6">Find what to study</h2>
               <p class="info-text mb-6">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
               <NuxtLink to="search/fos-landing" class="text-white font-weight-bold text-decoration-none hover-underline" @click="analytics.trackNavigation('/search/fos-landing')">
-                Search Fields of Study<v-icon size="x-small" color="white" class="ml-1">mdi-arrow-right</v-icon>
+                <v-btn
+                  color="primary-yellow text-uppercase h-tag font-weight-bold" 
+                  target="_blank"
+                  size="large"
+                  :height="60"
+                  :width="278"
+                  @click="analytics.trackNavigation('/search/fos-landing')"
+                >
+                  Search Fields of Study
+                </v-btn>
               </NuxtLink>
             </div>
           </v-col>
@@ -807,10 +816,10 @@
   &.fos-arrow {
     position: absolute;
     top: 150px;
-    left: -230px;
+    left: -220px;
 
     @include md() {
-      left: -200px;
+      left: -180px;
       top: 130px;
     }
 
