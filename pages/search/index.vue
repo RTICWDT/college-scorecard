@@ -376,7 +376,7 @@
                   v-for="school in results.schools"
                   :key="school.id"
                   cols="12"
-                  :xl="showSidebar ? 3 : 2"
+                  :xl="showSidebar ? 2 : 2"
                   :lg="showSidebar ? 4 : 3"
                   :md="showSidebar ? 6 : 4"
                   sm="6"
