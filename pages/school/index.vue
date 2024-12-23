@@ -96,7 +96,13 @@
             </h1>            
             <div class="population my-1">
               <span class="font-weight-bold">{{ toNumber(undergraduates) }}</span>
-              undergraduate students
+              undergraduate students 
+              <TooltipModal
+                definition="undergrad-students"
+                color="white"
+                class=""
+                :isBranch="isBranch"
+              />
             </div>
             <div class="school-url my-1">
               <a
