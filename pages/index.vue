@@ -221,6 +221,7 @@
               size="large"
               :height="60"
               :width="241"
+              @click="analytics.trackNavigation('/search/')"
             >
               Start your Search
             </v-btn>
@@ -347,6 +348,7 @@
                 size="large"
                 :height="60"
                 :width="218"
+                @click="analytics.trackNavigation('/search/')"
               >
                 Search Schools
               </v-btn>
@@ -387,7 +389,7 @@
               <p class="mb-2 h-tag tag-white">Search fields of study</p>
               <h2 class="display-6 mb-6">Find what to study</h2>
               <p class="info-text mb-6">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
-              <NuxtLink to="search/fos-landing" class="text-white font-weight-bold text-decoration-none hover-underline">
+              <NuxtLink to="search/fos-landing" class="text-white font-weight-bold text-decoration-none hover-underline" @click="analytics.trackNavigation('/search/fos-landing')">
                 Search Fields of Study<v-icon size="x-small" color="white" class="ml-1">mdi-arrow-right</v-icon>
               </NuxtLink>
             </div>
