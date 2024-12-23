@@ -26,8 +26,8 @@
 }
 
 .sidebar-open {
-  min-width: 390px;
-  max-width: 390px;
+  min-width: 330px;
+  max-width: 330px;
 
   @include md {
     min-width: 330px;
@@ -35,8 +35,8 @@
   }
 
   @include xl {
-    min-width: 600px;
-    max-width: 600px;
+    min-width: 330px;
+    max-width: 330px;
   }
 }
 
@@ -70,6 +70,20 @@
 
 :deep(.v-pagination__list) {
   justify-content: right;
+}
+
+:deep(.v-pagination__prev) {
+  width: 28px;
+}
+
+:deep(.v-pagination__next) {
+  width: 28px;
+}
+
+:deep(.v-pagination__item > button) {
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
 }
 
 .resultsNavCard {
@@ -237,7 +251,7 @@
                   <Spacer :height="10" />
 
                   <div class="d-flex flex-column flex-md-row align-start align-md-center w-100">
-                    <div class="d-flex flex-column flex-sm-row pb-4 pb-sm-0 flex-grow-1">
+                    <div class="d-flex flex-column flex-sm-row pb-4 pb-md-0 flex-grow-1">
                       <!-- RESET FILTERS -->
                       <v-btn
                         id="search-button-clear"
@@ -480,14 +494,14 @@ watch(() => results.meta, (meta) => {
 // 
 
 const paginatorPageCount = computed(() => {
-  if (breakpoints.xs.value) { return 1 }
+  if (breakpoints.xs.value) { return 3 }
   if (breakpoints.smAndDown.value) { 
-    return 2
+    return 4
   }
 
   if (breakpoints.md.value) {
     if (showSidebar.value) {
-      return 1
+      return 2
     }
     return 4
   }
@@ -500,7 +514,7 @@ const sortText = computed(() => {
   const foundSort = sorts.value.find((el) => el.field === input.sort)
   if (foundSort) {
     if (foundSort.field === 'threshold_earnings:desc') {
-      return "% Earning More Than..."
+      return "% Earning More..."
     }
     return foundSort.type
   }
