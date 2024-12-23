@@ -76,7 +76,6 @@
                         v-model="input.cip4_degree"
                         hide-details
                         id="fosDegree"
-                        color="fos-search-color"
                         aria-required="true"
                       />
                     </v-col>
@@ -170,7 +169,6 @@
                       v-model="input.cip4_degree"
                       hide-details
                       id="fosDegree"
-                      color="primary-yellow"
                       bgColor="white"
                       aria-required="true"
                       class="fos-search-degree-large"

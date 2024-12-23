@@ -8,6 +8,7 @@
           'options-visible': isOpen, 
           'variant-dense': variant === 'dense',
           'variant-home': variant === 'home',
+          'variant-home-full-border': variant === 'home-full-border'
           }"
         >
         <div style="width: 25px;">
@@ -38,6 +39,7 @@
           :class="{
             'variant-dense': variant === 'dense',
             'variant-home': variant === 'home',
+            'variant-home-full-border': variant === 'home-full-border',
           }"
           @click="onPlaceHolderClick">
           {{ placeholder }}
@@ -118,6 +120,10 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator: (value) => ['default', 'homepage', 'dense'].includes(value)
+  },
+  fullBorder: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -549,7 +555,7 @@ onUnmounted(() => {
     top: 8px;
   }
 
-  &.variant-home:not(.active) {
+  &.variant-home:not(.active), &.variant-home-full-border:not(.active) {
     top: 23px;
   }
 
@@ -562,12 +568,17 @@ onUnmounted(() => {
       top: 5px;
       left: 40px;
     }
+
+    .variant-home-full-border & {
+      top: 5px;
+      left: 40px;
+    }
   }
 
   &.focus {
-    color: v-bind('themeColor');
+    color:  use-theme('gray-700');
 
-    &.variant-home {
+    &.variant-home, &.variant-home-full-border {
       color: use-theme('gray-700');
     }
   }
@@ -679,7 +690,6 @@ ul[role="listbox"] li[role="option"] {
   padding-top: 0;
   padding-bottom: 0;
   outline: 1px solid v-bind('themeColor');
-
 }
 
 
@@ -702,12 +712,18 @@ ul[role="listbox"] li[role="option"] {
     height: 40px;
   }
 
-  &.variant-home {
+  &.variant-home, &.variant-home-full-border {
     height: 70px;
     border: 1px solid transparent;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     border-right:none;
+  }
+
+  &.variant-home-full-border {
+    border-right: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 }
 
