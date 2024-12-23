@@ -73,7 +73,7 @@
                     target="_blank"
                     @click="analytics.transitionOutboundLink"
                   >
-                    {{ version }}
+                    {{ config.public.version }}
                     <v-icon size="x-small" color="white" class="pl-1">
                       mdi-open-in-new
                     </v-icon>
@@ -152,7 +152,7 @@ const route = useRoute()
 const activeLink = ref(null)
 const { breakpoints } = useVuetify()
 
-const version = ref('3.4.0') // TODO: implement a way to get the version
+const config = useRuntimeConfig() 
 
 const isFluid = computed(() => {
   return breakpoints.md.value
