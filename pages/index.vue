@@ -240,7 +240,7 @@
             <img
               src="~/assets/images/home/search.png" 
               class="elevation-6 rounded-lg position-absolute layout-images search scale-on-hover-small" 
-              alt="College Search"
+              alt="The College Scorecard search results page with degree types filter open."
             />
           </div>
         </v-col>
@@ -286,7 +286,7 @@
               <img 
                 src="~/assets/images/home/school_1.png" 
                 class="elevation-6 rounded-lg layout-images school_1" 
-                alt="College Search"
+                alt="Card with data about a fake college. The checkmark in the top corner turns blue on hover to demonstrate the site's compare feature."
               />
             </div>
             <div
@@ -300,7 +300,7 @@
               <img
                 src="~/assets/images/home/school_2.png" 
                 class="elevation-6 rounded-lg layout-images school_2" 
-                alt="College Search"
+                alt="Card with data about a fake college. The checkmark in the top corner turns blue on hover to demonstrate the site's compare feature."
               />
             </div>
           </div>
@@ -360,13 +360,13 @@
             <img 
               src="~/assets/images/home/average_annual_cost.png" 
               class="elevation-6 rounded-lg position-absolute layout-images annual_cost scale-on-hover" 
-              alt="College Search"
+              alt="Bar chart labeled 'Average Annual Cost.' A horizontal blue bar is displayed with a value of $31,101 on a scale of $0 to $100,000. A navy blue midpoint line overlays the blue bar at an unknown value. "
               style="z-index: 1;"
             />
             <img 
               src="~/assets/images/home/acceptance_rate.png" 
               class="elevation-6 rounded-lg position-absolute layout-images acceptance_rate scale-on-hover" 
-              alt="College Search"
+              alt="Pie graph labeled 'Acceptance Rate.' The value 25% is displayed in the center of the graph and the pie graph is shaded accordingly."
             />
           </div>
           <img
@@ -399,7 +399,7 @@
               <img
                 src="~/assets/images/home/location.png" 
                 class="elevation-6 rounded-lg position-absolute layout-images location scale-on-hover" 
-                alt="College Search"
+                alt="Location filter with 'Near Me' selected. Slider for Annual Earnings is filtered to show $60k - $150k. Slider for Median Debt is filtered to $0k - $27k."
               />
               <img
                 src="~/assets/images/home/psychology.png" 
@@ -409,7 +409,7 @@
               <img 
                 src="~/assets/images/home/median_earnings.png" 
                 class="elevation-6 rounded-lg position-absolute layout-images median_earning scale-on-hover" 
-                alt="College Search"
+                alt="The header 'Compare Median Earnings' is above two bar charts. One chart says 'Psychology - University of State College' and displays a value of $76,515. The other chart says 'Psychology - College State University' and displays a value of $72,810."
                 style="z-index: 1;"
               />
               <HomeArrow

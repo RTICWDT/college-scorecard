@@ -1,10 +1,19 @@
 <template>
   <h3 class="display-7 mb-4">Start Your FAFSA® Application</h3>
   <div style="max-width: 400px">
-    <p class="mb-4">To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA).</p>
-    <p  class="mb-7">
-      Use the 
-      <a class="home-callout" href="https://www.bls.gov/ooh/" target="_blank" @click="analytics.transitionOutboundLink($event)">FAFSA4caster
+    <p class="mb-4">
+      You can learn more about the types of financial aid that are available at
+      <a class="home-callout" href="https://studentaid.gov/" target="_blank" @click="analytics.transitionOutboundLink($event)">
+        StudentAid.gov
+        <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      </a>
+    </p>
+
+
+    <p class="mb-7">
+      To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA®) form. You can use
+      <a class="home-callout" href="https://studentaid.gov/aid-estimator/" target="_blank" @click="analytics.transitionOutboundLink($event)">
+        Federal Student Aid aid-estimator
         <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
       </a>
       to see how much aid may be available to you.

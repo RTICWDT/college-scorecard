@@ -1,6 +1,6 @@
 <template>
   <div :class="classes" ref="arrowContainer">
-    <svg :width="width" :height="height" :viewBox="viewBox" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg :width="width" :height="height" :viewBox="viewBox" fill="none" xmlns="http://www.w3.org/2000/svg" alt="">
       <path 
         :class="['arrow-path', { 'animate': hasBeenVisible }]" 
         :d="path" 

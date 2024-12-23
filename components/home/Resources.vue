@@ -56,13 +56,13 @@
     </a>
     for detailed information about over 300 occupational profiles.
   </p>
-  <hr />
-  <p>
+  <!-- <hr /> -->
+  <!-- <p>
     You can learn more about the types of financial aid that are  available at
     <a class="home-callout" href="https://studentaid.gov/" target="_blank" @click="analytics.transitionOutboundLink($event)">StudentAid.gov
       <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
     </a>
-  </p>
+  </p> -->
 </template>
 
 <style scoped lang="scss">
