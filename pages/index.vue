@@ -210,9 +210,9 @@
             <div class="college-filter-highlight" :style="highlightStyle"></div>
           </div>
           <ul class="college-filter-list mb-7">
-            <li @mouseenter="highlightStyle.top = '-10px'"><span>Search by Location</span></li>
-            <li @mouseenter="highlightStyle.top = '28px'"><span>Filter by annual cost</span></li>
-            <li @mouseenter="highlightStyle.top = '68px'"><span>Search by degree type</span></li>
+            <li @mouseenter="highlightStyle.top = '-10px'"><span class="info-text">Search by Location</span></li>
+            <li @mouseenter="highlightStyle.top = '28px'"><span class="info-text">Filter by annual cost</span></li>
+            <li @mouseenter="highlightStyle.top = '68px'"><span class="info-text">Search by degree type</span></li>
           </ul>
           <NuxtLink to="/search/" :tabindex="-1">
             <v-btn
@@ -257,7 +257,7 @@
           <div class="compare-colleges-text-wrap"> 
             <p class="mb-2 h-tag tag-yellow">Compare Colleges</p>
             <h2 class="display-6 mb-6">See how colleges <div class="d-inline-block">compare <HomeCompareIcon class="d-inline" :hovered="true" /></div></h2>
-            <p style="max-width: 420px">Compare up to 10 colleges at once to make informed decisions about your path to college.</p>
+            <p class="info-text" style="max-width: 420px">Compare up to 10 colleges at once to make informed decisions about your path to college.</p>
             <Spacer :height="80" class="d-block d-lg-none" />
             <div class="d-none d-lg-block">
               <Spacer :height="80" />
@@ -600,7 +600,7 @@
 
 .college-filter-highlight {
   position: absolute;
-  width: 228px;
+  width: 238px;
   height: 40px;
   background-color: use-theme('primary-yellow');
   opacity: 0.2;
