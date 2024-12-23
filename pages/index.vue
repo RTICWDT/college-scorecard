@@ -519,9 +519,16 @@
   border-radius: 30px;
   font-size: 16px;
 
+  outline: 2px solid  use-theme('primary-blue');
+
   &.dark {
     border: 1.5px solid use-theme('primary-blue');
     color: use-theme('primary-blue');
+    outline: 2px solid  white;
+  }
+
+  &:focus, &:hover {
+    box-shadow: 0 0 0 4px use-theme('secondary-blue');
   }
 }
 
