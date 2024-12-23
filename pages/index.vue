@@ -208,9 +208,9 @@
             <div class="college-filter-highlight" :style="highlightStyle"></div>
           </div>
           <ul class="college-filter-list mb-7">
-            <li @mouseenter="highlightStyle.top = '-10px'"><span class="info-text">Search by Location</span></li>
-            <li @mouseenter="highlightStyle.top = '28px'"><span class="info-text">Filter by annual cost</span></li>
-            <li @mouseenter="highlightStyle.top = '68px'"><span class="info-text">Search by degree type</span></li>
+            <li @mouseenter="highlightStyle.top = '-10px'"><span class="info-text">Search by location</span></li>
+            <li @mouseenter="highlightStyle.top = '30px'"><span class="info-text">Filter by annual cost</span></li>
+            <li @mouseenter="highlightStyle.top = '70px'"><span class="info-text">Search by degree type</span></li>
           </ul>
           <NuxtLink to="/search/" :tabindex="-1">
             <v-btn
