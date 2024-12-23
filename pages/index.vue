@@ -578,8 +578,10 @@
     &::before {
       content: '';
       display: inline-block;
-      height: 16px;
-      width: 16px;
+      position: relative;
+      bottom: 2px;
+      height: 10px;
+      width: 14px;
       background-image: url('~/assets/images/checkmark.png');
       background-size:     cover;                      /* <------ */
       background-repeat:   no-repeat;
