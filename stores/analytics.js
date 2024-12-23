@@ -48,7 +48,9 @@ export const useAnalytics = defineStore('analytics', {
   
     transitionOutboundLink(event) {
       let href = '(unknown)'
-      if (event.target.className.match(/v-btn__content/)) {
+      if (!event.target.href) {
+        href = event.target.parentNode.href
+      } else if (event.target.className.match(/v-btn__content/)) {
         href = event.target.parentNode.href
       } else {
         href = event.target.href
