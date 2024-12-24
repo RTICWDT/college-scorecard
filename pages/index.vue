@@ -208,9 +208,9 @@
             <div class="college-filter-highlight" :style="highlightStyle"></div>
           </div>
           <ul class="college-filter-list mb-7">
-            <li @mouseenter="highlightStyle.top = '-10px'"><span class="info-text">Search by location</span></li>
-            <li @mouseenter="highlightStyle.top = '30px'"><span class="info-text">Filter by annual cost</span></li>
-            <li @mouseenter="highlightStyle.top = '70px'"><span class="info-text">Search by degree type</span></li>
+            <li @mouseenter="filterHoverTo('-10px', 'search_location')"><span class="info-text">Search by location</span></li>
+            <li @mouseenter="filterHoverTo('30px', 'search_cost')"><span class="info-text">Filter by annual cost</span></li>
+            <li @mouseenter="filterHoverTo('70px', 'search_degree')"><span class="info-text">Search by degree type</span></li>
           </ul>
           <NuxtLink to="/search/" :tabindex="-1">
             <v-btn
@@ -235,11 +235,34 @@
         </v-col>
         <v-col class="d-none d-sm-block" cols="8" sm="6" lg="7">
           <div class="position-relative" style="height: 500px;">
-            <img
-              src="~/assets/images/home/search.png" 
-              class="elevation-6 rounded-lg position-absolute layout-images search scale-on-hover-small" 
-              alt="The College Scorecard search results page with degree types filter open."
-            />
+            <div class="position-absolute layout-images search scale-on-hover-small">
+              <Transition name="slide-up">
+                <img
+                  v-if="highlightImg === 'search_location'"
+                  src="~/assets/images/home/search_location.png" 
+                  class="elevation-6 rounded-lg" 
+                  alt="The College Scorecard search results page with degree types filter open."
+                />
+                <img
+                  v-else-if="highlightImg === 'search_cost'"
+                  src="~/assets/images/home/search_cost.png" 
+                  class="elevation-6 rounded-lg" 
+                  alt="The College Scorecard search results page with degree types filter open."
+                />
+                <img
+                  v-else-if="highlightImg === 'search_degree'"
+                  src="~/assets/images/home/search_degree.png" 
+                  class="elevation-6 rounded-lg" 
+                  alt="The College Scorecard search results page with degree types filter open."
+                />
+                <img
+                  v-else="highlightImg === 'search'"
+                  src="~/assets/images/home/search.png" 
+                  class="elevation-6 rounded-lg" 
+                  alt="The College Scorecard search results page with degree types filter open."
+                />
+              </Transition>
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -389,7 +412,7 @@
               <p class="info-text mb-6">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
               <NuxtLink to="search/fos-landing" :tabindex="-1">
                 <v-btn
-                  color="primary-yellow text-uppercase h-tag font-weight-bold" 
+                  color="primary-yellow text-uppercase h-tag font-weight-bold"
                   target="_blank"
                   size="large"
                   :height="60"
@@ -484,6 +507,21 @@
     font-size: 40px;
     margin-bottom: 10px;
   }
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.25s ease-out;
+  position: absolute;
+}
+
+.slide-up-enter-from {
+  opacity: 0;
+}
+
+.slide-up-leave-to {
+  // opacity: 0;
+  box-shadow: none !important;
 }
 
 .search-button {
@@ -587,6 +625,7 @@
 .college-filter-list {
   li {
     list-style: none;
+    max-width: 240px;
 
     &::before {
       content: '';
@@ -681,8 +720,12 @@
   &.search {
     width: 710px;
     height: 580px;
-    bottom: -40px; 
-    // left: 15px;
+    bottom: -40px;
+
+    img {
+      width: 710px;
+      height: 580px;
+    }
   }
 
   &.median_debt {
@@ -965,12 +1008,18 @@ const { breakpoints } = useVuetify()
 const desktopTabs = ref(0)
 const mobilePanels = ref(0)
 
-const highlightStyle = ref({
-  top: "-10px",
-})
+
 
 const school1Hover = ref(false)
 const school2Hover = ref(false)
+
+const highlightStyle = ref({ top: "-10px" })
+const highlightImg = ref('search_location')
+
+const filterHoverTo = (position, image) => {
+  highlightStyle.value.top = position
+  highlightImg.value = image
+}
 
 const handleSchoolNameSelected = (school) => {
   if (school === "") {
