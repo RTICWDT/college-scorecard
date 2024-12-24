@@ -1092,4 +1092,16 @@ watch(location, (newVal) => {
 
   router.push({ name: 'search', query: query })
 })
+
+import searchLocation from '~/assets/images/home/search_location.png'
+import searchCost from '~/assets/images/home/search_cost.png'
+import searchDegree from '~/assets/images/home/search_degree.png'
+
+useHead({
+  link: [
+    { rel: 'preload', href: searchLocation, as: 'image', type: 'image/png' },
+    { rel: 'preload', href: searchCost, as: 'image', type: 'image/png' },
+    { rel: 'preload', href: searchDegree, as: 'image', type: 'image/png' },
+  ],
+})
 </script>
