@@ -387,7 +387,7 @@
               <p class="mb-2 h-tag tag-white">Search fields of study</p>
               <h2 class="display-6 mb-6">Find what to study</h2>
               <p class="info-text mb-6">Search and compare the Fields of Study (majors and programs) offered at colleges and universities. Find information about the salaries and debt of graduates.</p>
-              <NuxtLink to="search/fos-landing" class="text-white font-weight-bold text-decoration-none hover-underline" @click="analytics.trackNavigation('/search/fos-landing')">
+              <NuxtLink to="search/fos-landing" :tabindex="-1">
                 <v-btn
                   color="primary-yellow text-uppercase h-tag font-weight-bold" 
                   target="_blank"
