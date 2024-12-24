@@ -525,8 +525,12 @@
     outline: 2px solid  white;
   }
 
-  &:focus, &:hover {
+  &:focus {
     box-shadow: 0 0 0 4px use-theme('secondary-blue');
+  }
+
+  &:hover {
+    background-color: #FFFFFF11;
   }
 }
 
