@@ -241,13 +241,13 @@
                   v-if="highlightImg === 'search_location'"
                   src="~/assets/images/home/search_location.png" 
                   class="elevation-6 rounded-lg" 
-                  alt="The College Scorecard search results page with degree types filter open."
+                  alt="The College Scorecard search results page with location filter open."
                 />
                 <img
                   v-else-if="highlightImg === 'search_cost'"
                   src="~/assets/images/home/search_cost.png" 
                   class="elevation-6 rounded-lg" 
-                  alt="The College Scorecard search results page with degree types filter open."
+                  alt="The College Scorecard search results page with annual cost filter open."
                 />
                 <img
                   v-else-if="highlightImg === 'search_degree'"
@@ -259,7 +259,7 @@
                   v-else="highlightImg === 'search'"
                   src="~/assets/images/home/search.png" 
                   class="elevation-6 rounded-lg" 
-                  alt="The College Scorecard search results page with degree types filter open."
+                  alt="The College Scorecard search results page with all schools."
                 />
               </Transition>
             </div>
