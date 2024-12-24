@@ -523,6 +523,10 @@
     border: 1.5px solid use-theme('primary-blue');
     color: use-theme('primary-blue');
     outline: 2px solid  white;
+
+    &:hover {
+    background-color: #10274E11;
+  }
   }
 
   &:focus {
