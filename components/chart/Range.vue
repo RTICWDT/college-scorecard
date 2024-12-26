@@ -6,7 +6,8 @@
         :style="{ left: bar_styles.left, right: bar_styles.right }"
         class="picc-range-bar"
         ref="bar"
-      ></div>
+      >
+      </div>
 
       <span
         class="picc-range-label picc-range-label-min"
@@ -24,6 +25,23 @@
         <span v-html="_max.label"></span>
       </span>
 
+      <v-tooltip top v-if="!hideLower" :disabled="!lowertip">
+        <template v-slot:activator="{ on }">
+          <span
+            class="picc-range-label picc-range-label-lower"
+            :style="_lower.styles"
+            ref="lower"
+            v-on="on"
+          >
+            <span v-html="_lower.label" :style="lowerTipStyleOverride"></span>
+          </span>
+        </template>
+
+        <div class="hover-tip">
+          {{ lowertip }}
+        </div>
+      </v-tooltip>
+
       <span
         v-if="!hideMiddle"
         class="picc-range-label picc-range-label-middle"
@@ -32,6 +50,23 @@
       >
         <span v-html="_middle.label"></span>
       </span>
+
+      <v-tooltip top :disabled="!uppertip">
+        <template v-slot:activator="{ on }">
+          <span
+            class="picc-range-label picc-range-label-upper"
+            :style="_upper.styles"
+            ref="upper"
+            v-on="on"
+          >
+            <span v-html="_upper.label" :style="upperTipStyleOverride"></span>
+          </span>
+        </template>
+
+        <div class="hover-tip">
+          {{ uppertip }}
+        </div>
+      </v-tooltip>
     </div>
   </div>
 </template>
