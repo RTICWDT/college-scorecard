@@ -241,25 +241,25 @@
                   v-if="highlightImg === 'search_location'"
                   src="~/assets/images/home/search_location.png" 
                   class="elevation-6 rounded-lg" 
-                  alt="The College Scorecard search results page with location filter open."
+                  alt="College Scorecard search results page with location filter open."
                 />
                 <img
                   v-else-if="highlightImg === 'search_cost'"
                   src="~/assets/images/home/search_cost.png" 
                   class="elevation-6 rounded-lg" 
-                  alt="The College Scorecard search results page with annual cost filter open."
+                  alt="College Scorecard search results page with annual cost filter open."
                 />
                 <img
                   v-else-if="highlightImg === 'search_degree'"
                   src="~/assets/images/home/search_degree.png" 
                   class="elevation-6 rounded-lg" 
-                  alt="The College Scorecard search results page with degree types filter open."
+                  alt="College Scorecard search results page with degree types filter open."
                 />
                 <img
                   v-else="highlightImg === 'search'"
                   src="~/assets/images/home/search.png" 
                   class="elevation-6 rounded-lg" 
-                  alt="The College Scorecard search results page with all schools."
+                  alt="College Scorecard search results page with all schools."
                 />
               </Transition>
             </div>
@@ -286,7 +286,7 @@
                 <img 
                   src="~/assets/images/home/median_debt.png" 
                   class="elevation-6 rounded-lg layout-images median_debt scale-on-hover-small" 
-                  alt="The header 'Median Total Debt After Graduation' is above two bar charts. One chart says 'University of State College' and displays a value of $31,200. The other chart says 'College State University' and displays a value of $25,500."
+                  alt="The heading 'Median Total Debt After Graduation' shown above two bar charts. A chart labeled 'University of State College' displays a value of $31,200. A chart labeled says 'College State University' shows a value of $25,500."
                 />
               </div>
             </div>
@@ -307,7 +307,7 @@
               <img 
                 src="~/assets/images/home/school_1.png" 
                 class="elevation-6 rounded-lg layout-images school_1" 
-                alt="Card with data about a fake college. The checkmark in the top corner turns blue on hover to demonstrate the site's compare feature."
+                alt="Card with data about example college. Checkmark in top corner changes color on hover to demonstrate the site's compare feature. "
               />
             </div>
             <div
@@ -321,7 +321,7 @@
               <img
                 src="~/assets/images/home/school_2.png" 
                 class="elevation-6 rounded-lg layout-images school_2" 
-                alt="Card with data about a fake college. The checkmark in the top corner turns blue on hover to demonstrate the site's compare feature."
+                alt="Card with data about example college. Checkmark in top corner changes color on hover to demonstrate the site's compare feature."
               />
             </div>
           </div>
@@ -381,13 +381,13 @@
             <img 
               src="~/assets/images/home/average_annual_cost.png" 
               class="elevation-6 rounded-lg position-absolute layout-images annual_cost scale-on-hover" 
-              alt="Bar chart labeled 'Average Annual Cost.' A horizontal blue bar is displayed with a value of $31,101 on a scale of $0 to $100,000. A navy blue midpoint line overlays the blue bar at an unknown value. "
+              alt="Bar chart labeled 'Average Annual Cost.' A horizontal blue bar is displayed with a value of $31,101 on a scale of $0 to $100,000. A navy-blue midpoint line overlays the bar at an unspecified value."
               style="z-index: 1;"
             />
             <img 
               src="~/assets/images/home/acceptance_rate.png" 
               class="elevation-6 rounded-lg position-absolute layout-images acceptance_rate scale-on-hover" 
-              alt="Pie graph labeled 'Acceptance Rate.' The value 25% is displayed in the center of the graph and the pie graph is shaded accordingly."
+              alt="Pie graph labeled 'Acceptance Rate.' The value 25% is displayed in the center of the graph and the graph is shaded accordingly."
             />
           </div>
           <img
@@ -429,7 +429,7 @@
               <img
                 src="~/assets/images/home/location.png" 
                 class="elevation-6 rounded-lg position-absolute layout-images location scale-on-hover" 
-                alt="Location filter with 'Near Me' selected. Slider for Annual Earnings is filtered to show $60k - $150k. Slider for Median Debt is filtered to $0k - $27k."
+                alt="Location filter with 'Near Me' selected. Slider for Annual Earnings is set to show $60k - $150k. Slider for Median Debt is set to $0k - $27k."
               />
               <img
                 src="~/assets/images/home/psychology.png" 
@@ -439,7 +439,7 @@
               <img 
                 src="~/assets/images/home/median_earnings.png" 
                 class="elevation-6 rounded-lg position-absolute layout-images median_earning scale-on-hover" 
-                alt="The header 'Compare Median Earnings' is above two bar charts. One chart says 'Psychology - University of State College' and displays a value of $76,515. The other chart says 'Psychology - College State University' and displays a value of $72,810."
+                alt="The heading 'Compare Median Earnings' shown above two bar charts. A chart labeled 'Psychology - University of State College' shows a value of $76,515. A chart labeled 'Psychology - College State University' shows a value of $72,810."
                 style="z-index: 1;"
               />
               <HomeArrow
