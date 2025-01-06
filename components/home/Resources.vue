@@ -11,8 +11,10 @@
       target="_blank"
       @click="analytics.transitionOutboundLink($event)"
     >
-      apprenticeship.gov
-      <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      <span class="text-no-wrap">
+        apprenticeship.gov
+        <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      </span>
     </a>
   </p>
   <hr />
@@ -24,8 +26,10 @@
       target="_blank"
       @click="analytics.transitionOutboundLink($event)"
     >
-      MyNextMove.org
-      <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      <span class="text-no-wrap">
+        MyNextMove.org
+        <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      </span>
     </a>
     tool for career exploration and job analysis.
   </p>
@@ -35,8 +39,10 @@
     rates, and more on
     <a class="home-callout" href="https://trainingproviderresults.gov" target="_blank"
       @click="analytics.transitionOutboundLink($event)">
-      TrainingProviderResults.gov
-      <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      <span class="text-no-wrap">
+        TrainingProviderResults.gov
+        <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      </span>
     </a>.
   </p>
   <hr />
@@ -44,25 +50,23 @@
     Visit
     <a class="home-callout" href="https://careeronestop.org" target="_blank"
       @click="analytics.transitionOutboundLink($event)">
-      CareerOneStop.org
-      <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      <span class="text-no-wrap">
+        CareerOneStop.org
+        <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      </span>
     </a>, your source for career exploration training and jobs.
   </p>
   <hr />
   <p>
     Explore the
-    <a class="home-callout" href="https://www.bls.gov/ooh/" target="_blank" @click="analytics.transitionOutboundLink($event)">Occupational Outlook Handbook (OOH)
-      <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+    <a class="home-callout" href="https://www.bls.gov/ooh/" target="_blank" @click="analytics.transitionOutboundLink($event)">
+      <span class="text-no-wrap">
+        Occupational Outlook Handbook (OOH)
+        <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+      </span>
     </a>
     for detailed information about over 300 occupational profiles.
   </p>
-  <!-- <hr /> -->
-  <!-- <p>
-    You can learn more about the types of financial aid that are  available at
-    <a class="home-callout" href="https://studentaid.gov/" target="_blank" @click="analytics.transitionOutboundLink($event)">StudentAid.gov
-      <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
-    </a>
-  </p> -->
 </template>
 
 <style scoped lang="scss">
