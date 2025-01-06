@@ -13,7 +13,7 @@
     >
       <span class="text-no-wrap">
         apprenticeship.gov
-        <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>
+        <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon>.
       </span>
     </a>
   </p>
