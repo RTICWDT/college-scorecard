@@ -27,7 +27,7 @@
                     placeholder="Enter college name"
                   />
 
-                  <p class="pt-3 pb-2">Or Search by:</p>
+                  <p class="pt-3 pb-2">Quick search:</p>
                   <div class="d-flex">
                     <button class="option-button dark mr-3 d-flex align-center" @click="searchCollegesByLocation()" :disabled="location.error">
                       <div class="mr-2">
@@ -128,7 +128,7 @@
                 </div>
                 <Spacer :height="20" />
                 <div class="d-flex align-center">
-                  <p class="mr-4">Or search by:</p>
+                  <p class="mr-4">Quick search:</p>
                   <button class="option-button mr-3 d-flex align-center" @click="searchCollegesByLocation()" :disabled="location.error">
                     <div class="mr-2">
                       Near Me
