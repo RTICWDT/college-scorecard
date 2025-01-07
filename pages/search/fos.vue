@@ -66,6 +66,20 @@
   justify-content: right;
 }
 
+:deep(.v-pagination__prev) {
+  width: 28px;
+}
+
+:deep(.v-pagination__next) {
+  width: 28px;
+}
+
+:deep(.v-pagination__item > button) {
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+}
+
 .fosResultsSortBar {
   a {
     opacity: 1;
@@ -254,7 +268,7 @@
                 <Spacer :height="10" />
 
                 <div class="d-flex flex-column flex-md-row align-start align-md-center w-100">
-                  <div class="d-flex flex-column flex-sm-row pb-4 pb-sm-0 flex-grow-1">
+                  <div class="d-flex flex-column flex-sm-row pb-4 pb-md-0 flex-grow-1">
                     <!-- RESET FILTERS -->
                     <v-btn
                       id="search-button-clear"
@@ -553,11 +567,11 @@ const sorts = ref([
 
 // COMPUTED
 const paginatorPageCount = computed(() => {
-  if (breakpoints.xs.value) { return 1 }
-  if (breakpoints.smAndDown.value) { return 2 }
+  if (breakpoints.xs.value) { return 3 }
+  if (breakpoints.smAndDown.value) { return 4 }
 
   if (breakpoints.md.value) {
-    if (showSidebar.value) { return 1 }
+    if (showSidebar.value) { return 4 }
     return 4
   }
 

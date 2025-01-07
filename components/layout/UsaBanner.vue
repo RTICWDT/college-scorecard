@@ -6,7 +6,7 @@
         <p class="mb-0 py-1" style="font-size: .75rem">
           <span> 
             An official website of the United States government
-            <button tabindex="2" @click="toggleInfo" alt="Here's how you know">
+            <button tabindex="2" @click="toggleInfo">
               <span style="color: #0065A8; text-decoration: underline;">
                 <span class="pr-1">Here's how you know</span><i class="fas reveal-caret" :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
               </span>

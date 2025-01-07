@@ -1,13 +1,10 @@
 <template>
-  <Combobox  :variant="dense ? 'dense' : null" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
+  <Combobox variant="home-full-border" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
 </template>
 
 <script setup>
 const props = defineProps({
-  dense: {
-    type: Boolean,
-    default: false,
-  },
+  fullBorder: Boolean
 })
 
 const { site } = useSiteData()
