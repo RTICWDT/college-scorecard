@@ -270,5 +270,13 @@
   {
     "value": 107,
     "title": "Plymouth Brethren"
+  },
+  {
+    "value": 108,
+    "title": "Non-Denominational"
+  },
+  {
+    "value": 110,
+    "title": "Orthodox Christian"
   }
 ]
