@@ -35,6 +35,7 @@
           </ul>
 
           <p>The College Scorecard API has been updated to fix an issue where integer values were incorrectly set to 0 for data that was either privacy suppressed or unavailable. With this update, such values will now be properly returned as null.</p>
+          <p>This release also introduces a new College Scorecard home page that provides additional context about about the website's features and the types of data available.</p>
         </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
