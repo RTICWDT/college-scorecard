@@ -122,7 +122,7 @@
   line-height: 24px;
   letter-spacing: 0.48px;
   text-transform: uppercase;
-  font-weight: 100;
+  font-weight: 400;
 
   &.tag-green {
     color: use-theme('primary-green');
