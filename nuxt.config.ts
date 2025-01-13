@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      version: '3.4.1',
+      version: '3.5.0',
       apiKey: process.env.SCORECARD_API_KEY,
       apiUrl: process.env.SCORECARD_API_URL,
       recaptchaKey: process.env.RECAPTCHA_KEY,
