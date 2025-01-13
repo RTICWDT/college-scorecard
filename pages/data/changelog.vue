@@ -15,11 +15,11 @@
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
         <v-expansion-panel-title
-          >January NN, 2025</v-expansion-panel-title
+          >January 16, 2025</v-expansion-panel-title
         >
         <v-expansion-panel-text>
           <p>
-            On January NN, 2025, the Department updated the College
+            On January 16, 2025, the Department updated the College
             Scorecard downloadable data files and the API to include
             more recent data values derived from Federal Student Aid
             sources for the following data metrics:
