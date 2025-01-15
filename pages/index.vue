@@ -468,7 +468,7 @@
           </v-col>
           <v-col cols="12" md="6" sm="12" class="pl-md-8">
             <div class="d-flex flex-column h-100">
-              <v-card flat class="px-7 py-9 elevation-7">
+              <v-card flat class="pa-7 elevation-7">
                 <HomeFafsa />
               </v-card>
               <div class="flex-grow-1 my-3" />
@@ -506,6 +506,7 @@
   @include smAndDown() {
     font-size: 40px;
     margin-bottom: 10px;
+    line-height: 47.72px;
   }
 }
 
@@ -718,13 +719,13 @@
 
 .layout-images {
   &.search {
-    width: 710px;
-    height: 580px;
+    width: 650px;
+    height: 578px;
     bottom: -40px;
 
     img {
-      width: 710px;
-      height: 580px;
+      width: 650px;
+      height: 578px;
     }
   }
 

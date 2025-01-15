@@ -33,7 +33,7 @@
       <img
         v-if="props.theme === 'light'"
         src="~/assets/images/VA-Logo-light.png"
-        style="max-width: 280px"
+        style="max-width: 300px"
         alt="VA Logo"
         width="300"
         height="67"
