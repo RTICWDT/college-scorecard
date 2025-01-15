@@ -205,7 +205,7 @@
           <p class="mb-2 h-tag tag-green">Search Colleges</p>
           <h2 class="display-6 mb-6" style="max-width: 420px;">Search for colleges using filters</h2>
           <div class="position-relative">
-            <div class="college-filter-highlight" :style="highlightStyle"></div>
+            <div v-if="breakpoints.smAndUp.value" class="college-filter-highlight" :style="highlightStyle"></div>
           </div>
           <ul class="college-filter-list mb-7">
             <li @mouseenter="filterHoverTo('-10px', 'search_location')"><span class="info-text">Search by location</span></li>
