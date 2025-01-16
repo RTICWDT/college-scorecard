@@ -1,7 +1,16 @@
 <template>
   <div class="combobox combobox-list w-100">
     <div class="group" ref="groupNode">
-      <div class="input-wrapper" :class="{ 'active': comboboxHasVisualFocus, 'options-visible': isOpen, 'dense': dense }">
+      <div
+        class="input-wrapper"
+        :class="{ 
+          'active': comboboxHasVisualFocus, 
+          'options-visible': isOpen, 
+          'variant-dense': variant === 'dense',
+          'variant-home': variant === 'home',
+          'variant-home-full-border': variant === 'home-full-border'
+          }"
+        >
         <div style="width: 25px;">
           <v-icon v-if="loading" size="small" class="icon" icon="fa:fas fa-circle-notch fa-spin" aria-label="Loading results" />
           <v-icon v-else class="icon" icon="mdi:mdi-magnify" aria-label="Search" />
@@ -24,7 +33,15 @@
           @focus="onComboboxFocus"
           @blur="removeVisualFocusAll()"
         >
-        <div ref="placeholderNode" class="placeholder-text position-absolute" :class="{ 'dense': dense }" @click="onPlaceHolderClick">
+        <div
+          ref="placeholderNode"
+          class="placeholder-text position-absolute"
+          :class="{
+            'variant-dense': variant === 'dense',
+            'variant-home': variant === 'home',
+            'variant-home-full-border': variant === 'home-full-border',
+          }"
+          @click="onPlaceHolderClick">
           {{ placeholder }}
         </div>
         <button
@@ -37,10 +54,10 @@
           aria-controls="cb1-listbox"
           @click="onButtonClick"
         >
-        <svg width="18" height="18" aria-hidden="true" focusable="false" style="forced-color-adjust: auto">
-          <polygon class="arrow" stroke-width="0" fill="#000" points="4,9 14,9 9,14"></polygon>
-        </svg>
-      </button>
+          <svg width="18" height="18" aria-hidden="true" focusable="false" style="forced-color-adjust: auto">
+            <polygon class="arrow" stroke-width="0" fill="#000" points="4,9 14,9 9,14"></polygon>
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -75,10 +92,6 @@
 
 <script setup>
 const props = defineProps({
-  dense: {
-    type: Boolean,
-    default: false
-  },
   options: {
     type: Array,
     default: () => []
@@ -93,13 +106,22 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: 'Type to search'
+    default: 'Type to Search'
   },
   modelValue: {
     type: Object,
     default: null
   },
   loading: {
+    type: Boolean,
+    default: false
+  },
+  variant: {
+    type: String,
+    default: 'default',
+    validator: (value) => ['default', 'homepage', 'dense'].includes(value)
+  },
+  fullBorder: {
     type: Boolean,
     default: false
   }
@@ -143,6 +165,7 @@ onMounted(() => {
 const onComboboxInput = (event) => {
   filter.value = event.target.value
   props.onFilter(filter.value)
+  emit('onInput', filter.value)
 }
 
 watch(props.options, (newVal) => {
@@ -485,7 +508,7 @@ const updateStyle = () => {
   const rect = groupNode.value.getBoundingClientRect()
   styleRef.value = {
     position: 'fixed',
-    top: `${rect.bottom + 3}px`,
+    top: `${rect.bottom}px`,
     left: `${rect.left + window.scrollX}px`,
     width: `${rect.width}px`,
     display: 'block'
@@ -525,19 +548,39 @@ onUnmounted(() => {
   transition: all 0.2s;
   top: 15px;
   color: use-theme('gray-700');
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 
-  &.dense:not(.active) {
+  &.variant-dense:not(.active) {
     top: 8px;
+  }
+
+  &.variant-home:not(.active), &.variant-home-full-border:not(.active) {
+    top: 23px;
   }
 
   &.active {
     font-size: 12px;
     top: -10px;
     left: 25px;
+
+    .variant-home & {
+      top: 5px;
+      left: 40px;
+    }
+
+    .variant-home-full-border & {
+      top: 5px;
+      left: 40px;
+    }
   }
 
   &.focus {
-    color: v-bind('themeColor');
+    color:  use-theme('gray-700');
+
+    &.variant-home, &.variant-home-full-border {
+      color: use-theme('gray-700');
+    }
   }
 }
 
@@ -636,23 +679,9 @@ ul[role="listbox"] li[role="option"] {
   border-color: black;
 }
 
-.combobox .input-wrapper {
-  outline: 1px solid transparent;
-  border: 1px solid rgb(155,155,155);
-  transition: border-color 0.1s, outline-color 0.1s;
-  cursor: text;
-}
-
 .combobox .group.focus polygon,
 .combobox .group:hover polygon {
   fill-opacity: 1;
-}
-
-.combobox .group.focus input,
-.combobox .group.focus button,
-.combobox .group input:hover,
-.combobox .group button:hover {
-  /* background-color: #def; */
 }
 
 [role="listbox"].focus [role="option"][aria-selected="true"],
@@ -660,16 +689,14 @@ ul[role="listbox"] li[role="option"] {
   background-color: v-bind('themeColorTranparent');
   padding-top: 0;
   padding-bottom: 0;
-  /* border-top: 2px solid currentcolor; */
-  /* border-bottom: 2px solid currentcolor; */
   outline: 1px solid v-bind('themeColor');
-
 }
 
 
-.input-wrapper {
+.combobox .input-wrapper {
   background-color: white;
   border: 1px solid grey;
+  box-sizing: border-box;
   border-radius: 3px;
   display: flex;
   width: 100%;
@@ -677,26 +704,41 @@ ul[role="listbox"] li[role="option"] {
   padding: 1rem;
   height: 55px;
 
-  &.dense {
+  transition: border-color 0.15s ease, outline-color 0.15s ease;
+  cursor: text;
+  box-sizing: border-box;
+
+  &.variant-dense {
     height: 40px;
   }
-}
 
-.combobox .input-wrapper {
-  transition: border-color 0.15s ease, outline-color 0.15s ease;
-  outline: 2px solid transparent;
+  &.variant-home, &.variant-home-full-border {
+    height: 70px;
+    border: 1px solid transparent;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-right:none;
+  }
+
+  &.variant-home-full-border {
+    border-right: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
 }
 
 .combobox .input-wrapper:focus-within,
 .combobox .input-wrapper.active {
-  border-color: v-bind('themeColor'); /* Darker yellow border for contrast */
-  outline-color: v-bind('themeColor');
+  border-width: 2px;
+  border-color: v-bind('themeColor');
+  // outline-color: v-bind('themeColor');
 }
 
 /* Add this class to the input-wrapper when options are being viewed */
 .combobox .input-wrapper.options-visible {
+  border-width: 2px;
   border-color: v-bind('themeColor');
-  outline-color: v-bind('themeColor');
+  // outline-color: v-bind('themeColor');
 }
 
 /* Style for the v-icon */

@@ -14,9 +14,34 @@
     </v-row>
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
-        <v-expansion-panel-title>December 09, 2024</v-expansion-panel-title>
+        <v-expansion-panel-title
+          >January 16, 2025</v-expansion-panel-title
+        >
         <v-expansion-panel-text>
-          <p>On December 09, 2024, Version 3.4.0 of College Scorecard website was released. This version includes an upgrade to the website’s core framework to improve the performance and maintainability of the College Scorecard. The data on the website were not updated.</p>
+          <p>
+            On January 16, 2025, the Department updated the College
+            Scorecard downloadable data files and the API to include
+            more recent data values derived from Federal Student Aid
+            sources for the following data metrics:
+          </p>
+
+          <ul class="pb-4">
+            <li>Currently Operating Status Flag</li>
+            <li>Heightened Cash Monitoring Flag</li>
+            <li>Accrediting Agency Name and code</li>
+            <li>Title IV Approval Date</li>
+            <li>Federal School Code</li>
+            <li>Institutional Control</li>
+          </ul>
+
+          <p>The College Scorecard API has been updated to fix an issue where integer values were incorrectly set to 0 for data that was either privacy suppressed or unavailable. With this update, such values will now be properly returned as null.</p>
+          <p>This release also introduces a new College Scorecard home page that provides additional context about about the website's features and the types of data available.</p>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+      <v-expansion-panel>
+        <v-expansion-panel-title>December 9, 2024</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <p>On December 9, 2024, Version 3.4.0 of College Scorecard website was released. This version includes an upgrade to the website’s core framework to improve the performance and maintainability of the College Scorecard. The data on the website were not updated.</p>
         </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>

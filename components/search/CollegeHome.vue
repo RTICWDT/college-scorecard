@@ -1,14 +1,16 @@
 <template>
   <Combobox 
     v-model="search"
-    :placeholder="placeholder"  
-    :variant="dense ? 'dense' : null" 
+    placeholder="Enter college name (optional)"  
+    variant="home"
     :loading="loading"
     :options="items" 
     :onFilter="onFilter"
+    color="#FDB022"
     @onSubmit="handleSubmit"
     @onClear="handleClear"
     @onSearch="handleSearch"
+    @onInput="handleInput"
   />
 </template>
 
@@ -28,13 +30,9 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  dense: {
-    type: Boolean,
-    default: false,
-  },
-  placeholder: {
+  variant: {
     type: String,
-    default: "Enter a school",
+    default: 'default',
   },
 });
 
@@ -64,6 +62,10 @@ const handleClear = () => {
 
 const handleSearch = (newVal) => {
   emit('onSearch', newVal)
+}
+
+const handleInput = (newVal) => {
+  emit('onInput', newVal)
 }
 
 const runSearch = useDebounce((newVal) => {

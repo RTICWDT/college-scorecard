@@ -40,33 +40,37 @@ h1 {
       <v-row>
         <v-col cols="12" class="pb-0">
           <v-card class="pa-5 homepage-search-container" flat>
-            <v-row class="pb-0">
-              <v-col class="pb-0" cols="12" sm="5"><label class="d-block mb-2" for="fosSearch">Search Fields of Study (Required)</label></v-col>
-              <v-col class="pb-0" cols="12" sm="5"><label class="d-block mb-2" for="fosDegree">Select Degree Type (Required)</label></v-col>
-            </v-row>
             <v-row>
               <v-col cols="12" sm="5">
-                <SearchFieldOfStudy v-model="input.cip4" />
+                <div class="d-flex flex-column justify-end h-100">
+                  <label class="d-block mb-2" for="fosSearch">Search Fields of Study (Required)</label>
+                  <SearchFieldOfStudy v-model="input.cip4" />
+                </div>
               </v-col>
               <v-col cols="12" sm="4">
-                <v-select
-                  :items="fosDegrees"
-                  item-title="label"
-                  item-value="value"
-                  variant="outlined"
-                  placeholder="Select one"
-                  v-model="input.cip4_degree"
-                  hide-details
-                  id="fosDegree"
-                  color="primary-green"
-                  aria-required="true"
-                />
+                <div class="d-flex flex-column justify-end h-100">
+                  <label class="d-block mb-2" for="fosDegree">Select Degree Type (Required)</label>
+                  <v-select
+                    :items="fosDegrees"
+                    item-title="label"
+                    item-value="value"
+                    variant="outlined"
+                    placeholder="Select one"
+                    v-model="input.cip4_degree"
+                    hide-details
+                    id="fosDegree"
+                    color="primary-green"
+                    aria-required="true"
+                  />
+                </div>
               </v-col>
               <v-col cols="1" sm="3" class="">
-                <v-btn @click="handleFormSubmit" width="100%" size="x-large" color="secondary-green" :disabled="disableSearch">
-                  Search
-                  <v-icon>mdi-menu-right</v-icon>
-                </v-btn>
+                <div class="d-flex align-end h-100">
+                  <v-btn @click="handleFormSubmit" width="100%" size="x-large" color="secondary-green" :disabled="disableSearch">
+                    Search
+                    <v-icon>mdi-menu-right</v-icon>
+                  </v-btn>
+                </div>
               </v-col>
             </v-row>
           </v-card>

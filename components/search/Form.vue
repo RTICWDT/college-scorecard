@@ -387,7 +387,7 @@
           <v-select
             v-model="input.religious"
             id="search-form-religous"
-            :items="site.data.religious_affiliations"
+            :items="site.data.religious_affiliations.sort((a,b) => a.title.localeCompare(b.title))"
             item-text="label"
             item-value="value"
             label="Select one"
