@@ -63,10 +63,11 @@
                   <v-row>
                     <v-col cols="12" sm="5">
                       <Spacer :height="10" />
+                      <label class="d-block  mb-2" for="fosDegree">Search Fields of Study (Required)</label>
                       <SearchFieldOfStudy v-model="input.cip4" />
                     </v-col>
                     <v-col cols="12" sm="4">
-                      <label class="d-block  mb-2" for="fosDegree">Select Degree Type</label>
+                      <label class="d-block  mb-2" for="fosDegree">Select Degree Type (Required)</label>
                       <v-select
                         :items="fosDegrees"
                         item-title="label"
@@ -124,7 +125,7 @@
                       :searchEmptyName="false"
                     />
                   </div>
-                  <button class="search-button px-8 bg-primary-yellow font-weight-bold" @click="searchCollegesFromInput">SEARCH</button>
+                  <button class="search-button px-8 font-weight-bold" @click="searchCollegesFromInput">SEARCH</button>
                 </div>
                 <Spacer :height="20" />
                 <div class="d-flex align-center">
@@ -530,6 +531,12 @@
   border-bottom-right-radius: 5px;
   z-index: 100;
   position: relative;
+  background-color: use-theme('primary-yellow');  
+  color: black;
+
+  &:hover {
+    background-color: use-theme('yellow-950');
+  }
 }
 
 .fos-search-degree-large {
@@ -628,7 +635,7 @@
   line-height: 24px;
   letter-spacing: 0.48px;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 600;
 
   &.tag-green {
     color: use-theme('secondary-green');
