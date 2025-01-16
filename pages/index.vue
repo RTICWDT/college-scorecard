@@ -35,14 +35,14 @@
                       </div>
                       
                       <div v-if="location.isLoading">
-                        <v-icon size="x-small" color="primary-blue" icon="fa:fas fa-circle-notch fa-spin" />
+                        <v-icon class="option-icon" size="x-small" icon="fa:fas fa-circle-notch fa-spin" />
                       </div>
                       <div v-else-if="location.error">
-                        <v-icon size="x-small" color="primary-blue" icon="mdi-alert-circle" />
+                        <v-icon class="option-icon" size="x-small" icon="mdi-alert-circle" />
                       </div>
                       <div v-else>
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M0.99996 5.90567L11.146 1.22685L6.29732 11.067L6.14352 6.18331L0.99996 5.90567Z" stroke="#10274E" stroke-width="1.2" stroke-linejoin="round"/>
+                          <path class="option-icon" d="M0.99996 5.90567L11.146 1.22685L6.29732 11.067L6.14352 6.18331L0.99996 5.90567Z" stroke-width="1.2" stroke-linejoin="round"/>
                         </svg>
                       </div>
                     </button>
@@ -135,14 +135,14 @@
                     </div>
                     
                     <div v-if="location.isLoading">
-                      <v-icon size="x-small" icon="fa:fas fa-circle-notch fa-spin" />
+                      <v-icon class="option-icon" size="x-small" icon="fa:fas fa-circle-notch fa-spin" />
                     </div>
                     <div v-else-if="location.error">
-                      <v-icon size="x-small" icon="mdi-alert-circle" />
+                      <v-icon class="option-icon" size="x-small" icon="mdi-alert-circle" />
                     </div>
                     <div v-else>
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.99996 5.90567L11.146 1.22685L6.29732 11.067L6.14352 6.18331L0.99996 5.90567Z" stroke="white" stroke-width="1.2" stroke-linejoin="round"/>
+                        <path class="option-icon" d="M0.99996 5.90567L11.146 1.22685L6.29732 11.067L6.14352 6.18331L0.99996 5.90567Z" stroke-width="1.2" stroke-linejoin="round"/>
                       </svg>
                     </div>
                   </button>
@@ -558,23 +558,53 @@
 
   outline: 2px solid  use-theme('primary-blue');
 
+  // mobile
   &.dark {
     border: 1.5px solid use-theme('primary-blue');
     color: use-theme('primary-blue');
     outline: 2px solid  white;
 
     &:hover {
-    background-color: #10274E11;
+      background-color: #10274E;
+      color: white;
+
+      div {
+        .option-icon {
+          stroke: white;
+        }
+      }
+    }
+
+    div {
+      .option-icon {
+        stroke:#10274E;
+      }
+    }
   }
-  }
+
 
   &:focus {
     box-shadow: 0 0 0 4px use-theme('secondary-blue');
   }
 
   &:hover {
-    background-color: #FFFFFF11;
+    color: #10274E;
+    background-color: white;
+
+    div {
+      .option-icon {
+        stroke:#10274E;
+      }
+    }
   }
+
+  div {
+      .option-icon {
+        stroke: white;
+      }
+    }
+
+
 }
 
 .tab-splash {
