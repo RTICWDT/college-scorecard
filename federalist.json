@@ -1,9 +1,0 @@
-{
-    "headers": [
-      {
-        "/*": {
-          "cache-control": "private, no-store"
-        }
-      }
-    ]
-}
