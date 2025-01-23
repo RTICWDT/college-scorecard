@@ -1,0 +1,202 @@
+// unfortunately scss functions are breaking on build, so I have to dupe css here
+// todo: fix scss functions on build
+$gray-100: #EAEEF5;
+$gray-200: #DFE6F0;
+$gray-400: #C3C9D3;
+$gray-700: #6C737C;
+$primary-green: #007000;
+$primary-blue: #10274E;
+$secondary-blue: #1570EF;
+
+$base-font-family: "Inter", Helvetica, arial, sans-serif;
+$header-font-family: neue-haas-grotesk-display, Helvetica, arial, sans-serif;
+
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6,
+.text-subtitle-1,
+.text-subtitle-2,
+.text-body-1,
+.text-body-2,
+.text-button,
+.text-caption,
+.text-overline
+{
+  font-family: $base-font-family !important;
+}
+
+.title,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6,
+.display-7,
+.subtitle-1,
+.subtitle-2 {
+  font-family: $header-font-family !important;
+}
+
+.display-2 {
+  font-size: 28px !important;
+  line-height: 32px !important;
+}
+
+.display-3 {
+  font-size: 3rem !important;
+  line-height: 32px !important;
+}
+
+.display-5 {
+  font-size: 50px;
+  line-height: 59.65px;
+  font-weight: 500;
+}
+
+.display-6 {
+  font-size: 40px;
+  line-height: 47.72px;
+  font-weight: 400;
+}
+
+.display-7 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 33.4px;
+}
+
+.font-header {
+  font-family: $header-font-family;
+}
+
+.font-base {
+  font-family: $base-font-family;
+}
+
+.v-application {
+  // VUETIFY OVERRIDES
+  input::placeholder {
+    color: use-theme('gray-700') !important;
+    opacity: 1;
+  }
+
+  .v-label {
+    color: use-theme('gray-700');
+    opacity: 1;
+  }
+
+
+  .v-btn {
+    letter-spacing: normal;
+    text-transform: none;
+    box-shadow: none;
+  }
+
+  .v-pagination {
+    button {
+      box-shadow: 0px 1px 1px #0000001a !important;
+      border: 1px solid $gray-100;
+      height: auto;
+      padding: 1px 4px;
+    }
+  }
+
+  .v-expansion-panel-title {
+    font-weight: 500;
+    font-family: $header-font-family !important;
+    font-size: 18px;
+    line-height: 140%;
+  }
+
+  .v-card {
+    overflow-wrap: normal;
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+  }
+
+  .v-chip__close {
+    color: $primary-green !important;
+  }
+
+
+  // GENERAL OVERRIDES
+  font-family: $base-font-family !important;
+  background-color: $gray-100 !important;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $header-font-family !important;
+    line-height: 125% !important;
+  }
+
+  body, a {
+    color: $primary-green;
+  }
+
+  hr {
+    border: 1px solid $gray-200;
+    border-bottom-style: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  footer {
+    a {
+      color: white !important;
+    }
+  }
+
+  .overline {
+    font-size: 12px !important;
+    line-height: 160% !important;
+    letter-spacing: normal !important;
+  }
+
+  .sr-only {
+    display: none;
+  }
+  
+  .hover-tip {
+    max-width: 270px;
+  }
+  
+  .navy-text {
+    color: $primary-blue;
+  }
+  
+  .medium-light-blue-text {
+    color: $secondary-blue;
+  }
+  
+  .data-na {
+    padding: 0.5rem;
+    border: 1px dashed $gray-400;
+    color: $gray-700;
+    text-align: center;
+    margin: 0.8rem 0;
+  }
+  
+  .mini-data-na {
+    padding: 0.5rem;
+    color: $gray-700;
+    font-size: 0.85rem;
+    border: 1px dashed $gray-400;
+  }
+  
+  a.close-filter {
+    color: $gray-700 !important;
+    font-size:14px;
+  
+    &:active, &:hover {
+      color: $gray-700;
+    }
+  }
+  
+  .search-label {
+    font-weight:600;
+    font-size:14px;
+  }
+}

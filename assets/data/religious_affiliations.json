@@ -1,0 +1,282 @@
+[
+  {
+    "value": -1,
+    "title": "Not reported"
+  },
+  {
+    "value": -2,
+    "title": "Not applicable"
+  },
+  {
+    "value": 22,
+    "title": "American Evangelical Lutheran Church"
+  },
+  {
+    "value": 24,
+    "title": "African Methodist Episcopal Zion Church"
+  },
+  {
+    "value": 27,
+    "title": "Assemblies of God Church"
+  },
+  {
+    "value": 28,
+    "title": "Brethren Church"
+  },
+  {
+    "value": 30,
+    "title": "Roman Catholic"
+  },
+  {
+    "value": 33,
+    "title": "Wisconsin Evangelical Lutheran Synod"
+  },
+  {
+    "value": 34,
+    "title": "Christ and Missionary Alliance Church"
+  },
+  {
+    "value": 35,
+    "title": "Christian Reformed Church"
+  },
+  {
+    "value": 36,
+    "title": "Evangelical Congregational Church"
+  },
+  {
+    "value": 37,
+    "title": "Evangelical Covenant Church of America"
+  },
+  {
+    "value": 38,
+    "title": "Evangelical Free Church of America"
+  },
+  {
+    "value": 39,
+    "title": "Evangelical Lutheran Church"
+  },
+  {
+    "value": 40,
+    "title": "International United Pentecostal Church"
+  },
+  {
+    "value": 41,
+    "title": "Free Will Baptist Church"
+  },
+  {
+    "value": 42,
+    "title": "Interdenominational"
+  },
+  {
+    "value": 43,
+    "title": "Mennonite Brethren Church"
+  },
+  {
+    "value": 44,
+    "title": "Moravian Church"
+  },
+  {
+    "value": 45,
+    "title": "North American Baptist"
+  },
+  {
+    "value": 47,
+    "title": "Pentecostal Holiness Church"
+  },
+  {
+    "value": 48,
+    "title": "Christian Churches and Churches of Christ"
+  },
+  {
+    "value": 49,
+    "title": "Reformed Church in America"
+  },
+  {
+    "value": 50,
+    "title": "Episcopal Church, Reformed"
+  },
+  {
+    "value": 51,
+    "title": "African Methodist Episcopal"
+  },
+  {
+    "value": 52,
+    "title": "American Baptist"
+  },
+  {
+    "value": 53,
+    "title": "American Lutheran"
+  },
+  {
+    "value": 54,
+    "title": "Baptist"
+  },
+  {
+    "value": 55,
+    "title": "Christian Methodist Episcopal"
+  },
+  {
+    "value": 57,
+    "title": "Church of God"
+  },
+  {
+    "value": 58,
+    "title": "Church of Brethren"
+  },
+  {
+    "value": 59,
+    "title": "Church of the Nazarene"
+  },
+  {
+    "value": 60,
+    "title": "Cumberland Presbyterian"
+  },
+  {
+    "value": 61,
+    "title": "Christian Church (Disciples of Christ)"
+  },
+  {
+    "value": 64,
+    "title": "Free Methodist"
+  },
+  {
+    "value": 65,
+    "title": "Friends"
+  },
+  {
+    "value": 66,
+    "title": "Presbyterian Church (USA)"
+  },
+  {
+    "value": 67,
+    "title": "Lutheran Church in America"
+  },
+  {
+    "value": 68,
+    "title": "Lutheran Church - Missouri Synod"
+  },
+  {
+    "value": 69,
+    "title": "Mennonite Church"
+  },
+  {
+    "value": 71,
+    "title": "United Methodist"
+  },
+  {
+    "value": 73,
+    "title": "Protestant Episcopal"
+  },
+  {
+    "value": 74,
+    "title": "Churches of Christ"
+  },
+  {
+    "value": 75,
+    "title": "Southern Baptist"
+  },
+  {
+    "value": 76,
+    "title": "United Church of Christ"
+  },
+  {
+    "value": 77,
+    "title": "Protestant, not specified"
+  },
+  {
+    "value": 78,
+    "title": "Multiple Protestant Denomination"
+  },
+  {
+    "value": 79,
+    "title": "Other Protestant"
+  },
+  {
+    "value": 80,
+    "title": "Jewish"
+  },
+  {
+    "value": 81,
+    "title": "Reformed Presbyterian Church"
+  },
+  {
+    "value": 84,
+    "title": "United Brethren Church"
+  },
+  {
+    "value": 87,
+    "title": "Missionary Church Inc"
+  },
+  {
+    "value": 88,
+    "title": "Undenominational"
+  },
+  {
+    "value": 89,
+    "title": "Wesleyan"
+  },
+  {
+    "value": 91,
+    "title": "Greek Orthodox"
+  },
+  {
+    "value": 92,
+    "title": "Russian Orthodox"
+  },
+  {
+    "value": 93,
+    "title": "Unitarian Universalist"
+  },
+  {
+    "value": 94,
+    "title": "Latter Day Saints (Mormon Church)"
+  },
+  {
+    "value": 95,
+    "title": "Seventh Day Adventists"
+  },
+  {
+    "value": 97,
+    "title": "The Presbyterian Church in America"
+  },
+  {
+    "value": 99,
+    "title": "Other (none of the above)"
+  },
+  {
+    "value": 100,
+    "title": "Original Free Will Baptist"
+  },
+  {
+    "value": 101,
+    "title": "Ecumenical Christian"
+  },
+  {
+    "value": 102,
+    "title": "Evangelical Christian"
+  },
+  {
+    "value": 103,
+    "title": "Presbyterian"
+  },
+  {
+    "value": 105,
+    "title": "General Baptist"
+  },
+  {
+    "value": 106,
+    "title": "Muslim"
+  },
+  {
+    "value": 107,
+    "title": "Plymouth Brethren"
+  },
+  {
+    "value": 108,
+    "title": "Non-Denominational"
+  },
+  {
+    "value": 110,
+    "title": "Orthodox Christian"
+  }
+]
