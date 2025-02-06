@@ -134,7 +134,7 @@
                   <span
                     v-else
                     class="medium-light-blue-text font-weight-bold"
-                    >({{ toNumber(selectedFieldOfStudy.hoist) }})</span
+                    >({{ toNumber(fos.hoist) }})</span
                   >
                 </div>
               </v-expansion-panel-title>
