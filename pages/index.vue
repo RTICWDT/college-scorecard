@@ -1082,6 +1082,8 @@ const handleCollegeInput = (input) => {
 const searchCollegesFromInput = () => {
   if (collegeInput.value) {
     router.push("/search/?search=" + encodeURIComponent(collegeInput.value))
+  } else {
+    router.push("/search/")
   }
 }
 
