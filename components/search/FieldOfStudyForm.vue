@@ -23,7 +23,7 @@
           aria-label="Clear Salary After Complete Input"
           class="ml-1"
         >
-          <v-icon :color="fosSalaryIsDefault ? '#00000022' : 'black'">mdi-close</v-icon>
+          <v-icon :color="fosSalaryIsDefault ? 'white' : 'black'">mdi-close</v-icon>
         </v-btn>
       </h3>
 
@@ -88,7 +88,7 @@
           aria-label="Clear Median Total Debt Input"
           class="ml-1"
         >
-          <v-icon :color="fosDebtIsDefault ? '#00000022' : 'black'">mdi-close</v-icon>
+          <v-icon :color="fosDebtIsDefault ? 'white' : 'black'">mdi-close</v-icon>
         </v-btn>
       </h3>
 
