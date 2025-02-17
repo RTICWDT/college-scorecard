@@ -10,25 +10,25 @@
       </p>
       <ul>
         <li>
-          <a @click="scrollToAnchor('getting-started')" href="#">Getting Started</a>
+          <a @click.prevent="scrollToAnchor('getting-started')" class="glossary-anchor-link">Getting Started</a>
         </li>
         <li>
-          <a @click="scrollToAnchor('basic-usage')" href="#">Basic Usage</a>
+          <a @click.prevent="scrollToAnchor('basic-usage')" class="glossary-anchor-link">Basic Usage</a>
         </li>
         <li>
-          <a @click="scrollToAnchor('response-format')" href="#">Response Format</a>
+          <a @click.prevent="scrollToAnchor('response-format')" class="glossary-anchor-link">Response Format</a>
         </li>
         <li>
-          <a @click="scrollToAnchor('error-handling')" href="#">Error Handling</a>
+          <a @click.prevent="scrollToAnchor('error-handling')" class="glossary-anchor-link">Error Handling</a>
         </li>
         <li>
-          <a @click="scrollToAnchor('field-parameters')" href="#">Field Parameters</a>
+          <a @click.prevent="scrollToAnchor('field-parameters')" class="glossary-anchor-link">Field Parameters</a>
         </li>
         <li>
-          <a @click="scrollToAnchor('advanced-usage')" href="#">Advanced Usage</a>
+          <a @click.prevent="scrollToAnchor('advanced-usage')" class="glossary-anchor-link">Advanced Usage</a>
         </li>
         <li>
-          <a @click="scrollToAnchor('rate-limits')" href="#">Rate Limits</a>
+          <a @click.prevent="scrollToAnchor('rate-limits')" class="glossary-anchor-link">Rate Limits</a>
         </li>
       </ul>
       <h2 class="mb-2" id="getting-started">Getting Started</h2>
@@ -469,6 +469,16 @@ h3 {
 
 p { 
   margin-bottom: 1rem;
+}
+
+.glossary-anchor-link {
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+
 }
 </style>
 
