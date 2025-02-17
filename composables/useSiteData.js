@@ -6,7 +6,7 @@ import race_ethnicity from "~/assets/data/race_ethnicity.json"
 import religious_affiliations from "~/assets/data/religious_affiliations.json"
 import special_designations from "~/assets/data/special_designations.json"
 import states from "~/assets/data/states.json"
-import cip_6_digit from "~/assets/data/cip_6_test.json"
+import cip_6_digit from "~/assets/data/cip_6_digit_2020.json"
 import repayment_rates from "~/assets/data/repayment_rates.json"
 
 export function useSiteData() {
