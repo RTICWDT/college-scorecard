@@ -537,6 +537,10 @@
   &:hover {
     background-color: use-theme('yellow-950');
   }
+
+  &:focus {
+    outline: 2px solid use-theme('primary-aqua');
+  }
 }
 
 .fos-search-degree-large {
