@@ -80,7 +80,7 @@
                   </a>
                   | <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
                   <a
-                    href="http://www2.ed.gov/notices/index.html?src=ft"
+                    href="https://www.ed.gov/about/ed-overview/required-notices"
                     target="_blank"
                     @click="analytics.transitionOutboundLink"
                   >
