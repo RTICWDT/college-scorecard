@@ -109,7 +109,7 @@ const props = defineProps({
     default: 'Type to Search'
   },
   modelValue: {
-    type: Object,
+    type: [Object, String],
     default: null
   },
   loading: {
@@ -119,7 +119,7 @@ const props = defineProps({
   variant: {
     type: String,
     default: 'default',
-    validator: (value) => ['default', 'homepage', 'dense'].includes(value)
+    validator: (value) => ['default', 'dense', 'home'].includes(value)
   },
   fullBorder: {
     type: Boolean,
@@ -127,7 +127,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'onSubmit', 'onClear', 'onSearch'])
+const emit = defineEmits(['update:modelValue', 'onSubmit', 'onClear', 'onSearch', 'onInput'])
 const themeColor = ref(props.color)
 const themeColorTranparent = ref(props.color + '11')
 

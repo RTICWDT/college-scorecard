@@ -531,13 +531,9 @@ const searchAPI = async () => {
 
     const isSorting = !!input.sort
 
-    console.log("isSorting", isSorting)
-
     let params = prepareSearchParams()
     let query = buildQuery(params)
     let url = generateQueryString(params)
-
-    console.log(url)
 
     router.replace(route.path + url)
 
@@ -577,25 +573,19 @@ const searchAPI = async () => {
       }
     }
 
-    if (currentSearchTerm.value && !isSorting) {
-      // sort based on school.name match
-      results.schools.sort((a, b) => {
-          // Convert school names to lowercase for comparison
-          const aNameLower = a[fields.NAME].toLowerCase();
-          const bNameLower = b[fields.NAME].toLowerCase();
+    if (currentSearchTerm.value && (!isSorting || input.sort === "name:asc")) {
+      results.schools.sort((schoolA, schoolB) => {
+          const schoolAIsExactMatch = schoolNameIsExactMatch(schoolA);
+          const schoolBIsExactMatch = schoolNameIsExactMatch(schoolB);
 
-          // Check for exact matches
-          const aIsExactMatch = aNameLower === currentSearchTerm.value;
-          const bIsExactMatch = bNameLower === currentSearchTerm.value;
-
-          if (aIsExactMatch && !bIsExactMatch) {
-              return -1; // a comes first
+          if (schoolAIsExactMatch && !schoolBIsExactMatch) {
+              return -1; // school A comes first
           }
-          if (!aIsExactMatch && bIsExactMatch) {
-              return 1;  // b comes first
+          if (!schoolAIsExactMatch && schoolBIsExactMatch) {
+              return 1;  // school B comes first
           }
 
-          // If neither is an exact match, maintain original order based on relevance score
+          // If neither is an exact match, maintain original order based on original sort
           return 0;
       });
     }
@@ -612,6 +602,10 @@ const searchAPI = async () => {
 }
 
 const schoolNameIsExactMatch = (school) => {
+  if (!currentSearchTerm.value) {
+    return false;
+  }
+
   return school[fields.NAME].toLowerCase() === currentSearchTerm.value.toLowerCase()
 }
 
