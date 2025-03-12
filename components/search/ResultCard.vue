@@ -1,8 +1,15 @@
 <template>
+  <div v-if="exactMatch && !isLoading" class="exact-match-text">
+    <span>
+      EXACT NAME MATCH
+    </span>
+    <div class="bg-half-fill"></div>
+  </div>
+
   <v-card
     class="search-result-card mx-auto elevation-0"
     outlined
-    :class="{ 'result-card-selected': isSelected, 'loading': isLoading }"
+    :class="{ 'result-card-selected': isSelected, 'loading': isLoading, 'exact-match': exactMatch }"
   >
     <v-card-text class="pa-3" style="flex-grow:1">
       <p class="mt-1 mb-2" v-if="underInvestigation == 1">
@@ -121,6 +128,7 @@ const props = defineProps({
   school: Object,
   schoolsCount: Number,
   isLoading: Boolean,
+  exactMatch: Boolean,
 })
 
 const store = useCompareStore()
@@ -181,6 +189,36 @@ const isSelected = computed(() => store.institutions.find(({ id }) => id == prop
 </script>
 
 <style lang="scss" scoped>
+.exact-match {
+  outline: 3px solid #1874DC !important;
+}
+
+.exact-match-text {
+  position: relative;
+  z-index: 100;
+
+  span {
+    position: absolute;
+    top: -12px;
+    left: 17px;
+    width: 155px;
+    text-align: center;
+    color: #1874DC;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  div.bg-half-fill {
+    position: absolute;
+    background-color: white;
+    width: 155px;
+    height: 21px;
+    top: -3px;
+    left: 17px;
+    z-index: -1;
+  }
+}
+
 .loading {
   opacity: 0.6;
   filter: blur(1px);
