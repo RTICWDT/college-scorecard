@@ -15,7 +15,7 @@
                 </span>
                 <Spacer :height="10" />
                 <ChartHorizontalBarRangeSimplified
-                  :hasData="medianEarnings"
+                  :hasData="!!medianEarnings"
                   :show-bar-values="false"
                   class="pb-1"
                   :value="{
@@ -61,7 +61,7 @@
                 </span>
                 <Spacer :height="10" />
                 <ChartHorizontalBarRangeSimplified
-                  :hasData="medianDebt"
+                  :hasData="!!medianDebt"
                   :show-bar-values="false"
                   class="pb-1"
                   :value="{
@@ -91,7 +91,7 @@
                 </span>
                 <Spacer :height="10" />
                 <ChartHorizontalBarRangeSimplified
-                  :hasData="medianPrior"
+                  :hasData="!!medianPrior"
                   :show-bar-values="false"
                   class="pb-1"
                   :value="{
