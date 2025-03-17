@@ -593,6 +593,7 @@ const searchAPI = async () => {
     results.meta = response.metadata
     shareUrl.value = window.location.href
     displayFlag.value = input.dolflag === "true"
+    input.sort = input.sort || props.defaultSort
   } catch (err) {
     console.warn("Error fetching search.", err)
     results.meta = {}
