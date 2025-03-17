@@ -547,33 +547,38 @@ const searchAPI = async () => {
     isLoading.value = false
     results.schools = response.results
 
-    if (isSorting) {
-      if (input.sort === "threshold_earnings:desc") {
-        results.schools.sort((a, b) => {
-          return b[fields.MEDIAN_EARNINGS] - a[fields.MEDIAN_EARNINGS]
-        })
-      }
+    // we need to make sure we sort on results so we set input.sort here
+    // but still have a reference to isSorting, which lets us know
+    // if the user set a sorting value themselves
+    input.sort = input.sort || props.defaultSort
 
-      if (input.sort === "completion_rate:desc") {
-        results.schools.sort((a, b) => {
-          return b[fields.COMPLETION_RATE] - a[fields.COMPLETION_RATE]
-        })
-      }
-
-      if (input.sort === "avg_net_price:asc") {
-        results.schools.sort((a, b) => {
-          return a[fields.NET_PRICE] - b[fields.NET_PRICE]
-        })
-      }
-
-      if (input.sort === "name:asc") {
-        results.schools.sort((a, b) => {
-          return a[fields.NAME].localeCompare(b[fields.NAME])
-        })
-      }
+    if (input.sort === "threshold_earnings:desc") {
+      results.schools.sort((a, b) => {
+        return b[fields.MEDIAN_EARNINGS] - a[fields.MEDIAN_EARNINGS]
+      })
     }
 
-    if (currentSearchTerm.value && (!isSorting || input.sort === "name:asc")) {
+    if (input.sort === "completion_rate:desc") {
+      results.schools.sort((a, b) => {
+        return b[fields.COMPLETION_RATE] - a[fields.COMPLETION_RATE]
+      })
+    }
+
+    if (input.sort === "avg_net_price:asc") {
+      results.schools.sort((a, b) => {
+        return a[fields.NET_PRICE] - b[fields.NET_PRICE]
+      })
+    }
+
+    if (input.sort === "name:asc") {
+      results.schools.sort((a, b) => {
+        return a[fields.NAME].localeCompare(b[fields.NAME])
+      })
+    }
+
+    // if the user did not set a direct sort value, then make sure exact matches appear first
+    // in the results
+    if (currentSearchTerm.value && (!isSorting)) {
       results.schools.sort((schoolA, schoolB) => {
           const schoolAIsExactMatch = schoolNameIsExactMatch(schoolA);
           const schoolBIsExactMatch = schoolNameIsExactMatch(schoolB);
@@ -593,7 +598,6 @@ const searchAPI = async () => {
     results.meta = response.metadata
     shareUrl.value = window.location.href
     displayFlag.value = input.dolflag === "true"
-    input.sort = input.sort || props.defaultSort
   } catch (err) {
     console.warn("Error fetching search.", err)
     results.meta = {}
