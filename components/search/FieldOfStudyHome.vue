@@ -1,5 +1,5 @@
 <template>
-  <Combobox variant="home-full-border" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
+  <Combobox variant="homepage" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
 </template>
 
 <script setup>

@@ -46,7 +46,7 @@
 
           </div>
           <ChartHorizontalBarRangeSimplified
-            :hasData="netPrice"
+            :hasData="!!netPrice"
             :showMinMax="true"
             :value="{
               label: toDollar(netPrice),
@@ -132,7 +132,7 @@
             <v-col cols="2"></v-col>
             <v-col cols="8">
               <ChartHorizontalBarRangeSimplified
-                :hasData="netPrice"
+                :hasData="!!netPrice"
                 :showMinMax="true"
                 :value="{
                   label: toDollar(netPrice),
