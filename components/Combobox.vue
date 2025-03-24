@@ -507,8 +507,8 @@ const updateStyle = () => {
 
   const rect = groupNode.value.getBoundingClientRect()
   styleRef.value = {
-    position: 'fixed',
-    top: `${rect.bottom}px`,
+    position: 'absolute',
+    top: `${rect.bottom + window.scrollY}px`,
     left: `${rect.left + window.scrollX}px`,
     width: `${rect.width}px`,
     display: 'block'
