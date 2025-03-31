@@ -710,6 +710,13 @@ onMounted(() => {
   emit("search-update", { ...groomedInput.value, page: 0 })
 })
 
+// fix input religious being string on load
+onMounted(() => {
+  if (input.religious) {
+    input.religious = Number(input.religious);
+  }
+});
+
 watch(groomedInput, (newValue, oldValue) => {
   if (isEqual(newValue, oldValue)) { return }
   emit("search-update", { ...groomedInput.value, page: 0 })
