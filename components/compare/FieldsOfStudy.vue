@@ -136,7 +136,7 @@ const queryFieldsOfStudy = async () => {
     [fields.FIELD_OF_STUDY_CODE]: fieldOfStudy.code,
     [fields.FIELD_OF_STUDY_LENGTH]: fieldOfStudy.credential.level,
     [fields.OPERATING]: 1,
-    [fields.SIZE + "__range"]: "0..",
+    [fields.SIZE_CATEGORY]: "1,2,3",
     [fields.PREDOMINANT_DEGREE + "__range"]: "1..3",
     url: `${fieldOfStudy.unit_id}.${fieldOfStudy.code}.${fieldOfStudy.credential.level}`
   }))

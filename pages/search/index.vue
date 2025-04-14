@@ -625,7 +625,7 @@ const buildQuery = (params) => {
     fields.NAME,
     fields.CITY,
     fields.STATE,
-    fields.SIZE,
+    fields.SIZE_CATEGORY,
     fields.BRANCHES,
     fields.LOCALE,
     fields.OWNERSHIP, // to get "public" or "private"

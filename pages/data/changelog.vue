@@ -15,6 +15,51 @@
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
         <v-expansion-panel-title
+          >April XX, 2025</v-expansion-panel-title
+        >
+        <v-expansion-panel-text>
+          <p>
+            On April XX, 2025, the Department updated the College Scorecard website with more recent data for
+            metrics from the Integrated Postsecondary Education Data System (IPEDS) and from Federal Student
+            Aid sources. To reduce file sizes, some text values have also been abbreviated in all data files.
+            Also, the data documentation reports have been updated to include an appendix describing what
+            changes
+            were made to the report when compared to the prior version.
+          </p>
+          <p>
+            Specific data updates in this release include:
+          </p>
+          <ul>
+            <li>
+              Updates to all data metrics derived from IPEDS with more recent data values from a new data
+              collection year.
+            </li>
+            <li>
+              Added percentages of degree/certificate-seeking undergraduate students awarded Pell Grants and
+              Federal Student Loans.
+            </li>
+            <li>
+              Added median (50th percentile) SAT and ACT scores.
+            </li>
+            <li>
+              Updated data derived from Federal Student Aid sources to more recent values for the following data
+              metrics:
+              <ul>
+                <li>Currently Operating Status Flag</li>
+                <li>Heightened Cash Monitoring Flag</li>
+                <li>Accrediting Agency Name and Code</li>
+                <li>Title IV Approval Date</li>
+                <li>Federal School Code</li>
+                <li>Cohort Default Rate</li>
+                <li>Minority-serving institution indicators</li>
+                <li>Institutional control (Postsecondary Education Participants System version)</li>
+              </ul>
+            </li>
+          </ul>
+        </v-expansion-panel-text>
+      </v-expansion-panel>      
+      <v-expansion-panel>
+        <v-expansion-panel-title
           >January 16, 2025</v-expansion-panel-title
         >
         <v-expansion-panel-text>
@@ -1766,7 +1811,7 @@ const analytics = useAnalytics()
 
 const panels = ref([])
 const openAll = () => {
-  panels.value = [...Array(32).keys()].map((k, i) => i)
+  panels.value = [...Array(33).keys()].map((k, i) => i)
 }
 
 const closeAll = () => {

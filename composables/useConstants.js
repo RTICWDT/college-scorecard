@@ -22,6 +22,7 @@ export function useConstants() {
     OPERATING:            'school.operating',
   
     SIZE:                 'latest.student.size',
+    SIZE_CATEGORY:        'latest.student.size_category',
     FOS_SIZE:             'student.size',
     ONLINE_ONLY:          'school.online_only',
     MAIN:                 'school.main_campus',
@@ -190,7 +191,7 @@ export function useConstants() {
       advantage:          fields.EARNINGS_GT_25K,
       salary:             fields.MEDIAN_EARNINGS,
       name:               fields.NAME,
-      size:               fields.SIZE,
+      size:               fields.SIZE_CATEGORY,
       avg_net_price:      fields.NET_PRICE,
       completion_rate:    fields.COMPLETION_RATE,
       alias:              fields.ALIAS,
@@ -208,9 +209,9 @@ export function useConstants() {
     },
   
     size: {
-      small:  '1..2000',
-      medium: '2000..15000',
-      large:  '15001..'
+      small:  1,
+      medium: 2,
+      large:  3
     },
   
     degree: {
