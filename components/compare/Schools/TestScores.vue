@@ -96,7 +96,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!acceptanceRateActual(institution)"
+          :hasData="acceptanceRateActual(institution)"
           :showMinMax="true"
           :value="{
             label: toPercent(acceptanceRateActual(institution)),

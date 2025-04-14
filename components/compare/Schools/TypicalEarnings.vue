@@ -29,7 +29,7 @@
       </template>
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!medianEarnings(institution)"
+          :hasData="medianEarnings(institution)"
           :showMinMax="true"
           :value="{
             label: toDollar(medianEarnings(institution)),
@@ -58,7 +58,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-            :hasData="!!percentMoreThanHS(institution)"
+            :hasData="percentMoreThanHS(institution)"
             :showMinMax="true"
             :value="{
               label: toPercent(percentMoreThanHS(institution)),

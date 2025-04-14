@@ -33,7 +33,7 @@
 
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!netPrice(institution)"
+          :hasData="netPrice(institution)"
           :showMinMax="true"
           :value="{
             label: toDollar(netPrice(institution)),
@@ -68,7 +68,7 @@
 
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!completionRate(institution)"
+          :hasData="completionRate(institution)"
           :showMinMax="true"
           :value="{
             label: toPercent(completionRate(institution)),
@@ -103,7 +103,7 @@
 
       <template #data="{ institution }">      
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!medianEarnings(institution)"
+          :hasData="medianEarnings(institution)"
           :showMinMax="true"
           :value="{
             label: toDollar(medianEarnings(institution)),

@@ -122,7 +122,7 @@
             {{ item.label }}
             <Spacer :height="10" />
             <ChartHorizontalBarRangeSimplified 
-              :hasData="!!item.value"
+              :hasData="item.value"
               class="pb-1"
               :value="{
                 label: Math.round(item.value * 100) + '%',
@@ -138,7 +138,7 @@
               }"
             />
             <ChartHorizontalBarRangeSimplified 
-              :hasData="!!item.value"
+              :hasData="item.value"
               color="#10274E"
               :value="{
                 label: Math.round(item.staff_value * 100) + '%',
@@ -163,7 +163,7 @@
             {{ item.label }}
             <Spacer :height="10" />
             <ChartHorizontalBarRangeSimplified 
-              :hasData="!!item.value"
+              :hasData="item.value"
               class="pb-1"
               :value="{
                 label: Math.round(item.value * 100) + '%',
@@ -179,7 +179,7 @@
               }"
             />
             <ChartHorizontalBarRangeSimplified 
-              :hasData="!!item.value"
+              :hasData="item.value"
               color="#10274E"
               :value="{
                 label: Math.round(item.staff_value * 100) + '%',

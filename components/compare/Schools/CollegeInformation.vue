@@ -4,7 +4,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!fullTimeEnrollment(institution)"
+          :hasData="fullTimeEnrollment(institution)"
           :showMinMax="true"
           :value="{
             label: toPercent(fullTimeEnrollment(institution)),
@@ -55,7 +55,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!socioEconomicDiversity(institution)"
+          :hasData="socioEconomicDiversity(institution)"
           :showMinMax="true"
           :value="{
             label: toPercent(socioEconomicDiversity(institution)),
@@ -86,7 +86,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!currentRaceEthnicityPercentage(institution)"
+          :hasData="currentRaceEthnicityPercentage(institution)"
           :showMinMax="true"
           :value="{
             label: toPercent(currentRaceEthnicityPercentage(institution)),

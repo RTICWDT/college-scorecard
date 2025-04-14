@@ -165,7 +165,7 @@
             >
 
             <ChartHorizontalBarRangeSimplified
-              :hasData="!!netPrice"
+              :hasData="netPrice"
               :showMinMax="true"
               :showBarValues="false"
               :value="{
@@ -246,7 +246,7 @@
             </em>
 
             <ChartHorizontalBarRangeSimplified
-              :hasData="!!medianEarnings"
+              :hasData="medianEarnings"
               :showMinMax="true"
               :showBarValues="false"
               :value="{

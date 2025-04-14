@@ -16,7 +16,7 @@
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
           <ChartHorizontalBarRangeSimplified
-            :hasData="!!studentsReceivingLoans(institution)"
+            :hasData="studentsReceivingLoans(institution)"
             :showMinMax="true"
             :value="{
               label: toPercent(studentsReceivingLoans(institution)),
@@ -69,7 +69,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!medianTotalDebt(institution)"
+          :hasData="medianTotalDebt(institution)"
           :showMinMax="true"
           :value="{
             label: toDollar(medianTotalDebt(institution)),
@@ -128,7 +128,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="!!typicalMonthlyLoanPayment(institution)"
+          :hasData="typicalMonthlyLoanPayment(institution)"
           :showMinMax="true"
           :value="{
             label: toDollar(typicalMonthlyLoanPayment(institution)),
