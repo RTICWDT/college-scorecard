@@ -50,7 +50,7 @@
                 <NuxtLink to="/data/api-documentation/" class="d-block mb-1">
                   API Documentation
                 </NuxtLink>
-                <NuxtLink to="/data/change-log/" class="d-block mb-1">
+                <NuxtLink to="/data/changelog/" class="d-block mb-1">
                   Change Log
                 </NuxtLink>
                 <NuxtLink to="/data/glossary/" class="d-block mb-10">

@@ -154,7 +154,7 @@
                     <p class="font-weight-bold">Ready to Compare:</p>
                   </div>
                   <div class="d-flex align-center mr-5">
-                      <div :class="maxFosReamaxSchoolsReachedched ? 'bg-error' : 'bg-tertiary-green'"  class="pa-2 mr-2 rounded-circle">
+                      <div :class="maxSchoolsReached ? 'bg-error' : 'bg-tertiary-green'"  class="pa-2 mr-2 rounded-circle">
                         <v-icon size="xsmall" :icon="maxSchoolsReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-university'" />
                       </div>
                       <p>{{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}</p>
