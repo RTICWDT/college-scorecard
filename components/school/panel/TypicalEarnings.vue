@@ -40,7 +40,7 @@
         <Spacer :height="20" />
 
         <ChartHorizontalBarRangeSimplified
-          :hasData="medianEarnings"
+          :hasData="!!medianEarnings"
           :showMinMax="true"
           :value="{
             label: toDollar(medianEarnings),

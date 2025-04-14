@@ -6,7 +6,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarRangeSimplified
-            :hasData="gradCount(fos)"
+            :hasData="!!gradCount(fos)"
             :showMinMax="true"
             :value="{
               label: toNumber(gradCount(fos)),

@@ -7,7 +7,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarRangeSimplified
-            :hasData="medianEarnings(fos)"
+            :hasData="!!medianEarnings(fos)"
             :showMinMax="true"
             :value="{
               label: toDollar(medianEarnings(fos)),
@@ -31,7 +31,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarRangeSimplified
-            :hasData="monthlyEarnings(fos)"
+            :hasData="!!monthlyEarnings(fos)"
             :showMinMax="true"
             :value="{
               label: toDollar(monthlyEarnings(fos)),

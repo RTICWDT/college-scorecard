@@ -76,7 +76,6 @@
                 definition="hcm2"
                 color="white"
                 class="ml-2"
-                :isBranch="isBranch"
               />
             </v-chip>
             <h1
@@ -101,7 +100,6 @@
                 definition="undergrad-students"
                 color="white"
                 class=""
-                :isBranch="isBranch"
               />
             </div>
             <div class="school-url my-1">

@@ -25,7 +25,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarRangeSimplified
-            :hasData="medianTotalDebt(fos)"
+            :hasData="!!medianTotalDebt(fos)"
             :showMinMax="true"
             :value="{
               label: toDollar(medianTotalDebt(fos)),
@@ -69,7 +69,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarRangeSimplified
-            :hasData="medianTotalMonthlyDebt(fos)"
+            :hasData="!!medianTotalMonthlyDebt(fos)"
             :showMinMax="true"
             :value="{
               label: toDollar(medianTotalMonthlyDebt(fos)),
