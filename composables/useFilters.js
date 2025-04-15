@@ -64,21 +64,42 @@ export function useFilters() {
     return lookup[id]
   }
   
+  // const sizeCategory = (size) => {
+  //   let text = 'size unknown'
+  //   if (useInRange(size, 0, 2000)) text = 'Small'
+  //   else if (useInRange(size, 2000, 15000)) text = 'Medium'
+  //   else if (useInRange(15000, Infinity)) text = 'Large'
+  //   return text
+  // }
+
   const sizeCategory = (size) => {
     let text = 'size unknown'
-    if (useInRange(size, 0, 2000)) text = 'Small'
-    else if (useInRange(size, 2000, 15000)) text = 'Medium'
-    else if (useInRange(15000, Infinity)) text = 'Large'
-    return text
+    const lookup = {
+      '1': "Small",
+      '2': 'Medium',
+      '3': 'Large'
+    }
+    return lookup[size]
   }
   
+  // const sizeCategoryClass = (size) => {
+  //   let text = 'size unknown'
+  //   if (useInRange(size, 0, 2000)) text = 'icon-small'
+  //   else if (useInRange(size, 2000, 15000)) text = 'icon-medium'
+  //   else if (useInRange(15000, Infinity)) text = 'icon-large'
+  //   return text
+  // }
+
   const sizeCategoryClass = (size) => {
     let text = 'size unknown'
-    if (useInRange(size, 0, 2000)) text = 'icon-small'
-    else if (useInRange(size, 2000, 15000)) text = 'icon-medium'
-    else if (useInRange(15000, Infinity)) text = 'icon-large'
-    return text
+    const lookup = {
+      '1': "icon-small",
+      '2': 'icon-medium',
+      '3': 'icon-large'
+    }
+    return lookup[size]
   }
+
   
   const locale = (id) => {
     const lookup = {
