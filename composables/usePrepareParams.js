@@ -121,8 +121,8 @@ const alias = {
   },
 
   size: function(query, value, key) {
-    value = mapSize(value);
-    query[fields.SIZE + '__range'] = Array.isArray(value)
+    //value = mapSize(value);
+    query[fields.SIZE_CATEGORY] = Array.isArray(value)
       ? value.join(',')
       : value;
     delete query[key];
@@ -268,7 +268,7 @@ export const usePrepareParams = () => {
     // by default, filter out schools for which school.size is null
     // with a numeric range query
     if (!query.size) {
-      query[fields.SIZE + '__range'] = '1..';
+      query[fields.SIZE_CATEGORY] = '1,2,3';
     }
     
     /*

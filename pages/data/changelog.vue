@@ -15,6 +15,44 @@
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
         <v-expansion-panel-title
+          >April XX, 2025</v-expansion-panel-title
+        >
+        <v-expansion-panel-text>
+          <p>
+            On April XX, 2025, the Department updated the College Scorecard website with more recent 
+            data for metrics from the Integrated Postsecondary Education Data System (IPEDS) and from
+             Federal Student Aid sources. 
+          </p>
+          <p>
+            Specific data updates in this release include:
+          </p>
+          <ul>
+            <li>
+              Updates to all data metrics derived from IPEDS with more recent data values 
+              from a new data collection year.
+            </li>
+            <li>
+              Added a new metric, SCORECARD_SECTOR, to aid in classifying institutions into similar groups based on the predominant award 
+              conferred and the institutional ownership/control.
+            </li>
+            <li>
+              Updated data derived from Federal Student Aid sources to more recent values for the following data
+              metrics:
+              <ul>
+                <li>Currently Operating Status Flag</li>
+                <li>Heightened Cash Monitoring Flag</li>
+                <li>Accrediting Agency Name and Code</li>
+                <li>Title IV Approval Date</li>
+                <li>Federal School Code</li>
+                <li>Cohort Default Rate</li>
+                <li>Institutional control (Postsecondary Education Participants System version)</li>
+              </ul>
+            </li>
+          </ul>
+        </v-expansion-panel-text>
+      </v-expansion-panel>      
+      <v-expansion-panel>
+        <v-expansion-panel-title
           >January 16, 2025</v-expansion-panel-title
         >
         <v-expansion-panel-text>
@@ -1766,7 +1804,7 @@ const analytics = useAnalytics()
 
 const panels = ref([])
 const openAll = () => {
-  panels.value = [...Array(32).keys()].map((k, i) => i)
+  panels.value = [...Array(33).keys()].map((k, i) => i)
 }
 
 const closeAll = () => {

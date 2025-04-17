@@ -245,7 +245,7 @@
             hide-details
             v-model="input.size"
             label="Small"
-            value="small"
+            value=1
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -255,7 +255,7 @@
             hide-details
             v-model="input.size"
             label="Medium"
-            value="medium"
+            value=2
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -265,7 +265,7 @@
             hide-details
             v-model="input.size"
             label="Large"
-            value="large"
+            value=3
             class="py-0 my-0"
             @keydown.enter.prevent
           />
