@@ -15,11 +15,11 @@
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
         <v-expansion-panel-title
-          >April XX, 2025</v-expansion-panel-title
+          >April 23, 2025</v-expansion-panel-title
         >
         <v-expansion-panel-text>
           <p>
-            On April XX, 2025, the Department updated the College Scorecard website with more recent 
+            On April 23, 2025, the Department updated the College Scorecard website with more recent 
             data for metrics from the Integrated Postsecondary Education Data System (IPEDS) and from
              Federal Student Aid sources. 
           </p>
