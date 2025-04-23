@@ -97,7 +97,7 @@
               <span class="font-weight-bold">{{ toNumber(undergraduates) }}</span>
               undergraduate students 
               <TooltipModal
-                definition="undergrad-students"
+                definition="size"
                 color="white"
                 class=""
               />

@@ -42,7 +42,7 @@
 
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="contextualCompletionRate(institution)"
+          :hasData="!!contextualCompletionRate(institution)"
           :showMinMax="true"
           :value="{
             label: toPercent(contextualCompletionRate(institution)),
@@ -72,7 +72,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="retentionRate(institution)"
+          :hasData="!!retentionRate(institution)"
           :showMinMax="true"
           :value="{
             label: toPercent(retentionRate(institution)),

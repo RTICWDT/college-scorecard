@@ -109,7 +109,7 @@ const props = defineProps({
     default: 'Type to Search'
   },
   modelValue: {
-    type: Object,
+    type: [Object, String],
     default: null
   },
   loading: {
@@ -513,6 +513,8 @@ const updateStyle = () => {
     width: `${rect.width}px`,
     display: 'block'
   }
+
+
 } // roughly one frame at 60fps
 
 
