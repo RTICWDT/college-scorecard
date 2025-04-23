@@ -109,7 +109,7 @@ const props = defineProps({
     default: 'Type to Search'
   },
   modelValue: {
-    type: Object,
+    type: [Object, String],
     default: null
   },
   loading: {
@@ -119,7 +119,7 @@ const props = defineProps({
   variant: {
     type: String,
     default: 'default',
-    validator: (value) => ['default', 'homepage', 'dense'].includes(value)
+    validator: (value) => ['default', 'dense', 'home'].includes(value)
   },
   fullBorder: {
     type: Boolean,
@@ -127,7 +127,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'onSubmit', 'onClear', 'onSearch'])
+const emit = defineEmits(['update:modelValue', 'onSubmit', 'onClear', 'onSearch', 'onInput'])
 const themeColor = ref(props.color)
 const themeColorTranparent = ref(props.color + '11')
 
@@ -507,12 +507,14 @@ const updateStyle = () => {
 
   const rect = groupNode.value.getBoundingClientRect()
   styleRef.value = {
-    position: 'fixed',
-    top: `${rect.bottom}px`,
+    position: 'absolute',
+    top: `${rect.bottom + window.scrollY}px`,
     left: `${rect.left + window.scrollX}px`,
     width: `${rect.width}px`,
     display: 'block'
   }
+
+
 } // roughly one frame at 60fps
 
 

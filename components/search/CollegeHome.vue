@@ -19,7 +19,7 @@ const { prepareParams } = usePrepareParams()
 const { fields } = useConstants()
 const { apiGet } = useApi()
 
-const emit = defineEmits(['onClear', 'onSubmit', 'onSearch'])
+const emit = defineEmits(['onClear', 'onSubmit', 'onSearch', 'onInput'])
 const items = ref([]);
 const isLoading = ref(false);
 const search = ref(null);

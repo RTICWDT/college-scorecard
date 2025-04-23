@@ -50,7 +50,7 @@
                 <NuxtLink to="/data/api-documentation/" class="d-block mb-1">
                   API Documentation
                 </NuxtLink>
-                <NuxtLink to="/data/change-log/" class="d-block mb-1">
+                <NuxtLink to="/data/changelog/" class="d-block mb-1">
                   Change Log
                 </NuxtLink>
                 <NuxtLink to="/data/glossary/" class="d-block mb-10">
@@ -80,7 +80,7 @@
                   </a>
                   | <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
                   <a
-                    href="http://www2.ed.gov/notices/index.html?src=ft"
+                    href="https://www.ed.gov/about/ed-overview/required-notices"
                     target="_blank"
                     @click="analytics.transitionOutboundLink"
                   >

@@ -76,7 +76,6 @@
                 definition="hcm2"
                 color="white"
                 class="ml-2"
-                :isBranch="isBranch"
               />
             </v-chip>
             <h1
@@ -98,10 +97,9 @@
               <span class="font-weight-bold">{{ toNumber(undergraduates) }}</span>
               undergraduate students 
               <TooltipModal
-                definition="undergrad-students"
+                definition="size"
                 color="white"
                 class=""
-                :isBranch="isBranch"
               />
             </div>
             <div class="school-url my-1">

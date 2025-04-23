@@ -82,7 +82,7 @@ const props = defineProps({
 const years = computed(() => useGet(props.school, props.fields['PREDOMINANT_DEGREE']))
 const ownership = computed(() => useGet(props.school, props.fields['OWNERSHIP'], '-1'))
 const schoolLocale = computed(() => useGet(props.school, props.fields['LOCALE'], '-1'))
-const sizeField = computed(() => props.fos ? props.fields['FOS_SIZE'] : props.fields['SIZE'])
+const sizeField = computed(() => props.fos ? props.fields['FOS_SIZE'] : props.fields['SIZE_CATEGORY'])
 const schoolSize = computed(() => useGet(props.school, sizeField.value))
 
 const tip = computed(() => {

@@ -537,6 +537,10 @@
   &:hover {
     background-color: use-theme('yellow-950');
   }
+
+  &:focus {
+    outline: 2px solid use-theme('primary-aqua');
+  }
 }
 
 .fos-search-degree-large {
@@ -1082,6 +1086,8 @@ const handleCollegeInput = (input) => {
 const searchCollegesFromInput = () => {
   if (collegeInput.value) {
     router.push("/search/?search=" + encodeURIComponent(collegeInput.value))
+  } else {
+    router.push("/search/")
   }
 }
 

@@ -29,7 +29,7 @@
 
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="netPrice(institution)"
+          :hasData="!!netPrice(institution)"
           :showMinMax="true"
           :value="{
             label: toDollar(netPrice(institution)),
@@ -69,7 +69,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
         <ChartHorizontalBarRangeSimplified
-          :hasData="currentIncomeAmount(institution)"
+          :hasData="!!currentIncomeAmount(institution)"
           :showMinMax="true"
           :value="{
             label: toDollar(currentIncomeAmount(institution)),

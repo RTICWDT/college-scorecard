@@ -165,6 +165,7 @@ export function useComplexFieldMethods() {
       })
     }
     return useSortBy(output, ["label"])
+    
   }
   
   const retentionRate = (school) => {
@@ -321,7 +322,7 @@ export function useComplexFieldMethods() {
   const act = (school) => {
     if (!school) return null
     return {
-      available: useGet(school, fields['ACT_MIDPOINT']) != null,
+      available: (useGet(school, fields['ACT_25TH_PCTILE']) !== null && useGet(school, fields['ACT_75TH_PCTILE']) !== null),
       lower: useGet(school, fields['ACT_25TH_PCTILE']),
       upper: useGet(school, fields['ACT_75TH_PCTILE']),
       min: 0,
@@ -332,7 +333,7 @@ export function useComplexFieldMethods() {
   const satReading = (school) => {
     if (!school) return null
     return {
-      available: useGet(school, fields['SAT_READING_MIDPOINT']) != null,
+      available: (useGet(school, fields['SAT_READING_25TH_PCTILE']) !== null && useGet(school, fields['SAT_READING_75TH_PCTILE']) !== null),
       lower: useGet(school, fields['SAT_READING_25TH_PCTILE']),
       upper: useGet(school, fields['SAT_READING_75TH_PCTILE']),
       min: 0,
@@ -343,7 +344,7 @@ export function useComplexFieldMethods() {
   const satMath = (school) => {
     if (!school) return null
     return {
-      available: useGet(school, fields['SAT_MATH_MIDPOINT']) != null,
+      available: (useGet(school, fields['SAT_MATH_25TH_PCTILE']) !== null && useGet(school, fields['SAT_MATH_75TH_PCTILE']) !== null),
       lower: useGet(school, fields['SAT_MATH_25TH_PCTILE']),
       upper: useGet(school, fields['SAT_MATH_75TH_PCTILE']),
       min: 0,

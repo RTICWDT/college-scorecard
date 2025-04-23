@@ -77,7 +77,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             'green-50': '#ECFDF3',
             'green-25': '#F6FEF9',
         
-            'yellow-950': '#fdb036',
+            'yellow-950': '#db9525',
             'yellow-900': '#FDB022',
             'yellow-800': '#FEC84B',
             'yellow-700': '#FEDF89',

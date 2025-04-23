@@ -383,7 +383,7 @@
                   xs="12"
                   class="d-flex align-stretch"
                 >
-                  <SearchResultCard :school="school" :isLoading="isLoading" />
+                  <SearchResultCard :school="school" :isLoading="isLoading" :exactMatch="schoolNameIsExactMatch(school)" />
                 </v-col>
               </v-row>
 
@@ -473,13 +473,15 @@ const sorts = ref([
   { type: "% Earning More Than a High School Grad", field: "threshold_earnings:desc" },
 ])
 
+const currentSearchTerm = ref(null)
+
 const results = reactive({
   schools: [],
   meta: { total: 0 },
 })
 
 const input = reactive({
-  sort: route.query.sort || props.defaultSort,
+  sort: route.query.sort,
   page: route.query.page ? Number(route.query.page) + 1 : 1,
 })
 
@@ -527,44 +529,71 @@ const searchAPI = async () => {
     isLoading.value = true
     error.value = null
 
+    const isSorting = !!input.sort
+
     let params = prepareSearchParams()
     let query = buildQuery(params)
     let url = generateQueryString(params)
+
     router.replace(route.path + url)
 
     const response = await apiGet("/schools", query)
 
-    let searchTerm = query['school.search']
-    if (searchTerm) {
-      searchTerm = searchTerm.toLowerCase()
+    currentSearchTerm.value = query['school.search']
+    if (currentSearchTerm.value) {
+      currentSearchTerm.value = currentSearchTerm.value.toLowerCase()
     }
 
     isLoading.value = false
     results.schools = response.results
 
-    if (searchTerm) {
-      // sort based on school.name match
+    // we need to make sure we sort on results so we set input.sort here
+    // but still have a reference to isSorting, which lets us know
+    // if the user set a sorting value themselves
+    input.sort = input.sort || props.defaultSort
+
+    if (input.sort === "threshold_earnings:desc") {
       results.schools.sort((a, b) => {
-          // Convert school names to lowercase for comparison
-          const aNameLower = a[fields.NAME].toLowerCase();
-          const bNameLower = b[fields.NAME].toLowerCase();
+        return b[fields.MEDIAN_EARNINGS] - a[fields.MEDIAN_EARNINGS]
+      })
+    }
 
-          // Check for exact matches
-          const aIsExactMatch = aNameLower === searchTerm;
-          const bIsExactMatch = bNameLower === searchTerm;
+    if (input.sort === "completion_rate:desc") {
+      results.schools.sort((a, b) => {
+        return b[fields.COMPLETION_RATE] - a[fields.COMPLETION_RATE]
+      })
+    }
 
-          if (aIsExactMatch && !bIsExactMatch) {
-              return -1; // a comes first
+    if (input.sort === "avg_net_price:asc") {
+      results.schools.sort((a, b) => {
+        return a[fields.NET_PRICE] - b[fields.NET_PRICE]
+      })
+    }
+
+    if (input.sort === "name:asc") {
+      results.schools.sort((a, b) => {
+        return a[fields.NAME].localeCompare(b[fields.NAME])
+      })
+    }
+
+    // if the user did not set a direct sort value, then make sure exact matches appear first
+    // in the results
+    if (currentSearchTerm.value && (!isSorting)) {
+      results.schools.sort((schoolA, schoolB) => {
+          const schoolAIsExactMatch = schoolNameIsExactMatch(schoolA);
+          const schoolBIsExactMatch = schoolNameIsExactMatch(schoolB);
+
+          if (schoolAIsExactMatch && !schoolBIsExactMatch) {
+              return -1; // school A comes first
           }
-          if (!aIsExactMatch && bIsExactMatch) {
-              return 1;  // b comes first
+          if (!schoolAIsExactMatch && schoolBIsExactMatch) {
+              return 1;  // school B comes first
           }
 
-          // If neither is an exact match, maintain original order based on relevance score
+          // If neither is an exact match, maintain original order based on original sort
           return 0;
       });
     }
-
 
     results.meta = response.metadata
     shareUrl.value = window.location.href
@@ -575,6 +604,14 @@ const searchAPI = async () => {
     results.schools = []
     error.value = err.message
   }
+}
+
+const schoolNameIsExactMatch = (school) => {
+  if (!currentSearchTerm.value) {
+    return false;
+  }
+
+  return school[fields.NAME].toLowerCase() === currentSearchTerm.value.toLowerCase()
 }
 
 const generateQueryString = (params) => {
@@ -625,7 +662,7 @@ const buildQuery = (params) => {
     fields.NAME,
     fields.CITY,
     fields.STATE,
-    fields.SIZE,
+    fields.SIZE_CATEGORY,
     fields.BRANCHES,
     fields.LOCALE,
     fields.OWNERSHIP, // to get "public" or "private"
