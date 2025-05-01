@@ -12,7 +12,7 @@
             <strong>SEARCH:</strong>
           </div>
           <v-tab tabindex="0" class="search-tab navigation school" @click="navigateTo('/search/')" value="/search/">
-            Schools
+            Colleges
             <div class="tab-border-bottom"></div>
           </v-tab>
           <v-tab tabindex="0" class="search-tab navigation fos" @click="navigateTo('/search/fos-landing/')" value="/search/fos-landing/">
@@ -73,8 +73,6 @@ watch(activeTab, (newTab) => {
   height: 5px;
   bottom: 0;
   background-color: transparent;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
 }
 
 .search-tab {
@@ -88,7 +86,7 @@ watch(activeTab, (newTab) => {
 
     &.school {
       .tab-border-bottom {
-        background-color: use-theme('tertiary-green');
+        background-color: use-theme('primary-yellow');
       }
     }
 
@@ -101,8 +99,9 @@ watch(activeTab, (newTab) => {
 }
 
 .data-navigation {
-  background-color: white;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border-top: 1px solid rgba(255,255,255,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  background-color: use-theme('primary-blue');
+  color: white;
 }
 </style>

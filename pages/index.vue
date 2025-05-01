@@ -64,7 +64,7 @@
                     <v-col cols="12" sm="5">
                       <Spacer :height="10" />
                       <label class="d-block  mb-2" for="fosDegree">Search Fields of Study (Required)</label>
-                      <SearchFieldOfStudy v-model="input.cip4" />
+                      <SearchFieldOfStudy v-model="input.cip4" variant="default" />
                     </v-col>
                     <v-col cols="12" sm="4">
                       <label class="d-block  mb-2" for="fosDegree">Select Degree Type (Required)</label>
@@ -158,7 +158,7 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12" sm="5">
-                    <SearchFieldOfStudyHome v-model="input.cip4" />
+                    <SearchFieldOfStudy v-model="input.cip4" variant="home" />
                   </v-col>
                   <v-col cols="12" sm="4">
                     <v-select
