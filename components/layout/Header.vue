@@ -200,7 +200,7 @@ nav {
             <v-list-item @click="mobileNavClick(`/search/`)" class="nav-item" tabindex="0">
               <v-list-item-title>
                 <div class="d-flex justify-space-between">
-                  <span class="nav-subtitle-override">Search Schools</span>
+                  <span class="nav-subtitle-override">Search Colleges</span>
                   <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
                 </div>
               </v-list-item-title>
@@ -221,7 +221,7 @@ nav {
             <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item" tabindex="0">
               <v-list-item-title>
                 <div class="d-flex justify-space-between">
-                  <span class="nav-subtitle-override">Compare Schools</span>
+                  <span class="nav-subtitle-override">Compare Colleges</span>
                   <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
                 </div>
               </v-list-item-title>
@@ -359,7 +359,7 @@ const skipNav = () => {
 
 const compareItems = [
   {
-    label: 'Compare Schools',
+    label: 'Compare Colleges',
     action: '/compare/?toggle=institutions'
   },
   {
@@ -369,7 +369,7 @@ const compareItems = [
 ]
 const searchItems = [
   {
-    label: 'Search Schools',
+    label: 'Search Colleges',
     action: '/search/'
   },
   {

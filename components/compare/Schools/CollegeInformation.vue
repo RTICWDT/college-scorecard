@@ -23,7 +23,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <h2 class="mb-5">School Information</h2>
+  <h2 class="mb-5">College Information</h2>
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">

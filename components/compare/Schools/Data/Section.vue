@@ -1,5 +1,5 @@
 <template>
-  <CompareSchoolsDataBlock :institutions="institutions.schools4Year" title="4-year schools">
+  <CompareSchoolsDataBlock :institutions="institutions.schools4Year" title="4-year colleges">
     <template v-if="hasSlot('byline')" #byline="slotProps2">
       <slot name="byline" v-bind="slotProps2" />
     </template>
@@ -11,7 +11,7 @@
     </template>
   </CompareSchoolsDataBlock>
 
-  <CompareSchoolsDataBlock :institutions="institutions.schools2Year" title="2-year schools">
+  <CompareSchoolsDataBlock :institutions="institutions.schools2Year" title="2-year colleges">
     <template v-if="hasSlot('byline')" #byline="slotProps2">
       <slot name="byline" v-bind="slotProps2" />
     </template>

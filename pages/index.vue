@@ -372,7 +372,7 @@
                 :width="218"
                 @click="analytics.trackNavigation('/search/')"
               >
-                Search Schools
+                Search Colleges
               </v-btn>
             </NuxtLink>
           </div>

@@ -3,8 +3,8 @@
     <Toggle
       v-model="medianToggle"
       :options="[
-        { label: 'Midpoint for School Type', value: 'group', color: color('primary-green'), activeColor: 'transparent' },
-        { label: 'Midpoint for All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
+        { label: 'Midpoint for College Type', value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+        { label: 'Midpoint for All Colleges', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
       ]"
       backgroundColor="white"
       borderThickness="5px"
@@ -19,7 +19,7 @@
   </div>
 
   <CompareTooltipHeader title="Median Earnings" definition="institution-median-earnings" :h="2" class="mb-1 mt-7" />
-  <p class="mb-5" style="max-width: 800px">The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
+  <p class="mb-5" style="max-width: 800px">The median earnings of former students who received federal financial aid at 10 years after entering the college.</p>
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">
