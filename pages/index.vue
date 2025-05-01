@@ -68,7 +68,7 @@
                     </v-col>
                     <v-col cols="12" sm="4">
                       <label class="d-block  mb-2" for="fosDegree">Select Degree Type (Required)</label>
-                      <v-select
+                        <v-select
                         :items="fosDegrees"
                         item-title="label"
                         item-value="value"
@@ -77,8 +77,20 @@
                         v-model="input.cip4_degree"
                         hide-details
                         id="fosDegree"
+                        bgColor="white"
                         aria-required="true"
-                      />
+                        class="fos-search-degree-large"
+                      >
+                        <template #item="{ props, item }">
+                          <v-list-item :disabled="item.raw.disabled" v-bind="props">
+                            <template #title>
+                              <span :style="{ 'font-weight': item.raw.disabled ? 800 : 400 }">
+                                {{ item.title }}
+                              </span>
+                            </template>
+                          </v-list-item>
+                        </template>
+                      </v-select>
                     </v-col>
                     <v-col col="12" sm="3" class="">
                       <div class="d-none d-sm-block" style="height: 32px">
@@ -173,7 +185,17 @@
                       bgColor="white"
                       aria-required="true"
                       class="fos-search-degree-large"
-                    />
+                    >
+                      <template #item="{ props, item }">
+                        <v-list-item :disabled="item.raw.disabled" v-bind="props">
+                          <template #title>
+                            <span :style="{ 'font-weight': item.raw.disabled ? 800 : 400 }">
+                              {{ item.title }}
+                            </span>
+                          </template>
+                        </v-list-item>
+                      </template>
+                    </v-select>
                   </v-col>
 
                   <v-col cols="1" sm="3" class="">
@@ -1100,7 +1122,13 @@ const input = reactive({
   cip4_degree: null,
 })
 
-const fosDegrees = computed(() => formMappings.fosDegrees)
+const fosDegrees = computed(() => {
+  let degrees = [...formMappings.fosDegrees]
+  degrees.unshift({ label: 'Undergraduate', value: "undergrad", disabled: true })
+  degrees.splice(4, 0, { label: 'Graduate', value: "grad", disabled: true })
+  return degrees
+})
+
 const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
 
 const fosColor = computed(() => {

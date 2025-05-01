@@ -65,7 +65,17 @@ h1 {
             bgColor="white"
             aria-required="true"
             class="fos-search-degree-large"
-          />
+          >
+            <template #item="{ props, item }">
+              <v-list-item :disabled="item.raw.disabled" v-bind="props">
+                <template #title>
+                  <span :style="{ 'font-weight': item.raw.disabled ? 800 : 400 }">
+                    {{ item.title }}
+                  </span>
+                </template>
+              </v-list-item>
+            </template>
+          </v-select>
         </v-col>
 
         <v-col cols="1" sm="3" class="">
@@ -173,12 +183,21 @@ const input = reactive({
   cip4_degree: null,
 })
 
-const fosDegrees = computed(() => formMappings.fosDegrees)
+const fosDegrees = computed(() => {
+  let degrees = [...formMappings.fosDegrees]
+  degrees.unshift({ label: 'Undergraduate', value: "undergrad", disabled: true })
+  degrees.splice(4, 0, { label: 'Graduate', value: "grad", disabled: true })
+  return degrees
+})
 const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
 
 const handleFormSubmit = () => {
   router.push(`/search/fos/?cip4=${encodeURIComponent(input.cip4.code)}&cip4_degree=${encodeURIComponent(input.cip4_degree)}`)
 }
+
+const fosColor = computed(() => {
+  return disableSearch.value ? "" : "primary-yellow"
+})
 </script>
 
 <style lang="scss" scoped>
