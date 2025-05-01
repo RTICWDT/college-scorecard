@@ -14,6 +14,7 @@
           <v-checkbox
             v-model="showPellOnly"
             label="Show Pell Grant Recipients Only"
+            color="secondary-green"
             class="mt-0"
           >
             <template #label>

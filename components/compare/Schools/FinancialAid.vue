@@ -56,6 +56,7 @@
     hide-details
     v-model="includePriorDebt"
     label="Include debt borrowed at any prior institutions"
+    color="secondary-green"
   >
     <template v-slot:label>
       <span class="profile-fos-include-prior-debt">
@@ -115,6 +116,7 @@
     hide-details
     v-model="includePriorDebt"
     label="Include debt borrowed at any prior institutions"
+    color="secondary-green"
   >
     <template v-slot:label>
       <span class="profile-fos-include-prior-debt">
@@ -155,6 +157,7 @@
       class="mb-2 mt-n4"
       hide-details
       v-model="includeGraduatedOnly"
+      color="secondary-green"
       label="Only show data for those who graduated"
     />
 

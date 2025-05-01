@@ -10,6 +10,7 @@
         hide-details
         v-model="includeDebtBorrowed"
         label="Include debt borrowed at any prior institutions"
+        color="secondary-green"
       >
         <template v-slot:label>
           <span class="profile-fos-include-prior-debt">
@@ -54,6 +55,7 @@
         hide-details
         v-model="includeDebtBorrowedMonthly"
         label="Include debt borrowed at any prior institutions"
+        color="secondary-green"
       >
         <template v-slot:label>
           <span class="profile-fos-include-prior-debt">
