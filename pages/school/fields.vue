@@ -113,6 +113,7 @@
                     clearable
                     hide-details="auto"
                     class="mb-4"
+                    color="primary-yellow"
                   />
                   <v-select
                     id="school-field-fos-degree"
