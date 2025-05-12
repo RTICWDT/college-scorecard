@@ -1,6 +1,10 @@
 <style lang="scss" scoped>
 .search-subhead {
-  color: use-theme('gray-700');
+  color: black;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.8px;
 }
 
 .v-expansion-panel {

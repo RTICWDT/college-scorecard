@@ -69,12 +69,12 @@ h1 {
             <template #item="{ props, item }">
               <v-list-item v-if="item.raw.disabled" :disabled="true" style="opacity: 1" v-bind="props">
                 <template #title>
-                  <span style="font-weight: 800;">{{ item.title }}</span>
+                  <span style="font-weight: 800; font-size: 12px; letter-spacing: 0.8px;">{{ item.title }}</span>
                 </template>
               </v-list-item>
               <v-list-item v-else v-bind="props">
                 <template #title>
-                  <span>{{ item.title }}</span>
+                  <span style="font-size: 16px;">{{ item.title }}</span>
                 </template>
               </v-list-item>
             </template>
@@ -120,12 +120,12 @@ h1 {
                 <template #item="{ props, item }">
                   <v-list-item v-if="item.raw.disabled" :disabled="true" style="opacity: 1" v-bind="props">
                     <template #title>
-                      <span style="font-weight: 800;">{{ item.title }}</span>
+                      <span style="font-weight: 800; font-size: 12px; letter-spacing: 0.8px;">{{ item.title }}</span>
                     </template>
                   </v-list-item>
                   <v-list-item v-else v-bind="props">
                     <template #title>
-                      <span>{{ item.title }}</span>
+                      <span style="font-size: 16px;">{{ item.title }}</span>
                     </template>
                   </v-list-item>
                 </template>
