@@ -67,11 +67,14 @@ h1 {
             class="fos-search-degree-large"
           >
             <template #item="{ props, item }">
-              <v-list-item :disabled="item.raw.disabled" v-bind="props">
+              <v-list-item v-if="item.raw.disabled" :disabled="true" style="opacity: 1" v-bind="props">
                 <template #title>
-                  <span :style="{ 'font-weight': item.raw.disabled ? 800 : 400 }">
-                    {{ item.title }}
-                  </span>
+                  <span style="font-weight: 800;">{{ item.title }}</span>
+                </template>
+              </v-list-item>
+              <v-list-item v-else v-bind="props">
+                <template #title>
+                  <span>{{ item.title }}</span>
                 </template>
               </v-list-item>
             </template>
@@ -113,7 +116,20 @@ h1 {
                 hide-details
                 id="fosDegree"
                 aria-required="true"
-              />
+              >
+                <template #item="{ props, item }">
+                  <v-list-item v-if="item.raw.disabled" :disabled="true" style="opacity: 1" v-bind="props">
+                    <template #title>
+                      <span style="font-weight: 800;">{{ item.title }}</span>
+                    </template>
+                  </v-list-item>
+                  <v-list-item v-else v-bind="props">
+                    <template #title>
+                      <span>{{ item.title }}</span>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-select>
             </div>
             <div>
               <div class="d-none d-sm-block" style="height: 32px">
@@ -185,8 +201,8 @@ const input = reactive({
 
 const fosDegrees = computed(() => {
   let degrees = [...formMappings.fosDegrees]
-  degrees.unshift({ label: 'Undergraduate', value: "undergrad", disabled: true })
-  degrees.splice(4, 0, { label: 'Graduate', value: "grad", disabled: true })
+  degrees.unshift({ label: 'UNDERGRADUATE', value: "undergrad", disabled: true })
+  degrees.splice(4, 0, { label: 'GRADUATE', value: "grad", disabled: true })
   return degrees
 })
 const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
