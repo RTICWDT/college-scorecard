@@ -1130,8 +1130,8 @@ const input = reactive({
 
 const fosDegrees = computed(() => {
   let degrees = [...formMappings.fosDegrees]
-  degrees.unshift({ label: 'UNDERGRADUATE', value: "undergrad", disabled: true })
-  degrees.splice(4, 0, { label: 'GRADUATE', value: "grad", disabled: true })
+  // degrees.unshift({ label: 'UNDERGRADUATE', value: "undergrad", disabled: true })
+  // degrees.splice(4, 0, { label: 'GRADUATE', value: "grad", disabled: true })
   return degrees
 })
 
