@@ -15,6 +15,16 @@
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
         <v-expansion-panel-title
+          >May 20, 2025</v-expansion-panel-title
+        >
+        <v-expansion-panel-text>
+          <p>
+            On May 20, 2025, the Department updated the College Scorecard data to correct a truncation in the SCORECARD_SECTOR metric.
+            </p>
+        </v-expansion-panel-text>
+      </v-expansion-panel>      
+      <v-expansion-panel>
+        <v-expansion-panel-title
           >April 23, 2025</v-expansion-panel-title
         >
         <v-expansion-panel-text>
@@ -1804,7 +1814,7 @@ const analytics = useAnalytics()
 
 const panels = ref([])
 const openAll = () => {
-  panels.value = [...Array(33).keys()].map((k, i) => i)
+  panels.value = [...Array(34).keys()].map((k, i) => i)
 }
 
 const closeAll = () => {
