@@ -16,8 +16,8 @@
       </template>
 
       <div v-if="isSelected">Added to Compare</div>
-      <div v-else-if="isFull">Maximum of 10 Schools Reached</div>
-      <div v-else>Add to Compare School</div>
+      <div v-else-if="isFull">Maximum of 10 Colleges Reached</div>
+      <div v-else>Add to Compare Colleges</div>
     </v-btn>
   </div>
 </template>

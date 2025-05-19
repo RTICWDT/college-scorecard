@@ -23,6 +23,12 @@
   />
 </template>
 
+<!-- <style lang="scss" scoped>
+:deep(.v-field__overlay) {
+  border: 1px solid #636363;
+}
+</style> -->
+
 <script setup>
 const props = defineProps({
   modelValue: {

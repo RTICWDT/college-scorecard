@@ -49,7 +49,7 @@
     <v-row>
       <v-col>
         <v-card class="pb-5 px-3" variant="flat">
-            <h1 class="my-5 mx-5 header-1">Compare Schools and Fields of Study</h1>
+            <h1 class="my-5 mx-5 header-1">Compare Colleges and Fields of Study</h1>
             <hr />
 
             <Toggle
@@ -81,7 +81,7 @@
     </v-row>
   </v-container>
 
-  <!-- The accordion contents of Compare Schools is rendered here via the vue Teleport component -->
+  <!-- The accordion contents of Compare Colleges is rendered here via the vue Teleport component -->
   <!-- This isn't the best way to use teleports, but it solves the problem for this particular case -->
   <v-container v-show="isComparingSchools && schoolCount > 0" id="teleport-accordion-container" />
   <Spacer :height="40" />
@@ -140,7 +140,7 @@ const isComparingSchools = computed(() => route.query.toggle === 'institutions')
 const isComparingFieldsOfStudy = computed(() => route.query.toggle === 'fos')
 
 const compareToggleOptions = computed(() => [
-  { label: `SCHOOLS (${schoolCount.value})`, value: 'institutions', color: color('primary-green'), activeColor: color('primary-green', 0.1) },
+  { label: `COLLEGES (${schoolCount.value})`, value: 'institutions', color: color('primary-green'), activeColor: color('primary-green', 0.1) },
   { label: `FIELDS OF STUDY (${fieldOfStudyCount.value})`, value: 'fos', color: color('primary-yellow'), activeColor: color('primary-yellow', 0.1) },
 ])
 

@@ -14,6 +14,7 @@
           <v-checkbox
             v-model="showPellOnly"
             label="Show Pell Grant Recipients Only"
+            color="secondary-green"
             class="mt-0"
           >
             <template #label>
@@ -29,8 +30,8 @@
                 <Toggle
                   v-model="medianToggle"
                   :options="[
-                    { label: `${yearsText(school)} Schools`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
-                    { label: 'All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
+                    { label: `${yearsText(school)} Colleges`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+                    { label: 'All Colleges', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
                   ]"
                   backgroundColor="white"
                   borderThickness="5px"

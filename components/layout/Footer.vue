@@ -15,7 +15,7 @@
                   Search
                 </div>
                 <NuxtLink to="/search/" class="d-block mb-1">
-                  Search Schools
+                  Search Colleges
                 </NuxtLink>
                 <NuxtLink to="/search/fos-landing/" class="d-block mb-1">
                   Search Fields of Study
@@ -26,7 +26,7 @@
                   Compare
                 </div>
                 <NuxtLink to="/compare/?toggle=institutions" class="d-block mb-1">
-                  Compare Schools
+                  Compare Colleges
                 </NuxtLink>
                 <NuxtLink to="/compare/?toggle=fos" class="d-block mb-1">
                   Compare Fields of Study

@@ -13,7 +13,7 @@
         <v-container class="drawer-content elevation-10">
           <v-row>
             <v-col class="d-flex align-center">
-              <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
+              <p>Add up to 10 Colleges and 10 Fields of Study to compare.</p>
               <v-btn
                 class="ml-auto"
                 color="secondary-gray"
@@ -38,18 +38,18 @@
                   class="bg-tertiary-green mr-2"
                   :readonly="true"
                   :tabindex="-1"
-                  aria-label="Compare Schools Icon"
+                  aria-label="Compare Colleges Icon"
                 />
-                <h3>Compare Schools</h3>
+                <h3>Compare Colleges</h3>
               </div>
 
               <div class="items-list">
                 <div v-if="maxSchoolsReached" class="pa-2 mb-5 bg-tertiary-yellow font-weight-bold">
-                  Maximum of 10 Schools Selected
+                  Maximum of 10 Colleges Selected
                 </div>
 
                 <div v-if="noSchoolsSelected">
-                  <p class="text-body-2 pl-3 font-weight-bold">No Schools Selected</p>
+                  <p class="text-body-2 pl-3 font-weight-bold">No Colleges Selected</p>
                 </div>
                 <div v-else v-for="institution in store.institutions">
                   <div class="d-flex align-center mb-5">
@@ -66,12 +66,12 @@
               <div class="d-flex justify-start justify-sm-center bg-white pt-3 pb-10 pb-sm-0" :class="{ 'border-b': breakpoints.xs.value }">
                 <NuxtLink v-if="noSchoolsSelected" to="/search/" :tabindex="-1">
                   <v-btn color="primary-green"  :tabindex="showDrawer ? 0 : -1">
-                    Search Schools
+                    Search Colleges
                   </v-btn>
                 </NuxtLink>
                 <NuxtLink v-else to="/compare/?toggle=institutions" :tabindex="-1">
                   <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
-                    Compare {{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}
+                    Compare {{ store.institutions.length }} College{{ oneSchoolSelected ? '' : 's' }}
                   </v-btn>
                 </NuxtLink>
               </div>
@@ -157,9 +157,9 @@
                       <div :class="maxSchoolsReached ? 'bg-error' : 'bg-tertiary-green'"  class="pa-2 mr-2 rounded-circle">
                         <v-icon size="xsmall" :icon="maxSchoolsReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-university'" />
                       </div>
-                      <p>{{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}</p>
+                      <p>{{ store.institutions.length }} College{{ oneSchoolSelected ? '' : 's' }}</p>
                       <v-tooltip v-if="maxSchoolsReached" activator="parent" location="top">
-                        Maximum of 10 Schools Reached
+                        Maximum of 10 Colleges Reached
                       </v-tooltip>
                   </div>
                   <div class="d-flex align-center">

@@ -13,7 +13,7 @@
 }
 
 .splash {
-  background-color: use-theme('primary-aqua') !important;
+  background-color: use-theme('primary-blue') !important;
   color: white !important;
 }
 
@@ -133,7 +133,7 @@
           <div style="min-width: 200px" class="flex-grow-1 mr-0 mr-md-2">
             <SearchFieldOfStudy
               v-model="fosSearch.cip4"
-              :dense="true"
+              variant="dense"
             />
           </div>
 
@@ -156,7 +156,17 @@
               aria-required="true"
               density="compact"
               :max-width="breakpoints.smAndDown.value ? null : 400"
-            />
+            >
+              <template #item="{ props, item }">
+                <v-list-item :disabled="item.raw.disabled" v-bind="props">
+                  <template #title>
+                    <span :style="{ 'font-weight': item.raw.disabled ? 800 : 400 }">
+                      {{ item.title }}
+                    </span>
+                  </template>
+                </v-list-item>
+              </template>
+            </v-select>
           </div>
 
           <div class="d-flex flex-row-reverse mt-1 mt-md-0">
@@ -606,7 +616,12 @@ watch(() => results.meta, (meta) => {
   totalPages.value = Math.ceil(results.meta.total / results.meta.per_page)
 })
 
-const fosDegrees = computed(() => formMappings.fosDegrees)
+const fosDegrees = computed(() => {
+  let degrees = [...formMappings.fosDegrees]
+  // degrees.unshift({ label: 'UNDERGRADUATE', value: "undergrad", disabled: true })
+  // degrees.splice(4, 0, { label: 'GRADUATE', value: "grad", disabled: true })
+  return degrees
+})
 
 // METHODS
 const searchAPI = async () => {

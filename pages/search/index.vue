@@ -13,7 +13,7 @@
 }
 
 .splash {
-  background-color: use-theme('primary-aqua') !important;
+  background-color: use-theme('primary-blue') !important;
   color: white !important;
 }
 
@@ -98,9 +98,9 @@
     <v-container fluid>
       <v-row
         ><v-col class="pa-sm-10 pa-5">
-          <h1>Search Schools</h1>
+          <h1>Search Colleges</h1>
           <p>
-            Search schools that might be a good fit, and add to your compare
+            Search colleges that might be a good fit, and add to your compare
             list to see how they match up.
           </p></v-col
         ></v-row
@@ -113,7 +113,7 @@
     <v-row>
       <v-col class="px-0 py-0">
         <v-card flat class="white d-flex flex-column flex-md-row align-md-center border-none px-3 pb-2 pt-0 pt-md-2">
-          <div class="search-label my-2 my-md-0 mr-0 mr-md-2">School:</div>
+          <div class="search-label my-2 my-md-0 mr-0 mr-md-2">College:</div>
 
           <div style="min-width: 200px" class="flex-grow-1 mr-0 mr-md-2">
             <SearchSchool
