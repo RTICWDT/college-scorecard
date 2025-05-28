@@ -433,6 +433,7 @@ const { breakpoints } = useVuetify()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
 const { fields } = useConstants()
+const analytics = useAnalytics()
 
 definePageMeta({ 
   middleware: 'school-search',
@@ -537,6 +538,7 @@ const searchAPI = async () => {
 
     router.replace(route.path + url)
 
+    trackSearchFilters(params)
     const response = await apiGet("/schools", query)
 
     currentSearchTerm.value = query['school.search']
@@ -684,14 +686,77 @@ const buildQuery = (params) => {
   return query
 }
 
-
-const handleDOLFlag = () => {
-  debounceSearch()
-}
-
 // SEARCH EVENT HANDLERS
 //
 //
+const trackSearchFilters = (params) => {
+  console.log(params)
+
+  let filterParams = {}
+
+  if (params.cip4) {
+    filterParams.filter_academic_fields = true
+  }
+
+  if (params.cip4_degree) {
+    filterParams.filter_degree_type = true
+  }
+
+  if (params.size) {
+    filterParams.filter_size = true
+  }
+
+  if (params.completion_rate) {
+    filterParams.filter_graduation_rate = true
+  }
+
+  if (params.avg_net_price) {
+    filterParams.filter_average_annual_cost = true
+  }
+
+  if (params.locale) {
+    filterParams.filter_urbanicity = true
+  }
+
+  if (params.act || params.sat_math || params.sat_read) {
+    filterParams.filter_test_scores = true
+  }
+
+  if (params.acceptance) {
+    filterParams.filter_acceptance_rate = true
+  }
+
+  if (params.religious) {
+    filterParams.filter_religious_affiliation = true
+  }
+  
+  if (params.control) {
+    filterParams.filter_type_of_school = true
+  }
+
+  if (params.serving) {
+    filterParams.filter_specialized_mission = true
+  }
+
+  if (params.dolflag) {
+    filterParams.filter_wioa = true
+  }
+
+  if (params.state) {
+    filterParams.filter_state = true
+  }
+
+  if (params.zip) {
+    filterParams.filter_zip = true
+  }
+
+  if (params.lat && params.long) {
+    filterParams.filter_near_me = true
+  }
+
+  analytics.trackSearchFilters(filterParams)
+}
+
 const handleFormSearch = (params) => {
   const updateParams ={
     id: params.id,

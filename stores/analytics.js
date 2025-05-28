@@ -24,7 +24,7 @@ export const useAnalytics = defineStore('analytics', {
   },
 
   actions: {
-    GATrackEvent(category, action, label = '') {
+    GATrackEvent(category, action, label = '', customParams = {}) {
       try {
         if (import.meta.client && this.gtag) {
           const config = useRuntimeConfig()
@@ -34,7 +34,8 @@ export const useAnalytics = defineStore('analytics', {
 
           this.gtag('event', action, {
             event_category: category,
-            event_label: label || window.location.pathname
+            event_label: label || window.location.pathname,
+            ...customParams,
           })
         }
       } catch (e) {
@@ -88,5 +89,10 @@ export const useAnalytics = defineStore('analytics', {
     trackMultipleStates(states) {
       this.GATrackEvent('Multiple States', states)
     },
+
+    trackSearchFilters(filterParams) {
+      this.GATrackEvent('Search Filters', 'Applied', '', filterParams)
+    }
   },
+
 })
