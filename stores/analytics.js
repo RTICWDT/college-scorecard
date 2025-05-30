@@ -98,5 +98,4 @@ export const useAnalytics = defineStore('analytics', {
       this.GATrackEvent('Search Filters', 'Filter Applied', '', filterParams)
     }
   },
-
 })
