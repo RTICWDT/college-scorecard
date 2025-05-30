@@ -690,8 +690,6 @@ const buildQuery = (params) => {
 //
 //
 const trackSearchFilters = (params) => {
-  console.log(params)
-
   let filterParams = {}
 
   if (params.cip4) {
