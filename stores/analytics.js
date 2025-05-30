@@ -91,7 +91,11 @@ export const useAnalytics = defineStore('analytics', {
     },
 
     trackSearchFilters(filterParams) {
-      this.GATrackEvent('Search Filters', 'Applied', '', filterParams)
+      if (!filterParams || Object.keys(filterParams).length === 0) {
+        return
+      }
+
+      this.GATrackEvent('Search Filters', 'Filter Applied', '', filterParams)
     }
   },
 
