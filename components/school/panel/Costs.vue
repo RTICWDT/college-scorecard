@@ -29,7 +29,7 @@
               <Toggle
                 v-model="medianToggle"
                 :options="[
-                  { label: `${yearsText(school)} Colleges`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+                  { label: `${yearsText(groupName)} Colleges`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
                   { label: 'All Colleges', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
                 ]"
                 backgroundColor="white"

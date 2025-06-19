@@ -30,7 +30,7 @@
                 <Toggle
                   v-model="medianToggle"
                   :options="[
-                    { label: `${yearsText(school)} Colleges`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+                    { label: `${yearsText(groupName)} Colleges`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
                     { label: 'All Colleges', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
                   ]"
                   backgroundColor="white"
@@ -130,8 +130,10 @@ const {
   retentionRate: retentionRateMethod,
   completionRateFieldDefinition: completionRateFieldDefinitionMethod,
   toggleGraduationRate: toggleGraduationRateMethod,
+  groupName: groupNameMethod,
 } = useComplexFieldMethods()
 
+const groupName = computed(() => groupNameMethod(props.school))
 const completionRate = computed(() => completionRateMethod(props.school))
 const completionRatePell = computed(() => completionRatePellMethod(props.school))
 const retentionRate = computed(() => retentionRateMethod(props.school))
