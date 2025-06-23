@@ -10,6 +10,7 @@ export function useConstants() {
     ZIP_CODE:             'school.zip',
     SEARCH:               'school.search',
     ALIAS:                'school.alias',
+    ADDRESS:              'school.address',
   
     SCHOOL_URL:           'school.school_url',
   

@@ -12,6 +12,11 @@ export function useComplexFieldMethods() {
     return useGet(school, fields['NAME'], 'N/A')
   }
 
+  const address = (school) => {
+    if (!school) return null
+    return useGet(school, fields['ADDRESS'], 'N/A')
+  }
+
   const city = (school) => {
     if (!school) return null
     return useGet(school, fields['CITY'], 'N/A')
@@ -25,6 +30,17 @@ export function useComplexFieldMethods() {
   const zip = (school) => {
     if (!school) return null
     return useGet(school, fields['ZIP_CODE'], 'N/A')
+  }
+
+  const fullAddress = (school) => {
+    if (!school) return null
+    const addr = address(school)
+    const name = schoolName(school)
+    const cityValue = city(school)
+    const stateValue = state(school)
+    const zipValue = zip(school)
+    if (!name || !cityValue || !stateValue || !zipValue) return null
+    return `${name}, ${cityValue}, ${stateValue} ${zipValue}`
   }
 
   const schoolUrlDisplay = (school) => {
@@ -744,9 +760,11 @@ export function useComplexFieldMethods() {
   return {
     id,
     schoolName,
+    address,
     city,
     state,
     zip,
+    fullAddress,
     schoolUrlDisplay,
     underInvestigation,
     years,
