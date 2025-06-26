@@ -298,6 +298,7 @@ const {
   state: stateMethod,
   zip: zipMethod,
   specialDesignations: specialDesignationsMethod,
+  fullAddress,
 } = useComplexFieldMethods()
 
 // Computed properties
@@ -384,10 +385,14 @@ const handleSchoolNameSelected = (school) => {
 
 const generateMapLink = (school) => {
   const googleMapsBaseURL = "https://www.google.com/maps/search/?";
+  let lookup = fullAddress(school) || `${school.location.lat},${school.location.lon}`
+
+  console.log("Address for Google Maps:", lookup);
   const params = {
     api: 1,
-    query: `${school.location.lat},${school.location.lon}`
+    query: lookup,
   };
+
   const qs = new URLSearchParams(params).toString();
   return googleMapsBaseURL + qs;
 };
