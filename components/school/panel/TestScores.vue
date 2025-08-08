@@ -8,6 +8,7 @@
         </h2>
         <p>{{ standardizedTestText }}</p>
         <div
+          class="mr-5"
           v-show="
             standardizedTestValue != 3 &&
             standardizedTestValue != 4 &&
