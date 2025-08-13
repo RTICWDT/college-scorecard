@@ -228,9 +228,9 @@
             <h2 class="mb-3">College Scorecard Webinar</h2>
             <p class="webinar-info mb-5">The training is intended for college counselors, college advisors, and other college access professionals to learn how to use the College Scorecard to help students and their families make data-informed decisions about college attendance. Attendees will be able to use the knowledge gained during this training to train other college access professionals and school counselors in the use of College Scorecard.</p>
             <p class="mb-5">Register:</p>
-            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_vl4bvDL4Q-GojMn3qyy_cw">August 27, 2025 <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
-            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_atBjFginRfadwfRz3UWu6Q">September 10, 2025 <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
-            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_K_zglr_NTnG74lWsOpxibg">September 24, 2025 <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
+            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_vl4bvDL4Q-GojMn3qyy_cw">August 27, 2025 at 11:00 am ET <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
+            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_atBjFginRfadwfRz3UWu6Q">September 10, 2025 at 11:00 am ET <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
+            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_K_zglr_NTnG74lWsOpxibg">September 24, 2025 at 11:00 am ET <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
           </v-col>
         </v-row>
 
