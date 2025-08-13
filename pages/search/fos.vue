@@ -59,7 +59,7 @@
   @include xs { max-width: 320px; }
   @include sm { max-width: 500px; }
   @include md { max-width: 400px; }
-  @include lg { max-width: 700px; }
+  @include lgAndUp { max-width: 700px; }
 }
 
 :deep(.v-pagination__list) {

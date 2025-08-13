@@ -1,7 +1,15 @@
 <style lang="scss" scoped>
+#webinar {
+  position: relative;
+  bottom: 170px;
+}
 
 .splash-container {
-  margin-bottom: -80px;
+  @include xl { margin-bottom: -80px; }
+  @include lg { margin-bottom: -120px; }
+  @include md { margin-bottom: -80px; }
+  @include sm { margin-bottom: -80px; }
+  @include xs { margin-bottom: -80px; }
 }
 
 .subsplash-container {
@@ -53,7 +61,7 @@
     }
   }
 
-  @include lg {
+  @include lgAndUp {
     top: 93px;
     h1 {
       font-size: 50px;
@@ -67,7 +75,7 @@
   @include xs { min-height: 30px; }
   @include sm { min-height: 290px; }
   @include md { min-height: 290px; }
-  @include lg { min-height: 420px; }
+  @include lgAndUp { min-height: 420px; }
 }
 
 .banner-image-small {
@@ -171,6 +179,10 @@
   position: relative;
   bottom: 100px;
 }
+
+.webinar-info {
+  max-width: 924px;
+}
 </style>
 
 <template>
@@ -208,9 +220,22 @@
       </v-container>
     </div>
 
+    <div id="webinar"></div>
     <div class="bg-white subsplash-container">
       <v-container class="resources-container">
-        <Spacer :height="20" />
+        <v-row>
+          <v-col>
+            <h2 class="mb-3">College Scorecard Webinar</h2>
+            <p class="webinar-info mb-5">The training is intended for college counselors, college advisors, and other college access professionals to learn how to use the College Scorecard to help students and their families make data-informed decisions about college attendance. Attendees will be able to use the knowledge gained during this training to train other college access professionals and school counselors in the use of College Scorecard.</p>
+            <p class="mb-5">Register:</p>
+            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_vl4bvDL4Q-GojMn3qyy_cw">August 27, 2025 <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
+            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_atBjFginRfadwfRz3UWu6Q">September 10, 2025 <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
+            <a class="d-block mb-5" target="_blank" rel="noreferrer" href="https://rtiorg.zoom.us/webinar/register/WN_K_zglr_NTnG74lWsOpxibg">September 24, 2025 <v-icon size="x-small" color="secondary-green">mdi-open-in-new</v-icon></a>
+          </v-col>
+        </v-row>
+
+        <hr class="mb-10 mt-6" />
+
         <v-row>
           <v-col cols="12" md="5">
             <p class="mb-2 h-tag tag-green">For Educators</p>
