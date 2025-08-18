@@ -63,7 +63,7 @@ $grid-breakpoints: (
 }
 
 @mixin lg {
-  @media (min-width: map-get($grid-breakpoints, 'lg')) {
+  @media (min-width: map-get($grid-breakpoints, 'lg')) and (max-width: map-get($grid-breakpoints, 'xl') - 1) {
     @content;
   }
 }

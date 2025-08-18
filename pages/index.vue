@@ -3,6 +3,16 @@
   <!-- Splash -->
   <div class="bg-primary-blue section splash">
     <v-container>
+
+      <!-- WEBINAR ANNOUNCEMENT -->
+      <v-row>
+        <v-col>
+          <div class="bg-primary-aqua w-100 pa-3 rounded">
+            <p><strong>College Scorecard Learning Opportunity:</strong> Register for a free webinar on using the College Scorecard. <NuxtLink class="text-white" to="/resources#webinar">Register</NuxtLink></p>
+          </div>
+        </v-col>
+      </v-row>
+
       <v-row>
         <v-col>
           <h1 class="display-5 splash-title">Search and compare colleges</h1>

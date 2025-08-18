@@ -5,6 +5,7 @@
     <v-app>
       <header class="d-print-none" style="position: sticky; top: 0px; z-index: 1000;">
         <LayoutUsaBanner />
+        <LayoutWebinarCTA />
         <LayoutHeader />
       </header>
       <v-main id="mainContent" style="min-height: 80vh">
