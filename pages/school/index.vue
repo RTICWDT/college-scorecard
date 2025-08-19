@@ -3,7 +3,7 @@
     <v-row>
         <v-col cols="12" lg="12" class="">
           <div>
-            <v-card class="pa-5" elevation="0">
+            <v-card class="pa-5" :elevation="0">
               <h2 class="mb-3">Something went wrong and we couldn't find your school.</h2>
               <p class="mb-2">Try searching for a school by name:</p>
               <SearchSchool

@@ -3,7 +3,7 @@
     <v-row>
         <v-col cols="12" lg="12" class="">
           <div>
-            <v-card class="pa-5" elevation="0">
+            <v-card class="pa-5" :elevation="0">
               <h2 class="mb-3">Something went wrong and we couldn't find fields of study for this school.</h2>
               <p class="mb-2">Try searching for a different school by name:</p>
               <SearchSchool
@@ -44,7 +44,7 @@
               :hide="['email']"
               showCopy
               class="flex-grow-1 mr-2"
-              elevation="0"
+              :elevation="0"
             />
             <v-btn :href="schoolLink" variant="text" color="white" size="small">School Profile &raquo;</v-btn>
           </v-col>
@@ -190,10 +190,10 @@
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
-                  <v-expansion-panels v-model="subpanel">
+                  <v-expansion-panels v-model="subpanels[program.name]">
                     <v-expansion-panel
                       v-for="fos in program.fields"
-                      :key="fos.code + '-' + fos.credential.level"
+                      :key="program.name + '-' + fos.code + '-' + fos.credential.level"
                     >
                       <v-expansion-panel-title>
                         <span class="school-fields-fos-degree-title">
@@ -266,7 +266,7 @@ const { CIP2 } = useSiteData()
 const school = reactive({})
 const panels = ref([])
 const num_panels = ref(0)
-const subpanel = ref(null)
+const subpanels = reactive({})
 
 const currentFilter = ref(null)
 const currentTextFilter = ref('')
@@ -328,6 +328,12 @@ watch(processedPrograms, (newValue) => {
 
   totalCount.value = newValue.reduce((sum, category) => sum + category.fields.length, 0)
   num_panels.value = newValue.length
+
+  newValue.forEach(program => {
+    if (!subpanels[program.name]) {
+      subpanels[program.name] = []
+    }
+  })
 
   if (currentTextFilter.value || currentFilter.value) {
     panels.value = [...Array(num_panels.value).keys()].map((k, i) => i)
@@ -452,7 +458,10 @@ const findSchool = async () => {
     if (selectedFOS) {
       currentFilter.value = parseInt(selectedFOS.credential.level, 10);
       currentTextFilter.value = selectedFOS.title
-      subpanel.value = 0
+
+      if (processedPrograms.value && processedPrograms.value[0]) {
+        subpanels[processedPrograms.value[0].name] = [0]
+      }
     }
   } catch (err) {
     console.warn('No School found for ID: ' + schoolId)

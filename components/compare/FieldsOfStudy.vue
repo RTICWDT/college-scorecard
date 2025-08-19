@@ -39,7 +39,7 @@
         v-for="fieldOfStudy in fieldsOfStudy.all"
         :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
         :rounded="false"
-        elevation="0"
+        :elevation="0"
       >
         <div class="content d-flex">
           <div>

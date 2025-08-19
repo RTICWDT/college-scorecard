@@ -18,7 +18,7 @@
     </Toggle>
   </div>
 
-  <div class="mb-5" elevation="0">
+  <div class="mb-5" :elevation="0">
     <v-row class="mt-3">
       <!-- Graduation Rate -->
       <v-col md="6" cols="12" class="pr-sm-3">

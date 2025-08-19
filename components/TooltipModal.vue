@@ -21,7 +21,7 @@
             @click="showDialog = false" 
             :aria-label="`Close ${title} tooltip`"
             icon="mdi:mdi-close"
-            elevation="0"
+            :elevation="0"
             color="secondary-gray"
             class="ml-5"
           />
