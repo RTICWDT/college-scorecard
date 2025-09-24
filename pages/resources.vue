@@ -223,7 +223,7 @@
     <div id="webinar"></div>
     <div class="bg-white subsplash-container">
       <v-container class="resources-container">
-        <v-row>
+        <!-- <v-row>
           <v-col>
             <h2 class="mb-3">College Scorecard Webinar</h2>
             <p class="webinar-info mb-5">The training is intended for college counselors, college advisors, and other college access professionals to learn how to use the College Scorecard to help students and their families make data-informed decisions about college attendance. Attendees will be able to use the knowledge gained during this training to train other college access professionals and school counselors in the use of College Scorecard.</p>
@@ -232,7 +232,7 @@
           </v-col>
         </v-row>
 
-        <hr class="mb-10 mt-6" />
+        <hr class="mb-10 mt-6" /> -->
 
         <v-row>
           <v-col cols="12" md="5">
