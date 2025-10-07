@@ -1,20 +1,21 @@
 <template>
   <DocumentationCard title="Data Documentation">
     <p style="max-width: 800px" class="mb-4">
-      College Scorecard provides data at the institution-level and data
-      by field of study. The technical data documents provide in-depth
-      information about these data. The data dictionary includes
-      separate worksheets with institution-level and field of study
-      dictionaries as well as cohort maps describing the timing aspects
-      of each data element.
+      College Scorecard provides data at the institution-level and data by field
+      of study. The technical data documents provide in-depth information about
+      these data. The data dictionary includes separate worksheets with
+      institution-level and field of study dictionaries as well as cohort maps
+      describing the timing aspects of each data element.
     </p>
     <div class="">
       <v-row>
         <v-col>
           <v-btn
             color="secondary-green"
-            @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')"
-            href='/files/CollegeScorecardDataDictionary.xlsx'
+            @click="
+              analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')
+            "
+            href="/files/CollegeScorecardDataDictionary.xlsx"
             target="_blank"
             :size="breakpoints.smAndDown.value ? 'small' : 'large'"
             class="my-3"
@@ -34,7 +35,7 @@
           <v-btn
             variant="outlined"
             @click="analytics.trackDownload('InstitutionDataDocumentation.pdf')"
-            href='/files/InstitutionDataDocumentation.pdf'
+            href="/files/InstitutionDataDocumentation.pdf"
             target="_blank"
             text
             outlined
@@ -42,12 +43,14 @@
             :size="breakpoints.smAndDown.value ? 'small' : 'default'"
           >
             <v-icon size="x-small" class="pr-1" icon="fa:fas fa-file-pdf" />
-            Institution-Level Data Files (.pdf, 520 KB)
+            Institution-Level Data Files (.pdf, 531 KB)
           </v-btn>
           <v-btn
             variant="outlined"
-            @click="analytics.trackDownload('FieldOfStudyDataDocumentation.pdf')"
-            href='/files/FieldOfStudyDataDocumentation.pdf'
+            @click="
+              analytics.trackDownload('FieldOfStudyDataDocumentation.pdf')
+            "
+            href="/files/FieldOfStudyDataDocumentation.pdf"
             target="_blank"
             text
             outlined
@@ -55,7 +58,7 @@
             :size="breakpoints.smAndDown.value ? 'small' : 'default'"
           >
             <v-icon size="x-small" class="pr-1" icon="fa:fas fa-file-pdf" />
-            Field of Study Data Files (.pdf, 827 KB)
+            Field of Study Data Files (.pdf, 892 KB)
           </v-btn>
         </v-col>
       </v-row>
@@ -77,7 +80,10 @@
             :size="breakpoints.smAndDown.value ? 'small' : 'default'"
           >
             <v-icon size="x-small" class="pr-1" icon="fa:fas fa-file-pdf" />
-            Cohort Alignment on Earnings Calculations <span :class="{ 'd-none': breakpoints.smAndDown }">(.pdf, 476 KB)</span>
+            Cohort Alignment on Earnings Calculations
+            <span :class="{ 'd-none': breakpoints.smAndDown }"
+              >(.pdf, 476 KB)</span
+            >
           </v-btn>
         </v-col>
       </v-row>
