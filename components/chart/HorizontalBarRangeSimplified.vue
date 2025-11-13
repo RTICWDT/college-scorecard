@@ -1,5 +1,5 @@
 <template>
-<div v-if="hasData !== null" class="w-100" :class="props.class || 'pb-5'">
+<div v-if="hasData !== null && hasData !==false" class="w-100" :class="props.class || 'pb-5'">
   <div v-if="showMinMax" class="w-100 d-flex" style="font-size: 12px;">
     <div>{{  min.label }}</div>
     <div class="flex-grow-1" />

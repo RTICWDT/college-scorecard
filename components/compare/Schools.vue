@@ -120,7 +120,7 @@
         <!-- Typical Earning -->
         <v-expansion-panel>
           <v-expansion-panel-title @click="analytics.trackAccordion('Typical Earning')">
-            Typical Earning
+            Typical Earnings
           </v-expansion-panel-title>
 
           <v-expansion-panel-text>
