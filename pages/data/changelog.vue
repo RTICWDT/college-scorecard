@@ -14,10 +14,10 @@
     </v-row>
     <v-expansion-panels multiple v-model="panels" :disabled="false">
       <v-expansion-panel>
-        <v-expansion-panel-title>October NN, 2025</v-expansion-panel-title>
+        <v-expansion-panel-title>November 17, 2025</v-expansion-panel-title>
         <v-expansion-panel-text>
           <p>
-            On October NN, 2025, the Department updated the College Scorecard
+            On November 17, 2025, the Department updated the College Scorecard
             website with more recent data from Office of Postsecondary Education
             and Federal Student Aid sources.
           </p>

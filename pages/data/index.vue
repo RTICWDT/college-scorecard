@@ -7,7 +7,7 @@
     </p>
     <p class="pb-4">
       This data was
-      <strong>last updated October NN, 2025</strong>.
+      <strong>last updated November 17, 2025</strong>.
     </p>
 
     <h2 class="my-5">
