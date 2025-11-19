@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" :border="0" :style="{ borderRadius: 0, width: '100%', backgroundColor }">
+  <v-card :elevation="0" :border="0" :style="{ borderRadius: 0, width: '100%', backgroundColor }">
     <v-tabs
       v-model="localModelValue"
       center-active

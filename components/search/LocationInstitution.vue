@@ -189,7 +189,9 @@ watch(() => location.latLon, (newValue) => {
 
 watch(() => utility.location, (newValue, oldValue) => {
   if (newValue === "Near Me" && oldValue !== "Near Me") {
-    input.distance = 50
+    if (!input.distance || input.distance === 0) {
+      input.distance = 50
+    }
     handleLocationCheck()
   }
 })

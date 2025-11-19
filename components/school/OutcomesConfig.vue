@@ -6,6 +6,7 @@
         <v-checkbox
           :model-value="showPellOnly"
           @update:model-value="$emit('update:showPellOnly', $event)"
+          color="secondary-green"
           label="Show Pell Grant Recipients Only"
           class="mt-0 pt-0 mb-5 ml-n2"
           hideDetails

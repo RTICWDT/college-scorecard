@@ -18,16 +18,16 @@
             color="secondary-green"
             size="large"
           >
-            Search Schools
+            Search Colleges
           </v-btn>
         </NuxtLink>
       </div>
       <p class="text-center mt-8">
-        Try searching for schools and clicking the
+        Try searching for colleges and clicking the
         <v-btn icon tabindex="-1">
           <v-icon icon="fa:fa fa-check-circle" class="mx-1" color="grey" />
         </v-btn>
-        to add a school for comparison
+        to add a college for comparison
       </p>
     </div>
   </div>
@@ -120,7 +120,7 @@
         <!-- Typical Earning -->
         <v-expansion-panel>
           <v-expansion-panel-title @click="analytics.trackAccordion('Typical Earning')">
-            Typical Earning
+            Typical Earnings
           </v-expansion-panel-title>
 
           <v-expansion-panel-text>

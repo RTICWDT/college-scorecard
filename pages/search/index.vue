@@ -13,7 +13,7 @@
 }
 
 .splash {
-  background-color: use-theme('primary-aqua') !important;
+  background-color: use-theme('primary-blue') !important;
   color: white !important;
 }
 
@@ -65,7 +65,7 @@
   @include xs { max-width: 320px; }
   @include sm { max-width: 500px; }
   @include md { max-width: 400px; }
-  @include lg { max-width: 700px; }
+  @include lgAndUp { max-width: 700px; }
 }
 
 :deep(.v-pagination__list) {
@@ -98,9 +98,9 @@
     <v-container fluid>
       <v-row
         ><v-col class="pa-sm-10 pa-5">
-          <h1>Search Schools</h1>
+          <h1>Search Colleges</h1>
           <p>
-            Search schools that might be a good fit, and add to your compare
+            Search colleges that might be a good fit, and add to your compare
             list to see how they match up.
           </p></v-col
         ></v-row
@@ -113,7 +113,7 @@
     <v-row>
       <v-col class="px-0 py-0">
         <v-card flat class="white d-flex flex-column flex-md-row align-md-center border-none px-3 pb-2 pt-0 pt-md-2">
-          <div class="search-label my-2 my-md-0 mr-0 mr-md-2">School:</div>
+          <div class="search-label my-2 my-md-0 mr-0 mr-md-2">College:</div>
 
           <div style="min-width: 200px" class="flex-grow-1 mr-0 mr-md-2">
             <SearchSchool
@@ -433,6 +433,7 @@ const { breakpoints } = useVuetify()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
 const { fields } = useConstants()
+const analytics = useAnalytics()
 
 definePageMeta({ 
   middleware: 'school-search',
@@ -537,6 +538,7 @@ const searchAPI = async () => {
 
     router.replace(route.path + url)
 
+    trackSearchFilters(params)
     const response = await apiGet("/schools", query)
 
     currentSearchTerm.value = query['school.search']
@@ -684,14 +686,75 @@ const buildQuery = (params) => {
   return query
 }
 
-
-const handleDOLFlag = () => {
-  debounceSearch()
-}
-
 // SEARCH EVENT HANDLERS
 //
 //
+const trackSearchFilters = (params) => {
+  let filterParams = {}
+
+  if (params.cip4) {
+    filterParams.filter_academic_fields = true
+  }
+
+  if (params.cip4_degree) {
+    filterParams.filter_degree_type = true
+  }
+
+  if (params.size) {
+    filterParams.filter_size = true
+  }
+
+  if (params.completion_rate) {
+    filterParams.filter_graduation_rate = true
+  }
+
+  if (params.avg_net_price) {
+    filterParams.filter_average_annual_cost = true
+  }
+
+  if (params.locale) {
+    filterParams.filter_urbanicity = true
+  }
+
+  if (params.act || params.sat_math || params.sat_read) {
+    filterParams.filter_test_scores = true
+  }
+
+  if (params.acceptance) {
+    filterParams.filter_acceptance_rate = true
+  }
+
+  if (params.religious) {
+    filterParams.filter_religious_affiliation = true
+  }
+  
+  if (params.control) {
+    filterParams.filter_type_of_school = true
+  }
+
+  if (params.serving) {
+    filterParams.filter_specialized_mission = true
+  }
+
+  if (params.dolflag) {
+    filterParams.filter_wioa = true
+  }
+
+  if (params.state) {
+    filterParams.filter_state = true
+  }
+
+  if (params.zip) {
+    filterParams.filter_zip = true
+  }
+
+  if (params.lat && params.long) {
+    filterParams.filter_near_me = true
+  }
+
+  analytics.trackSearchFilters(filterParams)
+}
+
 const handleFormSearch = (params) => {
   const updateParams ={
     id: params.id,

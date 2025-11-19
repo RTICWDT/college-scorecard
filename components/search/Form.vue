@@ -1,6 +1,10 @@
 <style lang="scss" scoped>
 .search-subhead {
-  color: use-theme('gray-700');
+  color: black;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.8px;
 }
 
 .v-expansion-panel {
@@ -52,6 +56,7 @@
             hide-details
             class="option-checkbox"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -62,6 +67,7 @@
             hide-details
             class="option-checkbox"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -72,6 +78,7 @@
             hide-details
             class="option-checkbox"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <Spacer :height="20"/>
           <span class="search-subhead pt-5">Graduate</span>
@@ -85,6 +92,7 @@
             hide-details
             class="option-checkbox"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -95,6 +103,7 @@
             hide-details
             class="option-checkbox"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -105,6 +114,7 @@
             hide-details
             class="option-checkbox"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -115,6 +125,7 @@
             hide-details
             class="option-checkbox"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -125,6 +136,7 @@
             hide-details
             class="option-checkbox"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <Spacer :height="20"/>
         </v-expansion-panel-text>
@@ -248,6 +260,7 @@
             value=1
             class="py-0 my-0"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -258,6 +271,7 @@
             value=2
             class="py-0 my-0"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -268,6 +282,7 @@
             value=3
             class="py-0 my-0"
             @keydown.enter.prevent
+            color="secondary-green"
           />
         </v-expansion-panel-text>
       </v-expansion-panel>
@@ -286,6 +301,7 @@
               value="public"
               class="py-0 my-0"
               @keydown.enter.prevent
+              color="secondary-green"
             />
             <v-checkbox
               density="compact"
@@ -296,6 +312,7 @@
               value="private"
               class="py-0 my-0"
               @keydown.enter.prevent
+              color="secondary-green"
             />
             <v-checkbox
               density="compact"
@@ -306,6 +323,7 @@
               value="profit"
               class="py-0 my-0"
               @keydown.enter.prevent
+              color="secondary-green"
             />
           </div> 
         </v-expansion-panel-text>
@@ -324,6 +342,7 @@
             value="city"
             class="py-0 my-0"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -334,6 +353,7 @@
             value="suburban"
             class="py-0 my-0"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -344,6 +364,7 @@
             value="town"
             class="py-0 my-0"
             @keydown.enter.prevent
+            color="secondary-green"
           />
           <v-checkbox
             density="compact"
@@ -354,6 +375,7 @@
             value="rural"
             class="py-0 my-0"
             @keydown.enter.prevent
+            color="secondary-green"
           />
         </v-expansion-panel-text>
       </v-expansion-panel>
@@ -416,6 +438,7 @@
             value="true"
             hide-details
             @keydown.enter.prevent
+            color="secondary-green"
           /> 
         </v-expansion-panel-text>
       </v-expansion-panel>

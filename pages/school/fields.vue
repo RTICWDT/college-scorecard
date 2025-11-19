@@ -3,7 +3,7 @@
     <v-row>
         <v-col cols="12" lg="12" class="">
           <div>
-            <v-card class="pa-5" elevation="0">
+            <v-card class="pa-5" :elevation="0">
               <h2 class="mb-3">Something went wrong and we couldn't find fields of study for this school.</h2>
               <p class="mb-2">Try searching for a different school by name:</p>
               <SearchSchool
@@ -19,218 +19,224 @@
   </v-container>
 
   <v-main v-else>
-    <div class="school-heading">
-      <div class="bg-white">
-        <v-container>
-          <v-row class="meta-nv">
-            <v-col>
-              <v-btn
-                variant="text"
-                size="small"
-                id="referrer-link"
-                class="link-more"
-                @click="$router.back()"
-              >&laquo; Back</v-btn>
-            </v-col>
-            <v-col class="text-right d-flex">
-              <Share
-                :url="shareLink"
-                :label="breakpoints.smAndDown.value ? 'Share' : 'Share these Fields of Study'"
-                small
-                variant="text"
-                color="black"
-                :elevation="3"
-                :hide="['email']"
-                showCopy
-                class="flex-grow-1 mr-2"
-              />
-              <v-btn :href="schoolLink" variant="text" color="black" size="small">School Profile &raquo;</v-btn>
-            </v-col>
-          </v-row>
-        </v-container>
-      </div>
-      <v-container class="mt-10">
-        <v-row>
-          <v-col class="school-lef mb-n10">
-            <div class="show-loaded" id="school">
-              <!-- School Header Info -->
-              <v-row>
-                <v-col cols="12" md="6" class="text-white">
-                  <div v-if="!loading && school.id">
-                    <p class="mb-3 text-uppercase">
-                      All Fields of Study Offered at
-                    </p>
-                    <h1 class="text-h4 mb-3 font-weight-bold">
-                      {{ useGet(school, fields["NAME"], "School Name") }}
-                    </h1>
-                    <p class="mb-0">
-                      <strong>{{ toNumber(undergraduates) }}</strong>
-                      undergraduate students
-                    </p>
-                    <p class="">
-                      <a
-                        target="_blank"
-                        :href="schoolUrl"
-                        class="text-white"
-                        @click="analytics.transitionOutboundLink($event)"
-                      >
-                        {{ schoolUrlDisplay }}
-                        <v-icon size="x-small" class="pl-1" color="white" icon="fa:fas fa-external-link-alt" />
-                      </a>
-                    </p>
-                    <p
-                      class="mb-10"
-                      v-if="useGet(school, fields['UNDER_INVESTIGATION']) == 1"
-                    >
-                      <v-chip color="error" label>
-                        <strong>Under ED Monitoring</strong>
-                        <TooltipModal
-                          definition="hcm2"
-                          color="white"
-                          class="ml-2"
-                          :isBranch="isBranch"
-                        />
-                      </v-chip>
-                    </p>
-                  </div>
-                </v-col>
-
-                <v-col cols="12" md="6">
-                  <v-card class="pa-5">
-                    <h2 class="mb-6 d-inline-block">
-                      Filter Fields of Study Offered
-                    </h2>
-                    <v-avatar color="#fec005" size="40" class="ml-3 d-none d-sm-inline-flex">
-                      <v-icon color="black" icon="fa:fas fa-award" />
-                    </v-avatar>
-                    <v-text-field
-                      variant="outlined"
-                      label="Search Fields of Study"
-                      v-model="currentTextFilter"
-                      clearable
-                      hide-details="auto"
-                      class="mb-4"
-                    />
-                    <v-select
-                      id="school-field-fos-degree"
-                      variant="outlined"
-                      v-model="currentFilter"
-                      :items="filters"
-                      item-title="title"
-                      item-value="value"
-                      label="Search Degree Type"
-                      color="primary-green"
-                      clearable
-                      hide-details="auto"
-                    />
-                  </v-card>
-                </v-col>
-              </v-row>
-            </div>
+    <div class="bg-primary-aqua">
+      <v-container>
+        <v-row class="meta-nv">
+          <v-col>
+            <v-btn
+              variant="text"
+              size="small"
+              id="referrer-link"
+              class="link-more"
+              @click="$router.back()"
+            >
+              &laquo; Back
+            </v-btn>
           </v-col>
+
+          <v-col class="text-right d-flex">
+            <Share
+              :url="shareLink"
+              :label="breakpoints.smAndDown.value ? 'Share' : 'Share these Fields of Study'"
+              small
+              variant="outlined"
+              color="white"
+              :hide="['email']"
+              showCopy
+              class="flex-grow-1 mr-2"
+              :elevation="0"
+            />
+            <v-btn :href="schoolLink" variant="text" color="white" size="small">School Profile &raquo;</v-btn>
+          </v-col>
+
         </v-row>
       </v-container>
     </div>
 
-    <v-container class="my-10">
-      <div v-if="loading || !school.id" class="show-loading">
-        <h1 class="text-h6 text-center my-15">
-          <v-icon color="primary-blue">fas fa-circle-notch fa-spin</v-icon>
-          Loading
-        </h1>
-      </div>
-
-      <v-row v-else>
-        <v-col>
-          <v-alert
-            v-if="currentFilter === 4"
-            border="start"
-            density="compact"
-            color="yellow-600"
-            elevation="2"
-            class="mb-4"
-          >
-            No data on the number of graduates are displayed because of
-            definitional differences with other data sources. Fields of study on
-            this page include undergraduate-level programs that may be
-            classified as undergraduate certificates in other data sources.
-          </v-alert>
-
-          <v-alert
-            v-if="currentFilter === 8"
-            border="start"
-            density="compact"
-            color="yellow-600"
-            elevation="2"
-            class="mb-4"
-          >
-            Fields of study on this page include graduate-level programs that
-            may be labeled "postbaccalaureate certificates" in other data
-            sources.
-          </v-alert>
-
-          <h2 class="mb-4">{{ totalCount }} Results</h2>
-          <v-expansion-panels
-            v-if="!isEmpty(processedPrograms)"
-            v-model="panels"
-            multiple
-          >
-            <v-expansion-panel
-              v-for="(program, index) in processedPrograms"
-              :key="index"
-              class=""
-            >
-              <v-expansion-panel-title>
-                {{ useStartCase(useToLower(program.name).slice(0, -1)) }}
-              </v-expansion-panel-title>
-
-              <v-expansion-panel-text>
-                <v-expansion-panels v-model="subpanel">
-                  <v-expansion-panel
-                    v-for="fos in program.fields"
-                    :key="fos.code + '-' + fos.credential.level"
+    <v-container class="mt-10">
+      <v-row>
+        <v-col class="school-lef">
+          <div class="show-loaded" id="school">
+            <!-- School Header Info -->
+            <v-row>
+              <v-col cols="12" md="6" class="text-white">
+                <div v-if="!loading && school.id">
+                  <p class="mb-3 text-uppercase text-black">
+                    All Fields of Study Offered at
+                  </p>
+                  <h1 class="text-h4 mb-3 font-weight-bold text-black">
+                    {{ useGet(school, fields["NAME"], "School Name") }}
+                  </h1>
+                  <p class="mb-0 text-black">
+                    <strong>{{ toNumber(undergraduates) }}</strong>
+                    undergraduate students
+                  </p>
+                  <p class="text-black">
+                    <a
+                      target="_blank"
+                      :href="schoolUrl"
+                      class="text-primary-green"
+                      @click="analytics.transitionOutboundLink($event)"
+                    >
+                      {{ schoolUrlDisplay }}
+                    </a>
+                  </p>
+                  <p
+                    class="mb-10"
+                    v-if="useGet(school, fields['UNDER_INVESTIGATION']) == 1"
                   >
-                    <v-expansion-panel-title>
-                      <span class="school-fields-fos-degree-title">
-                        {{ fos.title.replace(/\.$/, "") }} - {{ fos.credential.title }}
-                      </span>
-                    </v-expansion-panel-title>
-
-                    <v-expansion-panel-text class="pa-0 ma-0">
-                      <ChartFieldDataExtended
-                        :fos="fos"
-                        :fos-salary-select-items="fosSalarySelectItems"
-                        :fos-salary-select="fieldDataExtendedSalarySelect"
-                        @update-salary-select="fieldDataExtendedSalarySelect = $event"
-                        :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
-                        @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
-                        :fields="fields"
+                    <v-chip color="error" label>
+                      <strong>Under ED Monitoring</strong>
+                      <TooltipModal
+                        definition="hcm2"
+                        color="white"
+                        class="ml-2"
+                        :isBranch="isBranch"
                       />
-                    </v-expansion-panel-text>
+                    </v-chip>
+                  </p>
+                </div>
+              </v-col>
 
-                  </v-expansion-panel>
-                </v-expansion-panels>
-              </v-expansion-panel-text>
-
-            </v-expansion-panel>
-          </v-expansion-panels>
-
-          <v-card v-else color="pa-5">
-            <p class="ma-0 text-center">
-              This institution does not offer any fields of study with this
-              degree.
-            </p>
-          </v-card>
+              <v-col cols="12" md="6">
+                <v-card class="pa-5">
+                  <h2 class="mb-6 d-inline-block">
+                    Filter Fields of Study Offered
+                  </h2>
+                  <v-avatar color="#fec005" size="40" class="ml-3 d-none d-sm-inline-flex">
+                    <v-icon color="black" icon="fa:fas fa-award" />
+                  </v-avatar>
+                  <v-text-field
+                    variant="outlined"
+                    label="Search Fields of Study"
+                    v-model="currentTextFilter"
+                    clearable
+                    hide-details="auto"
+                    class="mb-4"
+                    color="primary-yellow"
+                  />
+                  <v-select
+                    id="school-field-fos-degree"
+                    variant="outlined"
+                    v-model="currentFilter"
+                    :items="filters"
+                    item-title="title"
+                    item-value="value"
+                    label="Search Degree Type"
+                    color="primary-green"
+                    clearable
+                    hide-details="auto"
+                  />
+                </v-card>
+              </v-col>
+            </v-row>
+          </div>
         </v-col>
       </v-row>
     </v-container>
+
+
+    <div class="bg-white pt-1 pt-md-5 pb-1 pb-md-10">
+      <v-container class="my-10">
+        <div v-if="loading || !school.id" class="show-loading">
+          <h1 class="text-h6 text-center my-15">
+            <v-icon color="primary-blue">fas fa-circle-notch fa-spin</v-icon>
+            Loading
+          </h1>
+        </div>
+
+        <v-row v-else>
+          <v-col>
+            <v-alert
+              v-if="currentFilter === 4"
+              border="start"
+              density="compact"
+              color="yellow-600"
+              elevation="2"
+              class="mb-4"
+            >
+              No data on the number of graduates are displayed because of
+              definitional differences with other data sources. Fields of study on
+              this page include undergraduate-level programs that may be
+              classified as undergraduate certificates in other data sources.
+            </v-alert>
+
+            <v-alert
+              v-if="currentFilter === 8"
+              border="start"
+              density="compact"
+              color="yellow-600"
+              elevation="2"
+              class="mb-4"
+            >
+              Fields of study on this page include graduate-level programs that
+              may be labeled "postbaccalaureate certificates" in other data
+              sources.
+            </v-alert>
+
+            <h2 class="mb-4">{{ totalCount }} Results</h2>
+            <v-expansion-panels
+              v-if="!isEmpty(processedPrograms)"
+              v-model="panels"
+              multiple
+            >
+              <v-expansion-panel
+                v-for="(program, index) in processedPrograms"
+                :key="index"
+                class=""
+              >
+                <v-expansion-panel-title>
+                  {{ useStartCase(useToLower(program.name).slice(0, -1)) }}
+                </v-expansion-panel-title>
+
+                <v-expansion-panel-text>
+                  <v-expansion-panels v-model="subpanels[program.name]">
+                    <v-expansion-panel
+                      v-for="fos in program.fields"
+                      :key="program.name + '-' + fos.code + '-' + fos.credential.level"
+                    >
+                      <v-expansion-panel-title>
+                        <span class="school-fields-fos-degree-title">
+                          {{ fos.title.replace(/\.$/, "") }} - {{ fos.credential.title }}
+                        </span>
+                      </v-expansion-panel-title>
+
+                      <v-expansion-panel-text class="pa-0 ma-0">
+                        <ChartFieldDataExtended
+                          :fos="fos"
+                          :fos-salary-select-items="fosSalarySelectItems"
+                          :fos-salary-select="fieldDataExtendedSalarySelect"
+                          @update-salary-select="fieldDataExtendedSalarySelect = $event"
+                          :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
+                          @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
+                          :fields="fields"
+                        />
+                      </v-expansion-panel-text>
+
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+                </v-expansion-panel-text>
+
+              </v-expansion-panel>
+            </v-expansion-panels>
+
+            <v-card v-else color="pa-5">
+              <p class="ma-0 text-center">
+                This institution does not offer any fields of study with this
+                degree.
+              </p>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
     <LayoutFooterCTA />
   </v-main>
 </template>
 
 <style lang="scss" scoped>
 .school-heading {
-  background-color: use-theme('primary-aqua');
+  background-color: use-theme('gray-100');
 }
 .v-expansion-panel-title--active {
   background-color: use-theme('yellow-500');
@@ -260,7 +266,7 @@ const { CIP2 } = useSiteData()
 const school = reactive({})
 const panels = ref([])
 const num_panels = ref(0)
-const subpanel = ref(null)
+const subpanels = reactive({})
 
 const currentFilter = ref(null)
 const currentTextFilter = ref('')
@@ -322,6 +328,12 @@ watch(processedPrograms, (newValue) => {
 
   totalCount.value = newValue.reduce((sum, category) => sum + category.fields.length, 0)
   num_panels.value = newValue.length
+
+  newValue.forEach(program => {
+    if (!subpanels[program.name]) {
+      subpanels[program.name] = []
+    }
+  })
 
   if (currentTextFilter.value || currentFilter.value) {
     panels.value = [...Array(num_panels.value).keys()].map((k, i) => i)
@@ -446,7 +458,10 @@ const findSchool = async () => {
     if (selectedFOS) {
       currentFilter.value = parseInt(selectedFOS.credential.level, 10);
       currentTextFilter.value = selectedFOS.title
-      subpanel.value = 0
+
+      if (processedPrograms.value && processedPrograms.value[0]) {
+        subpanels[processedPrograms.value[0].name] = [0]
+      }
     }
   } catch (err) {
     console.warn('No School found for ID: ' + schoolId)

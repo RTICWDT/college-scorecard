@@ -3,6 +3,16 @@
   <!-- Splash -->
   <div class="bg-primary-blue section splash">
     <v-container>
+
+      <!-- WEBINAR ANNOUNCEMENT -->
+      <!-- <v-row>
+        <v-col>
+          <div class="bg-primary-aqua w-100 pa-3 rounded">
+            <p><strong>College Scorecard Learning Opportunity:</strong> Register for a free webinar on using the College Scorecard. <NuxtLink class="text-white" to="/resources#webinar">Register</NuxtLink></p>
+          </div>
+        </v-col>
+      </v-row> -->
+
       <v-row>
         <v-col>
           <h1 class="display-5 splash-title">Search and compare colleges</h1>
@@ -64,11 +74,11 @@
                     <v-col cols="12" sm="5">
                       <Spacer :height="10" />
                       <label class="d-block  mb-2" for="fosDegree">Search Fields of Study (Required)</label>
-                      <SearchFieldOfStudy v-model="input.cip4" />
+                      <SearchFieldOfStudy v-model="input.cip4" variant="default" />
                     </v-col>
                     <v-col cols="12" sm="4">
                       <label class="d-block  mb-2" for="fosDegree">Select Degree Type (Required)</label>
-                      <v-select
+                        <v-select
                         :items="fosDegrees"
                         item-title="label"
                         item-value="value"
@@ -77,8 +87,23 @@
                         v-model="input.cip4_degree"
                         hide-details
                         id="fosDegree"
+                        bgColor="white"
                         aria-required="true"
-                      />
+                        class="fos-search-degree-large"
+                      >
+                        <template #item="{ props, item }">
+                          <v-list-item v-if="item.raw.disabled" :disabled="true" style="opacity: 1" v-bind="props">
+                            <template #title>
+                              <span style="font-weight: 800; font-size: 12px; letter-spacing: 0.8px;">{{ item.title }}</span>
+                            </template>
+                          </v-list-item>
+                          <v-list-item v-else v-bind="props">
+                            <template #title>
+                              <span style="font-size: 16px;">{{ item.title }}</span>
+                            </template>
+                          </v-list-item>
+                        </template>
+                      </v-select>
                     </v-col>
                     <v-col col="12" sm="3" class="">
                       <div class="d-none d-sm-block" style="height: 32px">
@@ -158,7 +183,7 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12" sm="5">
-                    <SearchFieldOfStudyHome v-model="input.cip4" />
+                    <SearchFieldOfStudy v-model="input.cip4" variant="home" />
                   </v-col>
                   <v-col cols="12" sm="4">
                     <v-select
@@ -173,7 +198,20 @@
                       bgColor="white"
                       aria-required="true"
                       class="fos-search-degree-large"
-                    />
+                    >
+                      <template #item="{ props, item }">
+                        <v-list-item v-if="item.raw.disabled" :disabled="true" style="opacity: 1" v-bind="props">
+                          <template #title>
+                            <span style="font-weight: 800; font-size: 12px; letter-spacing: 0.8px;">{{ item.title }}</span>
+                          </template>
+                        </v-list-item>
+                        <v-list-item v-else v-bind="props">
+                          <template #title>
+                            <span style="font-size: 16px;">{{ item.title }}</span>
+                          </template>
+                        </v-list-item>
+                      </template>
+                    </v-select>
                   </v-col>
 
                   <v-col cols="1" sm="3" class="">
@@ -372,7 +410,7 @@
                 :width="218"
                 @click="analytics.trackNavigation('/search/')"
               >
-                Search Schools
+                Search Colleges
               </v-btn>
             </NuxtLink>
           </div>
@@ -1100,7 +1138,13 @@ const input = reactive({
   cip4_degree: null,
 })
 
-const fosDegrees = computed(() => formMappings.fosDegrees)
+const fosDegrees = computed(() => {
+  let degrees = [...formMappings.fosDegrees]
+  // degrees.unshift({ label: 'UNDERGRADUATE', value: "undergrad", disabled: true })
+  // degrees.splice(4, 0, { label: 'GRADUATE', value: "grad", disabled: true })
+  return degrees
+})
+
 const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
 
 const fosColor = computed(() => {

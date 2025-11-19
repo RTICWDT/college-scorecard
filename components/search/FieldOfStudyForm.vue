@@ -5,9 +5,9 @@
       ref="searchLocationRef"
       @search-update="handleLocationSelection"
       :horizontal="false"
-      :initial_state="input.state"
-      :initial_zip="input.zip"
-      :initial_distance="input.distance"
+      :initial-state="route.query.state ? route.query.state.split(',') : []"
+      :initial-zip="route.query.zip"
+      :initial-distance="route.query.distance"
     />
 
     <Spacer :height="20" />
@@ -261,6 +261,29 @@ const mapInputFromQuery = () => {
 
 const handleLocationSelection = (params) => {
   Object.assign(input, { ...input, ...params, page: 1 })
+
+  if (input.zip) {
+    if (!input.distance) {
+      input.distance = 50
+    }
+    input.state = null
+    input.lat = null
+    input.long = null
+  }
+
+  if (input.lat && input.long) {
+    if (!input.distance) {
+      input.distance = 50
+    }
+    input.state = null
+    input.zip = null
+  }
+
+  if (input.state) {
+    input.zip = null
+    input.lat = null
+    input.long = null
+  }
 }
 
 const resetForm = () => {

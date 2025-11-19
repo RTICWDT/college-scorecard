@@ -101,11 +101,11 @@ const items = computed(() => {
 const sentence = computed(() => {
   switch (props.label.toLowerCase()) {
     case "share":
-      return "Take a look at this school search from the College Scorecard:"
+      return "Take a look at this college search from the College Scorecard:"
     case "share this comparison":
-      return "Take a look at this school comparison on the College Scorecard:"
-    case "share this school":
-      return "Take a look at this school on the College Scorecard:"
+      return "Take a look at this college comparison on the College Scorecard:"
+    case "share this college":
+      return "Take a look at this college on the College Scorecard:"
     default:
       return ""
   }

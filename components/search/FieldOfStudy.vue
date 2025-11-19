@@ -1,5 +1,5 @@
 <template>
-  <Combobox  :variant="dense ? 'dense' : 'default'" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
+  <Combobox :variant="variant" color="#FDB022" :options="filteredOptions" v-model="selectedItem" :onFilter="onFilter" />
 </template>
 
 <script setup>
@@ -7,6 +7,10 @@ const props = defineProps({
   dense: {
     type: Boolean,
     default: false,
+  },
+  variant: {
+    type: String,
+    default: 'default',
   },
 })
 

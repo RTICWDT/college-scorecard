@@ -5,6 +5,7 @@
     <v-app>
       <header class="d-print-none" style="position: sticky; top: 0px; z-index: 1000;">
         <LayoutUsaBanner />
+        <!-- <LayoutWebinarCTA /> -->
         <LayoutHeader />
       </header>
       <v-main id="mainContent" style="min-height: 80vh">
@@ -46,7 +47,7 @@ const mapRouteToSEO = () => {
       break
 
     case matchRoute('/search'):
-      page.value = 'Search Schools'
+      page.value = 'Search Colleges'
       description.value = "Search colleges nationwide. Search for schools based on degree type, cost, school type, test scores, size, mission, afflication, and more."
       keywords.value = "College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, tutition costs, graduation rates, median earnings, acceptance rate, school size, WIOA"
       break

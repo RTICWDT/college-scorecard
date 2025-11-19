@@ -34,7 +34,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: "Enter a school",
+    default: "Enter a college",
   },
 });
 

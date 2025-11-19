@@ -3,8 +3,8 @@
     <Toggle
       v-model="medianToggle"
       :options="[
-        { label: 'Midpoint for School Type', value: 'group', color: color('primary-green'), activeColor: 'transparent' },
-        { label: 'Midpoint for All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
+        { label: 'Midpoint for College Type', value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+        { label: 'Midpoint for All Colleges', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
       ]"
       backgroundColor="white"
       borderThickness="5px"
@@ -18,7 +18,7 @@
     </Toggle>
   </div>
 
-  <div class="mb-5" elevation="0">
+  <div class="mb-5" :elevation="0">
     <v-row class="mt-3">
       <!-- Graduation Rate -->
       <v-col md="6" cols="12" class="pr-sm-3">
@@ -57,7 +57,7 @@
                     " "
                   : "All"
               }}
-              Schools:
+              Colleges:
               {{
                 toPercent(
                   medianToggle === "group"
@@ -146,7 +146,7 @@
                   ? yearsText(groupName)
                   : "All"
               }}
-              Schools:
+              Colleges:
               {{
                 toDollar(
                   medianToggle === "group"
@@ -186,7 +186,7 @@
                   (medianToggle === 'group'
                     ? yearsText(groupName)
                     : 'All') +
-                  ' Schools',
+                  ' Colleges',
                 value:
                   medianToggle === 'group'
                     ? toggleAverageAnnualCosts[0]
@@ -227,7 +227,7 @@
                   ? yearsText(groupName)
                   : "All"
               }}
-              Schools:
+              Colleges:
               {{
                 toDollar(
                   medianToggle === "group"
@@ -269,7 +269,7 @@
                   (medianToggle === 'group'
                     ? yearsText(groupName)
                     : 'All') +
-                  ' Schools',
+                  ' Colleges',
                 value:
                   medianToggle === 'group'
                     ? toggleMedianEarnings[0]

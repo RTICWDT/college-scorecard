@@ -169,8 +169,8 @@ const displayGradRate = computed(() => {
 
 const compareHoverCountText = computed(() => {
   return store.institutions.length > 9
-    ? 'Maximum of 10 Schools reached'
-    : 'Add School to compare'
+    ? 'Maximum of 10 Colleges reached'
+    : 'Add College to compare'
 })
 
 const compareSchoolsLength = computed(() => store.institutions.length)
